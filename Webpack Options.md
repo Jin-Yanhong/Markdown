@@ -1,25 +1,23 @@
-## npm命令行参数
+## npm 命令行参数
 
 ```bash
 // 安装开发所用的依赖
-npm i -D 
+npm i -D
 npm i -Dev
 npm install -D webpack-cli
-npm install -g webpack-dev-server 
+npm install -g webpack-dev-server
 npm install -D webpack
 npm install -D @babel/core @babel/preset-env babel-loader core.js
 ```
 
-- 配置文件 webpack.config.js
+-   配置文件 webpack.config.js
 
 ```javascript
 // 引入一个包，用于拼接路径
 const path = require('path');
 // 引入html插件
 const HtmlWebpackplugin = require('html-webpack-plugin');
-
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-
 // 包含webpack所有的配置信息
 module.exports = {
     // 指定入口文件
@@ -87,10 +85,9 @@ module.exports = {
         extensions: ['.js', 'ts'],
     },
 };
-
 ```
 
-- 配置 package.json
+-   配置 package.json
 
 ```json
 {
@@ -114,6 +111,4 @@ module.exports = {
     "author": "",
     "license": "ISC"
 }
-
 ```
-

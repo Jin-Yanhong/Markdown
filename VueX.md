@@ -1,6 +1,6 @@
 # VueX
 
-****
+---
 
 ### 核心概念
 
@@ -19,8 +19,6 @@ state: {
 },
 ```
 
-
-
 #### getters
 
 > 可以认为是 store 的计算属性
@@ -37,7 +35,6 @@ getters: {
     return getters.doneTodos.length
   }
 }
-
 // use.vue 计算属性
 computed: {
   doneTodosCount () {
@@ -76,10 +73,9 @@ mutations: {
 
 > 每个 mutation 都有一个字符串的 **事件类型 (type)** 和 一个 **回调函数 (handler)**
 >
+> 回调函数就是我们实际进行状态更改的地方，并且它会接受 state 作为第一个参数
 >
->回调函数就是我们实际进行状态更改的地方，并且它会接受 state 作为第一个参数
->
->可以向 `store.commit` 传入额外的参数，即 mutation 的 **载荷（payload）**
+> 可以向 `store.commit` 传入额外的参数，即 mutation 的 **载荷（payload）**
 
 #### actions
 
@@ -87,13 +83,10 @@ mutations: {
 >
 > 可以在`action`内执行异步方法
 
-
 ```javascript
 // user/store.js
-
 import { getInfo, login, logout } from "@/api/login";
 import { getToken, removeToken, setToken } from "@/utils/auth";
-
 actions: {
     // 提交 mutations ，触发状态变更
     // 登录
@@ -114,7 +107,6 @@ actions: {
           });
       });
     },
-
     // 获取用户信息
     GetInfo({ commit, state }) {
       return new Promise((resolve, reject) => {
@@ -141,7 +133,6 @@ actions: {
           });
       });
     },
-
     // 退出系统
     LogOut({ commit, state }) {
       return new Promise((resolve, reject) => {
@@ -158,7 +149,6 @@ actions: {
           });
       });
     },
-
     // 前端 登出
     FedLogOut({ commit }) {
       return new Promise(resolve => {
@@ -171,52 +161,45 @@ actions: {
 };
 ```
 
-- commit也可以这么写
+-   commit 也可以这么写
 
 ```javascript
 // 以对象形式分发
 store.commit({
-  type: '',
-  key:value
-})  
+    type: '',
+    key: value,
+});
 // type:mutations里的方法名
 // key:需要传递的参数
 // value:参数的值
-
 // 以载荷形式分发
-store.commit({type,
-  key:value
-})  
+store.commit({ type, key: value });
 ```
 
-- 在组件中分发 action
+-   在组件中分发 action
 
 ```javascript
 // login.vue
-
 // 在方法中触发
 this.$store.dispatch('Login', this.loginForm)
-
 // 在 methods 中使用辅助函数
 import { mapActions } from 'vuex'
-
 ...mapActions([
   'Login', // 将 `this.login(form)` 映射为 `this.$store.dispatch('Login',form)`
 ]),
 ...mapActions({
   add: 'increment' // 将 `this.add()` 映射为 `this.$store.dispatch('increment')`
 })
-
 ```
 
 > Action 函数接受一个与 store 实例具有相同方法和属性的 context 对象，因此你可以调用 `context.commit` 提交一个 mutation，或者通过 `context.state` 和 `context.getters` 来获取 state 和 getters。
 >
-> 在前面定义actions的时候返回Promise，后续分发中可以使用 
+> 在前面定义 actions 的时候返回 Promise，后续分发中可以使用
 >
 > ```js
 > store.dispatch('actionA').then(() => {
->   // ...
-> })
+>     // ...
+> });
 > ```
 >
 > 的处理方式
@@ -228,7 +211,6 @@ import { mapActions } from 'vuex'
 ```javascript
 // user/store.js
 export default user;
-
 // store/index.js
 import user from './modules/user';
 const store = new Vuex.Store({
@@ -236,72 +218,63 @@ const store = new Vuex.Store({
         user,
     },
 });
-
 export default store;
-
 // main.js 入口文件
-import store from './store'
-
+import store from './store';
 new Vue({
-  store,
-})
+    store,
+});
 ```
 
-- 模块的局部状态
-
-> 对于模块内部的 mutation 和 getter，接收的第一个参数是模块的局部状态对象。
+-   模块的局部状态
+    > 对于模块内部的 mutation 和 getter，接收的第一个参数是模块的局部状态对象。
 
 ```js
 const moduleA = {
-  state: () => ({
-    count: 0
-  }),
-  mutations: {
-    increment (state) {
-      // 这里的 `state` 对象是模块的局部状态
-      state.count++
-    }
-  },
-
-  getters: {
-    doubleCount (state) {
-      return state.count * 2
-    }
-  }
-}
-
+    state: () => ({
+        count: 0,
+    }),
+    mutations: {
+        increment(state) {
+            // 这里的 `state` 对象是模块的局部状态
+            state.count++;
+        },
+    },
+    getters: {
+        doubleCount(state) {
+            return state.count * 2;
+        },
+    },
+};
 ```
 
 > 同样，对于模块内部的 action，局部状态通过 `context.state` 暴露出来，根节点状态则为 `context.rootState`
 
 ```js
 const moduleA = {
-  // ...
-  actions: {
-    incrementIfOddOnRootSum ({ state, commit, rootState }) {
-      if ((state.count + rootState.count) % 2 === 1) {
-        commit('increment')
-      }
-    }
-  }
-}
+    // ...
+    actions: {
+        incrementIfOddOnRootSum({ state, commit, rootState }) {
+            if ((state.count + rootState.count) % 2 === 1) {
+                commit('increment');
+            }
+        },
+    },
+};
 ```
 
 对于模块内部的 getter，根节点状态会作为第三个参数暴露出来：
 
-
 ```javascript
 const moduleA = {
-  // ...
-  getters: {
-    sumWithRootCount (state, getters, rootState) {
-      return state.count + rootState.count
-    }
-  }
-}
+    // ...
+    getters: {
+        sumWithRootCount(state, getters, rootState) {
+            return state.count + rootState.count;
+        },
+    },
+};
 ```
-
-
 
 ### 辅助函数
 
@@ -310,19 +283,18 @@ const moduleA = {
 > 仅仅是将 store 中的 getter 映射到局部计算属性
 
 ```javascript
-import { mapGetters } from 'vuex'
-
+import { mapGetters } from 'vuex';
 export default {
-  // ...
-  computed: {
-  // 使用对象展开运算符将 getter 混入 computed 对象中
-    ...mapGetters([
-      'doneTodosCount',
-      'anotherGetter',
-      // ...
-    ])
-  }
-}
+    // ...
+    computed: {
+        // 使用对象展开运算符将 getter 混入 computed 对象中
+        ...mapGetters([
+            'doneTodosCount',
+            'anotherGetter',
+            // ...
+        ]),
+    },
+};
 ```
 
 > 可以将一个 getter 属性另取一个名字，使用对象形式：
@@ -333,4 +305,3 @@ export default {
   doneCount: 'doneTodosCount'
 })
 ```
-

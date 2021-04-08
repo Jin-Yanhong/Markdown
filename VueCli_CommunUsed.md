@@ -18,7 +18,6 @@ npm config set registry https://registry.npm.taobao.org
 ```
 
 验证是否配置成功
-
 常用组件
 
 ```bash
@@ -98,4 +97,3 @@ devServer: {
 // package.json
 "serve": "vue-cli-service serve && webpack-dev-server --open",
 ```
-

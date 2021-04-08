@@ -32,16 +32,14 @@
 | [toString()](https://www.runoob.com/jsref/jsref-tostring-array.html)       | _array_.toString()                                                                | 把数组转换为字符串，并返回结果。                                                                                                                                 |
 | [unshift()](https://www.runoob.com/jsref/jsref-unshift.html)               | _array_.unshift(_item1_,_item2_, ..., _itemX_)                                    | 向数组的**开头添加**一个或更多元素，并返回新的长度。                                                                                                             |
 | [valueOf()](https://www.runoob.com/jsref/jsref-valueof-array.html)         | _array_.valueOf()                                                                 | 返回数组对象的原始值。                                                                                                                                           |
-
-|               |                  |
-| ------------- | ---------------- |
-| push 结尾添加 | unshift 开头添加 |
-| pop 结尾删除  | shift 开头删除   |
+|                                                                            |                                                                                   |
+| -------------                                                              | ----------------                                                                  |
+| push 结尾添加                                                              | unshift 开头添加                                                                  |
+| pop 结尾删除                                                               | shift 开头删除                                                                    |
 
 ## 数组处理
 
 -   ### 数组去重
-
     -   ES6 数组 set 方法 （ES6 推荐）
 
 ```javascript

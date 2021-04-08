@@ -1,13 +1,13 @@
 ## 常用方法函数
 
-- ### 处理页码
+-   ### 处理页码
 
 ```javascript
 // 分页参数的处理方式
-totalPage = (total + pageSize - 1)/pageSize; 
+totalPage = (total + pageSize - 1) / pageSize;
 ```
 
-- ### 从浏览器URL获取参数
+-   ### 从浏览器 URL 获取参数
 
 ```javascript
 // 从 URL 获取参数
@@ -32,10 +32,9 @@ function UrlSearch(url) {
 }
 ```
 
-- ### 树形数据处理
+-   ### 树形数据处理
 
 ```javascript
-
 /**
  * 构造树型结构数据
  * @param {*} data 数据源
@@ -75,18 +74,17 @@ function handleTree(data, id, parentId, children, rootId) {
 
 ## 项目小结
 
-### iframe嵌套传参
+### iframe 嵌套传参
 
 ```javascript
-iframe.contentWindow //获取iframe的window对象；
-iframe.contentDocument //获取iframe的document对象
+iframe.contentWindow; //获取iframe的window对象；
+iframe.contentDocument; //获取iframe的document对象
 ```
 
 ### 动态赋值
 
 ```javascript
 _this.setData({
-   ['orderInfo[' + index + '].mwShoppingCartList']: hasEfficacy,
+    ['orderInfo[' + index + '].mwShoppingCartList']: hasEfficacy,
 });
 ```
-

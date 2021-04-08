@@ -1,6 +1,6 @@
 ## 表格
 
-- 添加状态切换开关
+-   添加状态切换开关
 
 ```vue
 <el-table-column label="状态" align="center">
@@ -15,7 +15,7 @@
 </el-table-column>
 ```
 
-- 数据字典调用
+-   数据字典调用
 
 ```vue
 <el-table-column label="公司状态" align="center">
@@ -27,4 +27,4 @@
 </el-table-column>
 ```
 
-​    
+​
