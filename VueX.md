@@ -227,7 +227,8 @@ new Vue({
 ```
 
 -   模块的局部状态
-    > 对于模块内部的 mutation 和 getter，接收的第一个参数是模块的局部状态对象。
+
+> 对于模块内部的 mutation 和 getter，接收的第一个参数是模块的局部状态对象。
 
 ```js
 const moduleA = {

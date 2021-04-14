@@ -1,30 +1,33 @@
-## Java 基础
+# Java 基础
 
--   .Java 源文件
+## .Java 源文件
 
 ```powershell
-// 编译
+// 编译源文件
 javac *.java
+
+// 运行字节码文件
+java *.class
 ```
 
--   .class 字节码文件（编译后产生）与 class 类名相同
--   注释方法
+### .class 字节码文件（编译后产生）与 class 类名相同
 
-```
-Java分为单行注释多行注释，初次之外还有文档注释可以被Javadoc解析
-```
+### 注释方法
 
--   多行注释使用时须注意的点
+> Java 分为单行注释多行注释，初次之外还有文档注释可以被 Javadoc 解析
+
+### 多行注释使用时须注意的点
 
 ```
 多行注释不可以嵌套
 一个文件中可以有多个class，但只能有一个class声明为public，并且需要跟文件名同名
 ```
 
--   package 管理
+## package 管理
+
     一个 Something.java 文件它的内容，文件名与 public 修饰的类名相同
 
-```java
+```
 package net.java.util;
 public class Something{
    ...
@@ -33,17 +36,19 @@ public class Something{
 
 那么它的路径应该是 net/java/util/Something.java 这样保存的。 package(包) 的作用是把不同的 java 程序分类保存，更方便的被其他 java 程序调用。
 
-## 内置数据类型
+# 内置数据类型
+
+## 基本数据类型
 
 Java 语言提供了八种基本类型。六种数字类型（四个整数型，两个浮点型），一种字符类型，还有一种布尔型。
 
-### 基本数据类型
+### 数字
 
-#### 数值
+所有的包装类**（Integer、Long、Byte、Double、Float、Short）**都是抽象类 Number 的子类
 
-##### 整型
+#### 整型
 
--   byte
+##### byte
 
 ```java
 // byte 数据类型是8位、有符号的，以二进制补码表示的整数；
@@ -55,7 +60,7 @@ Java 语言提供了八种基本类型。六种数字类型（四个整数型，
 byte a = 100，byte b = -50。
 ```
 
--   short
+##### short
 
 ```java
 // short 数据类型是 16 位、有符号的以二进制补码表示的整数
@@ -67,7 +72,7 @@ byte a = 100，byte b = -50。
 short s = 1000，short r = -20000。
 ```
 
--   int
+##### int
 
 ```java
 // int 数据类型是32位、有符号的以二进制补码表示的整数；
@@ -79,7 +84,7 @@ short s = 1000，short r = -20000。
 int a = 100000, int b = -200000。
 ```
 
--   long
+##### long
 
 ```java
 // long 数据类型是 64 位、有符号的以二进制补码表示的整数；
@@ -93,15 +98,15 @@ long a = 100000L，Long b = -200000L。
 
 > 习惯在 `long` 型的变量后边加上`L`，否则会认为是`int`类型
 >
-> > 过大的整数
+> 编译提示：过大的整数
 
 > 以上四种都是有符号，以二进制补码表示的整数，下面是浮点数
 >
 > **整型常量默认是`int`型**
 
-##### 浮点型
+#### 浮点型
 
--   float
+##### float
 
 ```java
 // float 数据类型是单精度、32位、符合IEEE 754标准的浮点数；
@@ -114,9 +119,9 @@ float f1 = 234.5f。
 
 > `float`型数据定义的时候必须在后边加上`f`
 >
-> > 编译失败
+> 编译提示：编译失败
 
--   double
+##### double
 
 ```java
 // double 数据类型是双精度、64 位、符合IEEE 754标准的浮点数；
@@ -133,6 +138,11 @@ double d1 = 123.4。
 
 #### 布尔型
 
+```java
+boolean one = true //
+boolean two = false //
+```
+
 #### 字符型
 
 ```java
@@ -148,15 +158,15 @@ char c5 = 'A' // A 对应的ASCII码值是65
 >
 > **单独的字母都可视为数字，值对应的是`ASCII`码值**
 
-### 引用数据类型
+## 引用数据类型
 
-#### Class （类）
+### Class （类）
 
-#### 接口
+### 接口
 
-#### 数组
+### 数组
 
-#### String
+### String
 
 -   声明一个字符串
 
@@ -166,11 +176,11 @@ String name = "Tom" // 双引号
 
 > String 可以和 8 种数据类型做运算，并且只能是连接运算，运算结果都是 `String` 类型
 
-## 数据类型转换
+# 数据类型转换
 
-### 自动类型转换
+## 自动类型转换
 
-```
+```text
 低  ------------------------------------>  高
 byte,short,char —> int —> long—> float —> double
 必须满足 转换前的数据类型的位数 要低于转换后的数据类型
@@ -188,7 +198,7 @@ byte,short,char —> int —> long—> float —> double
 >
 > 浮点数到整数的转换是通过舍弃小数得到，而不是四舍五入
 
-### 强制类型转换
+## 强制类型转换
 
 > 需要使用强转符号 `()`
 >
@@ -205,19 +215,14 @@ int e = 128;
 byte f = (byte)e; // 精度损失
 ```
 
-## Java 修饰符
+# Java 修饰符
 
-#### 访问控制修饰符
+### 访问控制修饰符
 
 -   **default** (即默认，什么也不写）: 在同一包内可见，不使用任何修饰符。使用对象：类、接口、变量、方法。
 -   **private** : 在同一类内可见。使用对象：变量、方法。 **注意：不能修饰类（外部类）**
 -   **public** : 对所有类可见。使用对象：类、接口、变量、方法
 -   **protected** : 对同一包内的类和所有子类可见。使用对象：变量、方法。 **注意：不能修饰类（外部类）**。
-
-#### 一元运算符
-
--   **前缀自增自减法(++a,--a):** 先进行自增或者自减运算，再进行表达式运算。
--   **后缀自增自减法(a++,a--):** 先进行表达式运算，再进行自增或者自减运算
 
 ```java
 public class selfAddMinus{
@@ -241,7 +246,7 @@ public class selfAddMinus{
 
 > 当使用与逻辑运算符时，在两个操作数都为 true 时，结果才为 true，
 
-## 循环语句
+# 循环语句
 
 -   Java 增强 for 循环
 
@@ -324,9 +329,10 @@ public class Test {
 > default
 > 匹配不到 break 继续执行后续的 case，直到匹配到为止
 
-## java 数据类型
+# Java String 类
 
 -   String
+
     <font color="red">String 类是不可改变的，所以你一旦创建了 String 对象，那它的值就无法改变了</font>，String 创建的字符串存储在公共池中，而 new 创建的字符串对象在堆上
 
 ```java
@@ -337,11 +343,87 @@ String s4 = new String("Runoob");   // String 对象创建
 String s5 = new String("Runoob");   // String 对象创建
 ```
 
--   StringBuffer、StringBuilder 如需要对字符串进行修改，则使用他们
-    StringBuilder 类在 Java 5 中被提出，它和 StringBuffer 之间的最大不同在于 StringBuilder 的方法不是线程安全的（不能同步访问）
-    <font color="green">由于 StringBuilder 相较于 StringBuffer 有速度优势，所以多数情况下建议使用 StringBuilder 类。</font>
-    然而在应用程序要求线程安全的情况下，则必须使用 StringBuffer 类。
+# Java StringBuffer 与 java StringBuilder 类
 
-## java 修饰符
+```java
+StringBuffer sBuffer = new StringBuffer("Hello");
+StringBuilder sBuilder = new StringBuilder(10);
+```
 
-重点
+> StringBuffer、StringBuilder 如需要对字符串进行修改，则使用他们，每次修改不会产生新的变量
+>
+> StringBuilder 类在 Java 5 中被提出，它和 StringBuffer 之间的最大不同在于 **`StringBuilder 的方法不是线程安全的（不能同步访问）`**
+
+> 由于 StringBuilder 相较于 StringBuffer 有速度优势，所以多数情况下建议使用 StringBuilder 类。
+>
+> **然而在应用程序要求线程安全的情况下，则必须使用 StringBuffer 类。**
+
+# Java 数组
+
+> 数组为引用类型的数据
+
+## 一维数组
+
+声明一个浮点数类型的数组变量
+
+```java
+double[] myList; // 首选的方法
+double myList[]; // 效果相同，但不是首选方法
+```
+
+## 多维数组
+
+### 多维数组的动态初始化（以二维数组为例）
+
+```java
+type[][] typeName = new type[typeLength1][typelength2];
+```
+
+> type 可以为基本数据类型和复合数据类型，typeLength1 和 typeLength2 必须为正整数，typeLength1 为行数，typeLength2 为列数。
+>
+> 例如：
+>
+> ```java
+> int a[][] = new int[2][3];
+> ```
+>
+> 解析为：二维数组 a 可以看成一个两行三列的数组。
+
+# Java Date()
+
+## 构造函数
+
+```java
+Date();
+```
+
+```java
+Date(long millisec)
+```
+
+获取当前时间
+
+```java
+import java.util.Date;
+
+public class DateDemo {
+   public static void main(String args[]) {
+       // 初始化 Date 对象
+       Date date = new Date();
+       // 使用 toString() 函数显示日期时间
+       System.out.println(date.toString());
+   }
+}
+```
+
+## 日期比较
+
+```java
+before()
+after()
+equals()
+```
+
+```java
+new Date(99, 2, 12).before(new Date (99, 2, 18))
+```
