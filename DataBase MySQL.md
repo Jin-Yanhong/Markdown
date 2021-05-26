@@ -23,19 +23,19 @@ mysql -uroot -p -P3306 -h 127.0.0.1;（端口号+主机地址）
 
 -   退出登录
 
-```bash
+```mysql
 exit;
 ```
 
 -   查看数据库
 
-```bash
+```mysql
 show databases; # 分号不能丢
 ```
 
 -   放弃指令（比如指令错误）
 
-```bash
+```mysql
 \c
 ```
 
@@ -43,27 +43,28 @@ show databases; # 分号不能丢
 
 -   创建数据库
 
-```
+```mysql
 # 创建数据库shop，并指定字符集
 create database shop charset utf8;
 ```
 
 -   使用数据库
 
-```bashs
+```mysql
 use shop
 ```
 
 -   查看当前数据库
 
-```sql
+```mysql
 // 查看当前数据库
+show databases shop
 ```
 
 -   删除数据库
 
 ```mysql
-drop  database if exists***shop***;
+drop  database if exists shop;
 ```
 
 -   导入外部（.sql）文件
@@ -163,7 +164,7 @@ insert info tableName (key1,key2) values (“val1”,“val2”);
             ```
 -   数据的新增
 
-```sql
+```mysql
 
 ```
 
@@ -175,4 +176,4 @@ insert info tableName (key1,key2) values (“val1”,“val2”);
 
 ## 排序规则
 
--   **ci** 对大小写不敏感
+-   **ci** 对大小写不敏感（Case insensitive）

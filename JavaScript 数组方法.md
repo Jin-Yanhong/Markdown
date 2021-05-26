@@ -25,17 +25,26 @@
 | [reduceRight()](https://www.runoob.com/jsref/jsref-reduceright.html)       | array.reduceRight(function(total, currentValue, currentIndex, arr), initialValue) | 将数组元素计算为一个值（从右到左）。                                                                                                                             |
 | [reverse()](https://www.runoob.com/jsref/jsref-reverse.html)               | _array_.reverse()                                                                 | **反转数组的元素顺序。**                                                                                                                                         |
 | [shift()](https://www.runoob.com/jsref/jsref-shift.html)                   | _array_.shift()                                                                   | **删除并返回数组的第一个元素。改变原数组** **pop**                                                                                                               |
-| [slice()](https://www.runoob.com/jsref/jsref-slice-array.html)             | _array_.slice(_start_, _end_)                                                     | 选取数组的一部分，并返回一个新数组。**不该变原数组**                                                                                                             |
+| [slice()](https://www.runoob.com/jsref/jsref-slice-array.html)             | _array_.slice(_start_, _end_)                                                     | 选取数组的一部分，并返回一个新数组。**不该变原数组**，当索引值为负时，从栈尾向栈顶读取                                                                           |
 | [some()](https://www.runoob.com/jsref/jsref-some.html)                     | array.some(function(currentValue,index,arr),thisValue)                            | 检测数组元素中是否有元素符合指定条件。如果有一个元素满足条件，则表达式返回*true* , 剩余的元素不会再执行检测，如果没有满足条件的元素，则返回 false                |
 | [sort()](https://www.runoob.com/jsref/jsref-sort.html)                     | _array_.sort(_sortfunction_)                                                      | 对数组的元素进行排序。排序顺序可以是字母或数字，并按升序或降序。当数字是按字母顺序排列时"40"将排在"5"前面**改变原数组**                                          |
-| [splice()](https://www.runoob.com/jsref/jsref-splice.html)                 | _array_.splice(_index_,_howmany_,_item1_,.....,_itemX_)                           | splice() 方法用于添加或删除数组中的元素。**这种方法会改变原始数组**。                                                                                            |
+| [splice()](https://www.runoob.com/jsref/jsref-splice.html)                 | _array_.splice(_index_,_howmany_,_item1_,.....,_itemX_)                           | **`splice() 方法用于添加或删除数组中的元素。这种方法会改变原始数组。`**                                                                                          |
 | [toString()](https://www.runoob.com/jsref/jsref-tostring-array.html)       | _array_.toString()                                                                | 把数组转换为字符串，并返回结果。                                                                                                                                 |
 | [unshift()](https://www.runoob.com/jsref/jsref-unshift.html)               | _array_.unshift(_item1_,_item2_, ..., _itemX_)                                    | 向数组的**开头添加**一个或更多元素，并返回新的长度。                                                                                                             |
 | [valueOf()](https://www.runoob.com/jsref/jsref-valueof-array.html)         | _array_.valueOf()                                                                 | 返回数组对象的原始值。                                                                                                                                           |
-|                                                                            |                                                                                   |
-| -------------                                                              | ----------------                                                                  |
-| push 结尾添加                                                              | unshift 开头添加                                                                  |
-| pop 结尾删除                                                               | shift 开头删除                                                                    |
+
+### 易混记忆
+
+<table>
+    <tr>
+        <td>push 结尾添加</td>
+        <td>unshift 开头添加</td>
+    </tr>
+    <tr>
+        <td>pop 结尾删除</td>
+        <td>shift 开头删除</td>
+    </tr>
+</table>
 
 ## 数组处理
 

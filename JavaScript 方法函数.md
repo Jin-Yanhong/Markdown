@@ -88,3 +88,10 @@ _this.setData({
     ['orderInfo[' + index + '].mwShoppingCartList']: hasEfficacy,
 });
 ```
+
+### 可视区宽高
+
+```javascript
+console.log(innerWidth, window.innerHeight)
+```
+

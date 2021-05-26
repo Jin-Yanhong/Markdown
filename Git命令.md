@@ -117,7 +117,7 @@ git push origin <tagName>
 -   一次性推送所有 Tag
 
 ```bash
-  git push origin --tags
+git push origin --tags
 ```
 
 ## Tag 的清除：

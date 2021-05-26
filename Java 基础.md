@@ -10,18 +10,59 @@ javac *.java
 java *.class
 ```
 
-### .class 字节码文件（编译后产生）与 class 类名相同
+> 一个文件中可以有多个 class，但只能有一个 class 声明为 public，并且需要跟文件名同名
+>
+> .class 字节码文件（编译后产生）与 class 类名相同
 
-### 注释方法
+## Java 关键字
 
-> Java 分为单行注释多行注释，初次之外还有文档注释可以被 Javadoc 解析
+关键字一律用小写字母标识，按其用途划分为如下几组。
 
-### 多行注释使用时须注意的点
+### 数据类型
 
-```
-多行注释不可以嵌套
-一个文件中可以有多个class，但只能有一个class声明为public，并且需要跟文件名同名
-```
+用于数据类型的关键字有 boolean、byte、char、 double、 false、float、int、long、new、short、true、void、instanceof。
+
+### 语句
+
+用于语句的关键字有 break、case、 catch、 continue、 default 、do、 else、 for、 if、return、switch、try、 while、 finally、 throw、this、 super。
+
+### 修饰符
+
+-   abstract
+-   final
+-   native
+-   private
+-   protected
+-   public
+-   static
+-   synchronized
+-   transient
+-   volatile
+
+### 方法、类、接口、包、异常
+
+-   class
+-   extends
+-   implements
+-   interface
+-   package
+-   import
+-   throws
+
+### 无意义
+
+-   cat
+-   future
+-   generic
+-   innerr
+-   operator
+-   outer
+-   rest
+-   var
+
+### 特殊值
+
+true、false、null
 
 ## package 管理
 
@@ -333,7 +374,9 @@ public class Test {
 
 -   String
 
-    <font color="red">String 类是不可改变的，所以你一旦创建了 String 对象，那它的值就无法改变了</font>，String 创建的字符串存储在公共池中，而 new 创建的字符串对象在堆上
+    <font color="red">String 类是不可改变的，所以你一旦创建了 String 对象，那它的值就无法改变了</font>
+
+    String 创建的字符串存储在公共池中，而 new 创建的字符串对象在堆上
 
 ```java
 String s1 = "Runoob";              // String 直接创建
@@ -427,3 +470,46 @@ equals()
 ```java
 new Date(99, 2, 12).before(new Date (99, 2, 18))
 ```
+
+# Java 方法
+
+## 方法的定义
+
+```text
+修饰符 返回值类型 方法名(参数类型 参数名){
+    ...
+    方法体
+    ...
+    return 返回值;
+}
+```
+
+eg:
+
+```java
+public static int max(int num1, int num2) {
+  return num1 > num2 ? num1 : num2;
+}
+```
+
+> 当函数不返回值的时候，返回值类型应当是 **`void`**
+
+## 方法的调用
+
+### 有返回值
+
+被当作一个具体的值来使用
+
+```java
+int larger = max(30, 40);
+```
+
+### 无返回值
+
+使用表达式调用
+
+```java
+System.out.println("hello");
+```
+
+# Java 异常处理

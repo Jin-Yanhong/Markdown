@@ -286,13 +286,13 @@ div ::v-deep p {
     grid-column-end: span 2;
 
     /* 行列的属性合并 */
-    grid-column: <start-line> / <end-line>;
-    grid-row: <start-line> / <end-line>;
+    grid-column: <start-line> | <end-line>;
+    grid-row: <start-line> | <end-line>;
 
     /* 指定元素所在的位置区域 */
     grid-area: a;
     /* ==> */
-    grid-area: <row-start> / <column-start> / <row-end> / <column-end>;
+    grid-area: <row-start> | <column-start> | <row-end> | <column-end>;
 
     /* justify-self 设置单元格内容的水平位置（左中右），跟justify-items属性的用法完全一致，但只作用于单个项目。 */
     justify-self: '';
@@ -455,3 +455,23 @@ transform：
 | skewX(_angle_)                  | 定义沿着 X 轴的 2D 倾斜转换。           |
 | skewY(_angle_)                  | 定义沿着 Y 轴的 2D 倾斜转换。           |
 | perspective(_n_)                | 为 3D 转换元素定义透视视图。            |
+
+## css 代码片段
+
+文本溢出显示省略号
+
+```css
+// 单行溢出隐藏
+p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+// 多行显示省略号
+p {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+}
+```
