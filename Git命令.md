@@ -5,7 +5,7 @@
 -   基本设置
 
 ```bash
-git config --global user.name "QingChen2020"
+git config --global user.name "jinyanhong"
 git config --global user.email "820877998@qq.com"
 ssh-keygen -t rsa -C "820877998@qq.com"
 ssh -T git@github.com

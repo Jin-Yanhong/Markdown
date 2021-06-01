@@ -458,7 +458,7 @@ transform：
 
 ## css 代码片段
 
-文本溢出显示省略号
+-   文本溢出显示省略号
 
 ```css
 // 单行溢出隐藏
@@ -473,5 +473,22 @@ p {
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
     overflow: hidden;
+}
+```
+
+-   调整 Chromium 内核浏览器滚动条的样式
+
+```css
+/* 滚动槽 */
+.container::-webkit-scrollbar-track {
+    -webkit-box-shadow: #48a7ff !important;
+    border-radius: 10px;
+    background: #114a7f;
+}
+/* 滚动条滑块 */
+.container::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #48a7ff;
+    -webkit-box-shadow: #48a7ff;
 }
 ```
