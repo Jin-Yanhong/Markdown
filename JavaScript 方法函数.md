@@ -95,3 +95,12 @@ _this.setData({
 console.log(innerWidth, window.innerHeight)
 ```
 
+### 几种常见的循环、迭代
+
+```javascript
+
+for (const key in Object.keys(data)) {
+    console.log(key);
+}
+```
+

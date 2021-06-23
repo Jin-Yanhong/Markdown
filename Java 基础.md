@@ -11,7 +11,6 @@ java *.class
 ```
 
 > 一个文件中可以有多个 class，但只能有一个 class 声明为 public，并且需要跟文件名同名
->
 > .class 字节码文件（编译后产生）与 class 类名相同
 
 ## Java 关键字

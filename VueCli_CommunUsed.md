@@ -71,6 +71,12 @@ cnpm install --save jsonp
 npm install vue-awesome-swiper@3 --save-dev
 ```
 
+创建 Uni - App
+```bash
+vue create -p dcloudio/uni-preset-vue my-project
+```
+
+
 \*.vue 引用
 
 ```javascript

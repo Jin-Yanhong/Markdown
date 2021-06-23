@@ -35,7 +35,7 @@
     },
 ```
 
-## 自动轮播tiptool
+## 自动轮播 tiptool
 
 ```javascript
 function tooltipHighlight(echart, option, need_scroll = false, scroll_count = 1) {
@@ -201,10 +201,9 @@ function tooltip_immediately_show(echart, option) {
         dataIndex: 0,
     });
 }
-
 ```
 
-tiptool自定义内容
+tiptool 自定义内容
 
 ```javascript
 function universal_tooltip_formatter(params, your_unit = '') {
@@ -242,3 +241,16 @@ function universal_tooltip_formatter(params, your_unit = '') {
 }
 ```
 
+## 图表样式相关配置项
+
+去掉鼠标指示线
+
+```javascript
+tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+        // shadow 显示阴影
+        type: 'none',
+    },
+},
+```

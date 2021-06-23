@@ -13,7 +13,6 @@
 > 参数：可迭代对象 Array、String
 
 > 返回值：Promise
->
 > 所有的`Promise`都完成返回完成状态的 Promise，有一个 Promise 为失败，则返回失败状态的 Promise
 
 -   async、await
@@ -37,4 +36,21 @@ async function asyncCall() {
 }
 
 asyncCall();
+```
+
+## Window
+
+```javascript
+// 滚动指定的距离
+window.scrollBy({
+    top:0, // 纵向滚动
+    left:0 // 横向滚动 
+    behavior: 'smooth',
+})
+
+// 滚动到某处
+window.scrollTo({
+    top: 0,
+    behavior: 'smooth',
+});
 ```
