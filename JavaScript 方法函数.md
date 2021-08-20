@@ -32,75 +32,132 @@ function UrlSearch(url) {
 }
 ```
 
--   ### 树形数据处理
+### 树形数据处理
+
+#### List 2 Tree
 
 ```javascript
 /**
- * 构造树型结构数据
- * @param {*} data 数据源
- * @param {*} id id字段 默认 'id'
- * @param {*} parentId 父节点字段 默认 'parentId'
- * @param {*} children 孩子节点字段 默认 'children'
- * @param {*} rootId 根Id 默认 0
+ * @param {string} list - 原一维数组.
+ * @param {string} id - 树形数组数据自身的 id.
+ * @param {string} parentId - 树形数组数据的父节点 id.
+ * @param {string} children - 树形数组数据的子节点 字段.
  */
-function handleTree(data, id, parentId, children, rootId) {
-    id = id || 'id';
-    parentId = parentId || 'parentId';
-    children = children || 'children';
-    rootId =
-        rootId ||
-        Math.min.apply(
-            Math,
-            data.map(item => {
-                return item[parentId];
-            })
-        ) ||
-        0;
-    //对源数据深度克隆
-    const cloneData = JSON.parse(JSON.stringify(data));
-    //循环所有项
-    const treeData = cloneData.filter(father => {
-        let branchArr = cloneData.filter(child => {
-            //返回每一项的子级数组
-            return father[id] === child[parentId];
-        });
-        branchArr.length > 0 ? (father.children = branchArr) : '';
-        //返回第一层
-        return father[parentId] === rootId;
+
+function list2Tree(list, id, parentId, children) {
+    let result = [];
+
+    if (!Array.isArray(list)) {
+        console.log('list2Tree Error: typeof list is not array ');
+        return result;
+    }
+
+    list.forEach(item => {
+        delete item.children;
     });
-    return treeData != '' ? treeData : data;
+
+    let map = {};
+
+    list.forEach(item => {
+        map[item[id]] = item;
+    });
+
+    list.forEach(item => {
+        let parent = map[item[parentId]];
+        if (parent) {
+            (parent[children] || (parent[children] = [])).push(item);
+        } else {
+            result.push(item);
+        }
+    });
+
+    return result;
+}
+```
+
+#### Tree 2 List
+
+```javascript
+/****************** 数组\对象 深拷贝 **********************/
+//
+//
+function deepCopy(obj) {
+    // 深度复制数组
+    if (Object.prototype.toString.call(obj) === '[object Array]') {
+        const object = [];
+        for (let i = 0; i < obj.length; i++) {
+            object.push(deepCopy(obj[i]));
+        }
+        return object;
+    }
+    // 深度复制对象
+    if (Object.prototype.toString.call(obj) === '[object Object]') {
+        const object = {};
+        for (let p in obj) {
+            object[p] = obj[p];
+        }
+        return object;
+    }
+}
+/******************** 树形结构转化为一维数组 ****************************/
+
+// 将treeObj中的所有对象，放入一个数组中，要求某个对象在另一个对象的children时，其parent_id是对应的另一个对象的id
+// 其原理实际上是数据结构中的广度优先遍历
+
+function tree2Array(treeObj, rootid) {
+    const temp = []; // 设置临时数组，用来存放队列
+    const out = []; // 设置输出数组，用来存放要输出的一维数组
+    temp.push(treeObj);
+    // 首先把根元素存放入out中
+    let pid = rootid;
+    const obj = deepCopy(treeObj);
+    obj.pid = pid;
+    delete obj['children'];
+    out.push(obj);
+    // 对树对象进行广度优先的遍历
+    while (temp.length > 0) {
+        const first = temp.shift();
+        const children = first.children;
+        if (children && children.length > 0) {
+            pid = first.id;
+            const len = first.children.length;
+            for (let i = 0; i < len; i++) {
+                temp.push(children[i]);
+                const obj = deepCopy(children[i]);
+                obj.pid = pid;
+                delete obj['children'];
+                out.push(obj);
+            }
+        }
+    }
+    return out;
 }
 ```
 
 ## 项目小结
 
-### iframe 嵌套传参
+### window.postMessage iframe 嵌套传参
 
 ```javascript
+//  外层获取内层
 iframe.contentWindow; //获取iframe的window对象；
 iframe.contentDocument; //获取iframe的document对象
-```
 
-### 动态赋值
-
-```javascript
-_this.setData({
-    ['orderInfo[' + index + '].mwShoppingCartList']: hasEfficacy,
-});
+// 内层获取外层
+window.parent;
 ```
 
 ### 可视区宽高
 
 ```javascript
-console.log(innerWidth, window.innerHeight)
+console.log(window.innerWidth, window.innerHeight);
 ```
 
 ### 几种常见的循环、迭代
 
 ```javascript
-
+// 拿到对象的key值索引
 for (const key in Object.keys(data)) {
     console.log(key);
 }
 ```
-

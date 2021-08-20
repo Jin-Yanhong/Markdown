@@ -27,4 +27,14 @@
 </el-table-column>
 ```
 
-​
+-   表格序号
+
+```vue
+<el-table-column label="序号" align="center">
+    <template slot-scope="scope">
+        <span>
+            {{ pageSize * pageNum + scope.$index + 1 }}
+        </span>
+    </template>
+</el-table-column>
+```

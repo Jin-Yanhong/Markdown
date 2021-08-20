@@ -243,14 +243,85 @@ function universal_tooltip_formatter(params, your_unit = '') {
 
 ## 图表样式相关配置项
 
-去掉鼠标指示线
-
 ```javascript
-tooltip: {
-    trigger: 'axis',
-    axisPointer: {
-        // shadow 显示阴影
-        type: 'none',
+Option: {
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            // 坐标轴指示器，坐标轴触发有效
+            type: 'shadow', // 默认为直线，可选为：'line' | 'shadow' | 'none'
+        },
+        formatter: '{b0}<br>人口总数:{c1}人<br>常住人口:{c0}人<br>流动人口:{c2}人',
     },
+    legend: {
+        orient: 'horizontal',
+        right: 0,
+        itemGap: 20,
+        left: 'center',
+        textStyle: {
+            color: '#ffffff',
+        },
+        data: ['人口总数', '常住人口', '流动人口'],
+    },
+    grid: {
+        left: 20,
+        right: 20,
+        top: 20,
+        bottom: 0,
+        containLabel: true,
+    },
+    xAxis: {
+        type: 'category',
+        data: ['网格1', '网格2', '网格3', '网格4', '网格5', '网格6'],
+        boundaryGap: ['20%', '20%'],
+        axisTick: {
+            alignWithLabel: true,
+        },
+        nameRotate: 45,
+        axisLabel: {
+            interval: 0, //强制文字产生间隔
+            // rotate: '45', //旋转角度
+        },
+        axisLine: {
+            show: true,
+            lineStyle: {
+                color: '#ffffff',
+            },
+        },
+    },
+    yAxis: [
+        {
+            type: 'value',
+            show: true,
+            splitLine: {
+                show: false,
+            },
+        },
+    ],
+    series: [
+        {
+            type: 'bar',
+            barWidth: 12,
+            color: '#4dd2ff',
+            data: [12504, 20498, 10916, 6637, 16603, 31352],
+            itemStyle: {
+                normal: {
+                    shadowBlur: 10, //发光范围
+                    shadowColor: '#0681c8', //发光颜色
+                    color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [
+                        {
+                            offset: 0,
+                            color: '#092ff266', // 鼠标指示时，提示框内图例的颜色
+                        },
+                        {
+                            offset: 1,
+                            color: '#05eaff',
+                        },
+                    ]),
+                },
+            },
+        },
+    ],
 },
 ```
+

@@ -4,6 +4,8 @@
 npm i -g vue-cli
 npm i -g @vue/cli@4.5.8
 // 更新 Vue 之前需要卸载旧版本
+npm uninstall @vue/cli -g // 新版
+npm uninstall vue-cli -g // 旧版
 ```
 
 安装淘宝镜像

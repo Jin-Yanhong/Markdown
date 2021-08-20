@@ -44,7 +44,7 @@ asyncCall();
 // 滚动指定的距离
 window.scrollBy({
     top:0, // 纵向滚动
-    left:0 // 横向滚动 
+    left:0 // 横向滚动
     behavior: 'smooth',
 })
 
@@ -53,4 +53,6 @@ window.scrollTo({
     top: 0,
     behavior: 'smooth',
 });
+
+// 谁有滚动条，这个方法加给谁
 ```

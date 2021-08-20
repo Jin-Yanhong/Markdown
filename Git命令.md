@@ -16,10 +16,15 @@ ssh -T git@github.com
 ```bash
 git push --set-upstream origin master
 git push -u origin master
-// 已有仓库
+# 已有仓库
+
 cd existing_git_repo
 git push --set-upstream origin master
-git remote add origin https://gitee.com/Dell-XPS/Code.git
+#gitee.com
+git remote add origin https:
+#xxx
+#xxx.git
+# 推送 并关联 远程本地
 git push -u origin(远程分支) master(本地分支)
 ```
 
@@ -30,29 +35,19 @@ git push -u origin(远程分支) master(本地分支)
 -   回撤到某一版本**(本地)**
 
 ```bash
-git reset --hard cedc856 (commit Hash 字符串前 7 位) // hard 销毁本地更改 soft 保留本地更改
+# hard 销毁本地更改 soft 保留本地更改
+git reset --hard cedc856 (commit Hash 字符串前 7 位)
 git push --force origin master
 git checkout 9ae2c2ce4ad80c87615965f8036fe01c661e646b（切换到以往版本）
-```
-
--   **关联到远程分支**
-
-```bash
-git branch --set-upstream-to origin
-```
-
--   **删除远程分支**
-
-```bash
-git branch -r -d origin/branch-name
-git push origin :branch-name
 ```
 
 -   查看当前 commit ID
 
 ```bash
-git rev-parse HEAD // 获取完整
-git rev-parse --short HEAD // 获取简短commit
+# 获取完整
+git rev-parse HEAD
+# 获取简短commit
+git rev-parse --short HEAD
 ```
 
 -   切换到最新版本
@@ -68,20 +63,18 @@ git checkout master
 -   **撤销本地更改**
 
 ```bash
-git checkout . // 文件名
+# 文件名
+git checkout .
 ```
 
 -   撤销 commit（本地）
 
 ```bash
-git reset --soft HEAD^ // 保留本地未提交更改
-git reset --hard HEAD^ // 不保留本地更改
-```
+# 保留本地未提交更改
+git reset --soft HEAD^
 
--   删除本地分支
-
-```bash
-git branch -d branch_name
+# 不保留本地更改
+git reset --hard HEAD^
 ```
 
 -   **修改本地 commit 消息**
@@ -96,7 +89,7 @@ git commit --amend
 git log --graph --pretty=format:'%C(red)%h%Creset - %C(white)%s %C(yellow)%d %C(cyan)（%cr）%Creset %C(green)<%an> '
 ```
 
-# Git Tag 相关：
+# Git Tag
 
 ---
 
@@ -146,4 +139,34 @@ git tag -a <tagname> -m "XXX..."
 
 ```bash
 git checkout [tagname]
+```
+
+# Git Branch
+
+-   **新建并切换分支**
+
+```bash
+git checkout -b branchName
+```
+
+-   **关联到远程分支**
+
+```bash
+git branch --set-upstream-to origin
+```
+
+-   **删除本地分支**
+
+```bash
+git branch -d branch_name
+```
+
+-   **删除远程分支**
+
+```bash
+# 删除远程分支
+git branch -r -d origin branch-name
+
+# 推送到远端
+git push origin :branch-name
 ```

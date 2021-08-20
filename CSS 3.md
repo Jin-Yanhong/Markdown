@@ -456,6 +456,14 @@ transform：
 | skewY(_angle_)                  | 定义沿着 Y 轴的 2D 倾斜转换。           |
 | perspective(_n_)                | 为 3D 转换元素定义透视视图。            |
 
+## CSS 透视变换
+
+```css
+.obj {
+    transform: perspective(1000px) rotateY(45deg);
+}
+```
+
 ## css 代码片段
 
 -   文本溢出显示省略号
@@ -479,12 +487,20 @@ p {
 -   调整 Chromium 内核浏览器滚动条的样式
 
 ```css
+/* 滚动条 */
+.container::-webkit-scrollbar {
+    -webkit-box-shadow: #48a7ff !important;
+    width: 10px;
+    height: 10px;
+}
+
 /* 滚动槽 */
 .container::-webkit-scrollbar-track {
     -webkit-box-shadow: #48a7ff !important;
     border-radius: 10px;
     background: #114a7f;
 }
+
 /* 滚动条滑块 */
 .container::-webkit-scrollbar-thumb {
     border-radius: 10px;
