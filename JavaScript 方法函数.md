@@ -1,13 +1,13 @@
 ## 常用方法函数
 
--   ### 处理页码
+#### 处理页码
 
 ```javascript
 // 分页参数的处理方式
 totalPage = (total + pageSize - 1) / pageSize;
 ```
 
--   ### 从浏览器 URL 获取参数
+#### 从浏览器 URL 获取参数
 
 ```javascript
 // 从 URL 获取参数
@@ -32,9 +32,9 @@ function UrlSearch(url) {
 }
 ```
 
-### 树形数据处理
+#### 树形数据处理
 
-#### List 2 Tree
+##### List 2 Tree
 
 ```javascript
 /**
@@ -75,7 +75,9 @@ function list2Tree(list, id, parentId, children) {
 }
 ```
 
-#### Tree 2 List
+##### Tree 2 List
+
+###### 方法 一
 
 ```javascript
 /****************** 数组\对象 深拷贝 **********************/
@@ -134,9 +136,77 @@ function tree2Array(treeObj, rootid) {
 }
 ```
 
+###### 方法 二
+
+```javascript
+function tree2List() {
+    var queen = [];
+    var out = [];
+    queen = queen.concat(tree);
+    while (queen.length) {
+        var first = queen.shift();
+        if (first.children) {
+            s;
+            queen = queen.concat(first.children);
+            delete first["children"];
+        }
+
+        out.push(first);
+    }
+    return out;
+}
+
+```
+
+#### 数据类型判断
+
+```javascript
+Object.prototype.toString.call(obj)
+// '[object Array]'
+// '[object Object]'
+// '[object String]'
+```
+
+#### 字段翻译
+
+```javascript
+/**
+ *
+ * @param {*} collection 翻译需要对照的数据
+ * @param {*} value 待翻译的值
+ * @param {*} collectionField 对照集合中的字段 默认 'value'
+ * @param {*} collectionLabel 对照集合中的字段名称 默认 'label'
+ * @returns
+ */
+function fieldTranslate(
+    collection,
+    value,
+    collectionField = "value",
+    collectionLabel = "label"
+) {
+    if (collection && value && toString(value).length) {
+        if (Object.prototype.toString.call(collection) === "[object Array]") {
+            let checked = collection.find(ele => {
+                return ele[collectionField] == value;
+            });
+            let tips =
+                (checked && checked[collectionLabel]) ||
+                "Field Translate：未知的数据值,请联系管理员";
+            return tips;
+        } else {
+            console.error("Field Translate Error：类型必须为 Array");
+            return "";
+        }
+    } else {
+        console.error("Field Translate Error：数据字段集合、为必须参数!");
+        return "";
+    }
+}
+```
+
 ## 项目小结
 
-### window.postMessage iframe 嵌套传参
+##### window.postMessage iframe 嵌套传参
 
 ```javascript
 //  外层获取内层
@@ -153,7 +223,7 @@ window.parent;
 console.log(window.innerWidth, window.innerHeight);
 ```
 
-### 几种常见的循环、迭代
+#### 几种常见的循环、迭代
 
 ```javascript
 // 拿到对象的key值索引
@@ -161,3 +231,4 @@ for (const key in Object.keys(data)) {
     console.log(key);
 }
 ```
+
