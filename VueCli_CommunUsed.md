@@ -8,12 +8,6 @@ npm uninstall @vue/cli -g // 新版
 npm uninstall vue-cli -g // 旧版
 ```
 
-安装淘宝镜像
-
-```bash
-npm i -g cnpm --registry=https://registry.npm.taobao.org
-```
-
 指定淘宝镜像源
 
 ```bash
@@ -73,11 +67,18 @@ cnpm install --save jsonp
 npm install vue-awesome-swiper@3 --save-dev
 ```
 
-创建 Uni - App
+安装animate.css
+
+```bash
+// 版本兼容性问题问题
+npm i --save animate.css@3
+```
+
+创建 Uniapp
+
 ```bash
 vue create -p dcloudio/uni-preset-vue my-project
 ```
-
 
 \*.vue 引用
 

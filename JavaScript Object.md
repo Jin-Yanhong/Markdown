@@ -64,6 +64,4 @@ window.scrollTo({
     top: 0,
     behavior: 'smooth',
 });
-
-// 谁有滚动条，这个方法加给谁
 ```

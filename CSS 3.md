@@ -553,3 +553,96 @@ p {
   z-index: 10;
 }
 ```
+
+#### js 操作 sass 变量
+
+>   ### var()介绍与使用
+>
+>     [详情(MDN)](https://developer.mozilla.org/zh-CN/docs/Web/CSS/var) **IE无效,其余主流浏览器有效**
+>
+>   #### var()使用
+>
+>     **只能在{}内声明,作用范围由{}的选择器决定**
+>
+>     CSS中原生的变量定义语法是：–*，变量使用语法是：var(–*)，其中*表示我们的变量名称。
+>    
+>      但是，**不能包含$，[，^，(，%等字符**，普通字符局限在只要是“数字[0-9]”“字母[a-zA-Z]”“下划线_”和“短横线-”这些组合，但是可以是中文，日文或者韩文。
+>    
+>#### 运行时改变scss变量值
+>
+>    这个方法并不是能直接改变scsss变量的值,但是能做到一样的效果,对于需要一个变量控制多个属性的更为有效简洁
+>    **单变量控制单条属性**的就没必要用了,这方法就是修改style属性而已,单对单和你之间在style写那条属性是一样的
+>    
+>[CSS4 Variables and Sass](https://codepen.io/jakealbaugh/post/css4-variables-and-sass) 简单来说就是将scss的变量交由css变量控制
+
+示例：
+
+```scss
+$colors: (
+  primary: #FFBB00,
+  secondary: #0969A2
+ );
+
+ Selector1{
+  @each $name, $color in $colors {
+   --color-#{$name}: $color;
+  }
+ }
+
+ <!-- Selector1的生成效果 -->
+ :root {
+  --color-primary: #FFBB00;
+  --color-secondary: #0969A2;
+ }
+
+
+ <!-- 使用方式一 直接使用css变量 -->
+ Selector{
+  color:var(--color-primary);
+ }
+
+ <!-- 使用方式二 利用scss的函数,以符合scss语法 推荐 --> 
+ @function color($color-name) {
+  @return var(--color-#{$color-name});
+ }
+
+ body { 
+  color: color(primary); //使用
+ }
+
+ <!-- body生成效果 -->
+ body { 
+  color: var(--color-primary); //这样就可以被js设置了
+ }
+```
+
+```scss
+/* 声明 */
+body {
+    /* body内有效 */
+    --name: value;
+}
+
+/* 使用 */
+.test {
+    /* 当--name不存在时,使用defaultValue */
+    attr: var(--name,defaultValue)
+    /* 错误的使用方法 */
+    var(--name): #369;
+}
+
+```
+
+>
+>   js设置css变量,即设置运行scss变量
+>
+>    ```javascript
+>    domObject.style.setProperty(name,value);//name为css变量名 e.g: --color-primary
+>```
+>   
+>至此完成了scss的运行时改变变量值
+>     由于scss是预编译的,无法在运行时改变变量值,而我又需要去改变,所以去google了,得到一个满意的解决方案 [原理(English)](https://codepen.io/jakealbaugh/post/css4-variables-and-sass)
+>    
+>  像这种的,变量–test 根本找不到,理由是并没有这个root,vue组件scoped的特性,只在本组件有效,但组件又没有完整的document,即组件内部没有root
+>   
+

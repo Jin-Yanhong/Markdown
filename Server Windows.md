@@ -18,7 +18,7 @@ netstat -aon|findstr "8081"
 tasklist|findstr "9088"
 ```
 
-## 启动相关服务
+## 系统相关服务
 
 ##### 启动
 
@@ -31,3 +31,10 @@ NET START 服务名
 ```bash
 NET STOP 服务名
 ```
+
+##### 安装相关服务
+
+```bash
+service install serviceName
+```
+

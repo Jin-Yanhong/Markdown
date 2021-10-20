@@ -14,11 +14,11 @@
 
 ```vue
 <div
-    :style="{
-        backgroundImage: 'url(' + item.imgsrc + ')',
-        backgroundSize: '100% 100%',
-        backgroundRepeat: 'no-repeat',
-    }"
+  :style="{
+    backgroundImage: 'url(' + item.imgsrc + ')',
+    backgroundSize: '100% 100%',
+    backgroundRepeat: 'no-repeat',
+  }"
 >This is a message</div>
 ```
 
@@ -26,7 +26,7 @@
 
 ### Event
 
--   v-on 事件修饰符
+- v-on 事件修饰符
 
 ```vue
 <!-- 点击事件将只会触发一次 -->
@@ -36,20 +36,13 @@
 <!-- 用于前端优化性能 -->
 <!-- 这其中包含 `event.preventDefault()` 的情况 -->
 <div v-on:scroll.passive="onScroll">...</div>
-.stop - 调用 event.stopPropagation()。
-.prevent - 调用 event.preventDefault()。
-.capture - 添加事件侦听器时使用 capture 模式。
-.self - 只当事件是从侦听器绑定的元素本身触发时才触发回调。
-.{keyCode | keyAlias} - 只当事件是从特定键触发时才触发回调。
-.native - 监听组件根元素的原生事件。
-.once - 只触发一次回调。
-.left - (2.2.0) 只当点击鼠标左键时触发。
-.right - (2.2.0) 只当点击鼠标右键时触发。
-.middle - (2.2.0) 只当点击鼠标中键时触发。
-.passive - (2.3.0) 以 { passive: true } 模式添加侦听器
+.stop - 调用 event.stopPropagation()。 .prevent - 调用 event.preventDefault()。 .capture - 添加事件侦听器时使用 capture 模式。 .self -
+只当事件是从侦听器绑定的元素本身触发时才触发回调。 .{keyCode | keyAlias} - 只当事件是从特定键触发时才触发回调。 .native - 监听组件根元素的原生事件。 .once -
+只触发一次回调。 .left - (2.2.0) 只当点击鼠标左键时触发。 .right - (2.2.0) 只当点击鼠标右键时触发。 .middle - (2.2.0) 只当点击鼠标中键时触发。 .passive -
+(2.3.0) 以 { passive: true } 模式添加侦听器
 ```
 
--   按键修饰符
+- 按键修饰符
 
 ```vue
 <input v-on:keyup.enter="submit">
@@ -57,16 +50,16 @@
 
 ### Value
 
--   v-model
+- v-model
 
 > 输入型文本域触发 input 事件
 >
 > 选择型表单触发 change 事件
 >
-> -   绑定单选复选，值为表单的 checked 值
-> -   绑定下拉选择，值为所选择的 option 值
-> -   原生 select 支持多选
->     几个比较有用的修饰符
+> - 绑定单选复选，值为表单的 checked 值
+> - 绑定下拉选择，值为所选择的 option 值
+> - 原生 select 支持多选
+>   几个比较有用的修饰符
 
 ```vue
 <!-- 在“change”时而非“input”时更新 -->
@@ -77,7 +70,7 @@
 <input v-model.trim="msg">
 ```
 
--   通过父组件触发子组件的方法
+- 通过父组件触发子组件的方法
 
 ```javascript
 // 子组件自定义事件
@@ -88,7 +81,7 @@ this.$ref.name['子组件的方法'];
 
 ### 生命周期钩子函数
 
--   生命周期图示
+- 生命周期图示
 
 <img src="https://gitee.com/Coder-jin/PicStore/raw/master/lifecycle.png" alt="Vue 实例生命周期"  />
 
@@ -158,8 +151,8 @@ updated: function () {
 
 参考
 
--   [构建组件 - keep-alive](https://cn.vuejs.org/v2/api/#keep-alive)
--   [动态组件 - keep-alive](https://cn.vuejs.org/v2/guide/components-dynamic-async.html#在动态组件上使用-keep-alive)
+- [构建组件 - keep-alive](https://cn.vuejs.org/v2/api/#keep-alive)
+- [动态组件 - keep-alive](https://cn.vuejs.org/v2/guide/components-dynamic-async.html#在动态组件上使用-keep-alive)
 
 #### deactivated
 
@@ -169,8 +162,8 @@ updated: function () {
 
 参考
 
--   [构建组件 - keep-alive](https://cn.vuejs.org/v2/api/#keep-alive)
--   [动态组件 - keep-alive](https://cn.vuejs.org/v2/guide/components-dynamic-async.html#在动态组件上使用-keep-alive)
+- [构建组件 - keep-alive](https://cn.vuejs.org/v2/api/#keep-alive)
+- [动态组件 - keep-alive](https://cn.vuejs.org/v2/guide/components-dynamic-async.html#在动态组件上使用-keep-alive)
 
 #### beforeDestory
 
@@ -186,7 +179,7 @@ updated: function () {
 
 #### [errorCaptured](https://cn.vuejs.org/v2/api/#errorCaptured)
 
--   类型：(err: Error, vm: Component, info: string) => ?boolean
+- 类型：(err: Error, vm: Component, info: string) => ?boolean
 
 ### 全局 API
 
@@ -196,7 +189,7 @@ updated: function () {
 >
 > `data` 选项是特例，需要注意 - 在 `Vue.extend()` 中它必须是函数
 >
-> 这点类似于 jQUery.extend()
+> 这点类似于 jQuery.extend()
 
 ```html
 <div id="mount-point"></div>
@@ -205,14 +198,14 @@ updated: function () {
 ```javascript
 // 创建构造器
 var Profile = Vue.extend({
-    template: '<p>{{firstName}} {{lastName}} aka {{alias}}</p>',
-    data: function () {
-        return {
-            firstName: 'Walter',
-            lastName: 'White',
-            alias: 'Heisenberg',
-        };
-    },
+  template: '<p>{{firstName}} {{lastName}} aka {{alias}}</p>',
+  data: function () {
+    return {
+      firstName: 'Walter',
+      lastName: 'White',
+      alias: 'Heisenberg',
+    };
+  },
 });
 // 创建 Profile 实例，并挂载到一个元素上。
 new Profile().$mount('#mount-point');
@@ -233,12 +226,12 @@ new Profile().$mount('#mount-point');
 vm.msg = 'Hello';
 // DOM 还没有更新
 Vue.nextTick(function () {
-    // DOM 更新了
+  // DOM 更新了
 });
 
 // 作为一个 Promise 使用 (2.1.0 起新增，详见接下来的提示)
 Vue.nextTick().then(function () {
-    // DOM 更新了
+  // DOM 更新了
 });
 ```
 
@@ -257,7 +250,7 @@ Vue.nextTick().then(function () {
 ```javascript
 // 注册
 Vue.filter('my-filter', function (value) {
-    // 返回处理后的值
+  // 返回处理后的值
 });
 
 // getter，返回已注册的过滤器
@@ -279,15 +272,15 @@ var myFilter = Vue.filter('my-filter');
 ```javascript
 // 注册组件，传入一个扩展过的构造器
 Vue.component(
-    'my-component',
-    Vue.extend({
-        /* ... */
-    })
+  'my-component',
+  Vue.extend({
+    /* ... */
+  })
 );
 
 // 注册组件，传入一个选项对象 (自动调用 Vue.extend)
 Vue.component('my-component', {
-    /* ... */
+  /* ... */
 });
 
 // 获取注册的组件 (始终返回构造器)
@@ -301,18 +294,133 @@ var MyComponent = Vue.component('my-component');
 ```javascript
 // 注册
 Vue.directive('my-directive', {
-    bind: function () {},
-    inserted: function () {},
-    update: function () {},
-    componentUpdated: function () {},
-    unbind: function () {},
+  bind: function () {},
+  inserted: function () {},
+  update: function () {},
+  componentUpdated: function () {},
+  unbind: function () {},
 });
 
 // 注册 (指令函数)
 Vue.directive('my-directive', function () {
-    // 这里将会被 `bind` 和 `update` 调用
+  // 这里将会被 `bind` 和 `update` 调用
 });
 
 // getter，返回已注册的指令
 var myDirective = Vue.directive('my-directive');
 ```
+
+### Watch
+
+监听路由
+
+##### 方法一
+
+```javascript
+//
+watch:{
+  $route(to,from){
+    console.log(to.path);
+  }
+},
+```
+
+##### 方法二
+
+```javascript
+//
+watch: {
+  $route: {
+    handler: function(val, oldVal){
+      console.log(val);
+    },
+    // 深度观察监听
+    deep: true
+  }
+},
+```
+
+##### 方法三
+
+```javascript
+//
+watch: {
+  '$route':'getPath'
+},
+methods: {
+  getPath(){
+    console.log(this.$route.path);
+  }
+}
+```
+
+### 插槽
+
+##### 后备内容
+
+有时为一个插槽设置具体的后备 (也就是默认的) 内容是很有用的，它只会在没有提供内容的时候被渲染。
+
+> 类似于默认值
+
+##### 具名插槽
+
+> 可以用于放置多个插槽
+
+子组件
+
+```vue
+<div class="container">
+  <header>
+    <slot name="header"></slot>
+  </header>
+  <main>
+    <slot></slot>
+  </main>
+  <footer>
+    <slot name="footer"></slot>
+  </footer>
+</div>
+```
+
+父组件
+
+```vue
+<base-layout>
+  <template v-slot:header>
+    <h1>Here might be a page title</h1>
+  </template>
+
+  <p>A paragraph for the main content.</p>
+  <p>And another one.</p>
+
+  <template v-slot:footer>
+    <p>Here's some contact info</p>
+  </template>
+</base-layout>
+```
+
+##### 作用域插槽 子组件使用
+
+> ##### 父组件的数据
+
+为了让 `user` 在父级的插槽内容中可用，我们可以将 `user` 作为 `<slot>` 元素的一个 attribute 绑定上去：
+
+```vue
+<span>
+  <slot v-bind:user="user">
+    {{ user.lastName }}
+  </slot>
+</span>
+```
+
+绑定在 `<slot>` 元素上的 attribute 被称为**插槽 prop**。现在在父级作用域中，我们可以使用带值的 `v-slot` 来定义我们提供的插槽 prop 的名字：
+
+```vue
+<current-user>
+  <template v-slot:default="slotProps">
+    {{ slotProps.user.firstName }}
+  </template>
+</current-user>
+```
+
+在这个例子中，我们选择将包含所有插槽 prop 的对象命名为 `slotProps`，但你也可以使用任意你喜欢的名字。

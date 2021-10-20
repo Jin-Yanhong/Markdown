@@ -146,7 +146,6 @@ function tree2List() {
     while (queen.length) {
         var first = queen.shift();
         if (first.children) {
-            s;
             queen = queen.concat(first.children);
             delete first["children"];
         }

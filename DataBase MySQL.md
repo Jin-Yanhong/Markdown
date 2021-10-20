@@ -66,7 +66,7 @@ use shop
 show databases shop
 ```
 
-#### 修改数据表名称
+#### 修改数据表名称（重命名）
 
 ```mysql
 ALTER TABLE oldName RENAME newName;
@@ -76,7 +76,7 @@ RENAME TABLE stus to stu
 #### 删除数据库
 
 ```mysql
-drop  database if exists shop;
+drop  database if exists tableName;
 ```
 
 #### 导入外部（.sql）文件
@@ -93,12 +93,16 @@ source .sql文件
 ```mysql
 create table tableName (id INT );
 CREATE table stu (id INT PRIMARY KEY AUTO_INCREMENT, sname CHAR ( 10 ), class_id INT DEFAULT NULL,age SMALLINT NOT NULL);
+-- 从已有数据表复制新的数据表 --
+create table tableName select * from existTable
 ```
 
 - 删除数据表
 
 ```mysql
 drop tabel if exists tableName;
+TRUNCATE tableName
+
 ```
 
 ## 数据字段的操作
@@ -106,7 +110,10 @@ drop tabel if exists tableName;
 #### 降序/升序排列
 
 ```mysql
-desc / acs
+-- 降序
+desc;
+-- 升序
+acs;
 ```
 
 #### 插入数据
@@ -115,6 +122,26 @@ desc / acs
 insert info tableName set key = “val”,key=“val”;
 insert info tableName (key1,key2) values (“val1”,“val2”);
 ```
+
+#### 修改字段
+
+```mysql
+-- 修改数据格式 
+ALTER table tableName MODIFY fieldName varchar(20) not null; 
+
+-- 修改字段名称
+ALTER table tableName CHANGE fieldName existFieldName newFieldName not null;
+
+-- 在指定位置插入新的字段（after）
+ALTER table tableName ADD newFieldName smallint default null AFTER fieldName1
+-- 添加一个字段作为首个字段 （first）
+ALTER table tableName ADD newFieldName smallint default null first
+
+-- 删除某个字段
+ALTER table tableName drop field
+```
+
+
 
 ## 数据的基本操作
 
@@ -173,10 +200,12 @@ insert info tableName (key1,key2) values (“val1”,“val2”);
 - ```sql
   select name,id from class where
   ```
+  
 - ```sql
   // 字段别名
   select name,id as ids from class
   ```
+  
 - ```sql
   // 使用连接函数
   select CONCAT(cname,description) as class_info from class
@@ -185,15 +214,15 @@ insert info tableName (key1,key2) values (“val1”,“val2”);
 
 - 数据的新增
 
-```mysql
+  ```mysql
+  
+  ```
 
-```
+  
 
 ## 数据字段类型
 
-```mysql
 
-```
 
 ## 排序规则
 
