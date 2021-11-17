@@ -1,4 +1,4 @@
-## Typescript 类型
+## TypeScript 类型
 
 -   联合类型
     ```typescript
@@ -101,40 +101,43 @@
     let K: myType;
     let L: myType;
     ```
-    ## Typescript 编译选项
-    编译参数
-    ```bash
-    // 单个文件 监视模式
-    tsc fileName -w
-    ```
+
+## TypeScript 编译选项
+
+编译参数
+
+```bash
+// 单个文件 监视模式
+tsc fileName -w
+```
 
 ## tsconfig.json
 
--   参数说明
+参数说明
 
-    ```json
-    {
-        // ** 任意路径
-        // * 任意文件
+```json
+{
+    // ** 任意路径
+    // * 任意文件
 
-        // 包含
-        "include": ["./src/**/*"],
-        // 排除
-        "exclude": ["./hello/*"],
-        // 继承 其他编译配置
-        "extends": "../config.json",
-        // 保存就编译
-        "compileOnSave": true,
-        "compilerOptions": {
-            // 指定编译后的js版本
-            "target": "ES3", // 默认  es5、es6、es2015...es2020 ESNext ==> 最新版本
-            "module": "amd", // "CommonJS", "AMD", "System", "UMD", "ES6", "ES2015", "ES2020", "ESNext", "None".
-            "lib": [], // 指定项目中使用的一些库，一般情况下不用动
-            "outDir": "./dist", // 指定编译后的路径
-            "outFile": "" // 所有全局作用域中的代码会编译合并到同一个文件 system、amd模块
-        }
+    // 包含
+    "include": ["./src/**/*"],
+    // 排除
+    "exclude": ["./hello/*"],
+    // 继承 其他编译配置
+    "extends": "../config.json",
+    // 保存就编译
+    "compileOnSave": true,
+    "compilerOptions": {
+        // 指定编译后的js版本
+        "target": "ES3", // 默认  es5、es6、es2015...es2020 ESNext ==> 最新版本
+        "module": "amd", // "CommonJS", "AMD", "System", "UMD", "ES6", "ES2015", "ES2020", "ESNext", "None".
+        "lib": [], // 指定项目中使用的一些库，一般情况下不用动
+        "outDir": "./dist", // 指定编译后的路径
+        "outFile": "" // 所有全局作用域中的代码会编译合并到同一个文件 system、amd模块
     }
-    ```
+}
+```
 
 -   模块化规范
 

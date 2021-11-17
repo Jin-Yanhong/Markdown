@@ -21,6 +21,14 @@ java *.class
 
 用于数据类型的关键字有 boolean、byte、char、 double、 false、float、int、long、new、short、true、void、instanceof。
 
+```mermaid
+graph LR
+A(Java 数据类型) --> B1(引用类型);
+A(Java 数据类型) --> B2(基础数据类型);
+B1 --> C1(字符串)
+B1 --> C2(')
+```
+
 ### 语句
 
 用于语句的关键字有 break、case、 catch、 continue、 default 、do、 else、 for、 if、return、switch、try、 while、 finally、 throw、this、 super。
@@ -511,4 +519,4 @@ int larger = max(30, 40);
 System.out.println("hello");
 ```
 
-# Java 异常处理
+**# Java [异常处理]()**
