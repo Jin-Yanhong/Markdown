@@ -107,3 +107,19 @@ devServer: {
 // package.json
 "serve": "vue-cli-service serve && webpack-dev-server --open",
 ```
+
+在新标签页打开页面
+
+```javascript
+const { href } = this.$router.resolve({
+    path: '/跳转的页面路由',
+    query: {
+        //要传的参数
+        id: this.id,
+    },
+});
+window.open(href, '_blank'); //打开新的窗口
+```
+
+
+

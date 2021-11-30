@@ -682,3 +682,371 @@ Echarts 的事件有两种。一种是鼠标事件。还有一种是通过 dispa
 ### 8）echartsInstance.dispose
 
 销毁实例。实例销毁之后无法再被使用。
+
+## 相关实例
+
+### 立体柱状图
+
+```javascript
+xData = ['本年话务总量', '本年人工话务量', '每万客户呼入量'];
+yData = [0, 1230, 425];
+option = {
+    backgroundColor: '#061326',
+    grid: {
+        top: '25%',
+        left: '-5%',
+        bottom: '5%',
+        right: '5%',
+        containLabel: true,
+    },
+    tooltip: {
+        show: true,
+    },
+    animation: false,
+    xAxis: [
+        {
+            type: 'category',
+            data: xData,
+            axisTick: {
+                alignWithLabel: true,
+            },
+            nameTextStyle: {
+                color: '#82b0ec',
+            },
+            axisLine: {
+                show: false,
+                lineStyle: {
+                    color: '#82b0ec',
+                },
+            },
+            axisLabel: {
+                textStyle: {
+                    color: '#fff',
+                },
+                margin: 30,
+            },
+        },
+    ],
+    yAxis: [
+        {
+            show: false,
+            type: 'value',
+            axisLabel: {
+                textStyle: {
+                    color: '#fff',
+                },
+            },
+            splitLine: {
+                lineStyle: {
+                    color: '#0c2c5a',
+                },
+            },
+            axisLine: {
+                show: false,
+            },
+        },
+    ],
+    series: [
+        {
+            name: '',
+            type: 'pictorialBar',
+            symbolSize: [40, 10],
+            symbolOffset: [0, -6], // 上部椭圆
+            symbolPosition: 'end',
+            z: 12,
+            // "barWidth": "0",
+            label: {
+                normal: {
+                    show: true,
+                    position: 'top',
+                    // "formatter": "{c}%"
+                    fontSize: 15,
+                    fontWeight: 'bold',
+                    color: '#34DCFF',
+                },
+            },
+            color: '#2DB1EF',
+            data: yData,
+        },
+        {
+            name: '',
+            type: 'pictorialBar',
+            symbolSize: [40, 10],
+            symbolOffset: [0, 7], // 下部椭圆
+            // "barWidth": "20",
+            z: 12,
+            color: '#2DB1EF',
+            data: yData,
+        },
+        {
+            name: '',
+            type: 'pictorialBar',
+            symbolSize: function (d) {
+                return d > 0 ? [50, 15] : [0, 0]
+            },
+            symbolOffset: [0, 12], // 下部内环
+            z: 10,
+            itemStyle: {
+                normal: {
+                    color: 'transparent',
+                    borderColor: '#2EA9E5',
+                    borderType: 'solid',
+                    borderWidth: 1,
+                },
+            },
+            data: yData,
+        },
+        {
+            name: '',
+            type: 'pictorialBar',
+            symbolSize: [70, 20],
+            symbolOffset: [0, 18], // 下部外环
+            z: 10,
+            itemStyle: {
+                normal: {
+                    color: 'transparent',
+                    borderColor: '#19465D',
+                    borderType: 'solid',
+                    borderWidth: 2,
+                },
+            },
+            data: yData,
+        },
+        {
+            type: 'bar',
+            //silent: true,
+            barWidth: '40',
+            barGap: '10%', // Make series be overlap
+            barCateGoryGap: '10%',
+            itemStyle: {
+                normal: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 0.7, [
+                        {
+                            offset: 0,
+                            color: '#38B2E6',
+                        },
+                        {
+                            offset: 1,
+                            color: '#0B3147',
+                        },
+                    ]),
+                    opacity: 0.8,
+                },
+            },
+            data: yData,
+        },
+    ],
+};
+
+```
+
+如图
+
+![image-20211125173422235](https://blog-pic-store.oss-cn-beijing.aliyuncs.com/blog/echarts%E7%AB%8B%E4%BD%93%E5%9C%86%E6%9F%B1.png)
+
+### 多边形柱状图
+
+```javascript
+var xData = ["工单", "影响客户"];
+var yData1 = [100, 60];
+var yData2 = [80, 40];
+var path = 'path://M214,1079l8-6h16l8,6-8,6H222Z';
+option = {
+    backgroundColor: 'BLACK',
+    title: {
+        text: '本年预安排停电',
+        top: 5,
+        left: '20%',
+        textStyle: {
+            fontSize: 18,
+            color: '#fff'
+        }
+    },
+    legend: {
+        data: ['总数', '未复电数']
+    },
+    "grid": {
+        "top": "25%",
+        "left": "-5%",
+        "bottom": "10%",
+        "right": "5%",
+        "containLabel": true
+    },
+    animation: false,
+    "xAxis": [{
+        "type": "category",
+        "data": xData,
+        "axisTick": {
+            show: false,
+            "alignWithLabel": true
+        },
+        "nameTextStyle": {
+            "color": "#fff"
+        },
+        "axisLine": {
+            show: false,
+            "lineStyle": {
+                "color": "#82b0ec"
+            }
+        },
+        "axisLabel": {
+            "textStyle": {
+                "color": "#fff"
+            },
+            margin: 20
+        }
+    }],
+    "yAxis": [{
+        show: false,
+        "type": "value",
+        "axisLabel": {
+            "textStyle": {
+                "color": "#fff"
+            },
+            "formatter": "{value}%"
+        },
+        "splitLine": {
+            "lineStyle": {
+                "color": "#0c2c5a"
+            }
+        },
+        "axisLine": {
+            "show": false
+        }
+    }],
+    "series": [{
+            type: 'pictorialBar',
+            symbol: path,
+            symbolSize: [30, 8],
+            symbolOffset: [-20, -5],
+            symbolPosition: 'end',
+            z: 12,
+            color: "#68B4FF",
+            data: yData1
+        },
+        {
+            type: 'pictorialBar',
+            symbol: path,
+            symbolSize: [30, 8],
+            symbolOffset: [20, -5],
+            symbolPosition: 'end',
+            z: 12,
+            color: "#FFCE69",
+            data: yData2
+        },
+        {
+            type: 'pictorialBar',
+            symbol: path,
+            symbolSize: [30, 8],
+            symbolOffset: [-20, 5],
+            z: 12,
+            color: "#68B4FF",
+            data: yData1
+        },
+        {
+            name: '',
+            type: 'pictorialBar',
+            symbol: path,
+            symbolSize: [30, 8],
+            symbolOffset: [20, 5],
+            color: "#FFCE69",
+            z: 12,
+            data: yData2
+        },
+        {
+            type: 'bar',
+            itemStyle: {
+                normal: {
+                    opacity: .7
+                }
+            },
+            barWidth: "30",
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                    offset: 0,
+                    color: "#3D83CD"
+                },
+                {
+                    offset: 1,
+                    color: "#0B3147"
+                }
+            ]),
+            data: yData1
+        },
+        {
+            type: 'bar',
+            itemStyle: {
+                normal: {
+                    opacity: .7
+                }
+            },
+            barWidth: "30",
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                    offset: 0,
+                    color: "#CC9F49"
+                },
+                {
+                    offset: 1,
+                    color: "#0B3147"
+                }
+            ]),
+            data: yData2
+        }
+    ]
+}
+```
+
+如图
+
+![image-20211125173711111](https://blog-pic-store.oss-cn-beijing.aliyuncs.com/blog/echart%E5%A4%9A%E8%BE%B9%E5%BD%A2%E6%9F%B1%E7%8A%B6%E5%9B%BE.png)
+
+### 回调函数使用
+
+```javascript
+var colors = ['#32DA56', '#e43c59'];
+var xData = ['2016-1', '2016-2', '2016-3', '2016-4', '2016-5', '2016-6', '2016-7', '2016-8', '2016-9', '2016-10', '2016-11', '2016-12'];
+var yData = [300, 380, 400, 380, 350, 410, 480, 460, 410, 380, 350, 320];
+option = {
+    // color: colors,
+    xAxis: [{
+        type: 'category',
+        axisTick: {
+            show: false,
+            alignWithLabel: true
+        },
+        splitLine: {
+            show: true
+        },
+        data: xData
+    }],
+    yAxis: [{
+        type: 'value',
+        axisTick: {
+            show: false,
+            alignWithLabel: true
+        },
+        splitLine: {
+            show: true
+        }
+    }],
+    series: [
+        {
+            type: 'bar',
+            symbol: 'none',
+            smooth: true,
+            data: yData,
+            itemStyle: {
+                normal: {
+                    color: function (d) {
+                        console.log(d)
+                        return d.value > 400 ? colors[1] : colors[0]
+                    }
+                }
+            }
+        }
+    ]
+};
+```
+
+如图
+
+![image-20211125173923381](https://blog-pic-store.oss-cn-beijing.aliyuncs.com/blog/echarts%20%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8.png)

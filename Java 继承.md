@@ -11,7 +11,7 @@ class 子类 extends 父类 {
 ```
 
 -   继承类型
-    <img src="https://gitee.com/Coder-jin/PicStore/raw/master/java-extends-2020-12-08.png" alt="img"  />
+    <img src="https://blog-pic-store.oss-cn-beijing.aliyuncs.com/blog/20211125122926.png" alt="img"  />
     <font color="orange">需要注意的是 Java 不支持多继承，但支持多重继承。</font>
 -   继承的特性
     > -   子类拥有父类非 private 的属性、方法。

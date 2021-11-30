@@ -6,7 +6,7 @@
 
 > Vue 最独特的特性之一，是其非侵入性的响应式系统。
 
-![data](https://gitee.com/Coder-jin/PicStore/raw/master/data.png)
+![data](https://blog-pic-store.oss-cn-beijing.aliyuncs.com/blog/lifecycle.png)
 
 ## 动态绑定
 
