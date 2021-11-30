@@ -1,257 +1,206 @@
 # 使用场景
 
-## 饼图图例后显示数据总数、百分比
+## 代码片段
+
+#### 饼图图例后显示数据总数、百分比
 
 ```javascript
-  legend: {
-        type: 'plain',
-        orient: 'horizontal',
-        pageIconColor: '#9bb3ff',
-        pageIconInactiveColor: '#ccc',
-        pageTextStyle: {
-            color: '#cce8ff',
-        },
-        icon: 'circle',
-        left: 'center',
-        bottom: 0,
-        textStyle: {
-            color: '#ffffff',
-            fontSize: 12,
-        },
-        formatter: function (name) {
-            var data = option.series[0].data;
-            var total = 0;
-            var tarValue;
-            for (var i = 0; i < data.length; i++) {
-                total += data[i].value;
-                if (data[i].name == name) {
-                    tarValue = data[i].value;
+legend: {
+    type: 'plain',
+    orient: 'horizontal',
+    pageIconColor: '#9bb3ff',
+    pageIconInactiveColor: '#ccc',
+    pageTextStyle: {
+        color: '#cce8ff',
+    },
+    icon: 'circle',
+    left: 'center',
+    bottom: 0,
+    textStyle: {
+        color: '#ffffff',
+        fontSize: 12,
+    },
+    formatter: function (name) {
+        var data = option.series[0].data;
+        var total = 0;
+        var tarValue;
+        for (var i = 0; i < data.length; i++) {
+            total += data[i].value;
+            if (data[i].name == name) {
+                tarValue = data[i].value;
+            }
+        }
+        var v = tarValue;
+        var p = Math.round((tarValue / total) * 100);
+        return `${name}  ${v}处 (${p}%)`;
+    },
+},
+```
+
+#### 自动轮播 tiptool
+
+```javascript
+/**
+ *
+ * @param {Object} echart echarts 实例
+ * @param {Object} option echarts 配置项
+ * @param {Boolean} option 此方法参数，是否需要滚动，默认不需滚动
+ * @param {Number} interval 图表高亮轮播切换的周期
+ */
+
+function tooltipHighlight(echart, option, need_scroll = false, interval = 2000) {
+    // 参数检查
+    if (!(echart && option)) {
+        console.error('echarts自动显示tooltips方法出错，echart、option 参数错误，请检查相关参数！');
+        return;
+    }
+
+    let dataLength;
+    // 数据长度检查
+    if (option.series[0] && option.series[0].data) {
+        dataLength = option.series[0].data.length;
+    } else if (option.series && option.series.data) {
+        dataLength = option.series.data.length;
+    } else if (option.dataset && option.dataset.source) {
+        dataLength = option.dataset.source.length - 1;
+    } else if (dataLength == 0) {
+        console.error('当前图表数据配置项暂无数据！');
+        return;
+    }
+
+    // 当前显示项索引
+    let curIndex = 0;
+    // 显示周期
+
+    // 是否需要滚动，默认不需要滚动
+    if (need_scroll) {
+        // scroll_count  所有数据都高亮一次，滚动条一共需要滑动的次数，
+        let scroll_count;
+
+        if (Object.prototype.toString.call(option.dataZoom) == '[object Array]') {
+            scroll_count = 100 / (option.dataZoom[0].end - option.dataZoom[0].start);
+        } else if (Object.prototype.toString.call(option.dataZoom) == '[object Object]') {
+            scroll_count = 100 / (option.dataZoom.end - option.dataZoom.start);
+        } else {
+            console.error('当前图表数据配置项没有配置 dataZoom 属性！');
+            return;
+        }
+        let zoom_step = 100 / scroll_count;
+
+        // 滚动配置参数
+        let startValue = 0;
+        let endValue;
+        let startPage = 1;
+        let count = Math.ceil(dataLength / scroll_count);
+        // 需要切换滚动的索引值
+        let scroll_index_arr = [];
+        //
+        for (let i = 0; i < dataLength + 1; i++) {
+            if (i % count == 1) {
+                scroll_index_arr.push(i);
+            }
+        }
+
+        scroll_index_arr.shift();
+        // console.log('滑动索引值', scroll_index_arr);
+        // debugger;
+        setInterval(() => {
+            // dataZoom 伴随滚动
+            echart.dispatchAction({
+                type: 'dataZoom',
+                // 开始位置的百分比，0 - 100
+                start: startValue,
+                // 结束位置的百分比，0 - 100
+                end: endValue,
+            });
+
+            // 图表当前项高亮
+            echart.dispatchAction({
+                type: 'highlight',
+                seriesIndex: 0,
+                dataIndex: curIndex,
+            });
+
+            // 显示 tooltip
+            echart.dispatchAction({
+                type: 'showTip',
+                seriesIndex: 0,
+                dataIndex: curIndex,
+            });
+
+            // 高亮自运算
+            if (curIndex < dataLength - 1) {
+                curIndex++;
+                // console.log('当前项', curIndex);
+            } else {
+                curIndex = 0;
+            }
+
+            if (curIndex == scroll_index_arr[startPage - 1] - startPage) {
+                //
+                startPage++;
+                // console.log('翻页参数叠加了', startPage);
+                if (startPage > scroll_index_arr.length + 1) {
+                    startPage = 1;
+                    // console.log('翻页参数重置了', startPage);
                 }
             }
-            var v = tarValue;
-            var p = Math.round((tarValue / total) * 100);
-            return `${name}  ${v}处 (${p}%)`;
-        },
-    },
-```
+            // 设置 滚动条 起始值
+            startValue = (startPage - 1) * zoom_step;
+            // 设置 滚动条 结束值
+            endValue = startValue + zoom_step;
+            // 数据重置
+            if (curIndex == 0) {
+                startPage = 1;
+                startValue = 0;
+                endValue = startValue + zoom_step;
+                // console.log('重置', startPage);
+            }
+        }, interval);
+    } else {
+        // debugger;
+        // 不需要要滚动
+        setInterval(() => {
+            // 图表当前项高亮
+            echart.dispatchAction({
+                type: 'highlight',
+                seriesIndex: 0,
+                dataIndex: curIndex,
+            });
 
-## 自动轮播 tiptool
+            // 显示 tooltip
+            echart.dispatchAction({
+                type: 'showTip',
+                seriesIndex: 0,
+                dataIndex: curIndex,
+            });
 
-```javascript
-function tooltipHighlight(echart, option, need_scroll = false, scroll_count = 1) {
-  tooltip_immediately_show(echart, option);
-
-  // 参数检查
-  if (!(echart && option)) {
-    console.error('echarts自动显示tooltips方法出错，echart、option 参数错误，请检查相关参数！');
-    return;
-  }
-
-  let dataLength;
-
-  // 数据长度检查
-  if (option.series[0] && option.series[0].data) {
-    dataLength = option.series[0].data.length;
-  } else if (option.dataset && option.dataset.source) {
-    dataLength = option.dataset.source.length - 1;
-  } else if (dataLength == 0) {
-    console.error('当前图表数据配置项暂无数据！');
-    return;
-  }
-  // 当前显示项索引
-  let curIndex = 0;
-  // 显示周期
-  const interval = 3000;
-
-  let zoom_step = 100 / scroll_count;
-
-  // 是否需要滚动，默认不需要滚动
-  if (need_scroll) {
-    // 滚动配置参数
-    let startValue = 0;
-    let endValue;
-    let startPage = 1;
-    let count = Math.ceil(dataLength / scroll_count);
-    // 需要切换滚动的索引值
-    let scroll_index_arr = [];
-    //
-    for (let i = 0; i < dataLength + 1; i++) {
-      if (i % count == 1) {
-        scroll_index_arr.push(i);
-      }
+            // 高亮自运算
+            if (curIndex < dataLength - 1) {
+                curIndex++;
+                // console.log('当前项', curIndex);
+            } else {
+                curIndex = 0;
+            }
+            // console.log('当前index', curIndex);
+        }, interval);
     }
-
-    scroll_index_arr.shift();
-    // console.log('滑动索引值', scroll_index_arr);
-    // debugger;
-    setInterval(() => {
-      // dataZoom 伴随滚动
-      echart.dispatchAction({
-        type: 'dataZoom',
-        // 开始位置的百分比，0 - 100
-        start: startValue,
-        // 结束位置的百分比，0 - 100
-        end: endValue,
-      });
-
-      // 图表当前项高亮
-      echart.dispatchAction({
-        type: 'highlight',
-        seriesIndex: 0,
-        dataIndex: curIndex,
-      });
-
-      // 显示 tooltip
-      echart.dispatchAction({
-        type: 'showTip',
-        seriesIndex: 0,
-        dataIndex: curIndex,
-      });
-
-      // 高亮自运算
-      if (curIndex < dataLength - 1) {
-        curIndex++;
-        // console.log('当前项', curIndex);
-      } else {
-        curIndex = 0;
-      }
-
-      if (curIndex == scroll_index_arr[startPage - 1] - startPage) {
-        //
-        startPage++;
-        // console.log('翻页参数叠加了', startPage);
-        if (startPage > scroll_index_arr.length + 1) {
-          startPage = 1;
-          // console.log('翻页参数重置了', startPage);
-        }
-      }
-      // 设置 滚动条 起始值
-      startValue = (startPage - 1) * zoom_step;
-      // 设置 滚动条 结束值
-      endValue = startValue + zoom_step;
-      // 数据重置
-      if (curIndex == 0) {
-        startPage = 1;
-        startValue = 0;
-        endValue = startValue + zoom_step;
-        // console.log('重置', startPage);
-      }
-      // console.log('当前位置', startPage, '当前index', curIndex, '当前页范围', scroll_index_arr[startPage - 1], '起始值', startValue, '结束值', endValue);
-    }, interval);
-  } else {
-    // debugger;
-    // 不需要要滚动
-    setInterval(() => {
-      // 图表当前项高亮
-      echart.dispatchAction({
-        type: 'highlight',
-        seriesIndex: 0,
-        dataIndex: curIndex,
-      });
-
-      // 显示 tooltip
-      echart.dispatchAction({
-        type: 'showTip',
-        seriesIndex: 0,
-        dataIndex: curIndex,
-      });
-
-      // 高亮自运算
-      if (curIndex < dataLength - 1) {
-        curIndex++;
-        // console.log('当前项', curIndex);
-      } else {
-        curIndex = 0;
-      }
-      // console.log('当前index', curIndex);
-    }, interval);
-  }
-}
-
-function tooltip_immediately_show(echart, option) {
-  // 统一配置 柱状图 的tooltip 样式
-  option.tooltip = {
-    trigger: 'axis',
-    axisPointer: {
-      type: 'shadow',
-      shadowStyle: {
-        color: 'rgba(150,150,150,0.3)',
-      },
-    },
-    backgroundColor: 'rgba(0,0,0,0.4)',
-    borderWidth: 0,
-    textStyle: {
-      color: 'rgba(255,255,255,0.7)',
-    },
-    show: true,
-  };
-  echart.setOption(option);
-
-  // 第一个弹窗默认显示
-  echart.dispatchAction({
-    type: 'highlight',
-    seriesIndex: 0,
-    dataIndex: 0,
-  });
-
-  // 显示 tooltip
-  echart.dispatchAction({
-    type: 'showTip',
-    seriesIndex: 0,
-    dataIndex: 0,
-  });
 }
 ```
 
-tiptool 自定义内容
+#### 图表样式相关配置项
 
 ```javascript
-function universal_tooltip_formatter(params, your_unit = '') {
-  let content = '';
-  let str = '';
-  if (params instanceof Array) {
-    // 数组
-
-    params.map(ele => {
-      str = '';
-      if (ele.seriesType == 'bar') {
-        // 柱状图
-        content += `${ele.marker} ${ele.seriesName.includes('series') ? '' : ele.seriesName} ${ele.value} ${your_unit}<br/>`;
-        str = str.concat(`${params[0].name ? params[0].name : ''} <br/>` + content);
-      } else if (ele.seriesType == 'pie') {
-        // 环形图
-        // content += `${ele.marker} ${ele.seriesName.includes('series') ? '' : ele.seriesName} ${ele.value} ${your_unit}<br/>`;
-        console.log('数组环形图');
-      }
-    });
-  } else if (params instanceof Object) {
-    // 对象;
-    if (params.seriesType == 'bar') {
-      // 柱状图
-      content += `${params.marker} ${params.seriesName.includes('series') ? '' : params.seriesName} ${params.value} ${your_unit}<br/>`;
-      str = str.concat(`${params.name ? params.name : ''} <br/>` + content);
-    }
-    if (params.seriesType == 'pie') {
-      // 环形图
-      content += `${params.marker} ${params.value} ${your_unit} ${params.percent}% <br/>`;
-      str = str.concat(`${params.data.name ? params.data.name : ''} <br/>` + content);
-    }
-  }
-  return str;
-}
-```
-
-## 图表样式相关配置项
-
-```javascript
-Option: {
+let option = {
     tooltip: {
         trigger: 'axis',
         axisPointer: {
             // 坐标轴指示器，坐标轴触发有效
             type: 'shadow', // 默认为直线，可选为：'line' | 'shadow' | 'none'
         },
-        formatter: '{b0}<br>人口总数:{c1}人<br>常住人口:{c0}人<br>流动人口:{c2}人',
+        formatter: function (params) {
+            //
+        },
     },
     legend: {
         orient: 'horizontal',
@@ -322,59 +271,64 @@ Option: {
             },
         },
     ],
-},
+};
 ```
 
-# Echarts 常用 API（echarts 和 echartsInstance）
+# Echarts 常用 API
 
-## 一、echarts 上的方法
+## echarts 上的方法
 
-一般在项目中引入 echarts 之后，可以获得一个全局的 echarts 对象。
+在项目中引入 echarts 之后，可以获得一个全局的 echarts 对象。
 
-##### echarts.init()
+#### echarts.init()
+
+echarts.init(target: HTMLDivElement , theme: Object)
 
 创建一个 echarts 实例，返回 echarts 实例。不能在单个容器中创建多个 echarts 实例。
 
-```
-(dom: HTMLDivElement|HTMLCanvasElement, theme?: Object|string, opts?: {
-    devicePixelRatio?: number
-    renderer?: string
-    width?: number|string
-    height? number|string
-}) => ECharts
-```
+#### echarts.dispose
 
-##### echarts.dispose(target: ECharts|HTMLDivElement|HTMLCanvasElement)
+echarts.dispose(target: ECharts|HTMLDivElement|HTMLCanvasElement)
 
 销毁实例。实例销毁后无法再被使用。
 
-##### echarts.getInstanceByDom(target: HTMLDivElement|HTMLCanvasElement)
+#### echarts.getInstanceByDom
+
+echarts.getInstanceByDom(target: HTMLDivElement|HTMLCanvasElement)
 
 获取 Dom 容器上的实例。
 
-##### echarts.registerTheme(themeName: string, theme: Object)
+#### echarts.registerTheme
+
+echarts.registerTheme(themeName: string, theme: Object)
 
 注册主题，用于初始化实例的时候指定。
 
-### 2.然后是几个比较具体的方法
+#### echarts.connect
 
-##### echarts.connect(group:string|Array)
+echarts.connect(group:string|Array)
 
 多个图表实例实现联动
 
-##### echarts.disconnect(group:string)
+#### echarts.disconnect
+
+echarts.disconnect(group:string)
 
 解除图表实例的联动，如果只需要移除单个实例，可以通过将该图表实例 group 设为空。
 
-##### echarts.registerMap(mapName: string, geoJson: Object, specialAreas?: Object)
+#### echarts.registerMap
+
+echarts.registerMap(mapName: string, geoJson: Object, specialAreas?: Object)
 
 注册可用的地图。必须在包括 geo 组件或者 map 图表类型的时候才能使用。
 
-### echarts.getMap(mapName: string) => Object
+#### echarts.getMap
+
+echarts.getMap(mapName: string) => Object
 
 获取已注册的地图，返回的对象类型是：
 
-```
+```javascript
 {
     // 地图的 geoJson 数据
     geoJson: Object,
@@ -383,13 +337,14 @@ Option: {
 }
 ```
 
-### echarts.graphic
+#### echarts.graphic
 
 图形相关帮助方法。主要有两个方法：clipPointsByRect()和 clipRectByRect()。
-1）clipPointsByRect()
-输入一组点，一个矩形，返回被矩形截取过的点
 
-```
+-   clipPointsByRect()
+    输入一组点，一个矩形，返回被矩形截取过的点
+
+```javascript
 (
     // 要被截取的点列表，如 [[23, 44], [12, 15], ...]。
     points: Array.<Array.<number>>,
@@ -403,8 +358,8 @@ Option: {
 ) => Array.<Array.<number>> // 截取结果。
 ```
 
-2）clipRectByRect()
-输入两个矩形，返回第二个矩形截取第一个矩形的结果。
+-   clipRectByRect()
+    输入两个矩形，返回第二个矩形截取第一个矩形的结果。
 
 ```javascript
 (
@@ -432,50 +387,45 @@ Option: {
 
 如果矩形完全被截取完，则会返回 undefined。
 
-## 二、echartsInstance 的方法
+## EchartsInstance （实例对象）方法
 
-### 1.echartsInstance.group
+#### echartsInstance.group
 
 图表的分组，用于联动。
 
-### 2.echartsInstance.setOption()
+#### echartsInstance.setOption()
 
-```javascript
-(option: Object, notMerge?: boolean, lazyUpdate?: boolean)
-or
-(option: Object, opts?: Object)
-```
-
+(option: Object, notMerge?: boolean, lazyUpdate?: boolean)或者(option: Object, opts?: Object)
 设置图表实例的配置项和数据，万能接口，所有参数和数据的修改都可以通过 setOption 来完成。Echarts 会合并新的参数和数据，然后刷新图表。还有开启动画的话，Echarts 会找到两组数据的差异然后通过合适的动画去展示。
 notMerge: 可选参数，是否可以不和之前的 option 进行合并，默认为 false，进行合并。
 lazyUpdate：也是一个可选参数，在设置完 option 之后是否不更新图表。默认为 false，即立即更新。
 **注意**：lazyUpdate 这个参数，设置为 false 的时候，会立即更新图表。一般在做项目的时候，会根据一定的不同条件值（时间等 condition）来在一个 div 容器上渲染具有不同数据的图表。这时候会从后端获取不同的数据来渲染 echarts 图表。这时候需要将 lazyUpdate 参数设置为 true，然后图表才能随着数据的变化而正常变化。
 
-### 3.下面是几个获取条件的方法
+## 常用的方法
 
-### 1）echartsInstance.getWidth() => number
+-   echartsInstance.getWidth() => number
 
 获取实例所在容器的宽度。
 
-### 2）echartsInstance.getHeight() => number
+-   echartsInstance.getHeight() => number
 
 获取实例所在容器的高度。
 
-### 3）echartsInstance.getDom() => HTMLCanvasElement|HTMLDivElement
+-   echartsInstance.getDom() => HTMLCanvasElement|HTMLDivElement
 
 获取实例容器的 dom 节点
 
-### 4）echartsInstance.getOption() => Object
+-   echartsInstance.getOption() => Object
 
 获取当前实例维护的 option 对象，返回的 option 对象是经过用户多次 setOption 之后修改合并之后的配置项和数据，也记录了用户的交互状态。
 
-### 4.下面是几个和 echarts 实例事件相关的方法
+### echarts 实例事件相关的方法
 
-### 1）echartsInstance.dispatchAction(payload：Object)
+-   echartsInstance.dispatchAction(payload：Object)
 
 触发图表行为。payload 可以通过 batch 属性同时触发多个行为。
 
-### 2）echartsInstance.on()
+-   echartsInstance.on()
 
 参数列表：
 
@@ -497,13 +447,13 @@ lazyUpdate：也是一个可选参数，在设置完 option 之后是否不更�
 Echarts 的事件有两种。一种是鼠标事件。还有一种是通过 dispatchAction 触发的事件，每个 action 上都有对应的事件。
 **注意**：如果事件是外部 dispatchAction 触发，并且 action 中有 batch 属性触发批量的行为，则相应的响应事件参数里也会把属性都放在 batch 属性中。？？？
 
-### 3）echartsInstance.off((eventName: string, handler?: Function))
+-   echartsInstance.off((eventName: string, handler?: Function))
 
 解绑事件处理函数.handler 是可选参数，可以传入需要解绑的处理函数，如果不传的话，则解绑事件下所有绑定的处理函数。
 
-### 5.涉及到坐标系上的点的方法
+### 涉及到坐标系上的点的方法
 
-### 1）echartsInstance.convertToPixel()
+-   echartsInstance.convertToPixel()
 
 方法的参数列表：
 
@@ -536,7 +486,7 @@ Echarts 的事件有两种。一种是鼠标事件。还有一种是通过 dispa
 
 转换坐标系上的点到像素坐标值
 
-### 2）echartsInstance.convertFromPixel()
+-   echartsInstance.convertFromPixel()
 
 方法列表参数：
 
@@ -569,7 +519,7 @@ Echarts 的事件有两种。一种是鼠标事件。还有一种是通过 dispa
 
 转换像素坐标值到逻辑坐标系上的点，是 convertToPixel 的逆运算。
 
-### 3）echartsInstance.containPixel
+-   echartsInstance.containPixel
 
 方法参数列表
 
@@ -601,22 +551,25 @@ Echarts 的事件有两种。一种是鼠标事件。还有一种是通过 dispa
 
 判断指定的点是否在指定的坐标系或系列上。
 
-### 6.其他的一些方法
+### 其他方法
 
-### 1）echartsInstance.showLoading(type?: string, opts?: Object)
+-   echartsInstance.showLoading(type?: string, opts?: Object)
+
+```javascript
+// type
+// 可选。加载动画类型。目前只有一种‘default’
+
+// opts
+// 可选。加载动画配置项，跟 type 有关。
+```
 
 显示加载动画效果。可以在加载数据前手动调用该接口显示加载动画，在数据加载完成后调用 hideLoading 隐藏加载动画。
 
-- type
-  可选。加载动画类型。目前只有一种‘default’
-- opts
-  可选。加载动画配置项，跟 type 有关。
-
-### 2）echartsInstance.hideLoading()
+-   echartsInstance.hideLoading()
 
 隐藏动画加载效果
 
-### 3）echartsInstance.getDataURL()
+-   echartsInstance.getDataURL()
 
 参数列表
 
@@ -635,7 +588,7 @@ Echarts 的事件有两种。一种是鼠标事件。还有一种是通过 dispa
 
 导出图表图片，返回一个 base64 的 URL，可以设置为 Image 的 src。
 
-### 4）echartsInstance.getConnectedDataURL()
+-   echartsInstance.getConnectedDataURL()
 
 参数列表格式
 
@@ -654,36 +607,37 @@ Echarts 的事件有两种。一种是鼠标事件。还有一种是通过 dispa
 
 导出联动的图表图片，返回一个 base64 的 url，可以设置为 Image 的 src。导出图片中每个图表的相对位置跟容器的相对位置有关。
 
-### 5）echartsInstance.appendData()
+-   echartsInstance.appendData()
 
 ```javascript
 (opts: {
-  // 要增加数据的系列序号。
-  seriesIndex?: string,
-  // 增加的数据。
-  data?: Array | TypedArray,
+    // 要增加数据的系列序号。
+    seriesIndex?: string,
+    // 增加的数据。
+    data?: Array | TypedArray,
 }) => string;
 ```
 
 此接口用于，在大数据量（百万以上）的渲染场景，分片加载数据和增量渲染。在大数据量的场景下（例如地理数的打点），就算数据使用二进制格式，也会有几十或上百兆，在互联网环境下，往往需要分片加载。appendData 接口提供了分片加载后增量渲染的能力，渲染新加入的数据块时不会清除原有已经渲染的部分。
-**注意**：
 
-- 现在不支持 系列（series） 使用 dataset 同时使用 appendData，只支持系列使用自己的 series.data 时使用 appendData
-- 目前并非所有的图表都支持分片加载时的增量渲染。目前支持的图有：ECharts 基础版本的 散点图（scatter） 和 线图（lines）。ECharts GL 的 散点图（scatterGL）、线图（linesGL） 和 可视化建筑群（polygons3D）
+> **注意**：
+>
+> -   现在不支持 系列（series） 使用 dataset 同时使用 appendData，只支持系列使用自己的 series.data 时使用 appendData
+> -   目前并非所有的图表都支持分片加载时的增量渲染。目前支持的图有：ECharts 基础版本的 散点图（scatter） 和 线图（lines）。ECharts GL 的 散点图（scatterGL）、线图（linesGL） 和 可视化建筑群（polygons3D）
 
-### 6）echartsInstance.clear()
+-   echartsInstance.clear()
 
 清空当前实例。会移除实例中所有的组件和图表。清空后调用 getOption 会返回一个{}空对象。
 
-### 7）echartsInstance.isDisposed
+-   echartsInstance.isDisposed
 
 当前实例是否已经被释放
 
-### 8）echartsInstance.dispose
+-   echartsInstance.dispose
 
 销毁实例。实例销毁之后无法再被使用。
 
-## 相关实例
+## 配置项相关实例
 
 ### 立体柱状图
 
@@ -782,7 +736,7 @@ option = {
             name: '',
             type: 'pictorialBar',
             symbolSize: function (d) {
-                return d > 0 ? [50, 15] : [0, 0]
+                return d > 0 ? [50, 15] : [0, 0];
             },
             symbolOffset: [0, 12], // 下部内环
             z: 10,
@@ -837,7 +791,6 @@ option = {
         },
     ],
 };
-
 ```
 
 如图
@@ -847,7 +800,7 @@ option = {
 ### 多边形柱状图
 
 ```javascript
-var xData = ["工单", "影响客户"];
+var xData = ['工单', '影响客户'];
 var yData1 = [100, 60];
 var yData2 = [80, 40];
 var path = 'path://M214,1079l8-6h16l8,6-8,6H222Z';
@@ -859,70 +812,75 @@ option = {
         left: '20%',
         textStyle: {
             fontSize: 18,
-            color: '#fff'
-        }
+            color: '#fff',
+        },
     },
     legend: {
-        data: ['总数', '未复电数']
+        data: ['总数', '未复电数'],
     },
-    "grid": {
-        "top": "25%",
-        "left": "-5%",
-        "bottom": "10%",
-        "right": "5%",
-        "containLabel": true
+    grid: {
+        top: '25%',
+        left: '-5%',
+        bottom: '10%',
+        right: '5%',
+        containLabel: true,
     },
     animation: false,
-    "xAxis": [{
-        "type": "category",
-        "data": xData,
-        "axisTick": {
-            show: false,
-            "alignWithLabel": true
-        },
-        "nameTextStyle": {
-            "color": "#fff"
-        },
-        "axisLine": {
-            show: false,
-            "lineStyle": {
-                "color": "#82b0ec"
-            }
-        },
-        "axisLabel": {
-            "textStyle": {
-                "color": "#fff"
+    xAxis: [
+        {
+            type: 'category',
+            data: xData,
+            axisTick: {
+                show: false,
+                alignWithLabel: true,
             },
-            margin: 20
-        }
-    }],
-    "yAxis": [{
-        show: false,
-        "type": "value",
-        "axisLabel": {
-            "textStyle": {
-                "color": "#fff"
+            nameTextStyle: {
+                color: '#fff',
             },
-            "formatter": "{value}%"
+            axisLine: {
+                show: false,
+                lineStyle: {
+                    color: '#82b0ec',
+                },
+            },
+            axisLabel: {
+                textStyle: {
+                    color: '#fff',
+                },
+                margin: 20,
+            },
         },
-        "splitLine": {
-            "lineStyle": {
-                "color": "#0c2c5a"
-            }
+    ],
+    yAxis: [
+        {
+            show: false,
+            type: 'value',
+            axisLabel: {
+                textStyle: {
+                    color: '#fff',
+                },
+                formatter: '{value}%',
+            },
+            splitLine: {
+                lineStyle: {
+                    color: '#0c2c5a',
+                },
+            },
+            axisLine: {
+                show: false,
+            },
         },
-        "axisLine": {
-            "show": false
-        }
-    }],
-    "series": [{
+    ],
+    series: [
+        {
             type: 'pictorialBar',
             symbol: path,
             symbolSize: [30, 8],
             symbolOffset: [-20, -5],
             symbolPosition: 'end',
             z: 12,
-            color: "#68B4FF",
-            data: yData1
+            color: '#68B4FF',
+            data: yData1,
         },
         {
             type: 'pictorialBar',
@@ -931,8 +889,8 @@ option = {
             symbolOffset: [20, -5],
             symbolPosition: 'end',
             z: 12,
-            color: "#FFCE69",
-            data: yData2
+            color: '#FFCE69',
+            data: yData2,
         },
         {
             type: 'pictorialBar',
@@ -940,8 +898,8 @@ option = {
             symbolSize: [30, 8],
             symbolOffset: [-20, 5],
             z: 12,
-            color: "#68B4FF",
-            data: yData1
+            color: '#68B4FF',
+            data: yData1,
         },
         {
             name: '',
@@ -949,50 +907,52 @@ option = {
             symbol: path,
             symbolSize: [30, 8],
             symbolOffset: [20, 5],
-            color: "#FFCE69",
+            color: '#FFCE69',
             z: 12,
-            data: yData2
+            data: yData2,
         },
         {
             type: 'bar',
             itemStyle: {
                 normal: {
-                    opacity: .7
-                }
+                    opacity: 0.7,
+                },
             },
-            barWidth: "30",
-            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+            barWidth: '30',
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                {
                     offset: 0,
-                    color: "#3D83CD"
+                    color: '#3D83CD',
                 },
                 {
                     offset: 1,
-                    color: "#0B3147"
-                }
+                    color: '#0B3147',
+                },
             ]),
-            data: yData1
+            data: yData1,
         },
         {
             type: 'bar',
             itemStyle: {
                 normal: {
-                    opacity: .7
-                }
+                    opacity: 0.7,
+                },
             },
-            barWidth: "30",
-            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+            barWidth: '30',
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                {
                     offset: 0,
-                    color: "#CC9F49"
+                    color: '#CC9F49',
                 },
                 {
                     offset: 1,
-                    color: "#0B3147"
-                }
+                    color: '#0B3147',
+                },
             ]),
-            data: yData2
-        }
-    ]
-}
+            data: yData2,
+        },
+    ],
+};
 ```
 
 如图
@@ -1007,27 +967,31 @@ var xData = ['2016-1', '2016-2', '2016-3', '2016-4', '2016-5', '2016-6', '2016-7
 var yData = [300, 380, 400, 380, 350, 410, 480, 460, 410, 380, 350, 320];
 option = {
     // color: colors,
-    xAxis: [{
-        type: 'category',
-        axisTick: {
-            show: false,
-            alignWithLabel: true
+    xAxis: [
+        {
+            type: 'category',
+            axisTick: {
+                show: false,
+                alignWithLabel: true,
+            },
+            splitLine: {
+                show: true,
+            },
+            data: xData,
         },
-        splitLine: {
-            show: true
+    ],
+    yAxis: [
+        {
+            type: 'value',
+            axisTick: {
+                show: false,
+                alignWithLabel: true,
+            },
+            splitLine: {
+                show: true,
+            },
         },
-        data: xData
-    }],
-    yAxis: [{
-        type: 'value',
-        axisTick: {
-            show: false,
-            alignWithLabel: true
-        },
-        splitLine: {
-            show: true
-        }
-    }],
+    ],
     series: [
         {
             type: 'bar',
@@ -1037,13 +1001,13 @@ option = {
             itemStyle: {
                 normal: {
                     color: function (d) {
-                        console.log(d)
-                        return d.value > 400 ? colors[1] : colors[0]
-                    }
-                }
-            }
-        }
-    ]
+                        console.log(d);
+                        return d.value > 400 ? colors[1] : colors[0];
+                    },
+                },
+            },
+        },
+    ],
 };
 ```
 
