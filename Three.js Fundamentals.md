@@ -1,1 +1,2 @@
-![](D:\Office\OneDrive\Markdown\编程笔记\images\threejs-structure.svg)
+![](https://blog-pic-store.oss-cn-beijing.aliyuncs.com/blog/threejs-structure.svg)
+

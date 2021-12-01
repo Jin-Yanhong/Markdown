@@ -90,3 +90,59 @@ function test() {
     //
 }
 ```
+
+## 三大核心属性
+
+### state
+
+修改 state 使用 **`setState({key:value})`**，且更新是合并操作
+
+![image-20211130203800257](https://blog-pic-store.oss-cn-beijing.aliyuncs.com/blog/image-20211130203800257.png)
+
+### props
+
+##### 值的传递与接收
+
+![image-20211130204930603](https://blog-pic-store.oss-cn-beijing.aliyuncs.com/blog/image-20211130204930603.png)
+
+#### 展开语法的回顾
+
+![image-20211130205633509](https://blog-pic-store.oss-cn-beijing.aliyuncs.com/blog/image-20211130205633509.png)
+
+#####
+
+![image-20211130210111328](https://blog-pic-store.oss-cn-beijing.aliyuncs.com/blog/image-20211130210111328.png)
+
+mdn
+
+![image-20211130210548482](https://blog-pic-store.oss-cn-beijing.aliyuncs.com/blog/image-20211130210548482.png)
+
+父传子 类型限定，默认值
+
+![image-20211130211344607](https://blog-pic-store.oss-cn-beijing.aliyuncs.com/blog/image-20211130211344607.png)
+
+![image-20211130211803620](https://blog-pic-store.oss-cn-beijing.aliyuncs.com/blog/image-20211130211803620.png)
+
+函数类型为 func
+
+![image-20211130212025364](https://blog-pic-store.oss-cn-beijing.aliyuncs.com/blog/image-20211130212025364.png)
+
+![image-20211130212356440](https://blog-pic-store.oss-cn-beijing.aliyuncs.com/blog/image-20211130212356440.png)
+
+props 限制整理到类的内部
+
+![image-20211130212819893](https://blog-pic-store.oss-cn-beijing.aliyuncs.com/blog/image-20211130212819893.png)
+
+
+
+![image-20211130215554766](https://blog-pic-store.oss-cn-beijing.aliyuncs.com/blog/image-20211130215554766.png)
+
+![image-20211130220120634](https://blog-pic-store.oss-cn-beijing.aliyuncs.com/blog/image-20211130220120634.png)
+
+![image-20211130223412814](https://blog-pic-store.oss-cn-beijing.aliyuncs.com/blog/image-20211130223412814.png)
+
+
+
+![image-20211130223645124](https://blog-pic-store.oss-cn-beijing.aliyuncs.com/blog/image-20211130223645124.png)
+
+### refs
