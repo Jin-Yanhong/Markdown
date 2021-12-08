@@ -205,7 +205,7 @@ function fieldTranslate(
 
 ## 项目小结
 
-##### window.postMessage iframe 嵌套传参
+#### window.postMessage
 
 ```javascript
 //  外层获取内层
@@ -219,7 +219,10 @@ window.parent;
 ### 可视区宽高
 
 ```javascript
-console.log(window.innerWidth, window.innerHeight);
+let obj = {
+    innerWidth: window.innerWidth,
+    innerHeight: window.innerHeight,
+};
 ```
 
 #### 几种常见的循环、迭代
@@ -230,4 +233,10 @@ for (const key in Object.keys(data)) {
     console.log(key);
 }
 ```
+
+#### window.onbeforeunload
+
+>   页面刷新之前执行的回调
+
+
 

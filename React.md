@@ -97,27 +97,61 @@ function test() {
 
 修改 state 使用 **`setState({key:value})`**，且更新是合并操作
 
-![image-20211130203800257](https://blog-pic-store.oss-cn-beijing.aliyuncs.com/blog/image-20211130203800257.png)
+
 
 ### props
 
-##### 值的传递与接收
+#### 值的传递
+
+
+
+
+
+
+
+```jsx
+
+
+
+
+ReactDOM.render(
+  element,
+  document.getElementById('root')
+);
+```
 
 ![image-20211130204930603](https://blog-pic-store.oss-cn-beijing.aliyuncs.com/blog/image-20211130204930603.png)
 
-#### 展开语法的回顾
+#### 值的接收
 
-![image-20211130205633509](https://blog-pic-store.oss-cn-beijing.aliyuncs.com/blog/image-20211130205633509.png)
+```jsx
+function formatName(user) {
+    
+  return user.firstName + ' ' + user.lastName;
+}
 
-#####
+const user = {
+  firstName: 'Harper',
+  lastName: 'Perez'
+};
 
-![image-20211130210111328](https://blog-pic-store.oss-cn-beijing.aliyuncs.com/blog/image-20211130210111328.png)
+const element = (
+  <h1>
+    Hello, {formatName(user)}!
+  </h1>
+);
 
-mdn
+ReactDOM.render(
+  element,
+  document.getElementById('root')
+);
+```
 
-![image-20211130210548482](https://blog-pic-store.oss-cn-beijing.aliyuncs.com/blog/image-20211130210548482.png)
 
-父传子 类型限定，默认值
+
+
+
+#### 组件参数选项
 
 ![image-20211130211344607](https://blog-pic-store.oss-cn-beijing.aliyuncs.com/blog/image-20211130211344607.png)
 
