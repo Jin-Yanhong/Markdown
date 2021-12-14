@@ -1,6 +1,6 @@
-## 解构复制
+## 解构赋值
 
-### 对象的解构赋值
+### 数组的解构赋值
 
 #### 默认值
 
@@ -28,6 +28,25 @@ function f() {
 }
 
 let [x = f()] = [1];
+```
+
+#### Tips
+
+对象数组快速统一修改某一属性的值
+
+```javascript
+let todoList = [
+    {
+        index: 1,
+        name: 'code',
+        status: 'doing',
+    },
+];
+let newTodoList = todoList.map((el, index) => {
+    return { ...el, status: 'done' };
+});
+console.log(newTodoList);
+// [{ index: 1, name: 'code', status: 'done' }]
 ```
 
 ### 对象的解构赋值
@@ -186,7 +205,7 @@ for (let codePoint of 'foo') {
 >
 >     ```javascript
 >     var button = document.getElementById('press');
->    
+>
 >     button.addEventListener('click', () => {
 >         this.classList.toggle('on');
 >     });
@@ -534,12 +553,12 @@ Foo.bar(); // hell
         printName(name = 'there') {
             this.print(`Hello ${name}`);
         }
-    
+
         print(text) {
             console.log(text);
         }
     }
-    
+
     const logger = new Logger();
     const { printName } = logger;
     printName(); // TypeError: Cannot read property 'print' of undefined
@@ -557,20 +576,20 @@ Foo.bar(); // hell
         constructor() {
             this.printName = this.printName.bind(this);
         }
-    
+
         // ...
     }
-    
+
     // 使用就箭头函数
     class Obj {
         constructor() {
             this.getThis = () => this;
         }
     }
-    
+
     const myObj = new Obj();
     myObj.getThis() === myObj; // true
-    
+
     // 使用Proxy
     function selfish(target) {
         const cache = new WeakMap();
@@ -589,6 +608,6 @@ Foo.bar(); // hell
         const proxy = new Proxy(target, handler);
         return proxy;
     }
-    
+
     const logger = selfish(new Logger());
     ```
