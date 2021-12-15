@@ -5,7 +5,7 @@
 ### 安装
 
 ```bash
-npm i react-router-dom@0 -s
+npm i react-router-dom -s
 ```
 
 ### 引用
@@ -14,16 +14,17 @@ npm i react-router-dom@0 -s
 import { HashRouter, Route, Link } from 'react-router-dom';
 ```
 
-> 这个包提供了三个核心的组件 **`:HashRouter(BrowserRouter)`**, **`Route`**, **`Link`**
+> 这个包提供了三个核心的组件 **`HashRouter(BrowserRouter)`**, **`Route`**, **`Link`**
 
 ### 使用
 
-使用**HashRouter**包裹整个应用，一个项目中只有一个 Router
+使用 **`HashRouter`** 包裹整个应用，一个项目中只有一个 Router
 
-使用**Link**指定导航链接
-使用`Route`指定路由规则(哪个路径展示哪个组件)
+使用 **`Link`** 指定导航链接
 
-> `render`和`children`展示方式请参考[React router 如何渲染(render 和 children)---访问控制](https://juejin.cn/post/7032267487647367204)
+使用 **`Route`** 指定路由规则(哪个路径展示哪个组件)
+
+使用 **`Switch`** 切换路由视图
 
 ```javascript
 import React from 'react';
@@ -52,9 +53,13 @@ ReactDom.render(<App />, document.getElementById('root'));
 
 ### 两种模式
 
-HashRouter :hash 模式
+#### HashRouter
 
-BrowserRouter: history 模式
+hash 模式
+
+#### BrowserRouter
+
+history 模式
 
 ### 内部原理
 
@@ -71,7 +76,7 @@ Router 组件：包裹整个应用，一个 React 应用只需要使用一次
 
 使用 es6 的导入重命名来统一名字： 无论导入的是哪个路由对象，都叫 Router
 
-```js
+```javascript
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { HashRouter as Router, Route, Link } from 'react-router-dom';
 ```
@@ -80,17 +85,31 @@ import { HashRouter as Router, Route, Link } from 'react-router-dom';
 
 ### 格式
 
-作用： 决定路由匹配规则
-格式：`<Route path="/xx/xx" component={组件}></Route>`
+#### 作用
+
+决定路由匹配规则
+
+#### 格式
+
+```jsx
+<Route path="/xx/xx" component={组件}></Route>
+```
 
 ### 匹配规则
 
-名词约定：
+#### 属性解释
 
-path： Route 组件中 path 属性的值
-pathname: 指的如下格式
-link 组件中 to 的属性值
-地址栏中的地址
+##### path
+
+Route 组件中 path 属性的值
+
+##### pathname
+
+指的如下格式
+
+##### link
+
+组件中 to 的属性值，地址栏中的地址
 
 #### 模糊匹配
 
@@ -103,7 +122,7 @@ link 组件中 to 的属性值
 精确匹配
 补充**exact**可以设置成精确匹配
 
-```js
+```jsx
 import React from 'react';
 import ReactDom from 'react-dom';
 import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
@@ -137,7 +156,7 @@ ReactDom.render(<App />, document.getElementById('root'));
 如果不加`exact`精确匹配,name 所有以'/'开头的都会被这个 path 匹配到 ,如:'/home' , '/login'
 加上`exact`精确匹配,只有在 path 为'/'的时候才能匹配到
 
-```js
+```jsx
 <Route path="/" exact component={Home} />
 ```
 
@@ -148,11 +167,19 @@ ReactDom.render(<App />, document.getElementById('root'));
 匹配到`from = '/'`后 , 重定向到 `"/comment"`路径对应的组件
 这里的`from`页可以改写成`path`效果一样
 
-```js
+```jsx
 import { HashRouter, Route, Link, Redirect } from 'react-router-dom';
 
 <Redirect from="/" exact to="/comment" />;
 ```
+
+## Link
+
+无法指定当前高亮的路由
+
+## NavLink
+
+可以指定当前高亮的路由
 
 ## Switch
 
@@ -237,7 +264,7 @@ Link 和 NavLink 都能用来做跳转,最终都会被渲染成`<a>内容</a>`�
 -   to 属性，用于指定地址，会渲染成 a 标签的 href 属性
 -   activeClassName: 用于指定高亮的类名，默认`active`。一般不去修改
 
-```js
+```jsx
 return (
     <div>
         <h1>react路由基本使用-Link</h1>
@@ -270,7 +297,7 @@ react-router
 
 使用格式:
 
-```js
+```jsx
 import { useHistory } from 'react-router-dom';
 
 export default function App() {
@@ -296,7 +323,7 @@ replace：在历史记录中用目标记录来替换当前记录
 
 push:
 
-```js
+```jsx
 详情页  --> login页(push)  ----> 主页
 ```
 
@@ -304,7 +331,7 @@ push:
 
 replace
 
-```js
+```jsx
 详情页  --> login页(replace)  ----> 主页
 ```
 
@@ -320,7 +347,7 @@ replace
 
 #### 组件中的 props 对象包含了 location:
 
-```js
+```jsx
 export default function Article(props) {
     console.log('props对象', props);
     return <div>Article</div>;
@@ -331,7 +358,7 @@ export default function Article(props) {
 
 #### history 中也包含了 location 对象
 
-```js
+```jsx
 import { useHistory } from 'react-router-dom';
 export default function Article() {
     const history = useHistory();
@@ -346,7 +373,7 @@ export default function Article() {
 
 #### useLocation 这个 Hook 获取
 
-```js
+```jsx
 import { useLocation } from 'react-router-dom';
 export default function Article() {
     const location = useLocation();
@@ -361,13 +388,13 @@ export default function Article() {
 
 #### 查询参数方式:
 
-```js
+```jsx
 <Link to="/home/article ?id=9 ">内容管理</Link>
 ```
 
 #### 对象写法:
 
-```js
+```jsx
 // 传递单个id  (location.id拿值)
 <Link to={{ pathname: '/home/article', id: 3 }}>内容管理</Link>
 
@@ -398,7 +425,7 @@ const value = location.search
 
 同样的用`location`,`search`,`state`
 
-```js
+```jsx
 message.success('登录成功', 2, () => {
     //  做跳转动作 到主页中
     history.replace('/home?id=33');
@@ -407,7 +434,7 @@ message.success('登录成功', 2, () => {
 
 `const value = location.search` //结果: ?id=33 需要截取一下
 
-```js
+```jsx
 message.success('登录成功', 2, () => {
     //  做跳转动作 到主页中
     history.replace('/home', '给我一个div');
@@ -416,7 +443,7 @@ message.success('登录成功', 2, () => {
 
 `const value = location.state` //结果: 给我一个 div
 
-```js
+```jsx
 message.success('登录成功', 2, () => {
     //  做跳转动作 到主页中
     history.replace('/home', { name: '给我一个div', id: 9 });
