@@ -62,7 +62,7 @@ div ::v-deep p {
 
 > 当元素表现为 flex 框时，它们沿着两个轴来布局：
 
-![flex_terms.png](https://gitee.com/Coder-jin/PicStore/raw/master/flex_terms.png)
+![img](https://gitee.com/Coder-jin/PicStore/raw/master/flex-term.png)
 
 - **主轴（main axis）**是沿着 flex 元素放置的方向延伸的轴（比如页面上的横向的行、纵向的列）。该轴的开始和结束被称为 **main start** 和 **main end**。
 - **交叉轴（cross axis）**是垂直于 flex 元素放置方向的轴。该轴的开始和结束被称为 **cross start** 和 **cross end**。
@@ -359,8 +359,9 @@ div ::v-deep p {
 
 ## 动画
 
+### 定义css关键帧
+
 ```css
-/* 定义css关键帧 */
 @keyframes animated_div {
   0% {
     transform: rotate(0deg);
@@ -408,6 +409,26 @@ div ::v-deep p {
 | animation-iteration-count | 规定动画被播放的次数。默认是 1。                                                         |
 | animation-direction       | 规定动画是否在下一周期逆向地播放。默认是 "normal"。                                      |
 | animation-play-state      | 规定动画是否正在运行或暂停。默认是 "running"。                                           |
+
+### 路径动画
+
+```css
+div {
+    /* 只改变运动路径，其他保持一致 */
+    offset-path: path('M 0 0 L 100 0 L 200 0 L 300 100 L 400 0 L 500 100 L 600 0 L 700 100 L 800 0');
+    animation: move 2000ms infinite alternate linear;
+}
+@keyframes move {
+    0% {
+        offset-distance: 0%;
+    }
+    100% {
+        offset-distance: 100%;
+    }
+}
+```
+
+
 
 ## 3D 变形
 

@@ -401,8 +401,6 @@ export default function Article() {
 // 传递id 和 name (location.state拿值)
 //这里写的如果不是state:{要传递的参数} ,那么location中原有的state属性会被覆盖,还是使用原有的state吧
 <Link to={{ pathname: '/home/article', state: {id:3 , name:'给我一个div'} }}>内容管理</Link>
-
-复制代码
 ```
 
 #### 接收数据:

@@ -12,7 +12,7 @@ totalPage = (total + pageSize - 1) / pageSize;
 ```javascript
 // 从 URL 获取参数
 function UrlSearch(url) {
-    let str = url || location.href; //取得整个地址栏
+    let str = url.split('#')[0] || location.href.split('#')[0]; //取得整个path
     let num = str.indexOf('?');
     if (num !== -1) {
         str = str.substr(num + 1); //取得所有参数   stringvar.substr(start [, length ]
@@ -147,20 +147,19 @@ function tree2List() {
         var first = queen.shift();
         if (first.children) {
             queen = queen.concat(first.children);
-            delete first["children"];
+            delete first['children'];
         }
 
         out.push(first);
     }
     return out;
 }
-
 ```
 
 #### 数据类型判断
 
 ```javascript
-Object.prototype.toString.call(obj)
+Object.prototype.toString.call(obj);
 // '[object Array]'
 // '[object Object]'
 // '[object String]'
@@ -177,28 +176,21 @@ Object.prototype.toString.call(obj)
  * @param {*} collectionLabel 对照集合中的字段名称 默认 'label'
  * @returns
  */
-function fieldTranslate(
-    collection,
-    value,
-    collectionField = "value",
-    collectionLabel = "label"
-) {
+function fieldTranslate(collection, value, collectionField = 'value', collectionLabel = 'label') {
     if (collection && value && toString(value).length) {
-        if (Object.prototype.toString.call(collection) === "[object Array]") {
+        if (Object.prototype.toString.call(collection) === '[object Array]') {
             let checked = collection.find(ele => {
                 return ele[collectionField] == value;
             });
-            let tips =
-                (checked && checked[collectionLabel]) ||
-                "Field Translate：未知的数据值,请联系管理员";
+            let tips = (checked && checked[collectionLabel]) || 'Field Translate：未知的数据值,请联系管理员';
             return tips;
         } else {
-            console.error("Field Translate Error：类型必须为 Array");
-            return "";
+            console.error('Field Translate Error：类型必须为 Array');
+            return '';
         }
     } else {
-        console.error("Field Translate Error：数据字段集合、为必须参数!");
-        return "";
+        console.error('Field Translate Error：数据字段集合、为必须参数!');
+        return '';
     }
 }
 ```
@@ -236,7 +228,4 @@ for (const key in Object.keys(data)) {
 
 #### window.onbeforeunload
 
->   页面刷新之前执行的回调
-
-
-
+> 页面刷新之前执行的回调
