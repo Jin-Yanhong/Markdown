@@ -7,8 +7,15 @@
 ```bash
 git config --global user.name "jinyanhong"
 git config --global user.email "820877998@qq.com"
+```
+
+-   创建 SSH 密钥
+
+```bash
+cat ~/.ssh/id_rsa.pub
 ssh-keygen -t rsa -C "820877998@qq.com"
 ssh -T git@github.com
+clip < ~/.ssh/id_rsa.pub
 ```
 
 -   创建 git 仓库

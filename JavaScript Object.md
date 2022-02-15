@@ -1,12 +1,12 @@
 ## Object
 
-##### Object.assign(target, ...sources)
+### Object.assign(target, ...sources)
 
 > 返回值：目标对象
 
 > `Object.assign` 不会在那些`source`对象值为 [`null`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/null) 或 [`undefined`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/undefined) 的时候抛出错误。
 
-##### Object.key(data)
+### Object.key(data)
 
 > 返回值：data 的 key （以数组形式）
 
@@ -19,7 +19,7 @@ for (const key in Object.keys(data)) {
 
 ## Promise
 
--   Promise.all(iterable)
+### Promise.all(iterable)
 
 > 参数：可迭代对象 Array、String
 
