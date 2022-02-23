@@ -18,7 +18,7 @@
 
 ```css
 div > p {
-  /* 直接子代 */
+    /* 直接子代 */
 }
 ```
 
@@ -26,10 +26,10 @@ div > p {
 
 ```css
 .child:nth-child(odd) {
-  /* 奇数 */
+    /* 奇数 */
 }
 .child:nth-child(even) {
-  /* 偶数 */
+    /* 偶数 */
 }
 ```
 
@@ -37,24 +37,26 @@ div > p {
 
 ```css
 div ~ p {
-  /* 普通兄弟选择器 */
+    /* 普通兄弟选择器 */
 }
 div + p {
-  /* 相邻兄弟选择器 */
+    /* 相邻兄弟选择器 */
 }
 ```
 
 #### CSS 选择器穿透
 
+vue 框架下深度选择器
+
 ```css
 /deep/ div {
-  /* 1 */
+    /* 1 */
 }
 div >>> p {
-  /* 2 */
+    /* 2 */
 }
 div ::v-deep p {
-  /* 3 */
+    /* 3 */
 }
 ```
 
@@ -64,10 +66,10 @@ div ::v-deep p {
 
 ![img](https://gitee.com/Coder-jin/PicStore/raw/master/flex-term.png)
 
-- **主轴（main axis）**是沿着 flex 元素放置的方向延伸的轴（比如页面上的横向的行、纵向的列）。该轴的开始和结束被称为 **main start** 和 **main end**。
-- **交叉轴（cross axis）**是垂直于 flex 元素放置方向的轴。该轴的开始和结束被称为 **cross start** 和 **cross end**。
-- 设置了 `display: flex` 的父元素（在本例中是 [`<section>`](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/section)）被称之为 **flex 容器（flex container）。**
-- 在 flex 容器中表现为柔性的盒子的元素被称之为 **flex 项**（**flex item**）
+-   **主轴（main axis）**是沿着 flex 元素放置的方向延伸的轴（比如页面上的横向的行、纵向的列）。该轴的开始和结束被称为 **main start** 和 **main end**。
+-   **交叉轴（cross axis）**是垂直于 flex 元素放置方向的轴。该轴的开始和结束被称为 **cross start** 和 **cross end**。
+-   设置了 `display: flex` 的父元素（在本例中是 [`<section>`](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/section)）被称之为 **flex 容器（flex container）。**
+-   在 flex 容器中表现为柔性的盒子的元素被称之为 **flex 项**（**flex item**）
 
 #### 相关 CSS 属性
 
@@ -75,28 +77,28 @@ div ::v-deep p {
 
 ```css
 .farther {
-  /* 用来指定主轴的方向 */
-  flex-direction: row | row-reverse | column | column-reverse;
+    /* 用来指定主轴的方向 */
+    flex-direction: row | row-reverse | column | column-reverse;
 
-  /* 是否折行 */
-  flex-wrap: nowrap | wrap | wrap-reverse;
-  /* wrap-reverse 垂直于主轴的方向排列发生变化 */
-  /* ==> 简写为 */
-  flex-flow: <flex-direction> || <flex-wrap>; /* 默认值为 row nowrap */
+    /* 是否折行 */
+    flex-wrap: nowrap | wrap | wrap-reverse;
+    /* wrap-reverse 垂直于主轴的方向排列发生变化 */
+    /* ==> 简写为 */
+    flex-flow: <flex-direction> || <flex-wrap>; /* 默认值为 row nowrap */
 
-  /* justify-content 指定主轴上的对齐方式 */
-  justify-content: flex-start | flex-end | center | space-between | space-around|space-evenly;
-  /* space-between: 基于容器平均分布;语素与容器间隔为0 */
-  /* space-around: 基于item平均分布;元素间间隔相等 */
-  /* space-evenly: 基于内容平均分布;语素与容器、元素间间隔相等 */
+    /* justify-content 指定主轴上的对齐方式 */
+    justify-content: flex-start | flex-end | center | space-between | space-around|space-evenly;
+    /* space-between: 基于容器平均分布;语素与容器间隔为0 */
+    /* space-around: 基于item平均分布;元素间间隔相等 */
+    /* space-evenly: 基于内容平均分布;语素与容器、元素间间隔相等 */
 
-  /* align-items属性定义item在交叉轴上如何对齐。 */
-  align-items: flex-start | flex-end | center | baseline | stretch;
-  /* baseline: item的第一行文字的基线对齐。 */
-  /* stretch（默认值）：如果item未设置高度或设为auto，将占满整个容器的高度。 */
+    /* align-items属性定义item在交叉轴上如何对齐。 */
+    align-items: flex-start | flex-end | center | baseline | stretch;
+    /* baseline: item的第一行文字的基线对齐。 */
+    /* stretch（默认值）：如果item未设置高度或设为auto，将占满整个容器的高度。 */
 
-  /* align-content属性定义了多根轴线（多行）的对齐方式。如果item只有一根轴线，该属性不起作用。 */
-  align-content: flex-start | flex-end | center | space-between | space-around | stretch;
+    /* align-content属性定义了多根轴线（多行）的对齐方式。如果item只有一根轴线，该属性不起作用。 */
+    align-content: flex-start | flex-end | center | space-between | space-around | stretch;
 }
 ```
 
@@ -104,26 +106,26 @@ div ::v-deep p {
 
 ```css
 .child_A {
-  /* 指定每个item的占主轴的比例 */
+    /* 指定每个item的占主轴的比例 */
 
-  /* order属性定义item的排列顺序。数值越小，排列越靠前，默认为0。 */
-  order: <integer>;
+    /* order属性定义item的排列顺序。数值越小，排列越靠前，默认为0。 */
+    order: <integer>;
 
-  /* flex-grow属性定义item的放大比例，默认为0，即如果存在剩余空间，也不放大。
+    /* flex-grow属性定义item的放大比例，默认为0，即如果存在剩余空间，也不放大。
     如果所有item的flex-grow属性都为1，则它们将等分剩余空间（如果有的话）。如果一个item的flex-grow属性为2，其他item都为1，则前者占据的剩余空间将比其他项多一倍。 */
-  flex-grow: <number>; /* default 0 */
+    flex-grow: <number>; /* default 0 */
 
-  /* 同 flex-grow，缩小 */
-  flex-shrink: <number>; /* default 1 */
+    /* 同 flex-grow，缩小 */
+    flex-shrink: <number>; /* default 1 */
 
-  /* flex-basis 指定了 flex 元素在主轴方向上的初始大小。如果不使用  box-sizing 改变盒模型的话，那么这个属性就决定了 flex 元素的内容盒（content-box）的尺寸。 */
-  flex-basis: <length> | auto; /* default auto */
+    /* flex-basis 指定了 flex 元素在主轴方向上的初始大小。如果不使用  box-sizing 改变盒模型的话，那么这个属性就决定了 flex 元素的内容盒（content-box）的尺寸。 */
+    flex-basis: <length> | auto; /* default auto */
 
-  /* 上述属性的简写 */
-  flex: none | [ < 'flex-grow' > < 'flex-shrink' >? || < 'flex-basis' > ];
+    /* 上述属性的简写 */
+    flex: none | [ < 'flex-grow' > < 'flex-shrink' >? || < 'flex-basis' > ];
 
-  /* align-self 会对齐当前 grid 或 flex 行中的元素，并覆盖已有的 align-items 的值 */
-  align-self: auto | flex-start | flex-end | center | baseline | stretch;
+    /* align-self 会对齐当前 grid 或 flex 行中的元素，并覆盖已有的 align-items 的值 */
+    align-self: auto | flex-start | flex-end | center | baseline | stretch;
 }
 ```
 
@@ -133,71 +135,71 @@ div ::v-deep p {
 
 ```css
 .farther {
-  /* 指定grid布局 */
-  display: grid|inline-grid;
-  /* 指定行数、列数，后边的值也可以是百分数*/
-  grid-template-columns: 100px 100px 100px;
-  grid-template-rows: 33.33% 33.33% 33.33%;
-  /* 也可以使用 repeat() 函数 */
-  /* repeat()接受两个参数，第一个参数是重复的次数（上例是3），第二个参数是所要重复的值。 */
-  grid-template-columns: repeat(3, 33.33%);
-  grid-template-rows: repeat(3, 33.33%);
-  /* 为了方便表示比例关系，网格布局提供了fr关键字（fraction 的缩写，意为"片段"）。如果两列的宽度分别为1fr和2fr，就表示后者是前者的两倍。 */
-  grid-template-columns: 1fr 1fr; /* 表示两个相同的列 */
-  /* 也可以组合使用 */
-  grid-template-columns: 150px 1fr 2fr;
-  /* minmax()函数产生一个长度范围，表示长度就在这个范围之中。它接受两个参数，分别为最小值和最大值。 */
-  grid-template-columns: 1fr 1fr minmax(100px, 1fr);
-  /* auto关键字表示由浏览器自己决定长度。 */
-  grid-template-columns: 100px auto 100px;
-  /* 可以使用方括号，指定每一根网格线的名字，方便以后的引用 */
-  grid-template-columns: [c1] 100px [c2] 100px [c3] auto [c4];
-  grid-template-rows: [r1] 100px [r2] 100px [r3] auto [r4];
-  /* 上面代码指定网格布局为3行 x 3列，因此有4根垂直网格线和4根水平网格线。方括号里面依次是这八根线的名字。 */
-  /* 网格布局允许同一根线有多个名字，比如[fifth-line row-5] */
+    /* 指定grid布局 */
+    display: grid|inline-grid;
+    /* 指定行数、列数，后边的值也可以是百分数*/
+    grid-template-columns: 100px 100px 100px;
+    grid-template-rows: 33.33% 33.33% 33.33%;
+    /* 也可以使用 repeat() 函数 */
+    /* repeat()接受两个参数，第一个参数是重复的次数（上例是3），第二个参数是所要重复的值。 */
+    grid-template-columns: repeat(3, 33.33%);
+    grid-template-rows: repeat(3, 33.33%);
+    /* 为了方便表示比例关系，网格布局提供了fr关键字（fraction 的缩写，意为"片段"）。如果两列的宽度分别为1fr和2fr，就表示后者是前者的两倍。 */
+    grid-template-columns: 1fr 1fr; /* 表示两个相同的列 */
+    /* 也可以组合使用 */
+    grid-template-columns: 150px 1fr 2fr;
+    /* minmax()函数产生一个长度范围，表示长度就在这个范围之中。它接受两个参数，分别为最小值和最大值。 */
+    grid-template-columns: 1fr 1fr minmax(100px, 1fr);
+    /* auto关键字表示由浏览器自己决定长度。 */
+    grid-template-columns: 100px auto 100px;
+    /* 可以使用方括号，指定每一根网格线的名字，方便以后的引用 */
+    grid-template-columns: [c1] 100px [c2] 100px [c3] auto [c4];
+    grid-template-rows: [r1] 100px [r2] 100px [r3] auto [r4];
+    /* 上面代码指定网格布局为3行 x 3列，因此有4根垂直网格线和4根水平网格线。方括号里面依次是这八根线的名字。 */
+    /* 网格布局允许同一根线有多个名字，比如[fifth-line row-5] */
 
-  /* 分别指定行间距、列间距 */
-  row-gap: 20px;
-  column-gap: 20px;
-  /* 简写为 */
-  gap: <row-gap> <column-gap>;
+    /* 分别指定行间距、列间距 */
+    row-gap: 20px;
+    column-gap: 20px;
+    /* 简写为 */
+    gap: <row-gap> <column-gap>;
 
-  grid-template-areas: '详细说明';
+    grid-template-areas: '详细说明';
 
-  /* 改变元素的自动排列方式 */
-  grid-auto-flow: | row| column| dense| row dense| column dense;
-  /* dense:优先填补空白; */
-  /* row dense:先行后列; */
-  /* column dense:先列后行; */
+    /* 改变元素的自动排列方式 */
+    grid-auto-flow: | row| column| dense| row dense| column dense;
+    /* dense:优先填补空白; */
+    /* row dense:先行后列; */
+    /* column dense:先列后行; */
 
-  /* 水平方向对齐方式 */
-  justify-items: start | end | center | stretch;
-  /* 垂直方向对齐方式 */
-  align-items: start | end | center | stretch;
-  /* 简写 */
-  place-items: <align-items> <justify-items>;
-  /* start：对齐单元格的起始边缘。 */
-  /* end：对齐单元格的结束边缘。 */
-  /* center：单元格内部居中。 */
-  /* stretch：拉伸，占满单元格的整个宽度（默认值）。 */
+    /* 水平方向对齐方式 */
+    justify-items: start | end | center | stretch;
+    /* 垂直方向对齐方式 */
+    align-items: start | end | center | stretch;
+    /* 简写 */
+    place-items: <align-items> <justify-items>;
+    /* start：对齐单元格的起始边缘。 */
+    /* end：对齐单元格的结束边缘。 */
+    /* center：单元格内部居中。 */
+    /* stretch：拉伸，占满单元格的整个宽度（默认值）。 */
 
-  /* justify-content属性是整个内容区域在容器里面的水平位置（左中右） */
-  justify-content: start | end | center | stretch | space-around | space-between | space-evenly;
-  /* align-content属性是整个内容区域的垂直位置（上中下） */
-  align-content: start | end | center | stretch | space-around | space-between | space-evenly;
-  /* 简写为 */
-  place-content: <align-content> <justify-content>;
+    /* justify-content属性是整个内容区域在容器里面的水平位置（左中右） */
+    justify-content: start | end | center | stretch | space-around | space-between | space-evenly;
+    /* align-content属性是整个内容区域的垂直位置（上中下） */
+    align-content: start | end | center | stretch | space-around | space-between | space-evenly;
+    /* 简写为 */
+    place-content: <align-content> <justify-content>;
 }
 ```
 
 > 设为网格布局以后，容器子元素（项目）的 float、display: inline-block、display: table-cell、vertical-align 和 column-\*等设置都将失效
 
-> - **repeat()重复某种模式也是可以的。**
+> -   **repeat()重复某种模式也是可以的。**
 >
 > ```css
 > .container {
->   display: grid;
->   grid-template-columns: repeat(2, 100px 20px 80px);
+>     display: grid;
+>     grid-template-columns: repeat(2, 100px 20px 80px);
 > }
 > ```
 >
@@ -207,12 +209,12 @@ div ::v-deep p {
 >
 > ---
 >
-> - **有时，单元格的大小是固定的，但是容器的大小不确定。如果希望每一行（或每一列）容纳尽可能多的单元格，这时可以使用 `auto-fill` 关键字表示自动填充。**
+> -   **有时，单元格的大小是固定的，但是容器的大小不确定。如果希望每一行（或每一列）容纳尽可能多的单元格，这时可以使用 `auto-fill` 关键字表示自动填充。**
 >
 > ```css
 > .container {
->   display: grid;
->   grid-template-columns: repeat(auto-fill, 100px);
+>     display: grid;
+>     grid-template-columns: repeat(auto-fill, 100px);
 > }
 > ```
 >
@@ -222,17 +224,17 @@ div ::v-deep p {
 >
 > ---
 >
-> - **`grid-template-areas` 详细描述**
+> -   **`grid-template-areas` 详细描述**
 >
 > ```css
 > .container {
->   display: grid;
->   grid-template-columns: 100px 100px 100px;
->   grid-template-rows: 100px 100px 100px;
->   grid-template-areas:
->     'a b c'
->     'd e f'
->     'g h i';
+>     display: grid;
+>     grid-template-columns: 100px 100px 100px;
+>     grid-template-rows: 100px 100px 100px;
+>     grid-template-areas:
+>         'a b c'
+>         'd e f'
+>         'g h i';
 > }
 > ```
 >
@@ -242,10 +244,10 @@ div ::v-deep p {
 >
 > ```css
 > .container {
->   grid-template-areas:
->     'a a a'
->     'b b b'
->     'c c c';
+>     grid-template-areas:
+>         'a a a'
+>         'b b b'
+>         'c c c';
 > }
 > ```
 >
@@ -254,10 +256,10 @@ div ::v-deep p {
 >
 > ```css
 > .container {
->   grid-template-areas:
->     'a . c'
->     'd . f'
->     'g . i';
+>     grid-template-areas:
+>         'a . c'
+>         'd . f'
+>         'g . i';
 > }
 > ```
 >
@@ -271,35 +273,35 @@ div ::v-deep p {
 
 ```css
 .child_A {
-  /* 制定内部元素的起始位置 */
-  grid-column-start: ''; /* 左边框所在的垂直网格线 */
-  grid-column-end: ''; /* 右边框所在的垂直网格线 */
-  grid-row-start: ''; /* 上边框所在的水平网格线 */
-  grid-row-end: ''; /* 下边框所在的水平网格线 */
+    /* 制定内部元素的起始位置 */
+    grid-column-start: ''; /* 左边框所在的垂直网格线 */
+    grid-column-end: ''; /* 右边框所在的垂直网格线 */
+    grid-row-start: ''; /* 上边框所在的水平网格线 */
+    grid-row-end: ''; /* 下边框所在的水平网格线 */
 
-  /* 除了指定为第几个网格线，还可以指定为网格线的名字。 */
-  grid-column-start: header-start;
-  grid-column-end: header-end;
-  /* 还可以使用span关键字，表示"跨越"，即左右边框（上下边框）之间跨越多少个网格。 */
-  grid-column-start: span 2;
-  /* ==> */
-  grid-column-end: span 2;
+    /* 除了指定为第几个网格线，还可以指定为网格线的名字。 */
+    grid-column-start: header-start;
+    grid-column-end: header-end;
+    /* 还可以使用span关键字，表示"跨越"，即左右边框（上下边框）之间跨越多少个网格。 */
+    grid-column-start: span 2;
+    /* ==> */
+    grid-column-end: span 2;
 
-  /* 行列的属性合并 */
-  grid-column: <start-line> | <end-line>;
-  grid-row: <start-line> | <end-line>;
+    /* 行列的属性合并 */
+    grid-column: <start-line> | <end-line>;
+    grid-row: <start-line> | <end-line>;
 
-  /* 指定元素所在的位置区域 */
-  grid-area: a;
-  /* ==> */
-  grid-area: <row-start> | <column-start> | <row-end> | <column-end>;
+    /* 指定元素所在的位置区域 */
+    grid-area: a;
+    /* ==> */
+    grid-area: <row-start> | <column-start> | <row-end> | <column-end>;
 
-  /* justify-self 设置单元格内容的水平位置（左中右），跟justify-items属性的用法完全一致，但只作用于单个项目。 */
-  justify-self: '';
-  /* align-self属性设置单元格内容的垂直位置（上中下），跟align-items属性的用法完全一致，也是只作用于单个项目。 */
-  align-self: '';
-  /* ==> place-self */
-  place-self: <align-self> <justify-self>;
+    /* justify-self 设置单元格内容的水平位置（左中右），跟justify-items属性的用法完全一致，但只作用于单个项目。 */
+    justify-self: '';
+    /* align-self属性设置单元格内容的垂直位置（上中下），跟align-items属性的用法完全一致，也是只作用于单个项目。 */
+    align-self: '';
+    /* ==> place-self */
+    place-self: <align-self> <justify-self>;
 }
 ```
 
@@ -309,41 +311,41 @@ div ::v-deep p {
 
 ```css
 .example {
-  /*  */
+    /*  */
 }
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-  .example {
-    /*  */
-  }
+    .example {
+        /*  */
+    }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
-  .example {
-    /*  */
-  }
+    .example {
+        /*  */
+    }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
-  .example {
-    /*  */
-  }
+    .example {
+        /*  */
+    }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
-  .example {
-    /*  */
-  }
+    .example {
+        /*  */
+    }
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
-  .example {
-    /*  */
-  }
+    .example {
+        /*  */
+    }
 }
 ```
 
@@ -351,47 +353,47 @@ div ::v-deep p {
 
 ```css
 @media only screen and (orientation: landscape) {
-  body {
-    background-color: lightblue;
-  }
+    body {
+        background-color: lightblue;
+    }
 }
 ```
 
 ## 动画
 
-### 定义css关键帧
+### 定义 css 关键帧
 
 ```css
 @keyframes animated_div {
-  0% {
-    transform: rotate(0deg);
-    left: 0px;
-  }
-  25% {
-    transform: rotate(20deg);
-    left: 0px;
-  }
-  50% {
-    transform: rotate(0deg);
-    left: 500px;
-  }
-  55% {
-    transform: rotate(0deg);
-    left: 500px;
-  }
-  70% {
-    transform: rotate(0deg);
-    left: 500px;
-    background: #1ec7e6;
-  }
-  100% {
-    transform: rotate(-360deg);
-    left: 0px;
-  }
+    0% {
+        transform: rotate(0deg);
+        left: 0px;
+    }
+    25% {
+        transform: rotate(20deg);
+        left: 0px;
+    }
+    50% {
+        transform: rotate(0deg);
+        left: 500px;
+    }
+    55% {
+        transform: rotate(0deg);
+        left: 500px;
+    }
+    70% {
+        transform: rotate(0deg);
+        left: 500px;
+        background: #1ec7e6;
+    }
+    100% {
+        transform: rotate(-360deg);
+        left: 0px;
+    }
 }
 /* 动画的调用 */
 .div {
-  animation: animated_div 3s;
+    animation: animated_div 3s;
 }
 ```
 
@@ -428,8 +430,6 @@ div {
 }
 ```
 
-
-
 ## 3D 变形
 
 属性如下：
@@ -447,8 +447,8 @@ transform：
 
 ```css
 .div {
-  transform: ;
-  /* 2d、3d、旋转、变形、缩放 */
+    transform: ;
+    /* 2d、3d、旋转、变形、缩放 */
 }
 ```
 
@@ -485,7 +485,7 @@ transform：
 
 ```css
 .obj {
-  transform: perspective(1000px) rotateY(45deg);
+    transform: perspective(1000px) rotateY(45deg);
 }
 ```
 
@@ -496,16 +496,16 @@ transform：
 ```css
 // 单行溢出隐藏
 p {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 // 多行显示省略号
 p {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
 }
 ```
 
@@ -514,23 +514,23 @@ p {
 ```css
 /* 滚动条 */
 .container::-webkit-scrollbar {
-  -webkit-box-shadow: #48a7ff !important;
-  width: 10px;
-  height: 10px;
+    -webkit-box-shadow: #48a7ff !important;
+    width: 10px;
+    height: 10px;
 }
 
 /* 滚动槽 */
 .container::-webkit-scrollbar-track {
-  -webkit-box-shadow: #48a7ff !important;
-  border-radius: 10px;
-  background: #114a7f;
+    -webkit-box-shadow: #48a7ff !important;
+    border-radius: 10px;
+    background: #114a7f;
 }
 
 /* 滚动条滑块 */
 .container::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  background: #48a7ff;
-  -webkit-box-shadow: #48a7ff;
+    border-radius: 10px;
+    background: #48a7ff;
+    -webkit-box-shadow: #48a7ff;
 }
 ```
 
@@ -538,103 +538,99 @@ p {
 
 ```less
 .borderBg {
-  position: absolute;
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  border: 1px solid #56fdfb;
-  width: 100%;
-  top: 38px;
-  left: 0;
-  height: calc(100% - 35px);
-  box-shadow: 0 0 40px 0 #188ee7 inset;
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border: 1px solid #56fdfb;
+    width: 100%;
+    top: 38px;
+    left: 0;
+    height: calc(100% - 35px);
+    box-shadow: 0 0 40px 0 #188ee7 inset;
 }
 .borderBg::before {
-  display: block;
-  position: absolute;
-  content: '';
-  left: -1px;
-  top: 23px;
-  width: calc(100% + 2px);
-  height: calc(100% - 46px);
-  border-left: 1px solid #325886;
-  border-right: 1px solid #325886;
-  z-index: 10;
+    display: block;
+    position: absolute;
+    content: '';
+    left: -1px;
+    top: 23px;
+    width: calc(100% + 2px);
+    height: calc(100% - 46px);
+    border-left: 1px solid #325886;
+    border-right: 1px solid #325886;
+    z-index: 10;
 }
 .borderBg::after {
-  display: block;
-  position: absolute;
-  content: '';
-  top: -1px;
-  left: 23px;
-  height: calc(100% + 2px);
-  width: calc(100% - 46px);
-  border-top: 1px solid #325886;
-  border-bottom: 1px solid #325886;
-  z-index: 10;
+    display: block;
+    position: absolute;
+    content: '';
+    top: -1px;
+    left: 23px;
+    height: calc(100% + 2px);
+    width: calc(100% - 46px);
+    border-top: 1px solid #325886;
+    border-bottom: 1px solid #325886;
+    z-index: 10;
 }
 ```
 
 #### js 操作 sass 变量
 
->   ### var()介绍与使用
+> ### var()介绍与使用
 >
->     [详情(MDN)](https://developer.mozilla.org/zh-CN/docs/Web/CSS/var) **IE无效,其余主流浏览器有效**
+> [详情(MDN)](https://developer.mozilla.org/zh-CN/docs/Web/CSS/var) **IE 无效,其余主流浏览器有效**
 >
->   #### var()使用
+> #### var()使用
 >
->     **只能在{}内声明,作用范围由{}的选择器决定**
+> **只能在{}内声明,作用范围由{}的选择器决定**
 >
->     CSS中原生的变量定义语法是：–*，变量使用语法是：var(–*)，其中*表示我们的变量名称。
->    
->      但是，**不能包含$，[，^，(，%等字符**，普通字符局限在只要是“数字[0-9]”“字母[a-zA-Z]”“下划线_”和“短横线-”这些组合，但是可以是中文，日文或者韩文。
->    
->#### 运行时改变scss变量值
+> CSS 中原生的变量定义语法是：–_，变量使用语法是：var(–_)，其中\*表示我们的变量名称。
 >
->    这个方法并不是能直接改变scsss变量的值,但是能做到一样的效果,对于需要一个变量控制多个属性的更为有效简洁
->    **单变量控制单条属性**的就没必要用了,这方法就是修改style属性而已,单对单和你之间在style写那条属性是一样的
->    
->[CSS4 Variables and Sass](https://codepen.io/jakealbaugh/post/css4-variables-and-sass) 简单来说就是将scss的变量交由css变量控制
+> 但是，**不能包含$，[，^，(，%等字符**，普通字符局限在只要是“数字[0-9]”“字母[a-zA-Z]”“下划线\_”和“短横线-”这些组合，但是可以是中文，日文或者韩文。
+>
+> #### 运行时改变 scss 变量值
+>
+> 这个方法并不是能直接改变 scsss 变量的值,但是能做到一样的效果,对于需要一个变量控制多个属性的更为有效简洁
+> **单变量控制单条属性**的就没必要用了,这方法就是修改 style 属性而已,单对单和你之间在 style 写那条属性是一样的
+>
+> [CSS4 Variables and Sass](https://codepen.io/jakealbaugh/post/css4-variables-and-sass) 简单来说就是将 scss 的变量交由 css 变量控制
 
 示例：
 
 ```scss
 $colors: (
-  primary: #FFBB00,
-  secondary: #0969A2
- );
+    primary: #ffbb00,
+    secondary: #0969a2,
+);
 
- Selector1{
-  @each $name, $color in $colors {
-   --color-#{$name}: $color;
-  }
- }
+Selector1 {
+    @each $name, $color in $colors {
+        --color-#{$name}: $color;
+    }
+}
 
- <!-- Selector1的生成效果 -->
- :root {
-  --color-primary: #FFBB00;
-  --color-secondary: #0969A2;
- }
+<!-- Selector1的生成效果 -- > :root {
+    --color-primary: #ffbb00;
+    --color-secondary: #0969a2;
+}
 
+<!-- 使用方式一 直接使用css变量 -- > Selector {
+    color: var(--color-primary);
+}
 
- <!-- 使用方式一 直接使用css变量 -->
- Selector{
-  color:var(--color-primary);
- }
+<!-- 使用方式二 利用scss的函数,
+以符合scss语法 推荐 -- > @function color($color-name) {
+    @return var(--color-#{$color-name});
+}
 
- <!-- 使用方式二 利用scss的函数,以符合scss语法 推荐 --> 
- @function color($color-name) {
-  @return var(--color-#{$color-name});
- }
+body {
+    color: color(primary); //使用
+}
 
- body { 
-  color: color(primary); //使用
- }
-
- <!-- body生成效果 -->
- body { 
-  color: var(--color-primary); //这样就可以被js设置了
- }
+<!-- body生成效果 -- > body {
+    color: var(--color-primary); //这样就可以被js设置了
+}
 ```
 
 ```scss
@@ -654,16 +650,13 @@ body {
 
 ```
 
+> js 设置 css 变量,即设置运行 scss 变量
 >
->   js设置css变量,即设置运行scss变量
+> ```javascript
+> domObject.style.setProperty(name, value); //name为css变量名 e.g: --color-primary
+> ```
 >
->    ```javascript
->    domObject.style.setProperty(name,value);//name为css变量名 e.g: --color-primary
->```
->   
->至此完成了scss的运行时改变变量值
->     由于scss是预编译的,无法在运行时改变变量值,而我又需要去改变,所以去google了,得到一个满意的解决方案 [原理(English)](https://codepen.io/jakealbaugh/post/css4-variables-and-sass)
->    
->  像这种的,变量–test 根本找不到,理由是并没有这个root,vue组件scoped的特性,只在本组件有效,但组件又没有完整的document,即组件内部没有root
->   
-
+> 至此完成了 scss 的运行时改变变量值
+>    由于 scss 是预编译的,无法在运行时改变变量值,而我又需要去改变,所以去 google 了,得到一个满意的解决方案 [原理(English)](https://codepen.io/jakealbaugh/post/css4-variables-and-sass)
+>
+> 像这种的,变量–test 根本找不到,理由是并没有这个 root,vue 组件 scoped 的特性,只在本组件有效,但组件又没有完整的 document,即组件内部没有 root

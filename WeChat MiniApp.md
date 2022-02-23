@@ -13,12 +13,6 @@
 
 ## WXML 内容
 
--   隐藏微信滚动条
-
-```html
-
-```
-
 ## js 内容
 
 -   data 动态赋值
@@ -37,7 +31,7 @@ _this.setData({
 .replace(/\<p/gi, '<p class="p_richText"');
 ```
 
-```javascript
+```css
 .p_richText{
 	/**/
 }

@@ -14,8 +14,17 @@ git config --global user.email "820877998@qq.com"
 ```bash
 cat ~/.ssh/id_rsa.pub
 ssh-keygen -t rsa -C "820877998@qq.com"
-ssh -T git@github.com
+ssh -T git@code.aliyun.com
 clip < ~/.ssh/id_rsa.pub
+```
+
+-   添加本地 SSH 配置
+
+```bash
+$ vim ~/.ssh/config
+Host *
+	HostkeyAlgorithms +ssh-rsa
+	PubkeyAcceptedKeyTypes +ssh-rsa
 ```
 
 -   创建 git 仓库

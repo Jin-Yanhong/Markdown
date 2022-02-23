@@ -6,7 +6,7 @@
 
 > `Object.assign` 不会在那些`source`对象值为 [`null`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/null) 或 [`undefined`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/undefined) 的时候抛出错误。
 
-### Object.key(data)
+### Object.keys(data)
 
 > 返回值：data 的 key （以数组形式）
 

@@ -6,29 +6,29 @@
 
 > Vue 最独特的特性之一，是其非侵入性的响应式系统。
 
-![data](https://blog-pic-store.oss-cn-beijing.aliyuncs.com/blog/lifecycle.png)
-
 ## 动态绑定
 
 ### vue 动态引入背景图片
 
-```vue
+```html
 <div
-  :style="{
-    backgroundImage: 'url(' + item.imgsrc + ')',
-    backgroundSize: '100% 100%',
-    backgroundRepeat: 'no-repeat',
-  }"
->This is a message</div>
+    :style="{
+        backgroundImage: 'url(' + item.imgsrc + ')',
+        backgroundSize: '100% 100%',
+        backgroundRepeat: 'no-repeat',
+    }"
+>
+    This is a message
+</div>
 ```
 
 ## API
 
 ### Event
 
-- v-on 事件修饰符
+-   v-on 事件修饰符
 
-```vue
+```html
 <!-- 点击事件将只会触发一次 -->
 <a v-on:click.once="doThis"></a>
 <!-- 滚动事件的默认行为 (即滚动行为) 将会立即触发 -->
@@ -42,35 +42,35 @@
 (2.3.0) 以 { passive: true } 模式添加侦听器
 ```
 
-- 按键修饰符
+-   按键修饰符
 
-```vue
-<input v-on:keyup.enter="submit">
+```html
+<input v-on:keyup.enter="submit" />
 ```
 
 ### Value
 
-- v-model
+-   v-model
 
 > 输入型文本域触发 input 事件
 >
 > 选择型表单触发 change 事件
 >
-> - 绑定单选复选，值为表单的 checked 值
-> - 绑定下拉选择，值为所选择的 option 值
-> - 原生 select 支持多选
->   几个比较有用的修饰符
+> -   绑定单选复选，值为表单的 checked 值
+> -   绑定下拉选择，值为所选择的 option 值
+> -   原生 select 支持多选
+>     几个比较有用的修饰符
 
-```vue
+```html
 <!-- 在“change”时而非“input”时更新 -->
-<input v-model.lazy="msg">
+<input v-model.lazy="msg" />
 <!-- 如果想自动将用户的输入值转为数值类型-->
-<input v-model.number="age" type="number">
+<input v-model.number="age" type="number" />
 <!-- 自动过滤用户输入的首尾空白字符-->
-<input v-model.trim="msg">
+<input v-model.trim="msg" />
 ```
 
-- 通过父组件触发子组件的方法
+-   通过父组件触发子组件的方法
 
 ```javascript
 // 子组件自定义事件
@@ -81,13 +81,12 @@ this.$ref.name['子组件的方法'];
 
 ### 生命周期钩子函数
 
-- 生命周期图示
+-   生命周期示意
+    ![data](https://blog-pic-store.oss-cn-beijing.aliyuncs.com/blog/lifecycle.png)
 
-<img src="https://gitee.com/Coder-jin/PicStore/raw/master/lifecycle.png" alt="Vue 实例生命周期"  />
+-   各节点先后顺序：
 
-示例：
-
-![image-20210408100239292](https://gitee.com/Coder-jin/PicStore/raw/master/image-20210408100239292.png)
+<img src="C:/Users/OptiPlex/AppData/Roaming/Typora/typora-user-images/image-20220223181519698.png" alt="Vue 实例生命周期" style="float:left"  />
 
 #### beforeCreate
 
@@ -151,8 +150,8 @@ updated: function () {
 
 参考
 
-- [构建组件 - keep-alive](https://cn.vuejs.org/v2/api/#keep-alive)
-- [动态组件 - keep-alive](https://cn.vuejs.org/v2/guide/components-dynamic-async.html#在动态组件上使用-keep-alive)
+-   [构建组件 - keep-alive](https://cn.vuejs.org/v2/api/#keep-alive)
+-   [动态组件 - keep-alive](https://cn.vuejs.org/v2/guide/components-dynamic-async.html#在动态组件上使用-keep-alive)
 
 #### deactivated
 
@@ -162,8 +161,8 @@ updated: function () {
 
 参考
 
-- [构建组件 - keep-alive](https://cn.vuejs.org/v2/api/#keep-alive)
-- [动态组件 - keep-alive](https://cn.vuejs.org/v2/guide/components-dynamic-async.html#在动态组件上使用-keep-alive)
+-   [构建组件 - keep-alive](https://cn.vuejs.org/v2/api/#keep-alive)
+-   [动态组件 - keep-alive](https://cn.vuejs.org/v2/guide/components-dynamic-async.html#在动态组件上使用-keep-alive)
 
 #### beforeDestory
 
@@ -179,7 +178,7 @@ updated: function () {
 
 #### [errorCaptured](https://cn.vuejs.org/v2/api/#errorCaptured)
 
-- 类型：(err: Error, vm: Component, info: string) => ?boolean
+-   类型：(err: Error, vm: Component, info: string) => ?boolean
 
 ### 全局 API
 
@@ -198,14 +197,14 @@ updated: function () {
 ```javascript
 // 创建构造器
 var Profile = Vue.extend({
-  template: '<p>{{firstName}} {{lastName}} aka {{alias}}</p>',
-  data: function () {
-    return {
-      firstName: 'Walter',
-      lastName: 'White',
-      alias: 'Heisenberg',
-    };
-  },
+    template: '<p>{{firstName}} {{lastName}} aka {{alias}}</p>',
+    data: function () {
+        return {
+            firstName: 'Walter',
+            lastName: 'White',
+            alias: 'Heisenberg',
+        };
+    },
 });
 // 创建 Profile 实例，并挂载到一个元素上。
 new Profile().$mount('#mount-point');
@@ -226,12 +225,12 @@ new Profile().$mount('#mount-point');
 vm.msg = 'Hello';
 // DOM 还没有更新
 Vue.nextTick(function () {
-  // DOM 更新了
+    // DOM 更新了
 });
 
 // 作为一个 Promise 使用 (2.1.0 起新增，详见接下来的提示)
 Vue.nextTick().then(function () {
-  // DOM 更新了
+    // DOM 更新了
 });
 ```
 
@@ -250,7 +249,7 @@ Vue.nextTick().then(function () {
 ```javascript
 // 注册
 Vue.filter('my-filter', function (value) {
-  // 返回处理后的值
+    // 返回处理后的值
 });
 
 // getter，返回已注册的过滤器
@@ -272,15 +271,15 @@ var myFilter = Vue.filter('my-filter');
 ```javascript
 // 注册组件，传入一个扩展过的构造器
 Vue.component(
-  'my-component',
-  Vue.extend({
-    /* ... */
-  })
+    'my-component',
+    Vue.extend({
+        /* ... */
+    })
 );
 
 // 注册组件，传入一个选项对象 (自动调用 Vue.extend)
 Vue.component('my-component', {
-  /* ... */
+    /* ... */
 });
 
 // 获取注册的组件 (始终返回构造器)
@@ -294,16 +293,16 @@ var MyComponent = Vue.component('my-component');
 ```javascript
 // 注册
 Vue.directive('my-directive', {
-  bind: function () {},
-  inserted: function () {},
-  update: function () {},
-  componentUpdated: function () {},
-  unbind: function () {},
+    bind: function () {},
+    inserted: function () {},
+    update: function () {},
+    componentUpdated: function () {},
+    unbind: function () {},
 });
 
 // 注册 (指令函数)
 Vue.directive('my-directive', function () {
-  // 这里将会被 `bind` 和 `update` 调用
+    // 这里将会被 `bind` 和 `update` 调用
 });
 
 // getter，返回已注册的指令
@@ -368,34 +367,34 @@ methods: {
 
 子组件
 
-```vue
+```html
 <div class="container">
-  <header>
-    <slot name="header"></slot>
-  </header>
-  <main>
-    <slot></slot>
-  </main>
-  <footer>
-    <slot name="footer"></slot>
-  </footer>
+    <header>
+        <slot name="header"></slot>
+    </header>
+    <main>
+        <slot></slot>
+    </main>
+    <footer>
+        <slot name="footer"></slot>
+    </footer>
 </div>
 ```
 
 父组件
 
-```vue
+```html
 <base-layout>
-  <template v-slot:header>
-    <h1>Here might be a page title</h1>
-  </template>
+    <template v-slot:header>
+        <h1>Here might be a page title</h1>
+    </template>
 
-  <p>A paragraph for the main content.</p>
-  <p>And another one.</p>
+    <p>A paragraph for the main content.</p>
+    <p>And another one.</p>
 
-  <template v-slot:footer>
-    <p>Here's some contact info</p>
-  </template>
+    <template v-slot:footer>
+        <p>Here's some contact info</p>
+    </template>
 </base-layout>
 ```
 
@@ -405,21 +404,17 @@ methods: {
 
 为了让 `user` 在父级的插槽内容中可用，我们可以将 `user` 作为 `<slot>` 元素的一个 attribute 绑定上去：
 
-```vue
+```html
 <span>
-  <slot v-bind:user="user">
-    {{ user.lastName }}
-  </slot>
+    <slot v-bind:user="user">{{ user.lastName }}</slot>
 </span>
 ```
 
 绑定在 `<slot>` 元素上的 attribute 被称为**插槽 prop**。现在在父级作用域中，我们可以使用带值的 `v-slot` 来定义我们提供的插槽 prop 的名字：
 
-```vue
+```html
 <current-user>
-  <template v-slot:default="slotProps">
-    {{ slotProps.user.firstName }}
-  </template>
+    <template v-slot:default="slotProps">{{ slotProps.user.firstName }}</template>
 </current-user>
 ```
 
@@ -439,4 +434,3 @@ const { href } = this.$router.resolve({
 });
 window.open(href, '_blank'); //打开新的窗口
 ```
-

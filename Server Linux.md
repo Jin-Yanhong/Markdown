@@ -10,6 +10,12 @@ rm -r	#删除子文件夹
 sudo rm -rf  #文件夹的名字 sudo：授权操作的许可,提升权限
 ```
 
+### 查看文本文件内容
+
+```bash
+cat filename
+```
+
 ### 查看 linux 内核版本
 
 ```
@@ -329,4 +335,3 @@ fuser -m -v /data/
 ```bash
 
 ```
-

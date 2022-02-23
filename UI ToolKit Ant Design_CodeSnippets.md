@@ -8,7 +8,7 @@
 
 解决 select 下拉框漂浮的问题
 
-```vue
+```html
 <template>
     <a-select
         style="width: 100%; position: relative"
@@ -23,13 +23,13 @@
     </a-select>
 </template>
 <script>
-export default {
-    methods: {
-        handleChange(value) {
-            console.log(`selected ${value}`);
+    export default {
+        methods: {
+            handleChange(value) {
+                console.log(`selected ${value}`);
+            },
         },
-    },
-};
+    };
 </script>
 ```
 

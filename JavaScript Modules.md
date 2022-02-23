@@ -81,44 +81,46 @@ myModuleInstance.goodbye(); // 'goodbye!'
 -   混合导出
 
 ```javascript
-
+export { module1 as default, module2, module3 };
 ```
 
 -   批量导出
 
 ```javascript
-
+export { module1, module2, module3 };
 ```
 
 -   设置别名
 
 ```javascript
-
+export { module1 as module2, module3, module4 };
 ```
 
 ### 导入
 
 -   批量导入
 
-```
-
+```javascript
+import{ module1 as default, module2, module3 } from "./..."
 ```
 
 -   设置别名
 
-```
-
+```javascript
+import module1 as module2  from "./..."
 ```
 
 -   混合导入
 
 ```javascript
-
+import { module1 as module2, module3, module4 } from './...';
 ```
 
 ### 技巧
 
 > **`ES6 规范是实时只读的`**
+
+# 以下模块化不常用
 
 ## UMD 规范
 

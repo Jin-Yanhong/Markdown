@@ -84,7 +84,7 @@ abstract class Animals {
         this.name = name;
     }
     sayHello() {
-        console.log('动物再叫~');
+        console.log('动物在叫~');
     }
 }
 class Dog extends Animals {

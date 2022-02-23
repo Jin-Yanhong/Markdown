@@ -149,7 +149,7 @@ actions: {
           });
       });
     },
-    // 前端 登出
+    // 前端 推出
     FedLogOut({ commit }) {
       return new Promise(resolve => {
         commit("SET_TOKEN", "");

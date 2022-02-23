@@ -38,3 +38,16 @@ NET STOP 服务名
 service install serviceName
 ```
 
+## 文件操作
+
+##### 查看文本文件内容
+
+```bash
+cat filename
+```
+
+##### 拷贝文本文件的内容
+
+```bash
+clip < filepath filename
+```

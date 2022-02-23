@@ -88,7 +88,7 @@ source .sql文件
 
 ## 数据表的操作 table
 
-- 新增数据表
+-   新增数据表
 
 ```mysql
 create table tableName (id INT );
@@ -97,7 +97,7 @@ CREATE table stu (id INT PRIMARY KEY AUTO_INCREMENT, sname CHAR ( 10 ), class_id
 create table tableName select * from existTable
 ```
 
-- 删除数据表
+-   删除数据表
 
 ```mysql
 drop tabel if exists tableName;
@@ -126,8 +126,8 @@ insert info tableName (key1,key2) values (“val1”,“val2”);
 #### 修改字段
 
 ```mysql
--- 修改数据格式 
-ALTER table tableName MODIFY fieldName varchar(20) not null; 
+-- 修改数据格式
+ALTER table tableName MODIFY fieldName varchar(20) not null;
 
 -- 修改字段名称
 ALTER table tableName CHANGE fieldName existFieldName newFieldName not null;
@@ -141,89 +141,81 @@ ALTER table tableName ADD newFieldName smallint default null first
 ALTER table tableName drop field
 ```
 
-
-
 ## 数据的基本操作
 
 ### 数据的查询
 
 #### 全部查询
 
-- ```mysql
-  SELECT * FROM tableName
-  ```
-- ```mysql
-  desc tableName
-  ```
-- ```mysql
-  SELECT name ,id as ids FROM tableName // as 表示别名
-  ```
+-   ```mysql
+    SELECT * FROM tableName
+    ```
+-   ```mysql
+    desc tableName
+    ```
+-   ```mysql
+    SELECT name ,id as ids FROM tableName // as 表示别名
+    ```
 
 ##### 条件查询
 
 ###### **查询所有**
 
-- ```mysql
-  select * from class WHERE id > 2 // 查找所有id > 2 的数据
-  ```
-- ```sql
-  // 查找所有 cname = 'php' 的数据
-  select * from class WHERE cname = 'php'
-  ```
-- ```sql
-  // 查询条件不包含
-    select * from class WHERE description not like'%p%' and id > 2// 查找所有描述字段不包含p,并且id > 2 的数据
-  ```
-- ```mysql
-  // 查找所有描述字段不包含p的数据,或者id > 2 的数据
-  select * from class WHERE description not like'%p%' or id > 2
-  ```
-- ```sql
-  // 查找所有年龄介于20 ~ 30 之间的
-  select * from class WHERE age BETWEEN 20 and 30
-  ```
-- ```mysql
-  // 查找所有班级id介于2 ~ 3 之间的
-  select * from class WHERE class_id in(2,3)
-  ```
-- ```sql
-  // 查找所有班级id不在2 ~ 3 之间的
-  select * from class WHERE class_id in(2,3)
-  ```
-- ```mysql
-  //对null的操作
-    select * from class WHERE class_id is null
-  ```
+-   ```mysql
+    select * from class WHERE id > 2 // 查找所有id > 2 的数据
+    ```
+-   ```sql
+    // 查找所有 cname = 'php' 的数据
+    select * from class WHERE cname = 'php'
+    ```
+-   ```sql
+    // 查询条件不包含
+      select * from class WHERE description not like'%p%' and id > 2// 查找所有描述字段不包含p,并且id > 2 的数据
+    ```
+-   ```mysql
+    // 查找所有描述字段不包含p的数据,或者id > 2 的数据
+    select * from class WHERE description not like'%p%' or id > 2
+    ```
+-   ```sql
+    // 查找所有年龄介于20 ~ 30 之间的
+    select * from class WHERE age BETWEEN 20 and 30
+    ```
+-   ```mysql
+    // 查找所有班级id介于2 ~ 3 之间的
+    select * from class WHERE class_id in(2,3)
+    ```
+-   ```sql
+    // 查找所有班级id不在2 ~ 3 之间的
+    select * from class WHERE class_id in(2,3)
+    ```
+-   ```mysql
+    //对null的操作
+      select * from class WHERE class_id is null
+    ```
 
 ###### 查询部分字段
 
-- ```sql
-  select name,id from class where
-  ```
-  
-- ```sql
-  // 字段别名
-  select name,id as ids from class
-  ```
-  
-- ```sql
-  // 使用连接函数
-  select CONCAT(cname,description) as class_info from class
-  返回的结果会以 class_info 为新的字段名
-  ```
+-   ```sql
+    select name,id from class where
+    ```
+-   ```sql
+    // 字段别名
+    select name,id as ids from class
+    ```
+-   ```sql
+    // 使用连接函数
+    select CONCAT(cname,description) as class_info from class
+    返回的结果会以 class_info 为新的字段名
+    ```
 
-- 数据的新增
+-   数据的新增
 
-  ```mysql
-  
-  ```
+    ```mysql
 
-  
+    ```
 
 ## 数据字段类型
 
-
-
 ## 排序规则
 
-- **ci** 对大小写不敏感（Case insensitive）
+-   **ci** 对大小写不敏感（Case insensitive）
