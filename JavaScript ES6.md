@@ -415,6 +415,8 @@ for (let i of s) {
 // 2 3 5 4
 ```
 
+> set 中的值是唯一的
+
 Set 结构的实例有以下属性
 
 -   `Set.prototype.constructor`：构造函数，默认就是`Set`函数。

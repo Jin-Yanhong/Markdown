@@ -11,7 +11,7 @@ this.$router.push({
 ```javascript
 // 对应的路由需要如下配置
 {
-    path: '/particulars/:id';
+    path: "/particulars/:id";
 }
 ```
 
@@ -24,7 +24,7 @@ this.$route.params.id;
 
 ```javascript
 this.$router.push({
-    name: 'particulars',
+    name: "particulars",
     params: {
         id: id,
     },
@@ -34,7 +34,7 @@ this.$router.push({
 ```javascript
 // 注意这里不能使用:/id来传递参数了，因为组件中，已经使用params来携带参数了
 {
-    path: '/particulars';
+    path: "/particulars";
 }
 ```
 
@@ -46,7 +46,7 @@ this.$route.params.id;
 
 ```javascript
 this.$router.push({
-    path: '/particulars',
+    path: "/particulars",
     query: {
         id: id,
     },
@@ -55,7 +55,7 @@ this.$router.push({
 
 ```javascript
 {
-    path: '/particulars';
+    path: "/particulars";
 }
 ```
 

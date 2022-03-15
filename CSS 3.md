@@ -87,7 +87,8 @@ div ::v-deep p {
     flex-flow: <flex-direction> || <flex-wrap>; /* 默认值为 row nowrap */
 
     /* justify-content 指定主轴上的对齐方式 */
-    justify-content: flex-start | flex-end | center | space-between | space-around|space-evenly;
+    justify-content: flex-start | flex-end | center | space-between |
+        space-around|space-evenly;
     /* space-between: 基于容器平均分布;语素与容器间隔为0 */
     /* space-around: 基于item平均分布;元素间间隔相等 */
     /* space-evenly: 基于内容平均分布;语素与容器、元素间间隔相等 */
@@ -98,7 +99,8 @@ div ::v-deep p {
     /* stretch（默认值）：如果item未设置高度或设为auto，将占满整个容器的高度。 */
 
     /* align-content属性定义了多根轴线（多行）的对齐方式。如果item只有一根轴线，该属性不起作用。 */
-    align-content: flex-start | flex-end | center | space-between | space-around | stretch;
+    align-content: flex-start | flex-end | center | space-between | space-around
+        | stretch;
 }
 ```
 
@@ -122,7 +124,7 @@ div ::v-deep p {
     flex-basis: <length> | auto; /* default auto */
 
     /* 上述属性的简写 */
-    flex: none | [ < 'flex-grow' > < 'flex-shrink' >? || < 'flex-basis' > ];
+    flex: none | [ < "flex-grow" > < "flex-shrink" >? || < "flex-basis" > ];
 
     /* align-self 会对齐当前 grid 或 flex 行中的元素，并覆盖已有的 align-items 的值 */
     align-self: auto | flex-start | flex-end | center | baseline | stretch;
@@ -164,7 +166,7 @@ div ::v-deep p {
     /* 简写为 */
     gap: <row-gap> <column-gap>;
 
-    grid-template-areas: '详细说明';
+    grid-template-areas: "详细说明";
 
     /* 改变元素的自动排列方式 */
     grid-auto-flow: | row| column| dense| row dense| column dense;
@@ -184,9 +186,11 @@ div ::v-deep p {
     /* stretch：拉伸，占满单元格的整个宽度（默认值）。 */
 
     /* justify-content属性是整个内容区域在容器里面的水平位置（左中右） */
-    justify-content: start | end | center | stretch | space-around | space-between | space-evenly;
+    justify-content: start | end | center | stretch | space-around |
+        space-between | space-evenly;
     /* align-content属性是整个内容区域的垂直位置（上中下） */
-    align-content: start | end | center | stretch | space-around | space-between | space-evenly;
+    align-content: start | end | center | stretch | space-around | space-between
+        | space-evenly;
     /* 简写为 */
     place-content: <align-content> <justify-content>;
 }
@@ -232,9 +236,9 @@ div ::v-deep p {
 >     grid-template-columns: 100px 100px 100px;
 >     grid-template-rows: 100px 100px 100px;
 >     grid-template-areas:
->         'a b c'
->         'd e f'
->         'g h i';
+>         "a b c"
+>         "d e f"
+>         "g h i";
 > }
 > ```
 >
@@ -245,9 +249,9 @@ div ::v-deep p {
 > ```css
 > .container {
 >     grid-template-areas:
->         'a a a'
->         'b b b'
->         'c c c';
+>         "a a a"
+>         "b b b"
+>         "c c c";
 > }
 > ```
 >
@@ -257,9 +261,9 @@ div ::v-deep p {
 > ```css
 > .container {
 >     grid-template-areas:
->         'a . c'
->         'd . f'
->         'g . i';
+>         "a . c"
+>         "d . f"
+>         "g . i";
 > }
 > ```
 >
@@ -274,10 +278,10 @@ div ::v-deep p {
 ```css
 .child_A {
     /* 制定内部元素的起始位置 */
-    grid-column-start: ''; /* 左边框所在的垂直网格线 */
-    grid-column-end: ''; /* 右边框所在的垂直网格线 */
-    grid-row-start: ''; /* 上边框所在的水平网格线 */
-    grid-row-end: ''; /* 下边框所在的水平网格线 */
+    grid-column-start: ""; /* 左边框所在的垂直网格线 */
+    grid-column-end: ""; /* 右边框所在的垂直网格线 */
+    grid-row-start: ""; /* 上边框所在的水平网格线 */
+    grid-row-end: ""; /* 下边框所在的水平网格线 */
 
     /* 除了指定为第几个网格线，还可以指定为网格线的名字。 */
     grid-column-start: header-start;
@@ -297,9 +301,9 @@ div ::v-deep p {
     grid-area: <row-start> | <column-start> | <row-end> | <column-end>;
 
     /* justify-self 设置单元格内容的水平位置（左中右），跟justify-items属性的用法完全一致，但只作用于单个项目。 */
-    justify-self: '';
+    justify-self: "";
     /* align-self属性设置单元格内容的垂直位置（上中下），跟align-items属性的用法完全一致，也是只作用于单个项目。 */
-    align-self: '';
+    align-self: "";
     /* ==> place-self */
     place-self: <align-self> <justify-self>;
 }
@@ -417,7 +421,9 @@ div ::v-deep p {
 ```css
 div {
     /* 只改变运动路径，其他保持一致 */
-    offset-path: path('M 0 0 L 100 0 L 200 0 L 300 100 L 400 0 L 500 100 L 600 0 L 700 100 L 800 0');
+    offset-path: path(
+        "M 0 0 L 100 0 L 200 0 L 300 100 L 400 0 L 500 100 L 600 0 L 700 100 L 800 0"
+    );
     animation: move 2000ms infinite alternate linear;
 }
 @keyframes move {
@@ -552,7 +558,7 @@ p {
 .borderBg::before {
     display: block;
     position: absolute;
-    content: '';
+    content: "";
     left: -1px;
     top: 23px;
     width: calc(100% + 2px);
@@ -564,7 +570,7 @@ p {
 .borderBg::after {
     display: block;
     position: absolute;
-    content: '';
+    content: "";
     top: -1px;
     left: 23px;
     height: calc(100% + 2px);
@@ -575,7 +581,7 @@ p {
 }
 ```
 
-#### js 操作 sass 变量
+## CSS in JS
 
 > ### var()介绍与使用
 >
@@ -610,17 +616,19 @@ Selector1 {
     }
 }
 
-<!-- Selector1的生成效果 -- > :root {
+// Selector1的生成效果
+:root {
     --color-primary: #ffbb00;
     --color-secondary: #0969a2;
 }
 
-<!-- 使用方式一 直接使用css变量 -- > Selector {
+// 使用方式一 直接使用css变量
+Selector {
     color: var(--color-primary);
 }
 
-<!-- 使用方式二 利用scss的函数,
-以符合scss语法 推荐 -- > @function color($color-name) {
+// 使用方式二 利用scss的函数， 以符合scss语法 推荐
+@function color($color-name) {
     @return var(--color-#{$color-name});
 }
 
@@ -628,7 +636,8 @@ body {
     color: color(primary); //使用
 }
 
-<!-- body生成效果 -- > body {
+// body生成效果
+body {
     color: var(--color-primary); //这样就可以被js设置了
 }
 ```
@@ -653,6 +662,7 @@ body {
 > js 设置 css 变量,即设置运行 scss 变量
 >
 > ```javascript
+> // domObject => dom 节点
 > domObject.style.setProperty(name, value); //name为css变量名 e.g: --color-primary
 > ```
 >

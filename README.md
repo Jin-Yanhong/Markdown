@@ -15,6 +15,6 @@
     -   MySQL、MongoDB
     -   Linux Server
 -   GIS
-    -   相关知识
+    -   Qgis
 
-会根据自身实际情况更新。
+根据自身实际情况不定期更新。

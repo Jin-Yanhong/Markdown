@@ -42,6 +42,9 @@ git remote add origin https:
 #xxx.git
 # 推送 并关联 远程本地
 git push -u origin(远程分支) master(本地分支)
+# 将本地分支关联到远程仓库
+git push --set-upstream origin dev
+
 ```
 
 # 版本控制
