@@ -86,14 +86,14 @@
 项目结构改变时，修改其变量即可。
 
 ```less
-@images: '../img'; //需要加引号
+@images: "../img"; //需要加引号
 body {
-    background: url('@{images}/dog.png'); //变量名 必须使用大括号包裹
+    background: url("@{images}/dog.png"); //变量名 必须使用大括号包裹
 }
 
 /* 生成的 CSS */
 body {
-    background: url('../img/dog.png');
+    background: url("../img/dog.png");
 }
 ```
 
@@ -182,14 +182,14 @@ _借助官网的 Demo_
 #### **用变量去定义变量**
 
 ```less
-@fnord: 'I am fnord.';
-@var: 'fnord';
+@fnord: "I am fnord.";
+@var: "fnord";
 #wrap::after {
     content: @@var; //将@var替换为其值 content:@fnord;
 }
 /* 生成的 CSS */
 #wrap::after {
-    content: 'I am fnord.';
+    content: "I am fnord.";
 }
 ```
 
@@ -202,7 +202,7 @@ _借助官网的 Demo_
 ```less
 #header {
     &:after {
-        content: 'Less is more!';
+        content: "Less is more!";
     }
     .title {
         font-weight: bold;
@@ -214,7 +214,7 @@ _借助官网的 Demo_
 }
 /* 生成的 CSS */
 #header::after {
-    content: 'Less is more!';
+    content: "Less is more!";
 }
 #header .title {
     //嵌套了
@@ -287,8 +287,8 @@ Less 提供了一个十分便捷的方式
 ```
 
 ```javascript
-const main = document.getElementById('main');
-main.classList.add('show');
+const main = document.getElementById("main");
+main.classList.add("show");
 ```
 
 结果：
@@ -673,7 +673,7 @@ extend 是 Less 的一个伪类。它可继承 所匹配声明中的全部样式
 }
 #main {
     &:after {
-        content: 'Less is good!';
+        content: "Less is good!";
     }
 }
 #wrap:extend(#main all) {
@@ -686,7 +686,7 @@ extend 是 Less 的一个伪类。它可继承 所匹配声明中的全部样式
 }
 #main:after,
 #wrap:after {
-    content: 'Less is good!';
+    content: "Less is good!";
 }
 ```
 
@@ -700,7 +700,7 @@ extend 是 Less 的一个伪类。它可继承 所匹配声明中的全部样式
 .Method {
     width: 200px;
     &:after {
-        content: 'Less is good!';
+        content: "Less is good!";
     }
 }
 #main {
@@ -714,13 +714,13 @@ extend 是 Less 的一个伪类。它可继承 所匹配声明中的全部样式
 #main {
     width: 200px;
     &:after {
-        content: 'Less is good!';
+        content: "Less is good!";
     }
 }
 #wrap {
     width: 200px;
     &:after {
-        content: 'Less is good!';
+        content: "Less is good!";
     }
 }
 ```
@@ -739,9 +739,9 @@ _翻译官网_
 1.  导入 less 文件 可省略后缀
 
 ```javascript
-import 'main';
+import "main";
 //等价于
-import 'main.less';
+import "main.less";
 ```
 
 1.  `@import` 的位置可随意放置
@@ -750,7 +750,7 @@ import 'main.less';
 #main {
     font-size: 15px;
 }
-@import 'style';
+@import "style";
 ```
 
 ### reference
@@ -758,7 +758,7 @@ import 'main.less';
 Less 中 最强大的特性 使用 引入的 Less 文件，但不会 编译它。
 
 ```less
-@import (reference) 'bootstrap.less';
+@import (reference) "bootstrap.less";
 
 #wrap:extend(.navbar all) {
 }
@@ -773,8 +773,8 @@ Less 中 最强大的特性 使用 引入的 Less 文件，但不会 编译它�
 > @import 语句的默认行为。这表明相同的文件只会被导入一次，而随后的导入文件的重复代码都不会解析。
 
 ```less
-@import (once) 'foo.less';
-@import (once) 'foo.less'; // this statement will be ignored
+@import (once) "foo.less";
+@import (once) "foo.less"; // this statement will be ignored
 ```
 
 #### multiple
@@ -787,8 +787,8 @@ Less 中 最强大的特性 使用 引入的 Less 文件，但不会 编译它�
     color: green;
 }
 // file: main.less
-@import (multiple) 'foo.less';
-@import (multiple) 'foo.less';
+@import (multiple) "foo.less";
+@import (multiple) "foo.less";
 
 /* 生成后的 CSS */
 .a {
@@ -892,7 +892,7 @@ isnumber(url(...)); // false
 
     ```less
     #main {
-        width: ~'calc(300px-30px)';
+        width: ~"calc(300px-30px)";
     }
 
     /* 生成后的 CSS */
@@ -918,8 +918,8 @@ isnumber(url(...)); // false
         .circle:nth-child(@{i}) {
             .judeg(@i);
             border-radius: @size @size 0 0;
-            animation: ~'circle-@{i}' @duration infinite @ease;
-            transition-delay: ~'@{i}ms';
+            animation: ~"circle-@{i}" @duration infinite @ease;
+            transition-delay: ~"@{i}ms";
         }
         @keyframes ~"circle-@{i}" {
             // do something...
@@ -937,15 +937,15 @@ isnumber(url(...)); // false
     ```less
     @content:` "aaa".toUpperCase()`;
     #randomColor {
-        @randomColor: ~'rgb(`Math.round(Math.random() * 256)`,`Math.round(Math.random() * 256)`,`Math.round(Math.random() * 256)`)';
+        @randomColor: ~"rgb(`Math.round(Math.random() * 256)`,`Math.round(Math.random() * 256)`,`Math.round(Math.random() * 256)`)";
     }
     #wrap {
-        width: ~'`Math.round(Math.random() * 100)`px';
+        width: ~"`Math.round(Math.random() * 100)`px";
         &:after {
             content: @content;
         }
-        height: ~'`window.innerHeight`px';
-        alert: ~'`alert(1)`';
+        height: ~"`window.innerHeight`px";
+        alert: ~"`alert(1)`";
         #randomColor();
         background-color: @randomColor;
     }
@@ -958,6 +958,6 @@ isnumber(url(...)); // false
         background: 随机颜色;
     }
     #wrap::after {
-        content: 'AAA';
+        content: "AAA";
     }
     ```

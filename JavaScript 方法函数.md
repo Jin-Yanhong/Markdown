@@ -229,3 +229,65 @@ for (const key in Object.keys(data)) {
 #### window.onbeforeunload
 
 > 页面刷新之前执行的回调
+
+#### JavaScript 随机数
+
+```javascript
+parseInt(Math.random() * (max - min + 1) + min, 10);
+Math.floor(Math.random() * (max - min + 1) + min); //  Math.floor() 向下取整
+```
+
+#### 获取一段时间的起止时间戳
+
+```javascript
+getTimestamp(interval = "1hour") {
+    /**
+     * 以数组形式接受 自定义时间段
+     * 其中第一项 是开始时间，第二个是结束时间
+     * eg. [ "2022-03-08T16:00:00.000Z", "2022-04-21T16:00:00.000Z" ]
+     */
+    let time = {};
+    let nowMS = new Date().getTime() / 1000; //秒级时间戳
+    let timeNow = nowMS;
+    let timeBefore;
+    let hours = 3600;
+    let days = hours * 24;
+    let weeks = days * 7;
+    let months = days * 30;
+    let years = months * 12;
+
+    switch (interval) {
+        case "1hour":
+            timeBefore = nowMS - hours;
+            break;
+        case "2hour":
+            timeBefore = nowMS - hours * 2;
+            break;
+        case "4hour":
+            timeBefore = nowMS - hours * 4;
+            break;
+        case "12hour":
+            timeBefore = nowMS - hours * 12;
+            break;
+        case "24hour":
+            timeBefore = nowMS - days;
+            break;
+        case "1week":
+            timeBefore = nowMS - weeks;
+            break;
+        case "1month":
+            timeBefore = nowMS - months;
+            break;
+        case "1year":
+            timeBefore = nowMS - years;
+            break;
+        default:
+            timeBefore = Date.parse(interval[0]) / 1000;
+            timeNow = Date.parse(interval[1]) / 1000;
+            break;
+    }
+    time.start = parseInt(timeBefore);
+    time.end = parseInt(timeNow);
+    return time;
+}
+```

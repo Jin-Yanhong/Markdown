@@ -38,19 +38,21 @@ let isDone: boolean = false;
 #### string
 
 ```typescript
-let color: string = 'blue';
-color = 'red';
+let color: string = "blue";
+color = "red";
 
 let fullName: string = `Bob Bobbington`;
 let age: number = 37;
-let sentence: string = `Hello, my name is ${fullName}. I'll be ${age + 1} years old next month.`;
+let sentence: string = `Hello, my name is ${fullName}. I'll be ${
+    age + 1
+} years old next month.`;
 ```
 
 #### any
 
 ```typescript
 let d: any = 4;
-d = 'hello';
+d = "hello";
 d = true;
 ```
 
@@ -58,7 +60,7 @@ d = true;
 
 ```typescript
 let notSure: unknown = 4;
-notSure = 'hello';
+notSure = "hello";
 ```
 
 #### void
@@ -94,7 +96,7 @@ let list: Array<number> = [1, 2, 3];
 
 ```typescript
 let x: [string, number];
-x = ['hello', 10];
+x = ["hello", 10];
 ```
 
 #### enum
@@ -127,7 +129,7 @@ let c: Color = Color.Green;
 也可以使用字面量去指定变量的类型，通过字面量可以确定变量的取值范围
 
 ```typescript
-let color: 'red' | 'blue' | 'black';
+let color: "red" | "blue" | "black";
 let num: 1 | 2 | 3 | 4 | 5;
 ```
 
@@ -144,14 +146,14 @@ let num: 1 | 2 | 3 | 4 | 5;
 -   第一种
 
     -   ```typescript
-        let someValue: unknown = 'this is a string';
+        let someValue: unknown = "this is a string";
         let strLength: number = (someValue as string).length;
         ```
 
 -   第二种
 
     -   ```typescript
-        let someValue: unknown = 'this is a string';
+        let someValue: unknown = "this is a string";
         let strLength: number = (<string>someValue).length;
         ```
 
@@ -176,7 +178,17 @@ tsc fileName -w
     // 排除 默认["node_modules", "bower_components", "jspm_packages"]
     "exclude": ["./hello/*"],
     // 只有编译文件夹中少量的文件才使用 file 选项
-    "files": ["core.ts", "sys.ts", "types.ts", "scanner.ts", "parser.ts", "utilities.ts", "binder.ts", "checker.ts", "tsc.ts"],
+    "files": [
+        "core.ts",
+        "sys.ts",
+        "types.ts",
+        "scanner.ts",
+        "parser.ts",
+        "utilities.ts",
+        "binder.ts",
+        "checker.ts",
+        "tsc.ts"
+    ],
     // 继承 其他编译配置
     "extends": "./config.json",
     // 保存就编译
@@ -474,8 +486,8 @@ class Employee extends Person {
     }
 }
 
-const p = new Person('孙悟空', 18);
-p.name = '猪八戒'; // 可以通过对象修改
+const p = new Person("孙悟空", 18);
+p.name = "猪八戒"; // 可以通过对象修改
 ```
 
 ### protected
@@ -504,8 +516,8 @@ class Employee extends Person {
     }
 }
 
-const p = new Person('孙悟空', 18);
-p.name = '猪八戒'; // 不能修改
+const p = new Person("孙悟空", 18);
+p.name = "猪八戒"; // 不能修改
 ```
 
 ### private
@@ -534,8 +546,8 @@ class Employee extends Person {
     }
 }
 
-const p = new Person('孙悟空', 18);
-p.name = '猪八戒'; // 不能修改
+const p = new Person("孙悟空", 18);
+p.name = "猪八戒"; // 不能修改
 ```
 
 ## Getter & Setter
@@ -564,9 +576,9 @@ class Person {
     }
 }
 
-const p1 = new Person('孙悟空');
+const p1 = new Person("孙悟空");
 console.log(p1.name); // 通过getter读取name属性
-p1.name = '猪八戒'; // 通过setter修改name属性
+p1.name = "猪八戒"; // 通过setter修改name属性
 ```
 
 ### 静态属性
@@ -613,7 +625,7 @@ function fn(per: Person) {
 }
 
 fn({
-    name: '孙悟空',
+    name: "孙悟空",
     sayHello() {
         console.log(`Hello, 我是 ${this.name}`);
     },
@@ -632,7 +644,7 @@ class Student implements Person {
     constructor(public name: string) {}
 
     sayHello() {
-        console.log('大家好，我是' + this.name);
+        console.log("大家好，我是" + this.name);
     }
 }
 ```
@@ -682,7 +694,7 @@ test<number>(10);
 function test<T, K>(a: T, b: K): K {
     return b;
 }
-test<number, string>(10, 'hello');
+test<number, string>(10, "hello");
 ```
 
 使用泛型时，完全可以将泛型当成是一个普通的类去使用，类中同样可以使用泛型：

@@ -5,7 +5,12 @@
 ```html
 <el-table-column label="状态" align="center">
     <template slot-scope="scope">
-        <el-switch v-model="scope.row.state" :active-value="'true'" :inactive-value="'false'" @change="handleStatusChange(scope.row)"></el-switch>
+        <el-switch
+            v-model="scope.row.state"
+            :active-value="'true'"
+            :inactive-value="'false'"
+            @change="handleStatusChange(scope.row)"
+        ></el-switch>
     </template>
 </el-table-column>
 ```

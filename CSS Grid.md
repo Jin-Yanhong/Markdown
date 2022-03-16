@@ -37,9 +37,9 @@
     gap: 20px 20px;
 
     grid-template-areas:
-        'a b c'
-        'd e f'
-        'g h i';
+        "a b c"
+        "d e f"
+        "g h i";
     /* 如果某些区域不需要利用，则使用"点"（.）表示。 */
     /* grid-template-areas:
                     'a . c'

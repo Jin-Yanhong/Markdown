@@ -97,27 +97,12 @@ function test() {
 
 修改 state 使用 **`setState({key:value})`**，且更新是合并操作
 
-
-
 ### props
 
 #### 值的传递
 
-
-
-
-
-
-
 ```jsx
-
-
-
-
-ReactDOM.render(
-  element,
-  document.getElementById('root')
-);
+ReactDOM.render(element, document.getElementById('root'));
 ```
 
 ![image-20211130204930603](https://blog-pic-store.oss-cn-beijing.aliyuncs.com/blog/image-20211130204930603.png)
@@ -126,30 +111,18 @@ ReactDOM.render(
 
 ```jsx
 function formatName(user) {
-    
-  return user.firstName + ' ' + user.lastName;
+    return user.firstName + ' ' + user.lastName;
 }
 
 const user = {
-  firstName: 'Harper',
-  lastName: 'Perez'
+    firstName: 'Harper',
+    lastName: 'Perez',
 };
 
-const element = (
-  <h1>
-    Hello, {formatName(user)}!
-  </h1>
-);
+const element = <h1>Hello, {formatName(user)}!</h1>;
 
-ReactDOM.render(
-  element,
-  document.getElementById('root')
-);
+ReactDOM.render(element, document.getElementById('root'));
 ```
-
-
-
-
 
 #### 组件参数选项
 
@@ -167,15 +140,11 @@ props 限制整理到类的内部
 
 ![image-20211130212819893](https://blog-pic-store.oss-cn-beijing.aliyuncs.com/blog/image-20211130212819893.png)
 
-
-
 ![image-20211130215554766](https://blog-pic-store.oss-cn-beijing.aliyuncs.com/blog/image-20211130215554766.png)
 
 ![image-20211130220120634](https://blog-pic-store.oss-cn-beijing.aliyuncs.com/blog/image-20211130220120634.png)
 
 ![image-20211130223412814](https://blog-pic-store.oss-cn-beijing.aliyuncs.com/blog/image-20211130223412814.png)
-
-
 
 ![image-20211130223645124](https://blog-pic-store.oss-cn-beijing.aliyuncs.com/blog/image-20211130223645124.png)
 

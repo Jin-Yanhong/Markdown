@@ -53,7 +53,7 @@
   data: {
     firstName: 'Fred'
   },
-  
+
   // 发送请求体数据的可选语法
   // 请求方式 post
   // 只有 value 会被发送，key 则不会
@@ -155,12 +155,11 @@
   cancelToken: new CancelToken(function (cancel) {
   }),
 
-  // `decompress` indicates whether or not the response body should be decompressed 
-  // automatically. If set to `true` will also remove the 'content-encoding' header 
+  // `decompress` indicates whether or not the response body should be decompressed
+  // automatically. If set to `true` will also remove the 'content-encoding' header
   // from the responses objects of all decompressed responses
   // - Node only (XHR cannot turn off decompression)
   decompress: true // 默认值
 
 }
 ```
-
