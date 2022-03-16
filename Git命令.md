@@ -56,12 +56,6 @@ git push --force origin master
 git checkout 9ae2c2ce4ad80c87615965f8036fe01c661e646b（切换到以往版本）
 ```
 
-### 切换到最新版本
-
-```bash
-git checkout master
-```
-
 ## 本地仓库更改
 
 ### 撤销本地更改
@@ -73,6 +67,8 @@ git checkout .
 
 ### 撤销 commit（本地）
 
+#### 软、硬撤回
+
 ```bash
 # 保留本地未提交更改
 git reset --soft HEAD^
@@ -81,10 +77,27 @@ git reset --soft HEAD^
 git reset --hard HEAD^
 ```
 
+#### 撤回到指定版本
+
+```bash
+# 上两个版本
+git reset --hard HEAD^^
+# 上20个版本
+git reset --hard HEAD~20
+# 回退到指定commitID版本
+git reset --hard commitID
+```
+
 ### 修改本地 commit 消息
 
 ```bash
 git commit --amend
+```
+
+#### 切换到本地最新版
+
+```bash
+git checkout master
 ```
 
 ## Git Tag
