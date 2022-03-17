@@ -1,6 +1,8 @@
-## Vue Route 传递与接收
+# Vue Route
 
--   方法一
+## 参数传递与接收
+
+### 方法一
 
 ```javascript
 this.$router.push({
@@ -20,7 +22,7 @@ this.$router.push({
 this.$route.params.id;
 ```
 
--   方法二
+### 方法二
 
 ```javascript
 this.$router.push({
@@ -42,7 +44,7 @@ this.$router.push({
 this.$route.params.id;
 ```
 
--   方法三
+### 方法三
 
 ```javascript
 this.$router.push({
@@ -63,13 +65,9 @@ this.$router.push({
 this.$route.query.id;
 ```
 
--   函数方法的执行要略微晚于 DOM 的加载，写在 DOM 里的方法可以用箭头函数执行
+## 路由监听
 
-## Watch
-
-监听路由
-
--   方法一
+### 方法一
 
 ```javascript
 watch:{
@@ -79,7 +77,7 @@ watch:{
 },
 ```
 
--   方法二
+### 方法二
 
 ```javascript
 watch: {
@@ -93,7 +91,7 @@ watch: {
 },
 ```
 
--   方法三
+### 方法三
 
 ```javascript
 //
@@ -106,3 +104,5 @@ methods: {
     }
 }
 ```
+
+> 函数方法的执行要略微晚于 DOM 的加载，写在 DOM 里的方法可以用箭头函数执行

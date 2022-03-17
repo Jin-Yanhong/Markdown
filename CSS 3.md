@@ -436,6 +436,12 @@ div {
 }
 ```
 
+## SVG 矢量动画
+
+-   [ ] [超级强大的 SVG SMIL animation 动画详解](https://www.zhangxinxu.com/wordpress/2014/08/so-powerful-svg-smil-animation/)
+
+-   [ ] [纯 CSS 实现帅气的 SVG 路径描边动画效果](https://www.zhangxinxu.com/wordpress/2014/04/animateion-line-drawing-svg-path-%e5%8a%a8%e7%94%bb-%e8%b7%af%e5%be%84/)
+
 ## 3D 变形
 
 属性如下：

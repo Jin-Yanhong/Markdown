@@ -195,6 +195,43 @@ function fieldTranslate(collection, value, collectionField = 'value', collection
 }
 ```
 
+#### 复制文本到剪切板
+
+```javascript
+function copyToClipboard(text) {
+    const input = document.createElement("input");
+    input.style.opacity = 0;
+    input.style.position = "absolute";
+    input.style.left = "-100000px";
+    document.body.appendChild(input);
+    input.value = text;
+    input.select();
+    input.setSelectionRange(0, text.length);
+    try {
+        if (document.execCommand("Copy", "false", null)) {
+            //如果复制成功
+            $.message("复制成功！");
+
+            document.body.removeChild(input);
+        } else {
+            //如果复制失败
+            $.message({
+                message: "复制失败！",
+                type: "info"
+            });
+        }
+    } catch (err) {
+        //如果报错
+        $.message({
+            message: "复制错误！",
+            type: "error"
+        });
+    }
+}
+```
+
+
+
 ## 项目小结
 
 #### window.postMessage

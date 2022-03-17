@@ -14,7 +14,12 @@ npm uninstall vue-cli -g // 旧版
 npm config set registry https://registry.npm.taobao.org
 ```
 
-验证是否配置成功
+查看注册源地址
+
+```bash
+npm config get registry
+```
+
 常用组件
 
 ```bash
@@ -67,32 +72,27 @@ cnpm install --save jsonp
 npm install vue-awesome-swiper@3 --save-dev
 ```
 
-安装animate.css
+安装 animate.css
 
 ```bash
 // 版本兼容性问题问题
 npm i --save animate.css@3
 ```
 
-创建 Uniapp
-
-```bash
-vue create -p dcloudio/uni-preset-vue my-project
-```
-
 \*.vue 引用
 
 ```javascript
-import { swiper, swiperSlide } from 'vue-awesome-swiper';
-import 'swiper/dist/css/swiper.css';
+// 引用 Swiper3 版本
+import { swiper, swiperSlide } from "vue-awesome-swiper";
+import "swiper/dist/css/swiper.css";
 ```
 
 main.js 全局引用
 
 ```javascript
 //swiper 轮播图插件
-import 'swiper/dist/css/swiper.css';
-import VueAwesomeSwiper from 'vue-awesome-swiper';
+import "swiper/dist/css/swiper.css";
+import VueAwesomeSwiper from "vue-awesome-swiper";
 Vue.use(VueAwesomeSwiper);
 ```
 
@@ -107,6 +107,3 @@ devServer: {
 // package.json
 "serve": "vue-cli-service serve && webpack-dev-server --open",
 ```
-
-
-
