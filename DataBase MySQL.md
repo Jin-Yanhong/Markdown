@@ -6,10 +6,10 @@
 
 ```bash
 NET START MySQL80
-NET STOP MySQL80
+NET STOP MySQL80s
 ```
 
-### linux 下
+### Linux 下
 
 ```bash
 systemctl start mysqld
