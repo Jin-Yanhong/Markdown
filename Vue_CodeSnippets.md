@@ -106,3 +106,29 @@ methods: {
 ```
 
 > 函数方法的执行要略微晚于 DOM 的加载，写在 DOM 里的方法可以用箭头函数执行
+
+## 事件
+
+### 绑定自定义属性
+
+```html
+<ul>
+    <li v-for="item in list">
+        <span :data-index="item.id" @click="cools($event)"></span>
+    </li>
+</ul>
+```
+
+```javascript
+const vm = new Vue({
+    el: "#app",
+    data() {
+        return {};
+    },
+    methods: {
+        cools(ev) {
+            console.log(ev.target.dataset.index);
+        },
+    },
+});
+```

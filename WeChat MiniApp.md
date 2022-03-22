@@ -43,6 +43,8 @@ _this.setData({
 
 #### 微信扫一扫
 
+> 微信扫一扫打开携带参数的小程序码
+
 ```javascript
 // 普通页面  onLoad:
 Page({

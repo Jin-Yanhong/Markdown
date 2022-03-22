@@ -12,21 +12,21 @@ totalPage = (total + pageSize - 1) / pageSize;
 ```javascript
 // 从 URL 获取参数
 function UrlSearch(url) {
-    let str = url.split('#')[0] || location.href.split('#')[0]; //取得整个path
-    let num = str.indexOf('?');
+    let str = url.split("#")[0] || location.href.split("#")[0]; //取得整个path
+    let num = str.indexOf("?");
     if (num !== -1) {
         str = str.substr(num + 1); //取得所有参数   stringvar.substr(start [, length ]
-        let arr = str.split('&'); //各个参数放到数组里
+        let arr = str.split("&"); //各个参数放到数组里
         let obj = {};
         for (let i = 0; i < arr.length; i++) {
-            num = arr[i].split('=');
+            num = arr[i].split("=");
             obj[num[0]] = num[1];
         }
-        console.log('获取到的参数如下:');
+        console.log("获取到的参数如下:");
         console.log(obj);
         return obj;
     } else {
-        console.log('当前页面没有参数');
+        console.log("当前页面没有参数");
         return {}; //返回空对象，不至于出现红色的错误信息！
     }
 }
@@ -48,21 +48,21 @@ function list2Tree(list, id, parentId, children) {
     let result = [];
 
     if (!Array.isArray(list)) {
-        console.log('list2Tree Error: typeof list is not array ');
+        console.log("list2Tree Error: typeof list is not array ");
         return result;
     }
 
-    list.forEach(item => {
+    list.forEach((item) => {
         delete item.children;
     });
 
     let map = {};
 
-    list.forEach(item => {
+    list.forEach((item) => {
         map[item[id]] = item;
     });
 
-    list.forEach(item => {
+    list.forEach((item) => {
         let parent = map[item[parentId]];
         if (parent) {
             (parent[children] || (parent[children] = [])).push(item);
@@ -85,7 +85,7 @@ function list2Tree(list, id, parentId, children) {
 //
 function deepCopy(obj) {
     // 深度复制数组
-    if (Object.prototype.toString.call(obj) === '[object Array]') {
+    if (Object.prototype.toString.call(obj) === "[object Array]") {
         const object = [];
         for (let i = 0; i < obj.length; i++) {
             object.push(deepCopy(obj[i]));
@@ -93,7 +93,7 @@ function deepCopy(obj) {
         return object;
     }
     // 深度复制对象
-    if (Object.prototype.toString.call(obj) === '[object Object]') {
+    if (Object.prototype.toString.call(obj) === "[object Object]") {
         const object = {};
         for (let p in obj) {
             object[p] = obj[p];
@@ -114,7 +114,7 @@ function tree2Array(treeObj, rootid) {
     let pid = rootid;
     const obj = deepCopy(treeObj);
     obj.pid = pid;
-    delete obj['children'];
+    delete obj["children"];
     out.push(obj);
     // 对树对象进行广度优先的遍历
     while (temp.length > 0) {
@@ -127,7 +127,7 @@ function tree2Array(treeObj, rootid) {
                 temp.push(children[i]);
                 const obj = deepCopy(children[i]);
                 obj.pid = pid;
-                delete obj['children'];
+                delete obj["children"];
                 out.push(obj);
             }
         }
@@ -147,7 +147,7 @@ function tree2List() {
         var first = queen.shift();
         if (first.children) {
             queen = queen.concat(first.children);
-            delete first['children'];
+            delete first["children"];
         }
 
         out.push(first);
@@ -176,21 +176,28 @@ Object.prototype.toString.call(obj);
  * @param {*} collectionLabel 对照集合中的字段名称 默认 'label'
  * @returns
  */
-function fieldTranslate(collection, value, collectionField = 'value', collectionLabel = 'label') {
+function fieldTranslate(
+    collection,
+    value,
+    collectionField = "value",
+    collectionLabel = "label"
+) {
     if (collection && value && toString(value).length) {
-        if (Object.prototype.toString.call(collection) === '[object Array]') {
-            let checked = collection.find(ele => {
+        if (Object.prototype.toString.call(collection) === "[object Array]") {
+            let checked = collection.find((ele) => {
                 return ele[collectionField] == value;
             });
-            let tips = (checked && checked[collectionLabel]) || 'Field Translate：未知的数据值,请联系管理员';
+            let tips =
+                (checked && checked[collectionLabel]) ||
+                "Field Translate：未知的数据值,请联系管理员";
             return tips;
         } else {
-            console.error('Field Translate Error：类型必须为 Array');
-            return '';
+            console.error("Field Translate Error：类型必须为 Array");
+            return "";
         }
     } else {
-        console.error('Field Translate Error：数据字段集合、为必须参数!');
-        return '';
+        console.error("Field Translate Error：数据字段集合、为必须参数!");
+        return "";
     }
 }
 ```
@@ -199,7 +206,7 @@ function fieldTranslate(collection, value, collectionField = 'value', collection
 
 ```javascript
 function copyToClipboard(text) {
-    const input = document.createElement("input");
+    const input = document.createElement("textarea");
     input.style.opacity = 0;
     input.style.position = "absolute";
     input.style.left = "-100000px";
@@ -217,20 +224,18 @@ function copyToClipboard(text) {
             //如果复制失败
             $.message({
                 message: "复制失败！",
-                type: "info"
+                type: "info",
             });
         }
     } catch (err) {
         //如果报错
         $.message({
             message: "复制错误！",
-            type: "error"
+            type: "error",
         });
     }
 }
 ```
-
-
 
 ## 项目小结
 

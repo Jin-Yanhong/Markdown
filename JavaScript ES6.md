@@ -24,7 +24,7 @@ x; // null
 
 ```javascript
 function f() {
-    console.log('aaa');
+    console.log("aaa");
 }
 
 let [x = f()] = [1];
@@ -38,12 +38,12 @@ let [x = f()] = [1];
 let todoList = [
     {
         index: 1,
-        name: 'code',
-        status: 'doing',
+        name: "code",
+        status: "doing",
     },
 ];
 let newTodoList = todoList.map((el, index) => {
-    return { ...el, status: 'done' };
+    return { ...el, status: "done" };
 });
 console.log(newTodoList);
 // [{ index: 1, name: 'code', status: 'done' }]
@@ -56,10 +56,10 @@ console.log(newTodoList);
 如果变量名与属性名不一致，必须写成下面这样。
 
 ```javascript
-let { foo: baz } = { foo: 'aaa', bar: 'bbb' };
+let { foo: baz } = { foo: "aaa", bar: "bbb" };
 baz; // "aaa"
 
-let obj = { first: 'hello', last: 'world' };
+let obj = { first: "hello", last: "world" };
 let { first: f, last: l } = obj;
 f; // 'hello'
 l; // 'world'
@@ -69,7 +69,7 @@ l; // 'world'
 >
 > ```javascript
 > let obj = {
->     p: ['Hello', { y: 'World' }],
+>     p: ["Hello", { y: "World" }],
 > };
 >
 > let {
@@ -98,7 +98,7 @@ x; // null
 字符串也可以解构赋值。这是因为此时，字符串被转换成了一个类似数组的对象。
 
 ```javascript
-const [a, b, c, d, e] = 'hello';
+const [a, b, c, d, e] = "hello";
 a; // "h"
 b; // "e"
 c; // "l"
@@ -109,7 +109,7 @@ e; // "o"
 > 类似数组的对象都有一个`length`属性，因此还可以对这个属性解构赋值。
 >
 > ```javascript
-> let { length: len } = 'hello';
+> let { length: len } = "hello";
 > len; // 5
 > ```
 
@@ -157,14 +157,14 @@ last; // 3
 ### 字符的 Unicode 表示法
 
 ```javascript
-'\u0061';
+"\u0061";
 // "a"
 ```
 
 ES6 为字符串添加了遍历器接口，使得字符串可以被`for...of`循环遍历。
 
 ```javascript
-for (let codePoint of 'foo') {
+for (let codePoint of "foo") {
     console.log(codePoint);
 }
 // "f"
@@ -204,10 +204,10 @@ for (let codePoint of 'foo') {
 > -   需要动态`this`的时候，也不应使用箭头函数
 >
 >     ```javascript
->     var button = document.getElementById('press');
+>     var button = document.getElementById("press");
 >
->     button.addEventListener('click', () => {
->         this.classList.toggle('on');
+>     button.addEventListener("click", () => {
+>         this.classList.toggle("on");
 >     });
 >     ```
 >
@@ -230,9 +230,9 @@ a1; // [2, 2]
 #### 合并数组
 
 ```javascript
-const arr1 = ['a', 'b'];
-const arr2 = ['c'];
-const arr3 = ['d', 'e'];
+const arr1 = ["a", "b"];
+const arr2 = ["c"];
+const arr3 = ["d", "e"];
 
 // ES5 的合并数组
 arr1.concat(arr2, arr3);
@@ -248,14 +248,14 @@ arr1.concat(arr2, arr3);
 #### 字符串
 
 ```javascript
-[...'hello'];
+[..."hello"];
 // [ "h", "e", "l", "l", "o" ]
 ```
 
 #### 实现了 `Iterator` 接口的对象
 
 ```javascript
-let nodeList = document.querySelectorAll('div'); // 类数组对象，没有数组的方法属性
+let nodeList = document.querySelectorAll("div"); // 类数组对象，没有数组的方法属性
 let array = [...nodeList]; // 转化为数组
 ```
 
@@ -263,9 +263,9 @@ let array = [...nodeList]; // 转化为数组
 
 ```javascript
 let map = new Map([
-    [1, 'one'],
-    [2, 'two'],
-    [3, 'three'],
+    [1, "one"],
+    [2, "two"],
+    [3, "three"],
 ]);
 
 let arr = [...map.keys()]; // [1, 2, 3]
@@ -277,8 +277,8 @@ let arr = [...map.keys()]; // [1, 2, 3]
 
 ```javascript
 // NodeList对象
-let ps = document.querySelectorAll('p');
-Array.from(ps).filter(p => {
+let ps = document.querySelectorAll("p");
+Array.from(ps).filter((p) => {
     return p.textContent.length > 100;
 });
 9;
@@ -299,7 +299,7 @@ function foo() {
 
 ```javascript
 let obj = { foo: 123 };
-Object.getOwnPropertyDescriptor(obj, 'foo');
+Object.getOwnPropertyDescriptor(obj, "foo");
 //  {
 //    value: 123,
 //    writable: true,
@@ -384,10 +384,15 @@ func?.(...args); // 函数或对象方法是否存在
 ```
 
 ```javascript
-const firstName = message?.body?.user?.firstName || 'default';
-const fooValue = myForm.querySelector('input[name=foo]')?.value;
+const firstName = message?.body?.user?.firstName || "default";
+const fooValue = myForm.querySelector("input[name=foo]")?.value;
 
-const firstName = (message && message.body && message.body.user && message.body.user.firstName) || 'default';
+const firstName =
+    (message &&
+        message.body &&
+        message.body.user &&
+        message.body.user.firstName) ||
+    "default";
 ```
 
 ### Null 判断运算符
@@ -395,7 +400,7 @@ const firstName = (message && message.body && message.body.user && message.body.
 **`??`**
 
 ```javascript
-const headerText = response.settings.headerText ?? 'Hello, world!';
+const headerText = response.settings.headerText ?? "Hello, world!";
 const animationDuration = response.settings.animationDuration ?? 300;
 const showSplashScreen = response.settings.showSplashScreen ?? true;
 ```
@@ -407,7 +412,7 @@ const showSplashScreen = response.settings.showSplashScreen ?? true;
 ```javascript
 const s = new Set();
 
-[2, 3, 5, 4, 5, 2, 2].forEach(x => s.add(x));
+[2, 3, 5, 4, 5, 2, 2].forEach((x) => s.add(x));
 
 for (let i of s) {
     console.log(i);
@@ -492,10 +497,13 @@ class CustomHTMLElement {
     }
 }
 
-var descriptor = Object.getOwnPropertyDescriptor(CustomHTMLElement.prototype, 'html');
+var descriptor = Object.getOwnPropertyDescriptor(
+    CustomHTMLElement.prototype,
+    "html"
+);
 
-'get' in descriptor; // true
-'set' in descriptor; // true
+"get" in descriptor; // true
+"set" in descriptor; // true
 ```
 
 ### 静态方法
@@ -507,7 +515,7 @@ var descriptor = Object.getOwnPropertyDescriptor(CustomHTMLElement.prototype, 'h
 ```javascript
 class Foo {
     static classMethod() {
-        return 'hello';
+        return "hello";
     }
 }
 
@@ -526,10 +534,10 @@ class Foo {
         this.baz();
     }
     static baz() {
-        console.log('hello');
+        console.log("hello");
     }
     baz() {
-        console.log('world');
+        console.log("world");
     }
 }
 
@@ -552,7 +560,7 @@ Foo.bar(); // hell
 
     ```javascript
     class Logger {
-        printName(name = 'there') {
+        printName(name = "there") {
             this.print(`Hello ${name}`);
         }
 
@@ -598,7 +606,7 @@ Foo.bar(); // hell
         const handler = {
             get(target, key) {
                 const value = Reflect.get(target, key);
-                if (typeof value !== 'function') {
+                if (typeof value !== "function") {
                     return value;
                 }
                 if (!cache.has(value)) {
