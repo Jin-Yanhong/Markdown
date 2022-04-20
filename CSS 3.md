@@ -491,6 +491,20 @@ transform：
 
 ## css 代码片段
 
+### 页面布局
+
+#### 清除浮动
+
+##### 伪元素清除浮动
+
+```css
+.nav::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+```
+
 ### 动画变形
 
 #### 透视变形

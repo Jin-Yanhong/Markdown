@@ -11,7 +11,11 @@ npm uninstall vue-cli -g // 旧版
 指定淘宝镜像源
 
 ```bash
+# npm 
 npm config set registry https://registry.npm.taobao.org
+
+# yarn
+yarn config set registry http://registry.npm.taobao.org/
 ```
 
 查看注册源地址

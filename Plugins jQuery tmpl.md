@@ -32,11 +32,11 @@ ${}等同与{{=}}是输出变量 ${}里面还可以放表达式 （=和变量之
 </script>
 <script type="text/javascript">
     var eachData = {
-        users: [{ name: 'jerry' }, { name: 'john' }],
-        groups: [{ name: 'mingdao' }, { name: 'meihua' }, { name: 'test' }],
-        departs: [{ name: 'IT' }],
+        users: [{ name: "jerry" }, { name: "john" }],
+        groups: [{ name: "mingdao" }, { name: "meihua" }, { name: "test" }],
+        departs: [{ name: "IT" }],
     };
-    $('#each').tmpl(eachData).appendTo('#div_each');
+    $("#each").tmpl(eachData).appendTo("#div_each");
 </script>
 ```
 
@@ -57,15 +57,15 @@ ${}等同与{{=}}是输出变量 ${}里面还可以放表达式 （=和变量之
 </script>
 <script type="text/javascript">
     var users = [
-        { ID: 'think8848', Name: 'Joseph Chan', Status: 1, App: 0 },
-        { ID: 'aCloud', Name: 'Mary Cheung', App: 1 },
-        { ID: 'bMingdao', Name: 'Jerry Jin' },
+        { ID: "think8848", Name: "Joseph Chan", Status: 1, App: 0 },
+        { ID: "aCloud", Name: "Mary Cheung", App: 1 },
+        { ID: "bMingdao", Name: "Jerry Jin" },
     ];
-    $('#ifelse').tmpl(users).appendTo('#div_ifelse');
+    $("#ifelse").tmpl(users).appendTo("#div_ifelse");
 </script>
 ```
 
-## {{ html }} 渲染HTML内容
+## {{ html }} 渲染 HTML 内容
 
 ```html
 <div id="div_html"></div>
@@ -76,8 +76,12 @@ ${}等同与{{=}}是输出变量 ${}里面还可以放表达式 （=和变量之
     </div>
 </script>
 <script type="text/javascript">
-    var user = { ID: 'think8848', Name: 'Joseph Chan', html: '<button>html</button>' };
-    $('#html').tmpl(user).appendTo('#div_html');
+    var user = {
+        ID: "think8848",
+        Name: "Joseph Chan",
+        html: "<button>html</button>",
+    };
+    $("#html").tmpl(user).appendTo("#div_html");
 </script>
 ```
 
@@ -98,10 +102,10 @@ ${}等同与{{=}}是输出变量 ${}里面还可以放表达式 （=和变量之
 </script>
 <script type="text/javascript">
     var users = [
-        { ID: 'think8848', Name: ['Joseph', 'Chan'] },
-        { ID: 'aCloud', Name: ['Mary', 'Cheung'] },
+        { ID: "think8848", Name: ["Joseph", "Chan"] },
+        { ID: "aCloud", Name: ["Mary", "Cheung"] },
     ];
-    $('#tmpl1').tmpl(users).appendTo('#tmpl');
+    $("#tmpl1").tmpl(users).appendTo("#tmpl");
 </script>
 ```
 
@@ -142,7 +146,50 @@ ${}等同与{{=}}是输出变量 ${}里面还可以放表达式 （=和变量之
 </script>
 <script type="text/javascript">
     $(function () {
-        $('#myTmpl').tmpl().appendTo('#wrapDemo');
+        $("#myTmpl").tmpl().appendTo("#wrapDemo");
+    });
+</script>
+```
+
+## $.tmpl() 用法
+
+> **`$.tmpl(temp, data).appendTo(target)`**
+
+> **` $(temp).tmpl(data).appendTo(target);`**
+
+```js
+let articleTemp = `
+<div class="panel-heading">
+    <h4>{{= title}}</h4>
+    <span>{{= dateTime}}</span>
+    <span>作者: {{= author}}</span>
+    <span>
+        <i class="iconfont icon-attentionfill"></i>
+        <span id="hits"></span>
+    </span>
+</div>
+<div class="panel-body">
+    {{html contect}}
+</div>
+`;
+// {{html XXX}} 在 此处输出 Html
+export default articleTemp;
+```
+
+```html
+<script type="module">
+    // 使用 文章模板
+    import articleTemp from "/template/article/content.js";
+    $(document).ready(function () {
+        let articleData = {
+            title: "购物流程",
+            author: "FSD",
+            dateTime: "2019-06-28 00:00:25",
+            // 富文本
+            contect: `<p></p>`,
+        };
+        //
+        $.tmpl(articleTemp, articleData).appendTo(".article-content");
     });
 </script>
 ```

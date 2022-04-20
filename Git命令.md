@@ -3,7 +3,7 @@
 ### 基本设置
 
 ```bash
-git config --global user.name "jinyanhong"
+git config --global user.name "金岩宏"
 git config --global user.email "820877998@qq.com"
 ```
 
@@ -13,6 +13,7 @@ git config --global user.email "820877998@qq.com"
 cat ~/.ssh/id_rsa.pub
 ssh-keygen -t rsa -C "820877998@qq.com"
 ssh -T git@code.aliyun.com
+# Windows 下
 clip < ~/.ssh/id_rsa.pub
 ```
 
