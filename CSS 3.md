@@ -505,6 +505,21 @@ transform：
 }
 ```
 
+### 元素居中
+
+#### 绝对定位居中
+
+```css
+div {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+```
+
 ### 动画变形
 
 #### 透视变形
