@@ -68,7 +68,7 @@ div ::v-deep p {
 
 -   **主轴（main axis）**是沿着 flex 元素放置的方向延伸的轴（比如页面上的横向的行、纵向的列）。该轴的开始和结束被称为 **main start** 和 **main end**。
 -   **交叉轴（cross axis）**是垂直于 flex 元素放置方向的轴。该轴的开始和结束被称为 **cross start** 和 **cross end**。
--   设置了 `display: flex` 的父元素（在本例中是 [`<section>`](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/section)）被称之为 **flex 容器（flex container）。**
+-   设置了 `display: flex` 的父元素，被称之为 **flex 容器（flex container）。**
 -   在 flex 容器中表现为柔性的盒子的元素被称之为 **flex 项**（**flex item**）
 
 #### 相关 CSS 属性
@@ -388,7 +388,7 @@ div ::v-deep p {
     70% {
         transform: rotate(0deg);
         left: 500px;
-        background: #1ec7e6;
+        background: [[1ec7e6]];
     }
     100% {
         transform: rotate(-360deg);
@@ -555,23 +555,23 @@ p {
 ```css
 /* 滚动条 */
 .container::-webkit-scrollbar {
-    -webkit-box-shadow: #48a7ff !important;
+    -webkit-box-shadow: [[48a7ff]] !important;
     width: 10px;
     height: 10px;
 }
 
 /* 滚动槽 */
 .container::-webkit-scrollbar-track {
-    -webkit-box-shadow: #48a7ff !important;
+    -webkit-box-shadow: [[48a7ff]] !important;
     border-radius: 10px;
-    background: #114a7f;
+    background: [[114a7f]];
 }
 
 /* 滚动条滑块 */
 .container::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background: #48a7ff;
-    -webkit-box-shadow: #48a7ff;
+    background: [[48a7ff]];
+    -webkit-box-shadow: [[48a7ff]];
 }
 ```
 
@@ -645,8 +645,8 @@ p {
 
 ```scss
 $colors: (
-    primary: #ffbb00,
-    secondary: #0969a2,
+    primary: [[ffbb00]],
+    secondary: [[0969a2]],
 );
 
 Selector1 {
@@ -657,8 +657,8 @@ Selector1 {
 
 // Selector1的生成效果
 :root {
-    --color-primary: #ffbb00;
-    --color-secondary: #0969a2;
+    --color-primary: [[ffbb00]];
+    --color-secondary: [[0969a2]];
 }
 
 // 使用方式一 直接使用css变量

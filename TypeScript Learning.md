@@ -32,7 +32,7 @@ let big: bigint = 100n;
 #### boolean
 
 ```typescript
-let isDone: boolean = false;
+let isDone: Boolean = false;
 ```
 
 #### string
@@ -123,6 +123,38 @@ enum Color {
 }
 let c: Color = Color.Green;
 ```
+
+#### interface
+
+使用`interface` (接口) 定义对象
+
+-   定义普通属性
+
+```typescript
+interface Person {
+    name: string;
+    age: number;
+}
+```
+
+-   定义任意属性
+
+```typescript
+interface Person {
+    name: string;
+    age: number;
+    [propName: string]: any;
+}
+```
+
+```typescript
+const person: Person = {
+    name: "Tom",
+    age: 19,
+};
+```
+
+> 需要注意的是，一旦定义了任意属性，那么确定属性和可选属性的类型都必须是它的类型的子集
 
 #### 字面量
 

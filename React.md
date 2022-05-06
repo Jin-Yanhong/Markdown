@@ -57,7 +57,7 @@ function test() {
 }
 
 // 使用组件
-ReactDOM.render(<Test />, document.getElementById('#app'));
+ReactDOM.render(<Test />, document.getElementById("#app"));
 ```
 
 ### 创建类式组件
@@ -73,7 +73,7 @@ class Test extends React.Component {
 }
 
 // 使用组件
-ReactDOM.render(<Test />, document.getElementById('#app'));
+ReactDOM.render(<Test />, document.getElementById("#app"));
 ```
 
 ### 事件绑定
@@ -101,51 +101,31 @@ function test() {
 
 #### 值的传递
 
-```jsx
-ReactDOM.render(element, document.getElementById('root'));
-```
+```js
 
-![image-20211130204930603](https://blog-pic-store.oss-cn-beijing.aliyuncs.com/blog/image-20211130204930603.png)
+```
 
 #### 值的接收
 
 ```jsx
 function formatName(user) {
-    return user.firstName + ' ' + user.lastName;
+    return user.firstName + " " + user.lastName;
 }
 
 const user = {
-    firstName: 'Harper',
-    lastName: 'Perez',
+    firstName: "Harper",
+    lastName: "Perez",
 };
 
 const element = <h1>Hello, {formatName(user)}!</h1>;
 
-ReactDOM.render(element, document.getElementById('root'));
+ReactDOM.render(element, document.getElementById("root"));
 ```
 
 #### 组件参数选项
 
-![image-20211130211344607](https://blog-pic-store.oss-cn-beijing.aliyuncs.com/blog/image-20211130211344607.png)
-
-![image-20211130211803620](https://blog-pic-store.oss-cn-beijing.aliyuncs.com/blog/image-20211130211803620.png)
-
 函数类型为 func
 
-![image-20211130212025364](https://blog-pic-store.oss-cn-beijing.aliyuncs.com/blog/image-20211130212025364.png)
-
-![image-20211130212356440](https://blog-pic-store.oss-cn-beijing.aliyuncs.com/blog/image-20211130212356440.png)
-
 props 限制整理到类的内部
-
-![image-20211130212819893](https://blog-pic-store.oss-cn-beijing.aliyuncs.com/blog/image-20211130212819893.png)
-
-![image-20211130215554766](https://blog-pic-store.oss-cn-beijing.aliyuncs.com/blog/image-20211130215554766.png)
-
-![image-20211130220120634](https://blog-pic-store.oss-cn-beijing.aliyuncs.com/blog/image-20211130220120634.png)
-
-![image-20211130223412814](https://blog-pic-store.oss-cn-beijing.aliyuncs.com/blog/image-20211130223412814.png)
-
-![image-20211130223645124](https://blog-pic-store.oss-cn-beijing.aliyuncs.com/blog/image-20211130223645124.png)
 
 ### refs
