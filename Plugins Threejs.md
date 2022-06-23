@@ -3,7 +3,7 @@
 ## 扩散波特效
 
 ```javascript
-let texture = new THREE.TextureLoader().load('ball.png');
+let texture = new THREE.TextureLoader().load("ball.png");
 texture.wrapS = texture.wrapT = THREE.RepeatWrapping; //每个都重复
 texture.repeat.set(1, 1);
 texture.needsUpdate = true;

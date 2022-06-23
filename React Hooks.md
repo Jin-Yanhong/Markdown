@@ -2,11 +2,11 @@
 
 -   New LifeCycle
 
-![生命周期（新）](<https://gitee.com/Coder-jin/PicStore/raw/master/react%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F(%E6%96%B0).png>)
+![生命周期（新）](./IMAGE/react-lifecycle-new.jpg)
 
 -   Earlier LifeCycle
 
-![生命周期（旧）](<https://gitee.com/Coder-jin/PicStore/raw/master/react%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F(%E6%97%A7).png>)
+![生命周期（旧）](./IMAGE/react-lifecycle-old.jpg)
 
 ## useState
 
@@ -53,4 +53,9 @@ function Example() {
         </div>
     );
 }
+```
+
+```jsx
+<button onClick={(e) => this.deleteRow(id, e)}>Delete Row</button>
+<button onClick={this.deleteRow.bind(this, id)}>Delete Row</button>
 ```

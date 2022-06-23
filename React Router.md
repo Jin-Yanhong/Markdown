@@ -11,7 +11,7 @@ npm i react-router-dom -s
 ### 引用
 
 ```javascript
-import { HashRouter, Route, Link } from 'react-router-dom';
+import { HashRouter, Route, Link } from "react-router-dom";
 ```
 
 > 这个包提供了三个核心的组件 **`HashRouter(BrowserRouter)`**, **`Route`**, **`Link`**
@@ -27,11 +27,11 @@ import { HashRouter, Route, Link } from 'react-router-dom';
 使用 **`Switch`** 切换路由视图
 
 ```javascript
-import React from 'react';
-import ReactDom from 'react-dom';
-import { HashRouter, Route, Link } from 'react-router-dom';
-import Search from './pages/Search.jsx';
-import Comment from './pages/Comment.jsx';
+import React from "react";
+import ReactDom from "react-dom";
+import { HashRouter, Route, Link } from "react-router-dom";
+import Search from "./pages/Search.jsx";
+import Comment from "./pages/Comment.jsx";
 export default function App() {
     return (
         <div>
@@ -46,7 +46,7 @@ export default function App() {
         </div>
     );
 }
-ReactDom.render(<App />, document.getElementById('root'));
+ReactDom.render(<App />, document.getElementById("root"));
 ```
 
 ## Router
@@ -77,8 +77,8 @@ Router 组件：包裹整个应用，一个 React 应用只需要使用一次
 使用 es6 的导入重命名来统一名字： 无论导入的是哪个路由对象，都叫 Router
 
 ```javascript
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import { HashRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { HashRouter as Router, Route, Link } from "react-router-dom";
 ```
 
 ## Route
@@ -123,9 +123,9 @@ Route 组件中 path 属性的值
 补充**exact**可以设置成精确匹配
 
 ```jsx
-import React from 'react';
-import ReactDom from 'react-dom';
-import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
+import React from "react";
+import ReactDom from "react-dom";
+import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 const Home = () => <div>主页</div>;
 const Article = () => <div>文章列表页</div>;
 const ArticleDetail = () => <div>文章详情页</div>;
@@ -147,7 +147,7 @@ export default function App() {
         </div>
     );
 }
-ReactDom.render(<App />, document.getElementById('root'));
+ReactDom.render(<App />, document.getElementById("root"));
 ```
 
 ### exact
@@ -168,7 +168,7 @@ ReactDom.render(<App />, document.getElementById('root'));
 这里的`from`页可以改写成`path`效果一样
 
 ```jsx
-import { HashRouter, Route, Link, Redirect } from 'react-router-dom';
+import { HashRouter, Route, Link, Redirect } from "react-router-dom";
 
 <Redirect from="/" exact to="/comment" />;
 ```
@@ -190,9 +190,14 @@ import { HashRouter, Route, Link, Redirect } from 'react-router-dom';
 在`Switch`组件下，不管有多少个 Route 的路由规则匹配成功，都只会渲染**第一个**匹配的组件
 
 ```jsx
-import React from 'react';
-import ReactDom from 'react-dom';
-import { BrowserRouter as Router, Route, NavLink, Switch } from 'react-router-dom';
+import React from "react";
+import ReactDom from "react-dom";
+import {
+    BrowserRouter as Router,
+    Route,
+    NavLink,
+    Switch,
+} from "react-router-dom";
 const Home = () => <div>主页</div>;
 const Article = () => <div>文章列表页</div>;
 const ArticleDetail = () => <div>文章详情页</div>;
@@ -214,7 +219,7 @@ export default function App() {
         </div>
     );
 }
-ReactDom.render(<App />, document.getElementById('root'));
+ReactDom.render(<App />, document.getElementById("root"));
 ```
 
 ### 404 页面处理
@@ -298,18 +303,18 @@ react-router
 使用格式:
 
 ```jsx
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 
 export default function App() {
     const history = useHistory();
     // 跳转到指定页面
-    history.push('/home');
+    history.push("/home");
 
     // 前进或后退到某个页面，参数 n 表示前进或后退页面数量（比如：-1 表示后退到上一页）
     history.go(-1);
 
     // 替换到当前页面,展示指定页面
-    history.replace('/login');
+    history.replace("/login");
 }
 ```
 
@@ -349,7 +354,7 @@ replace
 
 ```jsx
 export default function Article(props) {
-    console.log('props对象', props);
+    console.log("props对象", props);
     return <div>Article</div>;
 }
 ```
@@ -359,7 +364,7 @@ export default function Article(props) {
 #### history 中也包含了 location 对象
 
 ```jsx
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 export default function Article() {
     const history = useHistory();
     console.log(history);
@@ -374,10 +379,10 @@ export default function Article() {
 #### useLocation 这个 Hook 获取
 
 ```jsx
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 export default function Article() {
     const location = useLocation();
-    console.log('使用useLocation获取的location', location);
+    console.log("使用useLocation获取的location", location);
     return <div>Article</div>;
 }
 ```
@@ -424,27 +429,27 @@ const value = location.search
 同样的用`location`,`search`,`state`
 
 ```jsx
-message.success('登录成功', 2, () => {
+message.success("登录成功", 2, () => {
     //  做跳转动作 到主页中
-    history.replace('/home?id=33');
+    history.replace("/home?id=33");
 });
 ```
 
 `const value = location.search` //结果: ?id=33 需要截取一下
 
 ```jsx
-message.success('登录成功', 2, () => {
+message.success("登录成功", 2, () => {
     //  做跳转动作 到主页中
-    history.replace('/home', '给我一个div');
+    history.replace("/home", "给我一个div");
 });
 ```
 
 `const value = location.state` //结果: 给我一个 div
 
 ```jsx
-message.success('登录成功', 2, () => {
+message.success("登录成功", 2, () => {
     //  做跳转动作 到主页中
-    history.replace('/home', { name: '给我一个div', id: 9 });
+    history.replace("/home", { name: "给我一个div", id: 9 });
 });
 ```
 

@@ -9,7 +9,7 @@
     -   Element UI、Ant Design Vue
     -   JavaScript 的一些方法
     -   TypeScript
-    -   高频使用的js插件
+    -   高频使用的 js 插件
 -   后端
     -   Java
     -   MySQL、MongoDB

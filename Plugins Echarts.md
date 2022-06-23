@@ -48,10 +48,17 @@ legend: {
  * @param {Number} interval 图表高亮轮播切换的周期
  */
 
-function tooltipHighlight(echart, option, need_scroll = false, interval = 2000) {
+function tooltipHighlight(
+    echart,
+    option,
+    need_scroll = false,
+    interval = 2000
+) {
     // 参数检查
     if (!(echart && option)) {
-        console.error('echarts自动显示tooltips方法出错，echart、option 参数错误，请检查相关参数！');
+        console.error(
+            "echarts自动显示tooltips方法出错，echart、option 参数错误，请检查相关参数！"
+        );
         return;
     }
 
@@ -64,7 +71,7 @@ function tooltipHighlight(echart, option, need_scroll = false, interval = 2000) 
     } else if (option.dataset && option.dataset.source) {
         dataLength = option.dataset.source.length - 1;
     } else if (dataLength == 0) {
-        console.error('当前图表数据配置项暂无数据！');
+        console.error("当前图表数据配置项暂无数据！");
         return;
     }
 
@@ -77,12 +84,17 @@ function tooltipHighlight(echart, option, need_scroll = false, interval = 2000) 
         // scroll_count  所有数据都高亮一次，滚动条一共需要滑动的次数，
         let scroll_count;
 
-        if (Object.prototype.toString.call(option.dataZoom) == '[object Array]') {
-            scroll_count = 100 / (option.dataZoom[0].end - option.dataZoom[0].start);
-        } else if (Object.prototype.toString.call(option.dataZoom) == '[object Object]') {
+        if (
+            Object.prototype.toString.call(option.dataZoom) == "[object Array]"
+        ) {
+            scroll_count =
+                100 / (option.dataZoom[0].end - option.dataZoom[0].start);
+        } else if (
+            Object.prototype.toString.call(option.dataZoom) == "[object Object]"
+        ) {
             scroll_count = 100 / (option.dataZoom.end - option.dataZoom.start);
         } else {
-            console.error('当前图表数据配置项没有配置 dataZoom 属性！');
+            console.error("当前图表数据配置项没有配置 dataZoom 属性！");
             return;
         }
         let zoom_step = 100 / scroll_count;
@@ -107,7 +119,7 @@ function tooltipHighlight(echart, option, need_scroll = false, interval = 2000) 
         setInterval(() => {
             // dataZoom 伴随滚动
             echart.dispatchAction({
-                type: 'dataZoom',
+                type: "dataZoom",
                 // 开始位置的百分比，0 - 100
                 start: startValue,
                 // 结束位置的百分比，0 - 100
@@ -116,14 +128,14 @@ function tooltipHighlight(echart, option, need_scroll = false, interval = 2000) 
 
             // 图表当前项高亮
             echart.dispatchAction({
-                type: 'highlight',
+                type: "highlight",
                 seriesIndex: 0,
                 dataIndex: curIndex,
             });
 
             // 显示 tooltip
             echart.dispatchAction({
-                type: 'showTip',
+                type: "showTip",
                 seriesIndex: 0,
                 dataIndex: curIndex,
             });
@@ -163,14 +175,14 @@ function tooltipHighlight(echart, option, need_scroll = false, interval = 2000) 
         setInterval(() => {
             // 图表当前项高亮
             echart.dispatchAction({
-                type: 'highlight',
+                type: "highlight",
                 seriesIndex: 0,
                 dataIndex: curIndex,
             });
 
             // 显示 tooltip
             echart.dispatchAction({
-                type: 'showTip',
+                type: "showTip",
                 seriesIndex: 0,
                 dataIndex: curIndex,
             });
@@ -193,24 +205,24 @@ function tooltipHighlight(echart, option, need_scroll = false, interval = 2000) 
 ```javascript
 let option = {
     tooltip: {
-        trigger: 'axis',
+        trigger: "axis",
         axisPointer: {
             // 坐标轴指示器，坐标轴触发有效
-            type: 'shadow', // 默认为直线，可选为：'line' | 'shadow' | 'none'
+            type: "shadow", // 默认为直线，可选为：'line' | 'shadow' | 'none'
         },
         formatter: function (params) {
             //
         },
     },
     legend: {
-        orient: 'horizontal',
+        orient: "horizontal",
         right: 0,
         itemGap: 20,
-        left: 'center',
+        left: "center",
         textStyle: {
-            color: '#ffffff',
+            color: "#ffffff",
         },
-        data: ['人口总数', '常住人口', '流动人口'],
+        data: ["人口总数", "常住人口", "流动人口"],
     },
     grid: {
         left: 20,
@@ -220,9 +232,9 @@ let option = {
         containLabel: true,
     },
     xAxis: {
-        type: 'category',
-        data: ['网格1', '网格2', '网格3', '网格4', '网格5', '网格6'],
-        boundaryGap: ['20%', '20%'],
+        type: "category",
+        data: ["网格1", "网格2", "网格3", "网格4", "网格5", "网格6"],
+        boundaryGap: ["20%", "20%"],
         axisTick: {
             alignWithLabel: true,
         },
@@ -234,13 +246,13 @@ let option = {
         axisLine: {
             show: true,
             lineStyle: {
-                color: '#ffffff',
+                color: "#ffffff",
             },
         },
     },
     yAxis: [
         {
-            type: 'value',
+            type: "value",
             show: true,
             splitLine: {
                 show: false,
@@ -249,22 +261,22 @@ let option = {
     ],
     series: [
         {
-            type: 'bar',
+            type: "bar",
             barWidth: 12,
-            color: '#4dd2ff',
+            color: "#4dd2ff",
             data: [12504, 20498, 10916, 6637, 16603, 31352],
             itemStyle: {
                 normal: {
                     shadowBlur: 10, //发光范围
-                    shadowColor: '#0681c8', //发光颜色
+                    shadowColor: "#0681c8", //发光颜色
                     color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [
                         {
                             offset: 0,
-                            color: '#092ff266', // 鼠标指示时，提示框内图例的颜色
+                            color: "#092ff266", // 鼠标指示时，提示框内图例的颜色
                         },
                         {
                             offset: 1,
-                            color: '#05eaff',
+                            color: "#05eaff",
                         },
                     ]),
                 },
@@ -642,15 +654,15 @@ Echarts 的事件有两种。一种是鼠标事件。还有一种是通过 dispa
 ### 立体柱状图
 
 ```javascript
-xData = ['本年话务总量', '本年人工话务量', '每万客户呼入量'];
+xData = ["本年话务总量", "本年人工话务量", "每万客户呼入量"];
 yData = [0, 1230, 425];
 option = {
-    backgroundColor: '#061326',
+    backgroundColor: "#061326",
     grid: {
-        top: '25%',
-        left: '-5%',
-        bottom: '5%',
-        right: '5%',
+        top: "25%",
+        left: "-5%",
+        bottom: "5%",
+        right: "5%",
         containLabel: true,
     },
     tooltip: {
@@ -659,23 +671,23 @@ option = {
     animation: false,
     xAxis: [
         {
-            type: 'category',
+            type: "category",
             data: xData,
             axisTick: {
                 alignWithLabel: true,
             },
             nameTextStyle: {
-                color: '#82b0ec',
+                color: "#82b0ec",
             },
             axisLine: {
                 show: false,
                 lineStyle: {
-                    color: '#82b0ec',
+                    color: "#82b0ec",
                 },
             },
             axisLabel: {
                 textStyle: {
-                    color: '#fff',
+                    color: "#fff",
                 },
                 margin: 30,
             },
@@ -684,15 +696,15 @@ option = {
     yAxis: [
         {
             show: false,
-            type: 'value',
+            type: "value",
             axisLabel: {
                 textStyle: {
-                    color: '#fff',
+                    color: "#fff",
                 },
             },
             splitLine: {
                 lineStyle: {
-                    color: '#0c2c5a',
+                    color: "#0c2c5a",
                 },
             },
             axisLine: {
@@ -702,39 +714,39 @@ option = {
     ],
     series: [
         {
-            name: '',
-            type: 'pictorialBar',
+            name: "",
+            type: "pictorialBar",
             symbolSize: [40, 10],
             symbolOffset: [0, -6], // 上部椭圆
-            symbolPosition: 'end',
+            symbolPosition: "end",
             z: 12,
             // "barWidth": "0",
             label: {
                 normal: {
                     show: true,
-                    position: 'top',
+                    position: "top",
                     // "formatter": "{c}%"
                     fontSize: 15,
-                    fontWeight: 'bold',
-                    color: '#34DCFF',
+                    fontWeight: "bold",
+                    color: "#34DCFF",
                 },
             },
-            color: '#2DB1EF',
+            color: "#2DB1EF",
             data: yData,
         },
         {
-            name: '',
-            type: 'pictorialBar',
+            name: "",
+            type: "pictorialBar",
             symbolSize: [40, 10],
             symbolOffset: [0, 7], // 下部椭圆
             // "barWidth": "20",
             z: 12,
-            color: '#2DB1EF',
+            color: "#2DB1EF",
             data: yData,
         },
         {
-            name: '',
-            type: 'pictorialBar',
+            name: "",
+            type: "pictorialBar",
             symbolSize: function (d) {
                 return d > 0 ? [50, 15] : [0, 0];
             },
@@ -742,46 +754,46 @@ option = {
             z: 10,
             itemStyle: {
                 normal: {
-                    color: 'transparent',
-                    borderColor: '#2EA9E5',
-                    borderType: 'solid',
+                    color: "transparent",
+                    borderColor: "#2EA9E5",
+                    borderType: "solid",
                     borderWidth: 1,
                 },
             },
             data: yData,
         },
         {
-            name: '',
-            type: 'pictorialBar',
+            name: "",
+            type: "pictorialBar",
             symbolSize: [70, 20],
             symbolOffset: [0, 18], // 下部外环
             z: 10,
             itemStyle: {
                 normal: {
-                    color: 'transparent',
-                    borderColor: '#19465D',
-                    borderType: 'solid',
+                    color: "transparent",
+                    borderColor: "#19465D",
+                    borderType: "solid",
                     borderWidth: 2,
                 },
             },
             data: yData,
         },
         {
-            type: 'bar',
+            type: "bar",
             //silent: true,
-            barWidth: '40',
-            barGap: '10%', // Make series be overlap
-            barCateGoryGap: '10%',
+            barWidth: "40",
+            barGap: "10%", // Make series be overlap
+            barCateGoryGap: "10%",
             itemStyle: {
                 normal: {
                     color: new echarts.graphic.LinearGradient(0, 0, 0, 0.7, [
                         {
                             offset: 0,
-                            color: '#38B2E6',
+                            color: "#38B2E6",
                         },
                         {
                             offset: 1,
-                            color: '#0B3147',
+                            color: "#0B3147",
                         },
                     ]),
                     opacity: 0.8,
@@ -800,52 +812,52 @@ option = {
 ### 多边形柱状图
 
 ```javascript
-var xData = ['工单', '影响客户'];
+var xData = ["工单", "影响客户"];
 var yData1 = [100, 60];
 var yData2 = [80, 40];
-var path = 'path://M214,1079l8-6h16l8,6-8,6H222Z';
+var path = "path://M214,1079l8-6h16l8,6-8,6H222Z";
 option = {
-    backgroundColor: 'BLACK',
+    backgroundColor: "BLACK",
     title: {
-        text: '本年预安排停电',
+        text: "本年预安排停电",
         top: 5,
-        left: '20%',
+        left: "20%",
         textStyle: {
             fontSize: 18,
-            color: '#fff',
+            color: "#fff",
         },
     },
     legend: {
-        data: ['总数', '未复电数'],
+        data: ["总数", "未复电数"],
     },
     grid: {
-        top: '25%',
-        left: '-5%',
-        bottom: '10%',
-        right: '5%',
+        top: "25%",
+        left: "-5%",
+        bottom: "10%",
+        right: "5%",
         containLabel: true,
     },
     animation: false,
     xAxis: [
         {
-            type: 'category',
+            type: "category",
             data: xData,
             axisTick: {
                 show: false,
                 alignWithLabel: true,
             },
             nameTextStyle: {
-                color: '#fff',
+                color: "#fff",
             },
             axisLine: {
                 show: false,
                 lineStyle: {
-                    color: '#82b0ec',
+                    color: "#82b0ec",
                 },
             },
             axisLabel: {
                 textStyle: {
-                    color: '#fff',
+                    color: "#fff",
                 },
                 margin: 20,
             },
@@ -854,16 +866,16 @@ option = {
     yAxis: [
         {
             show: false,
-            type: 'value',
+            type: "value",
             axisLabel: {
                 textStyle: {
-                    color: '#fff',
+                    color: "#fff",
                 },
-                formatter: '{value}%',
+                formatter: "{value}%",
             },
             splitLine: {
                 lineStyle: {
-                    color: '#0c2c5a',
+                    color: "#0c2c5a",
                 },
             },
             axisLine: {
@@ -873,80 +885,80 @@ option = {
     ],
     series: [
         {
-            type: 'pictorialBar',
+            type: "pictorialBar",
             symbol: path,
             symbolSize: [30, 8],
             symbolOffset: [-20, -5],
-            symbolPosition: 'end',
+            symbolPosition: "end",
             z: 12,
-            color: '#68B4FF',
+            color: "#68B4FF",
             data: yData1,
         },
         {
-            type: 'pictorialBar',
+            type: "pictorialBar",
             symbol: path,
             symbolSize: [30, 8],
             symbolOffset: [20, -5],
-            symbolPosition: 'end',
+            symbolPosition: "end",
             z: 12,
-            color: '#FFCE69',
+            color: "#FFCE69",
             data: yData2,
         },
         {
-            type: 'pictorialBar',
+            type: "pictorialBar",
             symbol: path,
             symbolSize: [30, 8],
             symbolOffset: [-20, 5],
             z: 12,
-            color: '#68B4FF',
+            color: "#68B4FF",
             data: yData1,
         },
         {
-            name: '',
-            type: 'pictorialBar',
+            name: "",
+            type: "pictorialBar",
             symbol: path,
             symbolSize: [30, 8],
             symbolOffset: [20, 5],
-            color: '#FFCE69',
+            color: "#FFCE69",
             z: 12,
             data: yData2,
         },
         {
-            type: 'bar',
+            type: "bar",
             itemStyle: {
                 normal: {
                     opacity: 0.7,
                 },
             },
-            barWidth: '30',
+            barWidth: "30",
             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
                 {
                     offset: 0,
-                    color: '#3D83CD',
+                    color: "#3D83CD",
                 },
                 {
                     offset: 1,
-                    color: '#0B3147',
+                    color: "#0B3147",
                 },
             ]),
             data: yData1,
         },
         {
-            type: 'bar',
+            type: "bar",
             itemStyle: {
                 normal: {
                     opacity: 0.7,
                 },
             },
-            barWidth: '30',
+            barWidth: "30",
             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
                 {
                     offset: 0,
-                    color: '#CC9F49',
+                    color: "#CC9F49",
                 },
                 {
                     offset: 1,
-                    color: '#0B3147',
+                    color: "#0B3147",
                 },
             ]),
             data: yData2,
@@ -962,14 +974,27 @@ option = {
 ### 回调函数使用
 
 ```javascript
-var colors = ['#32DA56', '#e43c59'];
-var xData = ['2016-1', '2016-2', '2016-3', '2016-4', '2016-5', '2016-6', '2016-7', '2016-8', '2016-9', '2016-10', '2016-11', '2016-12'];
+var colors = ["#32DA56", "#e43c59"];
+var xData = [
+    "2016-1",
+    "2016-2",
+    "2016-3",
+    "2016-4",
+    "2016-5",
+    "2016-6",
+    "2016-7",
+    "2016-8",
+    "2016-9",
+    "2016-10",
+    "2016-11",
+    "2016-12",
+];
 var yData = [300, 380, 400, 380, 350, 410, 480, 460, 410, 380, 350, 320];
 option = {
     // color: colors,
     xAxis: [
         {
-            type: 'category',
+            type: "category",
             axisTick: {
                 show: false,
                 alignWithLabel: true,
@@ -982,7 +1007,7 @@ option = {
     ],
     yAxis: [
         {
-            type: 'value',
+            type: "value",
             axisTick: {
                 show: false,
                 alignWithLabel: true,
@@ -994,8 +1019,8 @@ option = {
     ],
     series: [
         {
-            type: 'bar',
-            symbol: 'none',
+            type: "bar",
+            symbol: "none",
             smooth: true,
             data: yData,
             itemStyle: {

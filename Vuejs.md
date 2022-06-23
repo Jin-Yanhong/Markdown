@@ -36,9 +36,12 @@
 <!-- 用于前端优化性能 -->
 <!-- 这其中包含 `event.preventDefault()` 的情况 -->
 <div v-on:scroll.passive="onScroll">...</div>
-.stop - 调用 event.stopPropagation()。 .prevent - 调用 event.preventDefault()。 .capture - 添加事件侦听器时使用 capture 模式。 .self -
-只当事件是从侦听器绑定的元素本身触发时才触发回调。 .{keyCode | keyAlias} - 只当事件是从特定键触发时才触发回调。 .native - 监听组件根元素的原生事件。 .once -
-只触发一次回调。 .left - (2.2.0) 只当点击鼠标左键时触发。 .right - (2.2.0) 只当点击鼠标右键时触发。 .middle - (2.2.0) 只当点击鼠标中键时触发。 .passive -
+.stop - 调用 event.stopPropagation()。 .prevent - 调用 event.preventDefault()。
+.capture - 添加事件侦听器时使用 capture 模式。 .self -
+只当事件是从侦听器绑定的元素本身触发时才触发回调。 .{keyCode | keyAlias} -
+只当事件是从特定键触发时才触发回调。 .native - 监听组件根元素的原生事件。 .once
+- 只触发一次回调。 .left - (2.2.0) 只当点击鼠标左键时触发。 .right - (2.2.0)
+只当点击鼠标右键时触发。 .middle - (2.2.0) 只当点击鼠标中键时触发。 .passive -
 (2.3.0) 以 { passive: true } 模式添加侦听器
 ```
 
@@ -74,9 +77,9 @@
 
 ```javascript
 // 子组件自定义事件
-this.$emit('eventName', params);
+this.$emit("eventName", params);
 // 在父组件中指定子组件的ref属性，父组件通过
-this.$ref.name['子组件的方法'];
+this.$ref.name["子组件的方法"];
 ```
 
 ### 生命周期钩子函数
@@ -197,17 +200,17 @@ updated: function () {
 ```javascript
 // 创建构造器
 var Profile = Vue.extend({
-    template: '<p>{{firstName}} {{lastName}} aka {{alias}}</p>',
+    template: "<p>{{firstName}} {{lastName}} aka {{alias}}</p>",
     data: function () {
         return {
-            firstName: 'Walter',
-            lastName: 'White',
-            alias: 'Heisenberg',
+            firstName: "Walter",
+            lastName: "White",
+            alias: "Heisenberg",
         };
     },
 });
 // 创建 Profile 实例，并挂载到一个元素上。
-new Profile().$mount('#mount-point');
+new Profile().$mount("#mount-point");
 ```
 
 结果如下
@@ -222,7 +225,7 @@ new Profile().$mount('#mount-point');
 
 ```javascript
 // 修改数据
-vm.msg = 'Hello';
+vm.msg = "Hello";
 // DOM 还没有更新
 Vue.nextTick(function () {
     // DOM 更新了
@@ -248,12 +251,12 @@ Vue.nextTick().then(function () {
 
 ```javascript
 // 注册
-Vue.filter('my-filter', function (value) {
+Vue.filter("my-filter", function (value) {
     // 返回处理后的值
 });
 
 // getter，返回已注册的过滤器
-var myFilter = Vue.filter('my-filter');
+var myFilter = Vue.filter("my-filter");
 ```
 
 #### Vue.use()
@@ -271,19 +274,19 @@ var myFilter = Vue.filter('my-filter');
 ```javascript
 // 注册组件，传入一个扩展过的构造器
 Vue.component(
-    'my-component',
+    "my-component",
     Vue.extend({
         /* ... */
     })
 );
 
 // 注册组件，传入一个选项对象 (自动调用 Vue.extend)
-Vue.component('my-component', {
+Vue.component("my-component", {
     /* ... */
 });
 
 // 获取注册的组件 (始终返回构造器)
-var MyComponent = Vue.component('my-component');
+var MyComponent = Vue.component("my-component");
 ```
 
 #### Vue.directive()
@@ -292,7 +295,7 @@ var MyComponent = Vue.component('my-component');
 
 ```javascript
 // 注册
-Vue.directive('my-directive', {
+Vue.directive("my-directive", {
     bind: function () {},
     inserted: function () {},
     update: function () {},
@@ -301,12 +304,12 @@ Vue.directive('my-directive', {
 });
 
 // 注册 (指令函数)
-Vue.directive('my-directive', function () {
+Vue.directive("my-directive", function () {
     // 这里将会被 `bind` 和 `update` 调用
 });
 
 // getter，返回已注册的指令
-var myDirective = Vue.directive('my-directive');
+var myDirective = Vue.directive("my-directive");
 ```
 
 ### Watch
@@ -414,7 +417,9 @@ methods: {
 
 ```html
 <current-user>
-    <template v-slot:default="slotProps">{{ slotProps.user.firstName }}</template>
+    <template v-slot:default="slotProps"
+        >{{ slotProps.user.firstName }}</template
+    >
 </current-user>
 ```
 
@@ -426,11 +431,11 @@ methods: {
 
 ```javascript
 const { href } = this.$router.resolve({
-    path: '/跳转的页面路由',
+    path: "/跳转的页面路由",
     query: {
         //要传的参数
         id: this.id,
     },
 });
-window.open(href, '_blank'); //打开新的窗口
+window.open(href, "_blank"); //打开新的窗口
 ```

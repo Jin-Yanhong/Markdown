@@ -25,7 +25,7 @@
 | [reduceRight()](https://www.runoob.com/jsref/jsref-reduceright.html)       | array.reduceRight(function(total, currentValue, currentIndex, arr), initialValue) | 将数组元素计算为一个值（从右到左）。                                                                                                                             |
 | [reverse()](https://www.runoob.com/jsref/jsref-reverse.html)               | _array_.reverse()                                                                 | **反转数组的元素顺序。**                                                                                                                                         |
 | [shift()](https://www.runoob.com/jsref/jsref-shift.html)                   | _array_.shift()                                                                   | **删除并返回数组的第一个元素。改变原数组** **pop**                                                                                                               |
-| [slice()](https://www.runoob.com/jsref/jsref-slice-array.html)             | _array_.slice(_start_, _end_)                                                     | 选取数组的一部分，并返回一个新数组。**不该变原数组**，当索引值为负时，从栈尾向栈顶读取                                                                           |
+| [slice()](https://www.runoob.com/jsref/jsref-slice-array.html)             | _array_.slice(_start_, _end_)                                                     | 选取数组的一部分，并返回一个新数组。**不改变原数组**，当索引值为负时，从栈尾向栈顶读取                                                                           |
 | [some()](https://www.runoob.com/jsref/jsref-some.html)                     | array.some(function(currentValue,index,arr),thisValue)                            | 检测数组元素中是否有元素符合指定条件。如果有一个元素满足条件，则表达式返回*true* , 剩余的元素不会再执行检测，如果没有满足条件的元素，则返回 false                |
 | [sort()](https://www.runoob.com/jsref/jsref-sort.html)                     | _array_.sort(_sortfunction_)                                                      | 对数组的元素进行排序。排序顺序可以是字母或数字，并按升序或降序。当数字是按字母顺序排列时"40"将排在"5"前面**改变原数组**                                          |
 | [splice()](https://www.runoob.com/jsref/jsref-splice.html)                 | _array_.splice(_index_,_howmany_,_item1_,.....,_itemX_)                           | **`splice() 方法用于添加或删除数组中的元素。这种方法会改变原始数组。`**                                                                                          |
@@ -54,7 +54,25 @@
 function unique(arr) {
     return Array.from(new Set(arr));
 }
-var arr = [1, 1, 'true', 'true', true, true, 15, 15, false, false, 'NaN', 0, 0, 'a', 'a', {}, {}];
+var arr = [
+    1,
+    1,
+    "true",
+    "true",
+    true,
+    true,
+    15,
+    15,
+    false,
+    false,
+    "NaN",
+    0,
+    0,
+    "a",
+    "a",
+    {},
+    {},
+];
 console.log(unique(arr));
 //[1, "true", true, 15, false, undefined, null, NaN, "NaN", 0, "a", {}, {}]
 ```

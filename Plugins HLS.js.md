@@ -11,7 +11,12 @@ npm i hls.js@0.8.5 --save
 2.  使用
 
 ```vue
-<video ref="video" style="display: block; width: 960px; height: 540px" autoplay :src="playAddress"></video>
+<video
+    ref="video"
+    style="display: block; width: 960px; height: 540px"
+    autoplay
+    :src="playAddress"
+></video>
 ```
 
 ```javascript
@@ -21,7 +26,8 @@ if (Hls.isSupported()) {
     this.video = this.$refs.video;
 
     // 获取视频播放地址
-    let videoSrc = 'http://devimages.apple.com/iphone/samples/bipbop/gear3/prog_index.m3u8';
+    let videoSrc =
+        "http://devimages.apple.com/iphone/samples/bipbop/gear3/prog_index.m3u8";
 
     // HLS 绑定 Video
     hlsObj.attachMedia(_this.video);
@@ -44,21 +50,21 @@ if (Hls.isSupported()) {
         if (data.fatal) {
             switch (data.type) {
                 case Hls.ErrorTypes.NETWORK_ERROR:
-                    alert('播放视频监控失败，网络错误!');
+                    alert("播放视频监控失败，网络错误!");
                     hlsObj.startLoad();
                     break;
                 case hlsObj.ErrorTypes.MEDIA_ERROR:
-                    alert('播放视频监控失败，流媒体错误!');
+                    alert("播放视频监控失败，流媒体错误!");
                     hlsObj.recoverMediaError();
                     break;
                 default:
                     hlsObj.destroy();
-                    alert('视频监控播放失败，请联系系统管理员！');
+                    alert("视频监控播放失败，请联系系统管理员！");
                     break;
             }
         }
     });
 } else {
-    this.$message.error('您的浏览器不支持监控视频播放,请使用Chrome最新版本!');
+    this.$message.error("您的浏览器不支持监控视频播放,请使用Chrome最新版本!");
 }
 ```

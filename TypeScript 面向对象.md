@@ -1,19 +1,19 @@
-# Calss 类
+## Calss 类
 
 ### 类的方法和属性
 
 ```typescript
 class Dog {
-    readonly name: string = '旺财'; // 此处使用 "="
+    readonly name: string = "旺财"; // 此处使用 "="
     static readonly age: number = 2; // 此处使用 "="
     static bark() {
-        console.log('汪汪汪');
+        console.log("汪汪汪");
     }
     constructor(name: string, age: number) {
         // 在实例方法中 this => 当前实例
         // 在构造函数中 this => 当前对象就是新建对象
         // 可以通过 this 项新建的对象中添加属性
-        this.name = '旺财';
+        this.name = "旺财";
         // this.age = 2; // 静态属性不可改变
         console.log(this);
     }
@@ -42,7 +42,7 @@ class Animal {
         this.age = age;
     }
     bark() {
-        console.log('动物在叫');
+        console.log("动物在叫");
     }
 }
 /**
@@ -55,7 +55,7 @@ class Animal {
 class Dog extends Animal {
     // 如果在子类中添加父类中已有的方法，则会覆盖掉父类的方法。父类的方法还在，
     bark() {
-        console.log('汪汪汪');
+        console.log("汪汪汪");
     }
     run() {
         console.log(`${this.name}再跑`);
@@ -67,8 +67,8 @@ class Cat extends Animal {
     }
 }
 // 创建实例
-const dog = new Dog('旺财', 2);
-const cat = new Cat('喵喵', 2);
+const dog = new Dog("旺财", 2);
+const cat = new Cat("喵喵", 2);
 dog.run(); // 动物再跑
 dog.bark(); // 汪汪汪
 cat.bark(); // 汪汪汪
@@ -84,7 +84,7 @@ abstract class Animals {
         this.name = name;
     }
     sayHello() {
-        console.log('动物在叫~');
+        console.log("动物在叫~");
     }
 }
 class Dog extends Animals {
@@ -100,7 +100,7 @@ class Dog extends Animals {
         super.sayHello(); // super 表示父类
     }
 }
-const dog = new Dog('wangcai', 2);
+const dog = new Dog("wangcai", 2);
 dog.sayHello();
 // super相当于父类，在子类的构造函数中必须调用父类的构造函数，super([...arg]:<type>)
 ```
@@ -125,10 +125,10 @@ class Dog extends Animals {
     }
     // 子类继承抽象类后，需要对抽象类的抽象方法经行重写
     sayHello() {
-        console.log('汪汪汪');
+        console.log("汪汪汪");
     }
 }
-const dog = new Dog('wangcai', 2);
+const dog = new Dog("wangcai", 2);
 dog.sayHello();
 ```
 
@@ -142,7 +142,7 @@ type myType = {
     age: number;
 };
 const obj: myType = {
-    name: '小明',
+    name: "小明",
     age: 13,
 };
 // type myType = {
@@ -158,9 +158,9 @@ interface myInterrface {
     gender: string;
 }
 const obj2: myInterrface = {
-    name: '小明',
+    name: "小明",
     age: 13,
-    gender: '男',
+    gender: "男",
 };
 ```
 
@@ -174,7 +174,7 @@ type myType = {
     age: number;
 };
 const obj: myType = {
-    name: '小明',
+    name: "小明",
     age: 13,
 };
 // type myType = {
@@ -194,9 +194,9 @@ interface myInterrface {
     gender: string;
 }
 const obj2: myInterrface = {
-    name: '小明',
+    name: "小明",
     age: 13,
-    gender: '男',
+    gender: "男",
 };
 interface myInterfaceTwo {
     name: string;
@@ -208,7 +208,7 @@ class myclass implements myInterfaceTwo {
         this.name = name;
     }
     sayHello(): void {
-        console.log('hello');
+        console.log("hello");
     }
 }
 ```

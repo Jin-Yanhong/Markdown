@@ -46,8 +46,8 @@ for (const [key, value] of Object.entries(object1)) {
 
 ```javascript
 const entries = new Map([
-    ['foo', 'bar'],
-    ['baz', 42],
+    ["foo", "bar"],
+    ["baz", 42],
 ]);
 
 const obj = Object.fromEntries(entries);
@@ -105,10 +105,10 @@ console.log(object1.property1);
 const promise1 = Promise.resolve(3);
 const promise2 = 42;
 const promise3 = new Promise((resolve, reject) => {
-    setTimeout(resolve, 100, 'foo');
+    setTimeout(resolve, 100, "foo");
 });
 
-Promise.all([promise1, promise2, promise3]).then(values => {
+Promise.all([promise1, promise2, promise3]).then((values) => {
     console.log(values);
 });
 // expected output: Array [3, 42, "foo"]
@@ -120,15 +120,15 @@ Promise.all([promise1, promise2, promise3]).then(values => {
 
 ```javascript
 function resolveAfter2Seconds() {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
         setTimeout(() => {
-            resolve('resolved');
+            resolve("resolved");
         }, 2000);
     });
 }
 
 async function asyncCall() {
-    console.log('calling');
+    console.log("calling");
     const result = await resolveAfter2Seconds();
     console.log(result);
     // expected output: "resolved"
@@ -147,10 +147,14 @@ asyncCall();
 
 ```javascript
 const promise1 = Promise.resolve(3);
-const promise2 = new Promise((resolve, reject) => setTimeout(reject, 100, 'foo'));
+const promise2 = new Promise((resolve, reject) =>
+    setTimeout(reject, 100, "foo")
+);
 const promises = [promise1, promise2];
 
-Promise.allSettled(promises).then(results => results.forEach(result => console.log(result.status)));
+Promise.allSettled(promises).then((results) =>
+    results.forEach((result) => console.log(result.status))
+);
 
 // expected output:
 // "fulfilled"
@@ -169,14 +173,14 @@ Promise.allSettled(promises).then(results => results.forEach(result => console.l
 
 ```javascript
 const promise1 = new Promise((resolve, reject) => {
-    setTimeout(resolve, 500, 'one');
+    setTimeout(resolve, 500, "one");
 });
 
 const promise2 = new Promise((resolve, reject) => {
-    setTimeout(resolve, 100, 'two');
+    setTimeout(resolve, 100, "two");
 });
 
-Promise.race([promise1, promise2]).then(value => {
+Promise.race([promise1, promise2]).then((value) => {
     console.log(value);
     // Both resolve, but promise2 is faster
 });
@@ -205,15 +209,15 @@ Promise.race([promise1, promise2]).then(value => {
 
 ```javascript
 const promise = new Promise((resolve, reject) => {
-    setTimeout(resolve, 500, 'one');
+    setTimeout(resolve, 500, "one");
 });
 
 promise
-    .then(res => {
+    .then((res) => {
         // ...
         return res;
     })
-    .then(res => {
+    .then((res) => {
         // ...
         return res;
         // 返回结果处理完以后，依然是一个Promise
@@ -242,7 +246,7 @@ window.scrollBy({
 ```javascript
 window.scrollTo({
     top: 0,
-    behavior: 'smooth',
+    behavior: "smooth",
 });
 ```
 

@@ -205,7 +205,7 @@ for (let codePoint of "foo") {
 >
 >     ```javascript
 >     var button = document.getElementById("press");
->    
+>
 >     button.addEventListener("click", () => {
 >         this.classList.toggle("on");
 >     });
@@ -563,12 +563,12 @@ Foo.bar(); // hell
         printName(name = "there") {
             this.print(`Hello ${name}`);
         }
-    
+
         print(text) {
             console.log(text);
         }
     }
-    
+
     const logger = new Logger();
     const { printName } = logger;
     printName(); // TypeError: Cannot read property 'print' of undefined
@@ -586,20 +586,20 @@ Foo.bar(); // hell
         constructor() {
             this.printName = this.printName.bind(this);
         }
-    
+
         // ...
     }
-    
+
     // 使用就箭头函数
     class Obj {
         constructor() {
             this.getThis = () => this;
         }
     }
-    
+
     const myObj = new Obj();
     myObj.getThis() === myObj; // true
-    
+
     // 使用Proxy
     function selfish(target) {
         const cache = new WeakMap();
@@ -618,6 +618,6 @@ Foo.bar(); // hell
         const proxy = new Proxy(target, handler);
         return proxy;
     }
-    
+
     const logger = selfish(new Logger());
     ```

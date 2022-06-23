@@ -10,10 +10,10 @@ Asynchronous Module Definition （异步模块定义规范）
 define([], function () {
     return {
         hello: function () {
-            console.log('hello');
+            console.log("hello");
         },
         goodbye: function () {
-            console.log('goodbye');
+            console.log("goodbye");
         },
     };
 });
@@ -24,7 +24,7 @@ define([], function () {
 ### 导入
 
 ```javascript
-define(['myModule', 'myOtherModule'], function (myModule, myOtherModule) {
+define(["myModule", "myOtherModule"], function (myModule, myOtherModule) {
     console.log(myModule.hello());
 });
 ```
@@ -50,10 +50,10 @@ Node.js 广泛使用
 ```javascript
 function myModule() {
     this.hello = function () {
-        return 'hello!';
+        return "hello!";
     };
     this.goodbye = function () {
-        return 'goodbye!';
+        return "goodbye!";
     };
 }
 module.exports = myModule;
@@ -62,7 +62,7 @@ module.exports = myModule;
 ### 导入
 
 ```javascript
-var myModule = require('myModule');
+var myModule = require("myModule");
 var myModuleInstance = new myModule();
 myModuleInstance.hello(); // 'hello!'
 myModuleInstance.goodbye(); // 'goodbye!'
@@ -113,7 +113,7 @@ import module1 as module2  from "./..."
 -   混合导入
 
 ```javascript
-import { module1 as module2, module3, module4 } from './...';
+import { module1 as module2, module3, module4 } from "./...";
 ```
 
 ### 技巧

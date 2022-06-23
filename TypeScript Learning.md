@@ -94,6 +94,8 @@ let list: Array<number> = [1, 2, 3];
 
 #### tuple
 
+> 元组是固定数量的不同类型的元素的组合，元组中的元素类型可以是不同的，而且数量固定。
+
 ```typescript
 let x: [string, number];
 x = ["hello", 10];
@@ -202,52 +204,70 @@ tsc fileName -w
 编译整个文件夹需要 ts 配置文件 `tsconfig.json`
 
 ```json
-{
-    // ** 任意路径
-    // * 任意文件
-    // 包含
-    "include": ["./src/**/*"],
-    // 排除 默认["node_modules", "bower_components", "jspm_packages"]
-    "exclude": ["./hello/*"],
-    // 只有编译文件夹中少量的文件才使用 file 选项
-    "files": [
-        "core.ts",
-        "sys.ts",
-        "types.ts",
-        "scanner.ts",
-        "parser.ts",
-        "utilities.ts",
-        "binder.ts",
-        "checker.ts",
-        "tsc.ts"
-    ],
-    // 继承 其他编译配置
-    "extends": "./config.json",
-    // 保存就编译
-    "compileOnSave": true,
-    "compilerOptions": {
-        "target": "ES5", // 指定编译后的js版本， 默认 es3 es5、es6、es2015...es2020 ESNext ==> 最新版本
-        "module": "amd", // "CommonJS", "AMD", "System", "UMD", "ES6", "ES2015", "ES2020", "ESNext", "None".
-        "lib": [], // 指定项目中使用的一些库，一般情况下不用动
-        "outDir": "./dist", // 指定编译后的路径
-        "outFile": "", // 将所有的文件编译为一个 js 文件
-        "rootDir": "", // 指定项目根目录
 
-        "allowJs": false, // 是否对js文件进行编译
-        "checkJs": false, // 是否检查js是否符合规范
-
-        "removeComments": false, // 是否移除注释
-        "outFile": "", // 所有全局作用域中的代码会编译合并到同一个文件 system、amd模块
-        "noEmit": false, // 不生成编译的文件
-        "noEmitOnError": false, // 当有错误是不生成 编译文件
-
-        "strict": false, // 严格检查的总开关
-        "alwaysStrict": false, // 编译后的文件是否使用严格模式
-        "noImplicitAny": false, // 不允许隐式 any 类型
-        "noImplicitThis": false, // 不允许指向不明的this
-        "strictNullChecks": false // 严格检查空值
-    }
+"compilerOptions": {
+  "incremental": true, // TS编译器在第一次编译之后会生成一个存储编译信息的文件，第二次编译会在第一次的基础上进行增量编译，可以提高编译的速度
+  "tsBuildInfoFile": "./buildFile", // 增量编译文件的存储位置
+  "diagnostics": true, // 打印诊断信息
+  "target": "ES5", // 目标语言的版本
+  "module": "CommonJS", // 生成代码的模板标准
+  "outFile": "./app.js", // 将多个相互依赖的文件生成一个文件，可以用在AMD模块中，即开启时应设置"module": "AMD",
+  "lib": ["DOM", "ES2015", "ScriptHost", "ES2019.Array"], // TS需要引用的库，即声明文件，es5 默认引用dom、es5、scripthost,如需要使用es的高级版本特性，通常都需要配置，如es8的数组新特性需要引入"ES2019.Array",
+  "allowJS": true, // 允许编译器编译JS，JSX文件
+  "checkJs": true, // 允许在JS文件中报错，通常与allowJS一起使用
+  "outDir": "./dist", // 指定输出目录
+  "rootDir": "./", // 指定输出文件目录(用于输出)，用于控制输出目录结构
+  "declaration": true, // 生成声明文件，开启后会自动生成声明文件
+  "declarationDir": "./file", // 指定生成声明文件存放目录
+  "emitDeclarationOnly": true, // 只生成声明文件，而不会生成js文件
+  "sourceMap": true, // 生成目标文件的sourceMap文件
+  "inlineSourceMap": true, // 生成目标文件的inline SourceMap，inline SourceMap会包含在生成的js文件中
+  "declarationMap": true, // 为声明文件生成sourceMap
+  "typeRoots": [], // 声明文件目录，默认时node_modules/@types
+  "types": [], // 加载的声明文件包
+  "removeComments":true, // 删除注释
+  "noEmit": true, // 不输出文件,即编译后不会生成任何js文件
+  "noEmitOnError": true, // 发送错误时不输出任何文件
+  "noEmitHelpers": true, // 不生成helper函数，减小体积，需要额外安装，常配合importHelpers一起使用
+  "importHelpers": true, // 通过tslib引入helper函数，文件必须是模块
+  "downlevelIteration": true, // 降级遍历器实现，如果目标源是es3/5，那么遍历器会有降级的实现
+  "strict": true, // 开启所有严格的类型检查
+  "alwaysStrict": true, // 在代码中注入'use strict'
+  "noImplicitAny": true, // 不允许隐式的any类型
+  "strictNullChecks": true, // 不允许把null、undefined赋值给其他类型的变量
+  "strictFunctionTypes": true, // 不允许函数参数双向协变
+  "strictPropertyInitialization": true, // 类的实例属性必须初始化
+  "strictBindCallApply": true, // 严格的bind/call/apply检查
+  "noImplicitThis": true, // 不允许this有隐式的any类型
+  "noUnusedLocals": true, // 检查只声明、未使用的局部变量(只提示不报错)
+  "noUnusedParameters": true, // 检查未使用的函数参数(只提示不报错)
+  "noFallthroughCasesInSwitch": true, // 防止switch语句贯穿(即如果没有break语句后面不会执行)
+  "noImplicitReturns": true, //每个分支都会有返回值
+  "esModuleInterop": true, // 允许export=导出，由import from 导入
+  "allowUmdGlobalAccess": true, // 允许在模块中全局变量的方式访问umd模块
+  "moduleResolution": "node", // 模块解析策略，ts默认用node的解析策略，即相对的方式导入
+  "baseUrl": "./", // 解析非相对模块的基地址，默认是当前目录
+  "paths": { // 路径映射，相对于baseUrl
+    // 如使用jq时不想使用默认版本，而需要手动指定版本，可进行如下配置
+    "jquery": ["node_modules/jquery/dist/jquery.min.js"]
+  },
+  "rootDirs": ["src","out"], // 将多个目录放在一个虚拟目录下，用于运行时，即编译后引入文件的位置可能发生变化，这也设置可以虚拟src和out在同一个目录下，不用再去改变路径也不会报错
+  "listEmittedFiles": true, // 打印输出文件
+  "listFiles": true// 打印编译的文件(包括引用的声明文件)
 }
+
+// 指定一个匹配列表（属于自动指定该路径下的所有ts相关文件）
+"include": [
+   "src/**/*"
+],
+// 指定一个排除列表（include的反向操作）
+ "exclude": [
+   "demo.ts"
+],
+// 指定哪些文件使用该配置（属于手动一个个指定文件）
+ "files": [
+   "demo.ts"
+]
 ```
 
 ### 详细配置选项：
@@ -490,7 +510,7 @@ tsc fileName -w
                     -   有错误的情况下不进行编译
                     -   默认值：false
 
-## Ts 属性修饰符
+## Ts 属性/方法修饰符
 
 ### public（默认）
 
@@ -582,6 +602,23 @@ const p = new Person("孙悟空", 18);
 p.name = "猪八戒"; // 不能修改
 ```
 
+### static
+
+> 直接通过类名去调用
+
+```typescript
+class Tools {
+    static PI = 3.1415926;
+
+    static sum(num1: number, num2: number) {
+        return num1 + num2;
+    }
+}
+
+console.log(Tools.PI);
+console.log(Tools.sum(123, 456));
+```
+
 ## Getter & Setter
 
 -   对于一些不希望被任意修改的属性，可以将其设置为 private
@@ -613,31 +650,6 @@ console.log(p1.name); // 通过getter读取name属性
 p1.name = "猪八戒"; // 通过setter修改name属性
 ```
 
-### 静态属性
-
--   静态属性（方法），也称为类属性。使用静态属性无需创建实例，通过类即可直接使用
-
--   静态属性（方法）使用 `static` 开头
-
-示例：
-
-```typescript
-class Tools {
-    static PI = 3.1415926;
-
-    static sum(num1: number, num2: number) {
-        return num1 + num2;
-    }
-}
-
-console.log(Tools.PI);
-console.log(Tools.sum(123, 456));
-```
-
--   this
-
-    在类中，使用 this 表示当前对象
-
 ## 接口
 
 接口的作用类似于抽象类
@@ -664,7 +676,7 @@ fn({
 });
 ```
 
-### 示例（实现）
+### 示例（实现）※
 
 ```typescript
 interface Person {
@@ -679,6 +691,16 @@ class Student implements Person {
         console.log("大家好，我是" + this.name);
     }
 }
+```
+
+### 特殊类型的申明：
+
+```typescript
+interface ArrNumber {
+    [index: number]: string;
+}
+
+let arr: ArrNumber = ["1", "2", "3"];
 ```
 
 ## 泛型
@@ -753,3 +775,41 @@ function test<T extends MyInter>(arg: T): number {
 ```
 
 使用 T extends MyInter 表示泛型 T 必须是 MyInter 的子类，不一定非要使用接口类和抽象类同样适用。
+
+## Abstract Class
+
+父类中声明方法，在子类中重写
+
+> **`注意`**：抽象类无法被实例化
+
+```typescript
+abstract class Person {
+    abstract name: string;
+
+    display(): void {
+        console.log(this.name);
+    }
+}
+
+class Employee extends Person {
+    name: string;
+    empCode: number;
+
+    constructor(name: string, code: number) {
+        super(); // must call super()
+
+        this.empCode = code;
+        this.name = name;
+    }
+}
+
+let emp: Person = new Employee("James", 100);
+emp.display(); //James
+```
+
+## namespace
+
+-   内部模块，主要用于组织代码，避免命名冲突。
+-   命名空间内的类默认私有
+-   通过 `export` 暴露
+-   通过 `namespace` 关键字定义

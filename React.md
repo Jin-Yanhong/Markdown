@@ -1,15 +1,5 @@
 ## React.Children
 
-### map
-
-### count
-
-### forRach
-
-### only
-
-### toArray
-
 ## React.Component
 
 ## React.Fragment

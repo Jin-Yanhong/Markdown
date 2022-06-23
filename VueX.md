@@ -166,7 +166,7 @@ actions: {
 ```javascript
 // 以对象形式分发
 store.commit({
-    type: '',
+    type: "",
     key: value,
 });
 // type:mutations里的方法名
@@ -197,7 +197,7 @@ import { mapActions } from 'vuex'
 > 在前面定义 actions 的时候返回 Promise，后续分发中可以使用
 >
 > ```js
-> store.dispatch('actionA').then(() => {
+> store.dispatch("actionA").then(() => {
 >     // ...
 > });
 > ```
@@ -257,7 +257,7 @@ const moduleA = {
     actions: {
         incrementIfOddOnRootSum({ state, commit, rootState }) {
             if ((state.count + rootState.count) % 2 === 1) {
-                commit('increment');
+                commit("increment");
             }
         },
     },
@@ -284,14 +284,14 @@ const moduleA = {
 > 仅仅是将 store 中的 getter 映射到局部计算属性
 
 ```javascript
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 export default {
     // ...
     computed: {
         // 使用对象展开运算符将 getter 混入 computed 对象中
         ...mapGetters([
-            'doneTodosCount',
-            'anotherGetter',
+            "doneTodosCount",
+            "anotherGetter",
             // ...
         ]),
     },
