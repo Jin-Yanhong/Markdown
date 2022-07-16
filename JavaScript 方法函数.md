@@ -15,19 +15,16 @@ function UrlSearch(url) {
     let str = url.split("#")[0] || location.href.split("#")[0]; //取得整个path
     let num = str.indexOf("?");
     if (num !== -1) {
-        str = str.substr(num + 1); //取得所有参数   stringvar.substr(start [, length ]
-        let arr = str.split("&"); //各个参数放到数组里
+        str = str.substr(num + 1);
+        let arr = str.split("&");
         let obj = {};
         for (let i = 0; i < arr.length; i++) {
             num = arr[i].split("=");
             obj[num[0]] = num[1];
         }
-        console.log("获取到的参数如下:");
-        console.log(obj);
         return obj;
     } else {
-        console.log("当前页面没有参数");
-        return {}; //返回空对象，不至于出现红色的错误信息！
+        return {};
     }
 }
 ```
@@ -46,22 +43,17 @@ function UrlSearch(url) {
 
 function list2Tree(list, id, parentId, children) {
     let result = [];
-
     if (!Array.isArray(list)) {
         console.log("list2Tree Error: typeof list is not array ");
         return result;
     }
-
     list.forEach((item) => {
         delete item.children;
     });
-
     let map = {};
-
     list.forEach((item) => {
         map[item[id]] = item;
     });
-
     list.forEach((item) => {
         let parent = map[item[parentId]];
         if (parent) {
@@ -70,7 +62,6 @@ function list2Tree(list, id, parentId, children) {
             result.push(item);
         }
     });
-
     return result;
 }
 ```
@@ -105,7 +96,6 @@ function deepCopy(obj) {
 
 // 将treeObj中的所有对象，放入一个数组中，要求某个对象在另一个对象的children时，其parent_id是对应的另一个对象的id
 // 其原理实际上是数据结构中的广度优先遍历
-
 function tree2Array(treeObj, rootid) {
     const temp = []; // 设置临时数组，用来存放队列
     const out = []; // 设置输出数组，用来存放要输出的一维数组
@@ -149,7 +139,6 @@ function tree2List() {
             queen = queen.concat(first.children);
             delete first["children"];
         }
-
         out.push(first);
     }
     return out;
@@ -187,16 +176,14 @@ function fieldTranslate(
             let checked = collection.find((ele) => {
                 return ele[collectionField] == value;
             });
-            let tips =
-                (checked && checked[collectionLabel]) ||
-                "Field Translate：未知的数据值,请联系管理员";
+            let tips = (checked && checked[collectionLabel]) || "Error";
             return tips;
         } else {
-            console.error("Field Translate Error：类型必须为 Array");
+            console.log("fieldTranslate Error: the type of the first parameter must be array!");
             return "";
         }
     } else {
-        console.error("Field Translate Error：数据字段集合、为必须参数!");
+        console.log("fieldTranslate Error: please check function parameters!");
         return "";
     }
 }
@@ -315,57 +302,25 @@ parseInt(Math.random() * (max - min + 1) + min, 10);
 Math.floor(Math.random() * (max - min + 1) + min); //  Math.floor() 向下取整
 ```
 
-#### 获取一段时间的起止时间戳
-
 ```javascript
-getTimestamp(interval = "1hour") {
-    /**
-     * 以数组形式接受 自定义时间段
-     * 其中第一项 是开始时间，第二个是结束时间
-     * eg. [ "2022-03-08T16:00:00.000Z", "2022-04-21T16:00:00.000Z" ]
-     */
-    let time = {};
-    let nowMS = new Date().getTime() / 1000; //秒级时间戳
-    let timeNow = nowMS;
-    let timeBefore;
-    let hours = 3600;
-    let days = hours * 24;
-    let weeks = days * 7;
-    let months = days * 30;
-    let years = months * 12;
-
-    switch (interval) {
-        case "1hour":
-            timeBefore = nowMS - hours;
-            break;
-        case "2hour":
-            timeBefore = nowMS - hours * 2;
-            break;
-        case "4hour":
-            timeBefore = nowMS - hours * 4;
-            break;
-        case "12hour":
-            timeBefore = nowMS - hours * 12;
-            break;
-        case "24hour":
-            timeBefore = nowMS - days;
-            break;
-        case "1week":
-            timeBefore = nowMS - weeks;
-            break;
-        case "1month":
-            timeBefore = nowMS - months;
-            break;
-        case "1year":
-            timeBefore = nowMS - years;
-            break;
-        default:
-            timeBefore = Date.parse(interval[0]) / 1000;
-            timeNow = Date.parse(interval[1]) / 1000;
-            break;
+/**
+ *  @param list 需要分组的数据
+ *  @param colCount 所有字段一共分为 colCount 列
+ *  @param outPut 接收最后的返回值
+ */
+groupList(list, colCount) {
+  let outPut = [];
+  let length = list.length; // 总共 91 条数据
+  let colLength = Math.ceil(length / colCount); // 每列 23 条数据
+  for (let k = 0; k < colCount; k++) {
+    outPut.push([]);
+  }
+  // 数据分组
+  for (let i = 0; i < colCount; i++) {
+    for (let j = i * colLength; j < (i + 1) * colLength; j++) {
+      list[j] && outPut[i].push(list[j]);
     }
-    time.start = parseInt(timeBefore);
-    time.end = parseInt(timeNow);
-    return time;
-}
+  }
+  return outPut;
+},
 ```
