@@ -38,6 +38,12 @@ NET STOP 服务名
 service install serviceName
 ```
 
+##### 清空 DNS 缓存
+
+```
+systemctl restart dnsmasq.service
+```
+
 ## 文件操作
 
 ##### 查看文本文件内容

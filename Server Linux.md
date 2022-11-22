@@ -64,6 +64,18 @@ firewall-cmd --add-port=80/tcp # 即时打开，这里也可以是一个端口�
 systemctl stop firewalld.service
 ```
 
+### 刷新系统服务
+
+```bash
+systemctl daemon-reload
+```
+
+##### 清空 DNS 缓存
+
+```
+systemctl restart dnsmasq.service
+```
+
 ## 服务部署操作
 
 ### 启动某个服务
@@ -76,6 +88,12 @@ systemctl start docker
 
 ```bash
 systemctl restart docker
+```
+
+#### 修改 Hosts 文件
+
+```
+vim /etc/hosts
 ```
 
 ## 服务器磁盘操作

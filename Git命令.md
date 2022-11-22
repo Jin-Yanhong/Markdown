@@ -3,16 +3,20 @@
 ### 基本设置
 
 ```bash
-git config --global user.name "金岩宏"
+git config --global user.name "Jin-Yanhong"
 git config --global user.email "820877998@qq.com"
 ```
 
-### 创建 SSH 密钥
+### 创建并拷贝 SSH 密钥
 
 ```bash
-cat ~/.ssh/id_rsa.pub
 ssh-keygen -t rsa -C "820877998@qq.com"
-ssh -T git@code.aliyun.com
+
+ssh -T git@github.com
+
+# Linux 下
+cat ~/.ssh/id_rsa.pub
+
 # Windows 下
 clip < ~/.ssh/id_rsa.pub
 ```

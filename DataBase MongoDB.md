@@ -1,18 +1,37 @@
-## 基本概念
+## 系统服务
 
-### 数据库 database
+### Cent OS 卸载
 
-> 数据库是一个仓库，在仓库中可以存放集合，不需要手动创建
+1. 停止服务
 
-### 集合 collection
+```bash
+sudo service mongod stop
+```
 
-> 集合类似于数组，在集合中可以存放文档，不需要手动创建
+2. 查看 mongo 相关的包
 
-### 文档 document
+```bash
+yum list installed | grep mongo
+```
 
-> 文档数据库 中的最小单位, 当创建文档，如果文档所在的集合或数据库不存在会自动创建数据库和集合
+3. 移除相关的包
 
-## 服务配置
+```bash
+sudo yum erase $(rpm -qa | grep mongodb-org)
+```
+
+4. 删除日志、数据文件
+
+```bash
+sudo rm -r /var/log/mongodb
+sudo rm -r /var/lib/mongo
+```
+
+### Cent OS 安装
+
+[官方文档](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-enterprise-on-red-hat/)
+
+## 数据库配置
 
 ### 首次安装添加管理员用户
 
@@ -227,3 +246,7 @@ const BlogModel = mongoose.model("Blog", blogSchema);
 #### CRUD
 
 点击[这里](https://mongoosejs.com/docs/api/model.html)查看文档
+
+```
+
+```

@@ -25,6 +25,6 @@ yarn config set registry http://registry.npm.taobao.org/
 指定淘宝镜像源
 
 ```bash
-nvm node_mirror: https://npm.taobao.org/mirrors/node/
-nvm npm_mirror: https://npm.taobao.org/mirrors/npm/
+nvm node_mirror https://npm.taobao.org/mirrors/node/
+nvm npm_mirror https://npm.taobao.org/mirrors/npm/
 ```
