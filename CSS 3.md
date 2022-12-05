@@ -98,6 +98,32 @@ div + p {
 
 ## css 代码片段
 
+### 特殊滤镜
+
+#### 界面黑白
+
+```css
+:-webkit-full-screen {
+    -webkit-filter: grayscale(1);
+    filter: grayscale(1);
+}
+:-ms-fullscreen {
+    filter: grayscale(1);
+}
+:fullscreen {
+    -webkit-filter: grayscale(1);
+    filter: grayscale(1);
+}
+html {
+    /*兼容FF*/
+    filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0'/></filter></svg>#grayscale");
+    /*兼容IE内核*/
+    filter: progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);
+    /*兼容其它，谷歌之类的*/
+    -webkit-filter: grayscale(1);
+}
+```
+
 ### 页面布局
 
 #### 清除浮动
@@ -110,9 +136,9 @@ div + p {
 }
 ```
 
-### 元素居中
+#### 元素居中
 
-#### 绝对定位居中
+##### 绝对定位居中
 
 ```css
 div {
@@ -123,6 +149,35 @@ div {
     bottom: 0;
     margin: auto;
 }
+```
+
+##### flex 布局居中
+
+```css
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+```
+
+##### table 布局居中
+
+```html
+<style>
+    .center td {
+        height: 500px;
+        width: 500px;
+        text-align: center;
+        vertical-align: middle;
+    }
+</style>
+<table border="1" class="center">
+    <tr>
+        <td>Text</td>
+        <td>Text</td>
+    </tr>
+</table>
 ```
 
 ### 动画变形
@@ -163,7 +218,7 @@ p {
 }
 ```
 
-### 调整 Chromium 内核浏览器滚动条
+### 调整滚动条
 
 ```css
 /* 滚动条 */
@@ -188,7 +243,7 @@ p {
 }
 ```
 
-### 利用伪元素做四个角的边框
+### 伪元素四角边框
 
 ```less
 .borderBg {
