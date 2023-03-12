@@ -28,3 +28,13 @@ yarn config set registry http://registry.npm.taobao.org/
 nvm node_mirror https://npm.taobao.org/mirrors/node/
 nvm npm_mirror https://npm.taobao.org/mirrors/npm/
 ```
+
+## Node-Sass
+
+```bash
+npm config set sass_binary_site=https //npm.taobao.org/mirrors/node-sass
+```
+
+```bash
+npm i node-sass --sass_binary_site=https://npm.taobao.org/mirrors/node-sass/
+```

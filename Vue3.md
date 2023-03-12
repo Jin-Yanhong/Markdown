@@ -207,7 +207,7 @@
 ```vue
 <style scoped>
 :solted(div) {
-    color: red;
+	color: red;
 }
 </style>
 ```
@@ -219,7 +219,7 @@
 ```vue
 <style scoped>
 :deep(div) {
-    color: red;
+	color: red;
 }
 </style>
 ```
@@ -233,7 +233,7 @@
 ```vue
 <style scoped>
 :global(div) {
-    color: red;
+	color: red;
 }
 </style>
 ```
@@ -242,17 +242,17 @@
 
 ```vue
 <template>
-    <div class="div">动态CSS</div>
+	<div class="div">动态CSS</div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-const style = ref("red");
+import { ref } from 'vue';
+const style = ref('red');
 </script>
 
 <style scoped>
 .div {
-    color: v-bind(style);
+	color: v-bind(style);
 }
 </style>
 ```
@@ -265,7 +265,7 @@ const style = ref("red");
 
 ```typescript
 const getAssetsFile = (url: string) => {
-    return new URL(`../assets/${url}`, import.meta.url).href;
+	return new URL(`../assets/${url}`, import.meta.url).href;
 };
 ```
 
@@ -283,13 +283,13 @@ app.config.globalProperties.$getDate = getDate;
 
 ```typescript
 // customProperties.d.ts
-export declare module "vue" {
-    interface ComponentCustomProperties {
-        $dateFormater: (time: string | any, pattern: string) => string;
-        $getDate: (dateStr: string) => {
-            date: string;
-            imageIndex: number;
-        };
-    }
+export declare module 'vue' {
+	interface ComponentCustomProperties {
+		$dateFormater: (time: string | any, pattern: string) => string;
+		$getDate: (dateStr: string) => {
+			date: string;
+			imageIndex: number;
+		};
+	}
 }
 ```

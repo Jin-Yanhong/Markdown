@@ -38,21 +38,19 @@ let isDone: Boolean = false;
 #### string
 
 ```typescript
-let color: string = "blue";
-color = "red";
+let color: string = 'blue';
+color = 'red';
 
 let fullName: string = `Bob Bobbington`;
 let age: number = 37;
-let sentence: string = `Hello, my name is ${fullName}. I'll be ${
-    age + 1
-} years old next month.`;
+let sentence: string = `Hello, my name is ${fullName}. I'll be ${age + 1} years old next month.`;
 ```
 
 #### any
 
 ```typescript
 let d: any = 4;
-d = "hello";
+d = 'hello';
 d = true;
 ```
 
@@ -60,7 +58,7 @@ d = true;
 
 ```typescript
 let notSure: unknown = 4;
-notSure = "hello";
+notSure = 'hello';
 ```
 
 #### void
@@ -73,7 +71,7 @@ let unusable: void = undefined;
 
 ```typescript
 function error(message: string): never {
-    throw new Error(message);
+	throw new Error(message);
 }
 ```
 
@@ -98,30 +96,30 @@ let list: Array<number> = [1, 2, 3];
 
 ```typescript
 let x: [string, number];
-x = ["hello", 10];
+x = ['hello', 10];
 ```
 
 #### enum
 
 ```typescript
 enum Color {
-    Red,
-    Green,
-    Blue,
+	Red,
+	Green,
+	Blue,
 }
 let c: Color = Color.Green;
 
 enum Color {
-    Red = 1,
-    Green,
-    Blue,
+	Red = 1,
+	Green,
+	Blue,
 }
 let c: Color = Color.Green;
 
 enum Color {
-    Red = 1,
-    Green = 2,
-    Blue = 4,
+	Red = 1,
+	Green = 2,
+	Blue = 4,
 }
 let c: Color = Color.Green;
 ```
@@ -134,8 +132,8 @@ let c: Color = Color.Green;
 
 ```typescript
 interface Person {
-    name: string;
-    age: number;
+	name: string;
+	age: number;
 }
 ```
 
@@ -143,16 +141,16 @@ interface Person {
 
 ```typescript
 interface Person {
-    name: string;
-    age: number;
-    [propName: string]: any;
+	name: string;
+	age: number;
+	[propName: string]: any;
 }
 ```
 
 ```typescript
 const person: Person = {
-    name: "Tom",
-    age: 19,
+	name: 'Tom',
+	age: 19,
 };
 ```
 
@@ -163,7 +161,7 @@ const person: Person = {
 也可以使用字面量去指定变量的类型，通过字面量可以确定变量的取值范围
 
 ```typescript
-let color: "red" | "blue" | "black";
+let color: 'red' | 'blue' | 'black';
 let num: 1 | 2 | 3 | 4 | 5;
 ```
 
@@ -180,14 +178,14 @@ let num: 1 | 2 | 3 | 4 | 5;
 -   第一种
 
     -   ```typescript
-        let someValue: unknown = "this is a string";
+        let someValue: unknown = 'this is a string';
         let strLength: number = (someValue as string).length;
         ```
 
 -   第二种
 
     -   ```typescript
-        let someValue: unknown = "this is a string";
+        let someValue: unknown = 'this is a string';
         let strLength: number = (<string>someValue).length;
         ```
 
@@ -518,28 +516,28 @@ tsc fileName -w
 
 ```typescript
 class Person {
-    public name: string; // 写或什么都不写都是public
-    public age: number;
+	public name: string; // 写或什么都不写都是public
+	public age: number;
 
-    constructor(name: string, age: number) {
-        this.name = name; // 可以在类中修改
-        this.age = age;
-    }
+	constructor(name: string, age: number) {
+		this.name = name; // 可以在类中修改
+		this.age = age;
+	}
 
-    sayHello() {
-        console.log(`大家好，我是${this.name}`);
-    }
+	sayHello() {
+		console.log(`大家好，我是${this.name}`);
+	}
 }
 
 class Employee extends Person {
-    constructor(name: string, age: number) {
-        super(name, age);
-        this.name = name; //子类中可以修改
-    }
+	constructor(name: string, age: number) {
+		super(name, age);
+		this.name = name; //子类中可以修改
+	}
 }
 
-const p = new Person("孙悟空", 18);
-p.name = "猪八戒"; // 可以通过对象修改
+const p = new Person('孙悟空', 18);
+p.name = '猪八戒'; // 可以通过对象修改
 ```
 
 ### protected
@@ -548,28 +546,28 @@ p.name = "猪八戒"; // 可以通过对象修改
 
 ```typescript
 class Person {
-    protected name: string;
-    protected age: number;
+	protected name: string;
+	protected age: number;
 
-    constructor(name: string, age: number) {
-        this.name = name; // 可以修改
-        this.age = age;
-    }
+	constructor(name: string, age: number) {
+		this.name = name; // 可以修改
+		this.age = age;
+	}
 
-    sayHello() {
-        console.log(`大家好，我是${this.name}`);
-    }
+	sayHello() {
+		console.log(`大家好，我是${this.name}`);
+	}
 }
 
 class Employee extends Person {
-    constructor(name: string, age: number) {
-        super(name, age);
-        this.name = name; //子类中可以修改
-    }
+	constructor(name: string, age: number) {
+		super(name, age);
+		this.name = name; //子类中可以修改
+	}
 }
 
-const p = new Person("孙悟空", 18);
-p.name = "猪八戒"; // 不能修改
+const p = new Person('孙悟空', 18);
+p.name = '猪八戒'; // 不能修改
 ```
 
 ### private
@@ -578,28 +576,28 @@ p.name = "猪八戒"; // 不能修改
 
 ```typescript
 class Person {
-    private name: string;
-    private age: number;
+	private name: string;
+	private age: number;
 
-    constructor(name: string, age: number) {
-        this.name = name; // 可以修改
-        this.age = age;
-    }
+	constructor(name: string, age: number) {
+		this.name = name; // 可以修改
+		this.age = age;
+	}
 
-    sayHello() {
-        console.log(`大家好，我是${this.name}`);
-    }
+	sayHello() {
+		console.log(`大家好，我是${this.name}`);
+	}
 }
 
 class Employee extends Person {
-    constructor(name: string, age: number) {
-        super(name, age);
-        this.name = name; //子类中不能修改
-    }
+	constructor(name: string, age: number) {
+		super(name, age);
+		this.name = name; //子类中不能修改
+	}
 }
 
-const p = new Person("孙悟空", 18);
-p.name = "猪八戒"; // 不能修改
+const p = new Person('孙悟空', 18);
+p.name = '猪八戒'; // 不能修改
 ```
 
 ### static
@@ -608,11 +606,11 @@ p.name = "猪八戒"; // 不能修改
 
 ```typescript
 class Tools {
-    static PI = 3.1415926;
+	static PI = 3.1415926;
 
-    static sum(num1: number, num2: number) {
-        return num1 + num2;
-    }
+	static sum(num1: number, num2: number) {
+		return num1 + num2;
+	}
 }
 
 console.log(Tools.PI);
@@ -630,49 +628,47 @@ console.log(Tools.sum(123, 456));
 
 ```typescript
 class Person {
-    private _name: string;
+	private _name: string;
 
-    constructor(name: string) {
-        this._name = name;
-    }
+	constructor(name: string) {
+		this._name = name;
+	}
 
-    get name() {
-        return this._name;
-    }
+	get name() {
+		return this._name;
+	}
 
-    set name(name: string) {
-        this._name = name;
-    }
+	set name(name: string) {
+		this._name = name;
+	}
 }
 
-const p1 = new Person("孙悟空");
+const p1 = new Person('孙悟空');
 console.log(p1.name); // 通过getter读取name属性
-p1.name = "猪八戒"; // 通过setter修改name属性
+p1.name = '猪八戒'; // 通过setter修改name属性
 ```
 
 ## 接口
 
-接口的作用类似于抽象类
-不同点在于接口中的所有方法和属性都是没有实值的
-换句话说接口中的所有方法都是抽象方法。接口主要负责定义一个类的结构，接口可以去限制一个对象的接口，对象只有包含接口中定义的所有属性和方法时才能匹配接口。同时，可以让一个类去实现接口，实现接口时类中要保护接口中的所有属性。
+接口的作用类似于抽象类不同点在于接口中的所有方法和属性都是没有实值的换句话说接口中的所有方法都是抽象方法。接口主要负责定义一个类的结构，接口可以去限制一个对象的接口，对象只有包含接口中定义的所有属性和方法时才能匹配接口。同时，可以让一个类去实现接口，实现接口时类中要保护接口中的所有属性。
 
 ### 示例（检查对象类型）：
 
 ```typescript
 interface Person {
-    name: string;
-    sayHello(): void;
+	name: string;
+	sayHello(): void;
 }
 
 function fn(per: Person) {
-    per.sayHello();
+	per.sayHello();
 }
 
 fn({
-    name: "孙悟空",
-    sayHello() {
-        console.log(`Hello, 我是 ${this.name}`);
-    },
+	name: '孙悟空',
+	sayHello() {
+		console.log(`Hello, 我是 ${this.name}`);
+	},
 });
 ```
 
@@ -680,16 +676,16 @@ fn({
 
 ```typescript
 interface Person {
-    name: string;
-    sayHello(): void;
+	name: string;
+	sayHello(): void;
 }
 
 class Student implements Person {
-    constructor(public name: string) {}
+	constructor(public name: string) {}
 
-    sayHello() {
-        console.log("大家好，我是" + this.name);
-    }
+	sayHello() {
+		console.log('大家好，我是' + this.name);
+	}
 }
 ```
 
@@ -697,10 +693,10 @@ class Student implements Person {
 
 ```typescript
 interface ArrNumber {
-    [index: number]: string;
+	[index: number]: string;
 }
 
-let arr: ArrNumber = ["1", "2", "3"];
+let arr: ArrNumber = ['1', '2', '3'];
 ```
 
 ## 泛型
@@ -711,7 +707,7 @@ let arr: ArrNumber = ["1", "2", "3"];
 
 ```typescript
 function test(arg: any): any {
-    return arg;
+	return arg;
 }
 ```
 
@@ -721,12 +717,11 @@ function test(arg: any): any {
 
 ```typescript
 function test<T>(arg: T): T {
-    return arg;
+	return arg;
 }
 ```
 
-这里的`<T>`就是泛型，T 是我们给这个类型起的名字（不一定非叫 T），设置泛型后即可在函数中使用 T 来表示该类型。所以泛型其实很好理解，就表示某个类型。
-那么如何使用上边的函数呢？
+这里的`<T>`就是泛型，T 是我们给这个类型起的名字（不一定非叫 T），设置泛型后即可在函数中使用 T 来表示该类型。所以泛型其实很好理解，就表示某个类型。那么如何使用上边的函数呢？
 
 -   方式一（直接使用）：
 
@@ -746,20 +741,20 @@ test<number>(10);
 
 ```typescript
 function test<T, K>(a: T, b: K): K {
-    return b;
+	return b;
 }
-test<number, string>(10, "hello");
+test<number, string>(10, 'hello');
 ```
 
 使用泛型时，完全可以将泛型当成是一个普通的类去使用，类中同样可以使用泛型：
 
 ```typescript
 class MyClass<T> {
-    prop: T;
+	prop: T;
 
-    constructor(prop: T) {
-        this.prop = prop;
-    }
+	constructor(prop: T) {
+		this.prop = prop;
+	}
 }
 ```
 
@@ -767,10 +762,10 @@ class MyClass<T> {
 
 ```typescript
 interface MyInter {
-    length: number;
+	length: number;
 }
 function test<T extends MyInter>(arg: T): number {
-    return arg.length;
+	return arg.length;
 }
 ```
 
@@ -784,26 +779,26 @@ function test<T extends MyInter>(arg: T): number {
 
 ```typescript
 abstract class Person {
-    abstract name: string;
+	abstract name: string;
 
-    display(): void {
-        console.log(this.name);
-    }
+	display(): void {
+		console.log(this.name);
+	}
 }
 
 class Employee extends Person {
-    name: string;
-    empCode: number;
+	name: string;
+	empCode: number;
 
-    constructor(name: string, code: number) {
-        super(); // must call super()
+	constructor(name: string, code: number) {
+		super(); // must call super()
 
-        this.empCode = code;
-        this.name = name;
-    }
+		this.empCode = code;
+		this.name = name;
+	}
 }
 
-let emp: Person = new Employee("James", 100);
+let emp: Person = new Employee('James', 100);
 emp.display(); //James
 ```
 

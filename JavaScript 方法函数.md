@@ -12,20 +12,20 @@ totalPage = (total + pageSize - 1) / pageSize;
 ```javascript
 // 从 URL 获取参数
 function UrlSearch(url) {
-    let str = url.split("#")[0] || location.href.split("#")[0]; //取得整个path
-    let num = str.indexOf("?");
-    if (num !== -1) {
-        str = str.substr(num + 1);
-        let arr = str.split("&");
-        let obj = {};
-        for (let i = 0; i < arr.length; i++) {
-            num = arr[i].split("=");
-            obj[num[0]] = num[1];
-        }
-        return obj;
-    } else {
-        return {};
-    }
+	let str = url.split('#')[0] || location.href.split('#')[0]; //取得整个path
+	let num = str.indexOf('?');
+	if (num !== -1) {
+		str = str.substr(num + 1);
+		let arr = str.split('&');
+		let obj = {};
+		for (let i = 0; i < arr.length; i++) {
+			num = arr[i].split('=');
+			obj[num[0]] = num[1];
+		}
+		return obj;
+	} else {
+		return {};
+	}
 }
 ```
 
@@ -42,27 +42,27 @@ function UrlSearch(url) {
  */
 
 function list2Tree(list, id, parentId, children) {
-    let result = [];
-    if (!Array.isArray(list)) {
-        console.log("list2Tree Error: typeof list is not array ");
-        return result;
-    }
-    list.forEach((item) => {
-        delete item.children;
-    });
-    let map = {};
-    list.forEach((item) => {
-        map[item[id]] = item;
-    });
-    list.forEach((item) => {
-        let parent = map[item[parentId]];
-        if (parent) {
-            (parent[children] || (parent[children] = [])).push(item);
-        } else {
-            result.push(item);
-        }
-    });
-    return result;
+	let result = [];
+	if (!Array.isArray(list)) {
+		console.log('list2Tree Error: typeof list is not array ');
+		return result;
+	}
+	list.forEach(item => {
+		delete item.children;
+	});
+	let map = {};
+	list.forEach(item => {
+		map[item[id]] = item;
+	});
+	list.forEach(item => {
+		let parent = map[item[parentId]];
+		if (parent) {
+			(parent[children] || (parent[children] = [])).push(item);
+		} else {
+			result.push(item);
+		}
+	});
+	return result;
 }
 ```
 
@@ -75,54 +75,54 @@ function list2Tree(list, id, parentId, children) {
 //
 //
 function deepCopy(obj) {
-    // 深度复制数组
-    if (Object.prototype.toString.call(obj) === "[object Array]") {
-        const object = [];
-        for (let i = 0; i < obj.length; i++) {
-            object.push(deepCopy(obj[i]));
-        }
-        return object;
-    }
-    // 深度复制对象
-    if (Object.prototype.toString.call(obj) === "[object Object]") {
-        const object = {};
-        for (let p in obj) {
-            object[p] = obj[p];
-        }
-        return object;
-    }
+	// 深度复制数组
+	if (Object.prototype.toString.call(obj) === '[object Array]') {
+		const object = [];
+		for (let i = 0; i < obj.length; i++) {
+			object.push(deepCopy(obj[i]));
+		}
+		return object;
+	}
+	// 深度复制对象
+	if (Object.prototype.toString.call(obj) === '[object Object]') {
+		const object = {};
+		for (let p in obj) {
+			object[p] = obj[p];
+		}
+		return object;
+	}
 }
 /******************** 树形结构转化为一维数组 ****************************/
 
 // 将treeObj中的所有对象，放入一个数组中，要求某个对象在另一个对象的children时，其parent_id是对应的另一个对象的id
 // 其原理实际上是数据结构中的广度优先遍历
 function tree2Array(treeObj, rootid) {
-    const temp = []; // 设置临时数组，用来存放队列
-    const out = []; // 设置输出数组，用来存放要输出的一维数组
-    temp.push(treeObj);
-    // 首先把根元素存放入out中
-    let pid = rootid;
-    const obj = deepCopy(treeObj);
-    obj.pid = pid;
-    delete obj["children"];
-    out.push(obj);
-    // 对树对象进行广度优先的遍历
-    while (temp.length > 0) {
-        const first = temp.shift();
-        const children = first.children;
-        if (children && children.length > 0) {
-            pid = first.id;
-            const len = first.children.length;
-            for (let i = 0; i < len; i++) {
-                temp.push(children[i]);
-                const obj = deepCopy(children[i]);
-                obj.pid = pid;
-                delete obj["children"];
-                out.push(obj);
-            }
-        }
-    }
-    return out;
+	const temp = []; // 设置临时数组，用来存放队列
+	const out = []; // 设置输出数组，用来存放要输出的一维数组
+	temp.push(treeObj);
+	// 首先把根元素存放入out中
+	let pid = rootid;
+	const obj = deepCopy(treeObj);
+	obj.pid = pid;
+	delete obj['children'];
+	out.push(obj);
+	// 对树对象进行广度优先的遍历
+	while (temp.length > 0) {
+		const first = temp.shift();
+		const children = first.children;
+		if (children && children.length > 0) {
+			pid = first.id;
+			const len = first.children.length;
+			for (let i = 0; i < len; i++) {
+				temp.push(children[i]);
+				const obj = deepCopy(children[i]);
+				obj.pid = pid;
+				delete obj['children'];
+				out.push(obj);
+			}
+		}
+	}
+	return out;
 }
 ```
 
@@ -130,18 +130,18 @@ function tree2Array(treeObj, rootid) {
 
 ```javascript
 function tree2List() {
-    var queen = [];
-    var out = [];
-    queen = queen.concat(tree);
-    while (queen.length) {
-        var first = queen.shift();
-        if (first.children) {
-            queen = queen.concat(first.children);
-            delete first["children"];
-        }
-        out.push(first);
-    }
-    return out;
+	var queen = [];
+	var out = [];
+	queen = queen.concat(tree);
+	while (queen.length) {
+		var first = queen.shift();
+		if (first.children) {
+			queen = queen.concat(first.children);
+			delete first['children'];
+		}
+		out.push(first);
+	}
+	return out;
 }
 ```
 
@@ -165,27 +165,22 @@ Object.prototype.toString.call(obj);
  * @param {*} collectionLabel 对照集合中的字段名称 默认 'label'
  * @returns
  */
-function fieldTranslate(
-    collection,
-    value,
-    collectionField = "value",
-    collectionLabel = "label"
-) {
-    if (collection && value && toString(value).length) {
-        if (Object.prototype.toString.call(collection) === "[object Array]") {
-            let checked = collection.find((ele) => {
-                return ele[collectionField] == value;
-            });
-            let tips = (checked && checked[collectionLabel]) || "Error";
-            return tips;
-        } else {
-            console.log("fieldTranslate Error: the type of the first parameter must be array!");
-            return "";
-        }
-    } else {
-        console.log("fieldTranslate Error: please check function parameters!");
-        return "";
-    }
+function fieldTranslate(collection, value, collectionField = 'value', collectionLabel = 'label') {
+	if (collection && value && toString(value).length) {
+		if (Object.prototype.toString.call(collection) === '[object Array]') {
+			let checked = collection.find(ele => {
+				return ele[collectionField] == value;
+			});
+			let tips = (checked && checked[collectionLabel]) || 'Error';
+			return tips;
+		} else {
+			console.log('fieldTranslate Error: the type of the first parameter must be array!');
+			return '';
+		}
+	} else {
+		console.log('fieldTranslate Error: please check function parameters!');
+		return '';
+	}
 }
 ```
 
@@ -193,34 +188,34 @@ function fieldTranslate(
 
 ```javascript
 function copyToClipboard(text) {
-    const input = document.createElement("textarea");
-    input.style.opacity = 0;
-    input.style.position = "absolute";
-    input.style.left = "-100000px";
-    document.body.appendChild(input);
-    input.value = text;
-    input.select();
-    input.setSelectionRange(0, text.length);
-    try {
-        if (document.execCommand("Copy", "false", null)) {
-            //如果复制成功
-            $.message("复制成功！");
+	const input = document.createElement('textarea');
+	input.style.opacity = 0;
+	input.style.position = 'absolute';
+	input.style.left = '-100000px';
+	document.body.appendChild(input);
+	input.value = text;
+	input.select();
+	input.setSelectionRange(0, text.length);
+	try {
+		if (document.execCommand('Copy', 'false', null)) {
+			//如果复制成功
+			$.message('复制成功！');
 
-            document.body.removeChild(input);
-        } else {
-            //如果复制失败
-            $.message({
-                message: "复制失败！",
-                type: "info",
-            });
-        }
-    } catch (err) {
-        //如果报错
-        $.message({
-            message: "复制错误！",
-            type: "error",
-        });
-    }
+			document.body.removeChild(input);
+		} else {
+			//如果复制失败
+			$.message({
+				message: '复制失败！',
+				type: 'info',
+			});
+		}
+	} catch (err) {
+		//如果报错
+		$.message({
+			message: '复制错误！',
+			type: 'error',
+		});
+	}
 }
 ```
 
@@ -230,13 +225,13 @@ function copyToClipboard(text) {
 
 ```javascript
 function debounce(fn, delay) {
-    let timer = null; //借助闭包
-    return function () {
-        if (timer) {
-            clearTimeout(timer);
-        }
-        timer = setTimeout(fn, delay); // 简化写法
-    };
+	let timer = null; //借助闭包
+	return function () {
+		if (timer) {
+			clearTimeout(timer);
+		}
+		timer = setTimeout(fn, delay); // 简化写法
+	};
 }
 ```
 
@@ -244,19 +239,19 @@ function debounce(fn, delay) {
 
 ```javascript
 function throttle(fn, delay) {
-    let valid = true;
-    return function () {
-        if (!valid) {
-            //休息时间 暂不接客
-            return false;
-        }
-        // 工作时间，执行函数并且在间隔期内把状态位设为无效
-        valid = false;
-        setTimeout(() => {
-            fn();
-            valid = true;
-        }, delay);
-    };
+	let valid = true;
+	return function () {
+		if (!valid) {
+			//休息时间 暂不接客
+			return false;
+		}
+		// 工作时间，执行函数并且在间隔期内把状态位设为无效
+		valid = false;
+		setTimeout(() => {
+			fn();
+			valid = true;
+		}, delay);
+	};
 }
 ```
 
@@ -277,8 +272,8 @@ window.parent;
 
 ```javascript
 let obj = {
-    innerWidth: window.innerWidth,
-    innerHeight: window.innerHeight,
+	innerWidth: window.innerWidth,
+	innerHeight: window.innerHeight,
 };
 ```
 
@@ -287,7 +282,7 @@ let obj = {
 ```javascript
 // 拿到对象的key值索引
 for (const key in Object.keys(data)) {
-    console.log(key);
+	console.log(key);
 }
 ```
 

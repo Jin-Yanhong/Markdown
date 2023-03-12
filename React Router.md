@@ -11,7 +11,7 @@ npm i react-router-dom -s
 ### 引用
 
 ```javascript
-import { HashRouter, Route, Link } from "react-router-dom";
+import { HashRouter, Route, Link } from 'react-router-dom';
 ```
 
 > 这个包提供了三个核心的组件 **`HashRouter(BrowserRouter)`**, **`Route`**, **`Link`**
@@ -27,26 +27,26 @@ import { HashRouter, Route, Link } from "react-router-dom";
 使用 **`Switch`** 切换路由视图
 
 ```javascript
-import React from "react";
-import ReactDom from "react-dom";
-import { HashRouter, Route, Link } from "react-router-dom";
-import Search from "./pages/Search.jsx";
-import Comment from "./pages/Comment.jsx";
+import React from 'react';
+import ReactDom from 'react-dom';
+import { HashRouter, Route, Link } from 'react-router-dom';
+import Search from './pages/Search.jsx';
+import Comment from './pages/Comment.jsx';
 export default function App() {
-    return (
-        <div>
-            <h1>react路由基本使用</h1>
-            <HashRouter>
-                <Link to="/comment">评论</Link>
-                <Link to="/search">搜索</Link>
+	return (
+		<div>
+			<h1>react路由基本使用</h1>
+			<HashRouter>
+				<Link to='/comment'>评论</Link>
+				<Link to='/search'>搜索</Link>
 
-                <Route path="/comment" component={Comment} />
-                <Route path="/search" component={Search} />
-            </HashRouter>
-        </div>
-    );
+				<Route path='/comment' component={Comment} />
+				<Route path='/search' component={Search} />
+			</HashRouter>
+		</div>
+	);
 }
-ReactDom.render(<App />, document.getElementById("root"));
+ReactDom.render(<App />, document.getElementById('root'));
 ```
 
 ## Router
@@ -77,8 +77,8 @@ Router 组件：包裹整个应用，一个 React 应用只需要使用一次
 使用 es6 的导入重命名来统一名字： 无论导入的是哪个路由对象，都叫 Router
 
 ```javascript
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { HashRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { HashRouter as Router, Route, Link } from 'react-router-dom';
 ```
 
 ## Route
@@ -92,7 +92,7 @@ import { HashRouter as Router, Route, Link } from "react-router-dom";
 #### 格式
 
 ```jsx
-<Route path="/xx/xx" component={组件}></Route>
+<Route path='/xx/xx' component={组件}></Route>
 ```
 
 ### 匹配规则
@@ -115,62 +115,56 @@ Route 组件中 path 属性的值
 
 > 默认模糊匹配
 
-只要 pathname 以 path 开头就算匹配成功
-匹配成功就加载对应组件；
-整个匹配过程是逐一匹配，一个匹配成功了，并**不会停止匹配**。
+只要 pathname 以 path 开头就算匹配成功匹配成功就加载对应组件；整个匹配过程是逐一匹配，一个匹配成功了，并**不会停止匹配**。
 
-精确匹配
-补充**exact**可以设置成精确匹配
+精确匹配补充**exact**可以设置成精确匹配
 
 ```jsx
-import React from "react";
-import ReactDom from "react-dom";
-import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
+import React from 'react';
+import ReactDom from 'react-dom';
+import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
 const Home = () => <div>主页</div>;
 const Article = () => <div>文章列表页</div>;
 const ArticleDetail = () => <div>文章详情页</div>;
 export default function App() {
-    return (
-        <div>
-            <h1>react路由基本使用</h1>
-            <Router>
-                // 导航
-                <NavLink to="/">主页</NavLink>&nbsp;
-                <NavLink to="/article">文章列表页</NavLink>&nbsp;
-                <NavLink to="/article/123">文章详情页-123</NavLink>&nbsp;
-                <hr />
-                // 对应的跳转规则
-                <Route path="/" component={Home} />
-                <Route path="/article" component={Article} />
-                <Route path="/article/123" component={ArticleDetail} />
-            </Router>
-        </div>
-    );
+	return (
+		<div>
+			<h1>react路由基本使用</h1>
+			<Router>
+				// 导航
+				<NavLink to='/'>主页</NavLink>&nbsp;
+				<NavLink to='/article'>文章列表页</NavLink>&nbsp;
+				<NavLink to='/article/123'>文章详情页-123</NavLink>&nbsp;
+				<hr />
+				// 对应的跳转规则
+				<Route path='/' component={Home} />
+				<Route path='/article' component={Article} />
+				<Route path='/article/123' component={ArticleDetail} />
+			</Router>
+		</div>
+	);
 }
-ReactDom.render(<App />, document.getElementById("root"));
+ReactDom.render(<App />, document.getElementById('root'));
 ```
 
 ### exact
 
-如下代码:
-如果不加`exact`精确匹配,name 所有以'/'开头的都会被这个 path 匹配到 ,如:'/home' , '/login'
-加上`exact`精确匹配,只有在 path 为'/'的时候才能匹配到
+如下代码: 如果不加`exact`精确匹配,name 所有以'/'开头的都会被这个 path 匹配到 ,如:'/home' , '/login' 加上`exact`精确匹配,只有在 path 为'/'的时候才能匹配到
 
 ```jsx
-<Route path="/" exact component={Home} />
+<Route path='/' exact component={Home} />
 ```
 
 ## Redirect
 
 如下代码:
 
-匹配到`from = '/'`后 , 重定向到 `"/comment"`路径对应的组件
-这里的`from`页可以改写成`path`效果一样
+匹配到`from = '/'`后 , 重定向到 `"/comment"`路径对应的组件这里的`from`页可以改写成`path`效果一样
 
 ```jsx
-import { HashRouter, Route, Link, Redirect } from "react-router-dom";
+import { HashRouter, Route, Link, Redirect } from 'react-router-dom';
 
-<Redirect from="/" exact to="/comment" />;
+<Redirect from='/' exact to='/comment' />;
 ```
 
 ## Link
@@ -190,36 +184,31 @@ import { HashRouter, Route, Link, Redirect } from "react-router-dom";
 在`Switch`组件下，不管有多少个 Route 的路由规则匹配成功，都只会渲染**第一个**匹配的组件
 
 ```jsx
-import React from "react";
-import ReactDom from "react-dom";
-import {
-    BrowserRouter as Router,
-    Route,
-    NavLink,
-    Switch,
-} from "react-router-dom";
+import React from 'react';
+import ReactDom from 'react-dom';
+import { BrowserRouter as Router, Route, NavLink, Switch } from 'react-router-dom';
 const Home = () => <div>主页</div>;
 const Article = () => <div>文章列表页</div>;
 const ArticleDetail = () => <div>文章详情页</div>;
 export default function App() {
-    return (
-        <div>
-            <h1>react路由基本使用</h1>
-            <Router>
-                <NavLink to="/">主页</NavLink>&nbsp;
-                <NavLink to="/article">文章列表页</NavLink>&nbsp;
-                <NavLink to="/article/123">文章详情页-123</NavLink>&nbsp;
-                <hr />
-                <Switch>
-                    <Route path="/" exact component={Home} />
-                    <Route path="/article" component={Article} />
-                    <Route path="/article/123" component={ArticleDetail} />
-                </Switch>
-            </Router>
-        </div>
-    );
+	return (
+		<div>
+			<h1>react路由基本使用</h1>
+			<Router>
+				<NavLink to='/'>主页</NavLink>&nbsp;
+				<NavLink to='/article'>文章列表页</NavLink>&nbsp;
+				<NavLink to='/article/123'>文章详情页-123</NavLink>&nbsp;
+				<hr />
+				<Switch>
+					<Route path='/' exact component={Home} />
+					<Route path='/article' component={Article} />
+					<Route path='/article/123' component={ArticleDetail} />
+				</Switch>
+			</Router>
+		</div>
+	);
 }
-ReactDom.render(<App />, document.getElementById("root"));
+ReactDom.render(<App />, document.getElementById('root'));
 ```
 
 ### 404 页面处理
@@ -230,10 +219,10 @@ ReactDom.render(<App />, document.getElementById("root"));
 
 ```jsx
 <Switch>
-    <Route path="/" exact component={Home} />
-    <Route path="/article" component={Article} />
-    <Route path="/article/123" component={ArticleDetail} />
-    <Route component={Page404} />
+	<Route path='/' exact component={Home} />
+	<Route path='/article' component={Article} />
+	<Route path='/article/123' component={ArticleDetail} />
+	<Route component={Page404} />
 </Switch>
 ```
 
@@ -241,15 +230,14 @@ ReactDom.render(<App />, document.getElementById("root"));
 
 路由对象 Link 和 NavLink
 
-Link 和 NavLink 都能用来做跳转,最终都会被渲染成`<a>内容</a>`标签
-`import { Link, NavLink } from 'react-router-dom'`
+Link 和 NavLink 都能用来做跳转,最终都会被渲染成`<a>内容</a>`标签 `import { Link, NavLink } from 'react-router-dom'`
 
 ### Link
 
 `Link`组件无法展示哪个 link 处于选中的效果
 
 ```jsx
-<Link to="/search">搜索</Link>
+<Link to='/search'>搜索</Link>
 ```
 
 ### NavLink
@@ -259,8 +247,8 @@ Link 和 NavLink 都能用来做跳转,最终都会被渲染成`<a>内容</a>`�
 格式：
 
 ```jsx
-<NavLink to="/xxx" activeClassName="active">
-    链接
+<NavLink to='/xxx' activeClassName='active'>
+	链接
 </NavLink>
 ```
 
@@ -271,26 +259,26 @@ Link 和 NavLink 都能用来做跳转,最终都会被渲染成`<a>内容</a>`�
 
 ```jsx
 return (
-    <div>
-        <h1>react路由基本使用-Link</h1>
-        <Router>
-            <div>
-                Link:
-                <Link to="/search">搜索</Link>
-                <Link to="/comment">评论</Link>
-            </div>
-            <div>
-                NavLink: 自带高亮类
-                <NavLink to="/" exact>
-                    主页
-                </NavLink>
-                <NavLink to="/search">搜索</NavLink>
-                <NavLink to="/comment">评论</NavLink>
-            </div>
-            <Route path="/comment" component={Comment} />
-            <Route path="/search" component={Search} />
-        </Router>
-    </div>
+	<div>
+		<h1>react路由基本使用-Link</h1>
+		<Router>
+			<div>
+				Link:
+				<Link to='/search'>搜索</Link>
+				<Link to='/comment'>评论</Link>
+			</div>
+			<div>
+				NavLink: 自带高亮类
+				<NavLink to='/' exact>
+					主页
+				</NavLink>
+				<NavLink to='/search'>搜索</NavLink>
+				<NavLink to='/comment'>评论</NavLink>
+			</div>
+			<Route path='/comment' component={Comment} />
+			<Route path='/search' component={Search} />
+		</Router>
+	</div>
 );
 ```
 
@@ -303,18 +291,18 @@ react-router
 使用格式:
 
 ```jsx
-import { useHistory } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 
 export default function App() {
-    const history = useHistory();
-    // 跳转到指定页面
-    history.push("/home");
+	const history = useHistory();
+	// 跳转到指定页面
+	history.push('/home');
 
-    // 前进或后退到某个页面，参数 n 表示前进或后退页面数量（比如：-1 表示后退到上一页）
-    history.go(-1);
+	// 前进或后退到某个页面，参数 n 表示前进或后退页面数量（比如：-1 表示后退到上一页）
+	history.go(-1);
 
-    // 替换到当前页面,展示指定页面
-    history.replace("/login");
+	// 替换到当前页面,展示指定页面
+	history.replace('/login');
 }
 ```
 
@@ -354,8 +342,8 @@ replace
 
 ```jsx
 export default function Article(props) {
-    console.log("props对象", props);
-    return <div>Article</div>;
+	console.log('props对象', props);
+	return <div>Article</div>;
 }
 ```
 
@@ -364,11 +352,11 @@ export default function Article(props) {
 #### history 中也包含了 location 对象
 
 ```jsx
-import { useHistory } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 export default function Article() {
-    const history = useHistory();
-    console.log(history);
-    return <div>Article</div>;
+	const history = useHistory();
+	console.log(history);
+	return <div>Article</div>;
 }
 ```
 
@@ -379,11 +367,11 @@ export default function Article() {
 #### useLocation 这个 Hook 获取
 
 ```jsx
-import { useLocation } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 export default function Article() {
-    const location = useLocation();
-    console.log("使用useLocation获取的location", location);
-    return <div>Article</div>;
+	const location = useLocation();
+	console.log('使用useLocation获取的location', location);
+	return <div>Article</div>;
 }
 ```
 
@@ -394,7 +382,7 @@ export default function Article() {
 #### 查询参数方式:
 
 ```jsx
-<Link to="/home/article ?id=9 ">内容管理</Link>
+<Link to='/home/article ?id=9 '>内容管理</Link>
 ```
 
 #### 对象写法:
@@ -410,8 +398,7 @@ export default function Article() {
 
 #### 接收数据:
 
-再来看看传参之后`location`中有什么:
-**查询参数方式**:
+再来看看传参之后`location`中有什么: **查询参数方式**:
 
 ![查询参数.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9df4c5ed7d2f462d80e05f7b29f14f9f~tplv-k3u1fbpfcp-watermark.awebp?) **对象写法**
 
@@ -429,27 +416,27 @@ const value = location.search
 同样的用`location`,`search`,`state`
 
 ```jsx
-message.success("登录成功", 2, () => {
-    //  做跳转动作 到主页中
-    history.replace("/home?id=33");
+message.success('登录成功', 2, () => {
+	//  做跳转动作 到主页中
+	history.replace('/home?id=33');
 });
 ```
 
 `const value = location.search` //结果: ?id=33 需要截取一下
 
 ```jsx
-message.success("登录成功", 2, () => {
-    //  做跳转动作 到主页中
-    history.replace("/home", "给我一个div");
+message.success('登录成功', 2, () => {
+	//  做跳转动作 到主页中
+	history.replace('/home', '给我一个div');
 });
 ```
 
 `const value = location.state` //结果: 给我一个 div
 
 ```jsx
-message.success("登录成功", 2, () => {
-    //  做跳转动作 到主页中
-    history.replace("/home", { name: "给我一个div", id: 9 });
+message.success('登录成功', 2, () => {
+	//  做跳转动作 到主页中
+	history.replace('/home', { name: '给我一个div', id: 9 });
 });
 ```
 
@@ -457,5 +444,4 @@ message.success("登录成功", 2, () => {
 
 ### 路由传值小结:
 
-个人比较喜欢这种方式传参,跳转的时候直接给参数,全部在 location 中接收参数,并且拿到 location 的方式也很方便
-另外还有 params 方式传参,props 对象的 match 对象中有 params 对象,函数组件的话也可以使用`useParams`钩子 ,这里就不介绍了,想补充的兄弟欢迎在下面留言,有不对的地方欢迎指出
+个人比较喜欢这种方式传参,跳转的时候直接给参数,全部在 location 中接收参数,并且拿到 location 的方式也很方便另外还有 params 方式传参,props 对象的 match 对象中有 params 对象,函数组件的话也可以使用`useParams`钩子 ,这里就不介绍了,想补充的兄弟欢迎在下面留言,有不对的地方欢迎指出

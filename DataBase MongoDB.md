@@ -175,7 +175,7 @@ db.dropDatabase();
 
 ```javascript
 db.collection.find().sort({
-    key: 1,
+	key: 1,
 });
 
 // 1 升序
@@ -217,30 +217,30 @@ npm i mongoose --save
 #### 连接数据库
 
 ```javascript
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-mongoose.connect("mongodb://localhost/my_database", {
-    useMongoClient: true,
+mongoose.connect('mongodb://localhost/my_database', {
+	useMongoClient: true,
 });
 
-mongoose.connection.once("open", function () {});
+mongoose.connection.once('open', function () {});
 
-mongoose.connection.once("close", function () {});
+mongoose.connection.once('close', function () {});
 
 const blogSchema = new mongoose.Schema({
-    title: String, // String is shorthand for {type: String}
-    author: String,
-    body: String,
-    comments: [{ body: String, date: Date }],
-    date: { type: Date, default: Date.now },
-    hidden: Boolean,
-    meta: {
-        votes: Number,
-        favs: Number,
-    },
+	title: String, // String is shorthand for {type: String}
+	author: String,
+	body: String,
+	comments: [{ body: String, date: Date }],
+	date: { type: Date, default: Date.now },
+	hidden: Boolean,
+	meta: {
+		votes: Number,
+		favs: Number,
+	},
 });
 
-const BlogModel = mongoose.model("Blog", blogSchema);
+const BlogModel = mongoose.model('Blog', blogSchema);
 ```
 
 #### CRUD

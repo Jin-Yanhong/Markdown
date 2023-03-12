@@ -24,10 +24,10 @@ div > p {
 
 ```css
 .child:nth-child(odd) {
-    /* 奇数 */
+	/* 奇数 */
 }
 .child:nth-child(even) {
-    /* 偶数 */
+	/* 偶数 */
 }
 ```
 
@@ -48,41 +48,41 @@ div + p {
 
 ```css
 .example {
-    /*  */
+	/*  */
 }
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-    .example {
-        /*  */
-    }
+	.example {
+		/*  */
+	}
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
-    .example {
-        /*  */
-    }
+	.example {
+		/*  */
+	}
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
-    .example {
-        /*  */
-    }
+	.example {
+		/*  */
+	}
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
-    .example {
-        /*  */
-    }
+	.example {
+		/*  */
+	}
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
-    .example {
-        /*  */
-    }
+	.example {
+		/*  */
+	}
 }
 ```
 
@@ -90,9 +90,9 @@ div + p {
 
 ```css
 @media only screen and (orientation: landscape) {
-    body {
-        background-color: lightblue;
-    }
+	body {
+		background-color: lightblue;
+	}
 }
 ```
 
@@ -104,23 +104,23 @@ div + p {
 
 ```css
 :-webkit-full-screen {
-    -webkit-filter: grayscale(1);
-    filter: grayscale(1);
+	-webkit-filter: grayscale(1);
+	filter: grayscale(1);
 }
 :-ms-fullscreen {
-    filter: grayscale(1);
+	filter: grayscale(1);
 }
 :fullscreen {
-    -webkit-filter: grayscale(1);
-    filter: grayscale(1);
+	-webkit-filter: grayscale(1);
+	filter: grayscale(1);
 }
 html {
-    /*兼容FF*/
-    filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0'/></filter></svg>#grayscale");
-    /*兼容IE内核*/
-    filter: progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);
-    /*兼容其它，谷歌之类的*/
-    -webkit-filter: grayscale(1);
+	/*兼容FF*/
+	filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0'/></filter></svg>#grayscale");
+	/*兼容IE内核*/
+	filter: progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);
+	/*兼容其它，谷歌之类的*/
+	-webkit-filter: grayscale(1);
 }
 ```
 
@@ -130,9 +130,9 @@ html {
 
 ```css
 .nav::after {
-    content: "";
-    clear: both;
-    display: table;
+	content: '';
+	clear: both;
+	display: table;
 }
 ```
 
@@ -142,12 +142,12 @@ html {
 
 ```css
 div {
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
 }
 ```
 
@@ -155,9 +155,9 @@ div {
 
 ```css
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 ```
 
@@ -165,18 +165,18 @@ div {
 
 ```html
 <style>
-    .center td {
-        height: 500px;
-        width: 500px;
-        text-align: center;
-        vertical-align: middle;
-    }
+	.center td {
+		height: 500px;
+		width: 500px;
+		text-align: center;
+		vertical-align: middle;
+	}
 </style>
 <table border="1" class="center">
-    <tr>
-        <td>Text</td>
-        <td>Text</td>
-    </tr>
+	<tr>
+		<td>Text</td>
+		<td>Text</td>
+	</tr>
 </table>
 ```
 
@@ -186,7 +186,7 @@ div {
 
 ```css
 .obj {
-    transform: perspective(1000px) rotateY(45deg);
+	transform: perspective(1000px) rotateY(45deg);
 }
 ```
 
@@ -197,16 +197,16 @@ div {
 ```css
 // 单行溢出隐藏
 p {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 // 多行显示省略号
 p {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    overflow: hidden;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 3;
+	overflow: hidden;
 }
 ```
 
@@ -214,7 +214,7 @@ p {
 
 ```css
 p {
-    text-align-last: justify;
+	text-align-last: justify;
 }
 ```
 
@@ -223,23 +223,23 @@ p {
 ```css
 /* 滚动条 */
 .container::-webkit-scrollbar {
-    -webkit-box-shadow: [[48a7ff]] !important;
-    width: 10px;
-    height: 10px;
+	-webkit-box-shadow: [[48a7ff]] !important;
+	width: 10px;
+	height: 10px;
 }
 
 /* 滚动槽 */
 .container::-webkit-scrollbar-track {
-    -webkit-box-shadow: [[48a7ff]] !important;
-    border-radius: 10px;
-    background: [[114a7f]];
+	-webkit-box-shadow: [[48a7ff]] !important;
+	border-radius: 10px;
+	background: [[114a7f]];
 }
 
 /* 滚动条滑块 */
 .container::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background: [[48a7ff]];
-    -webkit-box-shadow: [[48a7ff]];
+	border-radius: 10px;
+	background: [[48a7ff]];
+	-webkit-box-shadow: [[48a7ff]];
 }
 ```
 
@@ -247,40 +247,40 @@ p {
 
 ```less
 .borderBg {
-    position: absolute;
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    border: 1px solid #56fdfb;
-    width: 100%;
-    top: 38px;
-    left: 0;
-    height: calc(100% - 35px);
-    box-shadow: 0 0 40px 0 #188ee7 inset;
+	position: absolute;
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	border: 1px solid #56fdfb;
+	width: 100%;
+	top: 38px;
+	left: 0;
+	height: calc(100% - 35px);
+	box-shadow: 0 0 40px 0 #188ee7 inset;
 }
 .borderBg::before {
-    display: block;
-    position: absolute;
-    content: "";
-    left: -1px;
-    top: 23px;
-    width: calc(100% + 2px);
-    height: calc(100% - 46px);
-    border-left: 1px solid #325886;
-    border-right: 1px solid #325886;
-    z-index: 10;
+	display: block;
+	position: absolute;
+	content: '';
+	left: -1px;
+	top: 23px;
+	width: calc(100% + 2px);
+	height: calc(100% - 46px);
+	border-left: 1px solid #325886;
+	border-right: 1px solid #325886;
+	z-index: 10;
 }
 .borderBg::after {
-    display: block;
-    position: absolute;
-    content: "";
-    top: -1px;
-    left: 23px;
-    height: calc(100% + 2px);
-    width: calc(100% - 46px);
-    border-top: 1px solid #325886;
-    border-bottom: 1px solid #325886;
-    z-index: 10;
+	display: block;
+	position: absolute;
+	content: '';
+	top: -1px;
+	left: 23px;
+	height: calc(100% + 2px);
+	width: calc(100% - 46px);
+	border-top: 1px solid #325886;
+	border-bottom: 1px solid #325886;
+	z-index: 10;
 }
 ```
 
@@ -305,39 +305,39 @@ p {
 
 ```scss
 $colors: (
-    primary: #ffbb00,
-    secondary: #0969a2,
+	primary: #ffbb00,
+	secondary: #0969a2,
 );
 
 Selector1 {
-    @each $name, $color in $colors {
-        --color-#{$name}: $color;
-    }
+	@each $name, $color in $colors {
+		--color-#{$name}: $color;
+	}
 }
 
 // Selector1的生成效果
 :root {
-    --color-primary: #ffbb00;
-    --color-secondary: #0969a2;
+	--color-primary: #ffbb00;
+	--color-secondary: #0969a2;
 }
 
 // 使用方式一 直接使用css变量
 Selector {
-    color: var(--color-primary);
+	color: var(--color-primary);
 }
 
 // 使用方式二 利用scss的函数, 以符合scss语法 推荐
 @function color($color-name) {
-    @return var(--color-#{$color-name});
+	@return var(--color-#{$color-name});
 }
 
 body {
-    color: color(primary); //使用
+	color: color(primary); //使用
 }
 
 // body生成效果
 body {
-    color: var(--color-primary); //这样就可以被js设置了
+	color: var(--color-primary); //这样就可以被js设置了
 }
 ```
 

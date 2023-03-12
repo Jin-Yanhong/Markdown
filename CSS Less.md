@@ -7,16 +7,16 @@
 @bgColor: skyblue; // 不要添加引号
 @width: 50%;
 #wrap {
-    color: @color;
-    background: @bgColor;
-    width: @width;
+	color: @color;
+	background: @bgColor;
+	width: @width;
 }
 
 /* 生成后的 CSS */
 #wrap {
-    color: #999;
-    background: skyblue;
-    width: 50%;
+	color: #999;
+	background: skyblue;
+	width: 50%;
 }
 ```
 
@@ -72,12 +72,12 @@
 @borderStyle: border-style;
 @Soild: solid;
 #wrap {
-    @{borderStyle}: @Soild; //变量名 必须使用大括号包裹
+	@{borderStyle}: @Soild; //变量名 必须使用大括号包裹
 }
 
 /* 生成的 CSS */
 #wrap {
-    border-style: solid;
+	border-style: solid;
 }
 ```
 
@@ -86,14 +86,14 @@
 项目结构改变时，修改其变量即可。
 
 ```less
-@images: "../img"; //需要加引号
+@images: '../img'; //需要加引号
 body {
-    background: url("@{images}/dog.png"); //变量名 必须使用大括号包裹
+	background: url('@{images}/dog.png'); //变量名 必须使用大括号包裹
 }
 
 /* 生成的 CSS */
 body {
-    background: url("../img/dog.png");
+	background: url('../img/dog.png');
 }
 ```
 
@@ -106,28 +106,28 @@ body {
 
 ```less
 @background: {
-    background: red;
+	background: red;
 };
 #main {
-    @background();
+	@background();
 }
 @Rules: {
-    width: 200px;
-    height: 200px;
-    border: solid 1px red;
+	width: 200px;
+	height: 200px;
+	border: solid 1px red;
 };
 #con {
-    @Rules();
+	@Rules();
 }
 
 /* 生成的 CSS */
 #main {
-    background: red;
+	background: red;
 }
 #con {
-    width: 200px;
-    height: 200px;
-    border: solid 1px red;
+	width: 200px;
+	height: 200px;
+	border: solid 1px red;
 }
 ```
 
@@ -142,20 +142,20 @@ body {
 @width: 300px;
 @color: #222;
 #wrap {
-    width: @width-20;
-    height: @width-20*5;
-    margin: (@width-20) * 5;
-    color: @color*2;
-    background-color: @color + #111;
+	width: @width-20;
+	height: @width-20*5;
+	margin: (@width-20) * 5;
+	color: @color*2;
+	background-color: @color + #111;
 }
 
 /* 生成的 CSS */
 #wrap {
-    width: 280px;
-    height: 200px;
-    margin: 1400px;
-    color: #444;
-    background-color: #333;
+	width: 280px;
+	height: 200px;
+	margin: 1400px;
+	color: #444;
+	background-color: #333;
 }
 ```
 
@@ -169,27 +169,27 @@ _借助官网的 Demo_
 @var: @a;
 @a: 100%;
 #wrap {
-    width: @var;
-    @a: 9%;
+	width: @var;
+	@a: 9%;
 }
 
 /* 生成的 CSS */
 #wrap {
-    width: 9%;
+	width: 9%;
 }
 ```
 
 #### **用变量去定义变量**
 
 ```less
-@fnord: "I am fnord.";
-@var: "fnord";
+@fnord: 'I am fnord.';
+@var: 'fnord';
 #wrap::after {
-    content: @@var; //将@var替换为其值 content:@fnord;
+	content: @@var; //将@var替换为其值 content:@fnord;
 }
 /* 生成的 CSS */
 #wrap::after {
-    content: "I am fnord.";
+	content: 'I am fnord.';
 }
 ```
 
@@ -201,28 +201,28 @@ _借助官网的 Demo_
 
 ```less
 #header {
-    &:after {
-        content: "Less is more!";
-    }
-    .title {
-        font-weight: bold;
-    }
-    &_content {
-        //理解方式：直接把 & 替换成 #header
-        margin: 20px;
-    }
+	&:after {
+		content: 'Less is more!';
+	}
+	.title {
+		font-weight: bold;
+	}
+	&_content {
+		//理解方式：直接把 & 替换成 #header
+		margin: 20px;
+	}
 }
 /* 生成的 CSS */
 #header::after {
-    content: "Less is more!";
+	content: 'Less is more!';
 }
 #header .title {
-    //嵌套了
-    font-weight: bold;
+	//嵌套了
+	font-weight: bold;
 }
 #header_content {
-    //没有嵌套！
-    margin: 20px;
+	//没有嵌套！
+	margin: 20px;
 }
 ```
 
@@ -232,12 +232,12 @@ _借助官网的 Demo_
 
 ```css
 #wrap {
-    width: 500px;
+	width: 500px;
 }
 @media screen and (max-width: 768px) {
-    #wrap {
-        width: 100px;
-    }
+	#wrap {
+		width: 100px;
+	}
 }
 ```
 
@@ -245,27 +245,27 @@ Less 提供了一个十分便捷的方式
 
 ```less
 #main {
-    //something...
+	//something...
 
-    @media screen {
-        @media (max-width: 768px) {
-            width: 100px;
-        }
-    }
-    @media tv {
-        width: 2000px;
-    }
+	@media screen {
+		@media (max-width: 768px) {
+			width: 100px;
+		}
+	}
+	@media tv {
+		width: 2000px;
+	}
 }
 /* 生成的 CSS */
 @media screen and (maxwidth: 768px) {
-    #main {
-        width: 100px;
-    }
+	#main {
+		width: 100px;
+	}
 }
 @media tv {
-    #main {
-        width: 2000px;
-    }
+	#main {
+		width: 2000px;
+	}
 }
 ```
 
@@ -277,28 +277,28 @@ Less 提供了一个十分便捷的方式
 
 ```less
 #main {
-    &.show {
-        display: block;
-    }
+	&.show {
+		display: block;
+	}
 }
 .show {
-    display: none;
+	display: none;
 }
 ```
 
 ```javascript
-const main = document.getElementById("main");
-main.classList.add("show");
+const main = document.getElementById('main');
+main.classList.add('show');
 ```
 
 结果：
 
 ```css
 #main.show {
-    display: block;
+	display: block;
 }
 .show {
-    display: none; //会被覆盖。
+	display: none; //会被覆盖。
 }
 ```
 
@@ -310,19 +310,19 @@ main.classList.add("show");
 
 ```less
 .card {
-    // 等价于 .card()
-    background: #f6f6f6;
-    -webkit-box-shadow: 0 1px 2px rgba(151, 151, 151, 0.58);
-    box-shadow: 0 1px 2px rgba(151, 151, 151, 0.58);
+	// 等价于 .card()
+	background: #f6f6f6;
+	-webkit-box-shadow: 0 1px 2px rgba(151, 151, 151, 0.58);
+	box-shadow: 0 1px 2px rgba(151, 151, 151, 0.58);
 }
 #wrap {
-    .card; //等价于.card();
+	.card; //等价于.card();
 }
 /* 生成的 CSS */
 #wrap {
-    background: #f6f6f6;
-    -webkit-box-shadow: 0 1px 2px rgba(151, 151, 151, 0.58);
-    box-shadow: 0 1px 2px rgba(151, 151, 151, 0.58);
+	background: #f6f6f6;
+	-webkit-box-shadow: 0 1px 2px rgba(151, 151, 151, 0.58);
+	box-shadow: 0 1px 2px rgba(151, 151, 151, 0.58);
 }
 ```
 
@@ -330,10 +330,10 @@ main.classList.add("show");
 
 ```less
 .card() {
-    //
+	//
 }
 #wrap {
-    .card();
+	.card();
 }
 ```
 
@@ -350,31 +350,31 @@ main.classList.add("show");
 
 ```less
 .border(@a:10px,@b:50px,@c:30px,@color:#000) {
-    border: solid 1px @color;
-    box-shadow: @arguments; //指代的是 全部参数
+	border: solid 1px @color;
+	box-shadow: @arguments; //指代的是 全部参数
 }
 #main {
-    .border(0px,5px,30px,red); //必须带着单位
+	.border(0px,5px,30px,red); //必须带着单位
 }
 #wrap {
-    .border(0px);
+	.border(0px);
 }
 #content {
-    .border; //等价于 .border()
+	.border; //等价于 .border()
 }
 
 /* 生成的 CSS */
 #main {
-    border: solid 1px red;
-    box-shadow: 0px, 5px, 30px, red;
+	border: solid 1px red;
+	box-shadow: 0px, 5px, 30px, red;
 }
 #wrap {
-    border: solid 1px #000;
-    box-shadow: 0px 50px 30px #000;
+	border: solid 1px #000;
+	box-shadow: 0px 50px 30px #000;
 }
 #content {
-    border: solid 1px #000;
-    box-shadow: 10px 50px 30px #000;
+	border: solid 1px #000;
+	box-shadow: 10px 50px 30px #000;
 }
 ```
 
@@ -384,30 +384,30 @@ main.classList.add("show");
 
 ```less
 .triangle(top,@width:20px,@color:#000) {
-    border-color: transparent transparent @color transparent;
+	border-color: transparent transparent @color transparent;
 }
 .triangle(right,@width:20px,@color:#000) {
-    border-color: transparent @color transparent transparent;
+	border-color: transparent @color transparent transparent;
 }
 
 .triangle(bottom,@width:20px,@color:#000) {
-    border-color: @color transparent transparent transparent;
+	border-color: @color transparent transparent transparent;
 }
 .triangle(left,@width:20px,@color:#000) {
-    border-color: transparent transparent transparent @color;
+	border-color: transparent transparent transparent @color;
 }
 .triangle(@_,@width:20px,@color:#000) {
-    border-style: solid;
-    border-width: @width;
+	border-style: solid;
+	border-width: @width;
 }
 #main {
-    .triangle(left, 50px, #999);
+	.triangle(left, 50px, #999);
 }
 /* 生成的 CSS */
 #main {
-    border-color: transparent transparent transparent #999;
-    border-style: solid;
-    border-width: 50px;
+	border-color: transparent transparent transparent #999;
+	border-style: solid;
+	border-width: 50px;
 }
 ```
 
@@ -422,37 +422,37 @@ main.classList.add("show");
 
 ```less
 #card() {
-    background: #723232;
-    .d(@w:300px) {
-        width: @w;
+	background: #723232;
+	.d(@w:300px) {
+		width: @w;
 
-        #a(@h:300px) {
-            height: @h; //可以使用上一层传进来的方法
-        }
-    }
+		#a(@h:300px) {
+			height: @h; //可以使用上一层传进来的方法
+		}
+	}
 }
 #wrap {
-    #card > .d > #a(100px); // 父元素不能加 括号
+	#card > .d > #a(100px); // 父元素不能加 括号
 }
 #main {
-    #card .d();
+	#card .d();
 }
 #con {
-    //不得单独使用命名空间的方法
-    //.d() 如果前面没有引入命名空间 #card ，将会报错
+	//不得单独使用命名空间的方法
+	//.d() 如果前面没有引入命名空间 #card ，将会报错
 
-    #card; // 等价于 #card();
-    .d(20px); //必须先引入 #card
+	#card; // 等价于 #card();
+	.d(20px); //必须先引入 #card
 }
 /* 生成的 CSS */
 #wrap {
-    height: 100px;
+	height: 100px;
 }
 #main {
-    width: 300px;
+	width: 300px;
 }
 #con {
-    width: 20px;
+	width: 20px;
 }
 ```
 
@@ -469,31 +469,31 @@ Less 没有 if else，可是它有 `when`
 
 ```less
 #card {
-    // and 运算符 ，相当于 与运算 &&，必须条件全部符合才会执行
-    .border(@width,@color,@style) when (@width>100px) and(@color=#999) {
-        border: @style @color @width;
-    }
+	// and 运算符 ，相当于 与运算 &&，必须条件全部符合才会执行
+	.border(@width,@color,@style) when (@width>100px) and(@color=#999) {
+		border: @style @color @width;
+	}
 
-    // not 运算符，相当于 非运算 !，条件为 不符合才会执行
-    .background(@color) when not (@color>=#222) {
-        background: @color;
-    }
+	// not 运算符，相当于 非运算 !，条件为 不符合才会执行
+	.background(@color) when not (@color>=#222) {
+		background: @color;
+	}
 
-    // , 逗号分隔符：相当于 或运算 ||，只要有一个符合条件就会执行
-    .font(@size:20px) when (@size>50px) , (@size<100px) {
-        font-size: @size;
-    }
+	// , 逗号分隔符：相当于 或运算 ||，只要有一个符合条件就会执行
+	.font(@size:20px) when (@size>50px) , (@size<100px) {
+		font-size: @size;
+	}
 }
 #main {
-    #card > .border(200px,#999,solid);
-    #card .background(#111);
-    #card > .font(40px);
+	#card > .border(200px,#999,solid);
+	#card .background(#111);
+	#card > .font(40px);
 }
 /* 生成后的 CSS */
 #main {
-    border: solid #999 200px;
-    background: #111;
-    font-size: 40px;
+	border: solid #999 200px;
+	background: #111;
+	font-size: 40px;
 }
 ```
 
@@ -509,20 +509,20 @@ Less 没有 if else，可是它有 `when`
 
 ```less
 .boxShadow(...) {
-    box-shadow: @arguments;
+	box-shadow: @arguments;
 }
 .textShadow(@a,...) {
-    text-shadow: @arguments;
+	text-shadow: @arguments;
 }
 #main {
-    .boxShadow(1px,4px,30px,red);
-    .textShadow(1px,4px,30px,red);
+	.boxShadow(1px,4px,30px,red);
+	.textShadow(1px,4px,30px,red);
 }
 
 /* 生成后的 CSS */
 #main {
-    box-shadow: 1px 4px 30px red;
-    text-shadow: 1px 4px 30px red;
+	box-shadow: 1px 4px 30px red;
+	text-shadow: 1px 4px 30px red;
 }
 ```
 
@@ -532,16 +532,16 @@ Less 没有 if else，可是它有 `when`
 
 ```less
 .border {
-    border: solid 1px red;
-    margin: 50px;
+	border: solid 1px red;
+	margin: 50px;
 }
 #main {
-    .border() !important;
+	.border() !important;
 }
 /* 生成后的 CSS */
 #main {
-    border: solid 1px red !important;
-    margin: 50px !important;
+	border: solid 1px red !important;
+	margin: 50px !important;
 }
 ```
 
@@ -553,23 +553,23 @@ Less 并没有提供 for 循环功能，但这也难不倒 聪明的程序员，
 .generate-columns(4);
 
 .generate-columns(@n, @i: 1) when (@i =< @n) {
-    .column-@{i} {
-        width: (@i * 100% / @n);
-    }
-    .generate-columns(@n, (@i + 1));
+	.column-@{i} {
+		width: (@i * 100% / @n);
+	}
+	.generate-columns(@n, (@i + 1));
 }
 /* 生成后的 CSS */
 .column-1 {
-    width: 25%;
+	width: 25%;
 }
 .column-2 {
-    width: 50%;
+	width: 50%;
 }
 .column-3 {
-    width: 75%;
+	width: 75%;
 }
 .column-4 {
-    width: 100%;
+	width: 100%;
 }
 ```
 
@@ -581,15 +581,15 @@ Less 并没有提供 for 循环功能，但这也难不倒 聪明的程序员，
 
 ```less
 .boxShadow() {
-    box-shadow+: inset 0 0 10px #555;
+	box-shadow+: inset 0 0 10px #555;
 }
 .main {
-    .boxShadow();
-    box-shadow+: 0 0 20px black;
+	.boxShadow();
+	box-shadow+: 0 0 20px black;
 }
 /* 生成后的 CSS */
 .main {
-    box-shadow: inset 0 0 10px #555, 0 0 20px black;
+	box-shadow: inset 0 0 10px #555, 0 0 20px black;
 }
 ```
 
@@ -597,16 +597,16 @@ Less 并没有提供 for 循环功能，但这也难不倒 聪明的程序员，
 
 ```less
 .Animation() {
-    transform+_: scale(2);
+	transform+_: scale(2);
 }
 .main {
-    .Animation();
-    transform+_: rotate(15deg);
+	.Animation();
+	transform+_: rotate(15deg);
 }
 
 /* 生成的 CSS */
 .main {
-    transform: scale(2) rotate(15deg);
+	transform: scale(2) rotate(15deg);
 }
 ```
 
@@ -616,17 +616,17 @@ Less 并没有提供 for 循环功能，但这也难不倒 聪明的程序员，
 
 ```less
 .average(@x, @y) {
-    @average: ((@x + @y) / 2);
+	@average: ((@x + @y) / 2);
 }
 
 div {
-    .average(16px, 50px); // 调用 方法
-    padding: @average; // 使用返回值
+	.average(16px, 50px); // 调用 方法
+	padding: @average; // 使用返回值
 }
 
 /* 生成的 CSS */
 div {
-    padding: 33px;
+	padding: 33px;
 }
 ```
 
@@ -640,26 +640,26 @@ extend 是 Less 的一个伪类。它可继承 所匹配声明中的全部样式
 
 ```less
 .animation {
-    transition: all 0.3s ease-out;
-    .hide {
-        transform: scale(0);
-    }
+	transition: all 0.3s ease-out;
+	.hide {
+		transform: scale(0);
+	}
 }
 #main {
-    &:extend(.animation);
+	&:extend(.animation);
 }
 #con {
-    &:extend(.animation .hide);
+	&:extend(.animation .hide);
 }
 
 /* 生成后的 CSS */
 .animation,
 #main {
-    transition: all 0.3s ease-out;
+	transition: all 0.3s ease-out;
 }
 .animation .hide,
 #con {
-    transform: scale(0);
+	transform: scale(0);
 }
 ```
 
@@ -669,12 +669,12 @@ extend 是 Less 的一个伪类。它可继承 所匹配声明中的全部样式
 
 ```less
 #main {
-    width: 200px;
+	width: 200px;
 }
 #main {
-    &:after {
-        content: "Less is good!";
-    }
+	&:after {
+		content: 'Less is good!';
+	}
 }
 #wrap:extend(#main all) {
 }
@@ -682,11 +682,11 @@ extend 是 Less 的一个伪类。它可继承 所匹配声明中的全部样式
 /* 生成的 CSS */
 #main,
 #wrap {
-    width: 200px;
+	width: 200px;
 }
 #main:after,
 #wrap:after {
-    content: "Less is good!";
+	content: 'Less is good!';
 }
 ```
 
@@ -698,30 +698,30 @@ extend 是 Less 的一个伪类。它可继承 所匹配声明中的全部样式
 
 ```less
 .Method {
-    width: 200px;
-    &:after {
-        content: "Less is good!";
-    }
+	width: 200px;
+	&:after {
+		content: 'Less is good!';
+	}
 }
 #main {
-    .Method;
+	.Method;
 }
 #wrap {
-    .Method;
+	.Method;
 }
 
 /* 生成的 CSS */
 #main {
-    width: 200px;
-    &:after {
-        content: "Less is good!";
-    }
+	width: 200px;
+	&:after {
+		content: 'Less is good!';
+	}
 }
 #wrap {
-    width: 200px;
-    &:after {
-        content: "Less is good!";
-    }
+	width: 200px;
+	&:after {
+		content: 'Less is good!';
+	}
 }
 ```
 
@@ -739,18 +739,18 @@ _翻译官网_
 1.  导入 less 文件 可省略后缀
 
 ```javascript
-import "main";
+import 'main';
 //等价于
-import "main.less";
+import 'main.less';
 ```
 
 1.  `@import` 的位置可随意放置
 
 ```css
 #main {
-    font-size: 15px;
+	font-size: 15px;
 }
-@import "style";
+@import 'style';
 ```
 
 ### reference
@@ -758,7 +758,7 @@ import "main.less";
 Less 中 最强大的特性 使用 引入的 Less 文件，但不会 编译它。
 
 ```less
-@import (reference) "bootstrap.less";
+@import (reference) 'bootstrap.less';
 
 #wrap:extend(.navbar all) {
 }
@@ -773,8 +773,8 @@ Less 中 最强大的特性 使用 引入的 Less 文件，但不会 编译它�
 > @import 语句的默认行为。这表明相同的文件只会被导入一次，而随后的导入文件的重复代码都不会解析。
 
 ```less
-@import (once) "foo.less";
-@import (once) "foo.less"; // this statement will be ignored
+@import (once) 'foo.less';
+@import (once) 'foo.less'; // this statement will be ignored
 ```
 
 #### multiple
@@ -784,18 +784,18 @@ Less 中 最强大的特性 使用 引入的 Less 文件，但不会 编译它�
 ```less
 // file: foo.less
 .a {
-    color: green;
+	color: green;
 }
 // file: main.less
-@import (multiple) "foo.less";
-@import (multiple) "foo.less";
+@import (multiple) 'foo.less';
+@import (multiple) 'foo.less';
 
 /* 生成后的 CSS */
 .a {
-    color: green;
+	color: green;
 }
 .a {
-    color: green;
+	color: green;
 }
 ```
 
@@ -892,12 +892,12 @@ isnumber(url(...)); // false
 
     ```less
     #main {
-        width: ~"calc(300px-30px)";
+    	width: ~'calc(300px-30px)';
     }
 
     /* 生成后的 CSS */
     #main {
-        width: calc(300px-30px);
+    	width: calc(300px-30px);
     }
     ```
 
@@ -909,22 +909,22 @@ isnumber(url(...)); // false
 
     ```less
     .judge(@i) when(@i=1) {
-        @size: 15px;
+    	@size: 15px;
     }
     .judge(@i) when(@i>1) {
-        @size: 16px;
+    	@size: 16px;
     }
     .loopAnimation(@i) when (@i<16) {
-        .circle:nth-child(@{i}) {
-            .judeg(@i);
-            border-radius: @size @size 0 0;
-            animation: ~"circle-@{i}" @duration infinite @ease;
-            transition-delay: ~"@{i}ms";
-        }
-        @keyframes ~"circle-@{i}" {
-            // do something...
-        }
-        .loopAnimation(@i + 1);
+    	.circle:nth-child(@{i}) {
+    		.judeg(@i);
+    		border-radius: @size @size 0 0;
+    		animation: ~'circle-@{i}' @duration infinite @ease;
+    		transition-delay: ~'@{i}ms';
+    	}
+    	@keyframes ~"circle-@{i}" {
+    		// do something...
+    	}
+    	.loopAnimation(@i + 1);
     }
     ```
 
@@ -937,27 +937,27 @@ isnumber(url(...)); // false
     ```less
     @content:` "aaa".toUpperCase()`;
     #randomColor {
-        @randomColor: ~"rgb(`Math.round(Math.random() * 256)`,`Math.round(Math.random() * 256)`,`Math.round(Math.random() * 256)`)";
+    	@randomColor: ~'rgb(`Math.round(Math.random() * 256)`,`Math.round(Math.random() * 256)`,`Math.round(Math.random() * 256)`)';
     }
     #wrap {
-        width: ~"`Math.round(Math.random() * 100)`px";
-        &:after {
-            content: @content;
-        }
-        height: ~"`window.innerHeight`px";
-        alert: ~"`alert(1)`";
-        #randomColor();
-        background-color: @randomColor;
+    	width: ~'`Math.round(Math.random() * 100)`px';
+    	&:after {
+    		content: @content;
+    	}
+    	height: ~'`window.innerHeight`px';
+    	alert: ~'`alert(1)`';
+    	#randomColor();
+    	background-color: @randomColor;
     }
     /* 生成后的 CSS */
 
     // 弹出 1
     #wrap {
-        width: 随机值（0~100）px;
-        height: 743px; //由电脑而异
-        background: 随机颜色;
+    	width: 随机值（0~100）px;
+    	height: 743px; //由电脑而异
+    	background: 随机颜色;
     }
     #wrap::after {
-        content: "AAA";
+    	content: 'AAA';
     }
     ```

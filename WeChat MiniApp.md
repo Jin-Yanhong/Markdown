@@ -4,57 +4,14 @@
 
 ```css
 ::-webkit-scrollbar {
-    display: none;
-    width: 0;
-    height: 0;
-    color: transparent;
+	display: none;
+	width: 0;
+	height: 0;
+	color: transparent;
 }
 ```
 
-## WXML 内容
-
-#### 微信获取用户信息
-
-
-```html
-<view class="container">
-  <view class="userinfo">
-    <block wx:if="{{canIUseOpenData}}">
-      <view class="userinfo-avatar" bindtap="bindViewTap">
-        <open-data type="userAvatarUrl"></open-data>
-      </view>
-      <open-data type="userNickName"></open-data>
-    </block>
-    <block wx:elif="{{!hasUserInfo}}">
-      <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> 获取头像昵称 </button>
-      <button wx:elif="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-      <view wx:else> 请使用1.4.4及以上版本基础库 </view>
-    </block>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
-</view>
-
-```
-
-
-
-
-
 ## js 内容
-
-### Data Object
-
-```javascript
-_this.setData({
-    ["orderInfo[" + index + "].mwShoppingCartList"]: hasEfficacy,
-});
-```
 
 ### 富文本
 
@@ -68,7 +25,7 @@ _this.setData({
 
 ```css
 .p_richText {
-    /**/
+	/**/
 }
 ```
 
@@ -81,85 +38,84 @@ _this.setData({
 ```javascript
 // 普通页面  onLoad:
 Page({
-    onLoad: function (options) {
-        if (options.scene) {
-            const shopCode = decodeURIComponent(options.scene);
-        }
-    },
+	onLoad: function (options) {
+		if (options.scene) {
+			const shopCode = decodeURIComponent(options.scene);
+		}
+	},
 });
 
 //  App.js (待验证)
 Page({
-    onLoad: function (options) {
-        if (options?.query?.scene) {
-            const shopCode = decodeURIComponent(options.query.scene);
-        }
-    },
+	onLoad: function (options) {
+		if (options?.query?.scene) {
+			const shopCode = decodeURIComponent(options.query.scene);
+		}
+	},
 });
 ```
 
 #### 强制使用最新版
 
 ```javascript
- App({
-     onLaunch: function (options) {
-         this.autoUpdate()
-     },
-     autoUpdate: function () {
-         var self = this
-         // 获取小程序更新机制兼容
-         if (wx.canIUse('getUpdateManager')) {
-             const updateManager = wx.getUpdateManager()
-             updateManager.onCheckForUpdate(function (res) {
-                 if (res.hasUpdate) {
-                     wx.showModal({
-                         title: '更新提示',
-                         content: '检测到新版本，是否下载新版本并重启小程序？',
-                         success: function (res) {
-                             if (res.confirm) {
-                                 self.downLoadAndUpdate(updateManager)
-                             } else if (res.cancel) {
-                                 wx.showModal({
-                                     title: '温馨提示',
-                                     content: '本次版本更新涉及到新的功能添加，旧版本无法正常访问的',
-                                     showCancel: false,
-                                     confirmText: "确定更新",
-                                     success: function (res) {
-                                         if (res.confirm) {
-                                             //下载新版本，并重新应用
-                                             self.downLoadAndUpdate(updateManager)
-                                         }
-                                     }
-                                 })
-                             }
-                         }
-                     })
-                 }
-             })
-         } else {
-             wx.showModal({
-                 title: '提示',
-                 content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。',
-             })
-         }
-     },
+App({
+	onLaunch: function (options) {
+		this.autoUpdate();
+	},
+	autoUpdate: function () {
+		var self = this;
+		// 获取小程序更新机制兼容
+		if (wx.canIUse('getUpdateManager')) {
+			const updateManager = wx.getUpdateManager();
+			updateManager.onCheckForUpdate(function (res) {
+				if (res.hasUpdate) {
+					wx.showModal({
+						title: '更新提示',
+						content: '检测到新版本，是否下载新版本并重启小程序？',
+						success: function (res) {
+							if (res.confirm) {
+								self.downLoadAndUpdate(updateManager);
+							} else if (res.cancel) {
+								wx.showModal({
+									title: '温馨提示',
+									content: '本次版本更新涉及到新的功能添加，旧版本无法正常访问的',
+									showCancel: false,
+									confirmText: '确定更新',
+									success: function (res) {
+										if (res.confirm) {
+											//下载新版本，并重新应用
+											self.downLoadAndUpdate(updateManager);
+										}
+									},
+								});
+							}
+						},
+					});
+				}
+			});
+		} else {
+			wx.showModal({
+				title: '提示',
+				content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。',
+			});
+		}
+	},
 
-     downLoadAndUpdate: function (updateManager) {
-         var self = this
-         wx.showLoading();
-         updateManager.onUpdateReady(function () {
-             wx.hideLoading()
-             updateManager.applyUpdate()
-         })
-         updateManager.onUpdateFailed(function () {
-             wx.hideLoading()
-             // 新的版本下载失败
-             wx.showModal({
-                 title: '已经有新版本了哟~',
-                 content: '新版本已经上线，请您删除当前小程序，重新搜索打开',
-             })
-         })
-     }
- })
+	downLoadAndUpdate: function (updateManager) {
+		var self = this;
+		wx.showLoading();
+		updateManager.onUpdateReady(function () {
+			wx.hideLoading();
+			updateManager.applyUpdate();
+		});
+		updateManager.onUpdateFailed(function () {
+			wx.hideLoading();
+			// 新的版本下载失败
+			wx.showModal({
+				title: '已经有新版本了哟~',
+				content: '新版本已经上线，请您删除当前小程序，重新搜索打开',
+			});
+		});
+	},
+});
 ```
-

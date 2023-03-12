@@ -6,11 +6,11 @@
 
 ```javascript
 function makeFunc() {
-    var name = "Mozilla";
-    function displayName() {
-        alert(name);
-    }
-    return displayName;
+	var name = 'Mozilla';
+	function displayName() {
+		alert(name);
+	}
+	return displayName;
 }
 
 var myFunc = makeFunc();
@@ -27,8 +27,8 @@ myFunc();
 
 ```javascript
 function* generator(i) {
-    yield i;
-    yield i + 10;
+	yield i;
+	yield i + 10;
 }
 
 const gen = generator(10);
@@ -50,16 +50,16 @@ function.call(thisArg, arg1, arg2, ...) // 参数列表
 
 ```javascript
 function Product(name, price) {
-    this.name = name;
-    this.price = price;
+	this.name = name;
+	this.price = price;
 }
 
 function Food(name, price) {
-    Product.call(this, name, price);
-    this.category = "food";
+	Product.call(this, name, price);
+	this.category = 'food';
 }
 
-console.log(new Food("cheese", 5).name);
+console.log(new Food('cheese', 5).name);
 // expected output: "cheese"
 ```
 
@@ -95,10 +95,10 @@ function.bind(thisArg[, arg1[, arg2[, ...]]])
 
 ```javascript
 const module = {
-    x: 42,
-    getX: function () {
-        return this.x;
-    },
+	x: 42,
+	getX: function () {
+		return this.x;
+	},
 };
 
 const unboundGetX = module.getX;

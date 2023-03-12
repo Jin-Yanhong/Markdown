@@ -2,8 +2,7 @@
 
 1.  int()
 
-    > Boolean 值 true = 1 ，false = 0
-    > 含有除数字以外的特殊字符，不能强转
+    > Boolean 值 true = 1 ，false = 0 含有除数字以外的特殊字符，不能强转
 
 2.  float()
 
@@ -11,10 +10,7 @@
 
 4.  bool()
 
-    > Boolean 值 true = 1 ，false = 0
-    > 含有除数字以外的特殊字符，不能强转
-    > 字符串中没有内容都为`false`
-    > 列表中有数据，返回`true`,否则返回`false`
+    > Boolean 值 true = 1 ，false = 0 含有除数字以外的特殊字符，不能强转字符串中没有内容都为`false` 列表中有数据，返回`true`,否则返回`false`
 
     ```python
     print(bool(0))
@@ -99,7 +95,6 @@ input()
 
 ### 文件的打开
 
-open(filepath,mode).
-w,r
+open(filepath,mode). w,r
 
 ### 文件的关闭

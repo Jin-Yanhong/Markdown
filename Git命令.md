@@ -182,6 +182,7 @@ git branch -d branch_name
 ```bash
 # 删除远程分支
 git branch -r -d origin branch-name
+git push origin --delete remoteBranchName
 
 # 推送到远端
 git push origin :branch-name

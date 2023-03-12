@@ -54,6 +54,12 @@ cat filename
 
 ##### 拷贝文本文件的内容
 
-```bash
+```sh
 clip < filepath filename
+```
+
+```sh
+# 环境变量
+# set PATH=C
+echo %PATH%
 ```

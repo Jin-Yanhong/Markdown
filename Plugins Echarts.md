@@ -48,242 +48,144 @@ legend: {
  * @param {Number} interval 图表高亮轮播切换的周期
  */
 
-function tooltipHighlight(
-    echart,
-    option,
-    need_scroll = false,
-    interval = 2000
-) {
-    // 参数检查
-    if (!(echart && option)) {
-        console.error(
-            "echarts自动显示tooltips方法出错，echart、option 参数错误，请检查相关参数！"
-        );
-        return;
-    }
+function tooltipHighlight(echart, option, need_scroll = false, interval = 2000) {
+	// 参数检查
+	if (!(echart && option)) {
+		console.error('echarts自动显示tooltips方法出错，echart、option 参数错误，请检查相关参数！');
+		return;
+	}
 
-    let dataLength;
-    // 数据长度检查
-    if (option.series[0] && option.series[0].data) {
-        dataLength = option.series[0].data.length;
-    } else if (option.series && option.series.data) {
-        dataLength = option.series.data.length;
-    } else if (option.dataset && option.dataset.source) {
-        dataLength = option.dataset.source.length - 1;
-    } else if (dataLength == 0) {
-        console.error("当前图表数据配置项暂无数据！");
-        return;
-    }
+	let dataLength;
+	// 数据长度检查
+	if (option.series[0] && option.series[0].data) {
+		dataLength = option.series[0].data.length;
+	} else if (option.series && option.series.data) {
+		dataLength = option.series.data.length;
+	} else if (option.dataset && option.dataset.source) {
+		dataLength = option.dataset.source.length - 1;
+	} else if (dataLength == 0) {
+		console.error('当前图表数据配置项暂无数据！');
+		return;
+	}
 
-    // 当前显示项索引
-    let curIndex = 0;
-    // 显示周期
+	// 当前显示项索引
+	let curIndex = 0;
+	// 显示周期
 
-    // 是否需要滚动，默认不需要滚动
-    if (need_scroll) {
-        // scroll_count  所有数据都高亮一次，滚动条一共需要滑动的次数，
-        let scroll_count;
+	// 是否需要滚动，默认不需要滚动
+	if (need_scroll) {
+		// scroll_count  所有数据都高亮一次，滚动条一共需要滑动的次数，
+		let scroll_count;
 
-        if (
-            Object.prototype.toString.call(option.dataZoom) == "[object Array]"
-        ) {
-            scroll_count =
-                100 / (option.dataZoom[0].end - option.dataZoom[0].start);
-        } else if (
-            Object.prototype.toString.call(option.dataZoom) == "[object Object]"
-        ) {
-            scroll_count = 100 / (option.dataZoom.end - option.dataZoom.start);
-        } else {
-            console.error("当前图表数据配置项没有配置 dataZoom 属性！");
-            return;
-        }
-        let zoom_step = 100 / scroll_count;
+		if (Object.prototype.toString.call(option.dataZoom) == '[object Array]') {
+			scroll_count = 100 / (option.dataZoom[0].end - option.dataZoom[0].start);
+		} else if (Object.prototype.toString.call(option.dataZoom) == '[object Object]') {
+			scroll_count = 100 / (option.dataZoom.end - option.dataZoom.start);
+		} else {
+			console.error('当前图表数据配置项没有配置 dataZoom 属性！');
+			return;
+		}
+		let zoom_step = 100 / scroll_count;
 
-        // 滚动配置参数
-        let startValue = 0;
-        let endValue;
-        let startPage = 1;
-        let count = Math.ceil(dataLength / scroll_count);
-        // 需要切换滚动的索引值
-        let scroll_index_arr = [];
-        //
-        for (let i = 0; i < dataLength + 1; i++) {
-            if (i % count == 1) {
-                scroll_index_arr.push(i);
-            }
-        }
+		// 滚动配置参数
+		let startValue = 0;
+		let endValue;
+		let startPage = 1;
+		let count = Math.ceil(dataLength / scroll_count);
+		// 需要切换滚动的索引值
+		let scroll_index_arr = [];
+		//
+		for (let i = 0; i < dataLength + 1; i++) {
+			if (i % count == 1) {
+				scroll_index_arr.push(i);
+			}
+		}
 
-        scroll_index_arr.shift();
-        // console.log('滑动索引值', scroll_index_arr);
-        // debugger;
-        setInterval(() => {
-            // dataZoom 伴随滚动
-            echart.dispatchAction({
-                type: "dataZoom",
-                // 开始位置的百分比，0 - 100
-                start: startValue,
-                // 结束位置的百分比，0 - 100
-                end: endValue,
-            });
+		scroll_index_arr.shift();
+		// console.log('滑动索引值', scroll_index_arr);
+		// debugger;
+		setInterval(() => {
+			// dataZoom 伴随滚动
+			echart.dispatchAction({
+				type: 'dataZoom',
+				// 开始位置的百分比，0 - 100
+				start: startValue,
+				// 结束位置的百分比，0 - 100
+				end: endValue,
+			});
 
-            // 图表当前项高亮
-            echart.dispatchAction({
-                type: "highlight",
-                seriesIndex: 0,
-                dataIndex: curIndex,
-            });
+			// 图表当前项高亮
+			echart.dispatchAction({
+				type: 'highlight',
+				seriesIndex: 0,
+				dataIndex: curIndex,
+			});
 
-            // 显示 tooltip
-            echart.dispatchAction({
-                type: "showTip",
-                seriesIndex: 0,
-                dataIndex: curIndex,
-            });
+			// 显示 tooltip
+			echart.dispatchAction({
+				type: 'showTip',
+				seriesIndex: 0,
+				dataIndex: curIndex,
+			});
 
-            // 高亮自运算
-            if (curIndex < dataLength - 1) {
-                curIndex++;
-                // console.log('当前项', curIndex);
-            } else {
-                curIndex = 0;
-            }
+			// 高亮自运算
+			if (curIndex < dataLength - 1) {
+				curIndex++;
+				// console.log('当前项', curIndex);
+			} else {
+				curIndex = 0;
+			}
 
-            if (curIndex == scroll_index_arr[startPage - 1] - startPage) {
-                //
-                startPage++;
-                // console.log('翻页参数叠加了', startPage);
-                if (startPage > scroll_index_arr.length + 1) {
-                    startPage = 1;
-                    // console.log('翻页参数重置了', startPage);
-                }
-            }
-            // 设置 滚动条 起始值
-            startValue = (startPage - 1) * zoom_step;
-            // 设置 滚动条 结束值
-            endValue = startValue + zoom_step;
-            // 数据重置
-            if (curIndex == 0) {
-                startPage = 1;
-                startValue = 0;
-                endValue = startValue + zoom_step;
-                // console.log('重置', startPage);
-            }
-        }, interval);
-    } else {
-        // debugger;
-        // 不需要要滚动
-        setInterval(() => {
-            // 图表当前项高亮
-            echart.dispatchAction({
-                type: "highlight",
-                seriesIndex: 0,
-                dataIndex: curIndex,
-            });
+			if (curIndex == scroll_index_arr[startPage - 1] - startPage) {
+				//
+				startPage++;
+				// console.log('翻页参数叠加了', startPage);
+				if (startPage > scroll_index_arr.length + 1) {
+					startPage = 1;
+					// console.log('翻页参数重置了', startPage);
+				}
+			}
+			// 设置 滚动条 起始值
+			startValue = (startPage - 1) * zoom_step;
+			// 设置 滚动条 结束值
+			endValue = startValue + zoom_step;
+			// 数据重置
+			if (curIndex == 0) {
+				startPage = 1;
+				startValue = 0;
+				endValue = startValue + zoom_step;
+				// console.log('重置', startPage);
+			}
+		}, interval);
+	} else {
+		// debugger;
+		// 不需要要滚动
+		setInterval(() => {
+			// 图表当前项高亮
+			echart.dispatchAction({
+				type: 'highlight',
+				seriesIndex: 0,
+				dataIndex: curIndex,
+			});
 
-            // 显示 tooltip
-            echart.dispatchAction({
-                type: "showTip",
-                seriesIndex: 0,
-                dataIndex: curIndex,
-            });
+			// 显示 tooltip
+			echart.dispatchAction({
+				type: 'showTip',
+				seriesIndex: 0,
+				dataIndex: curIndex,
+			});
 
-            // 高亮自运算
-            if (curIndex < dataLength - 1) {
-                curIndex++;
-                // console.log('当前项', curIndex);
-            } else {
-                curIndex = 0;
-            }
-            // console.log('当前index', curIndex);
-        }, interval);
-    }
+			// 高亮自运算
+			if (curIndex < dataLength - 1) {
+				curIndex++;
+				// console.log('当前项', curIndex);
+			} else {
+				curIndex = 0;
+			}
+			// console.log('当前index', curIndex);
+		}, interval);
+	}
 }
-```
-
-#### 图表样式相关配置项
-
-```javascript
-let option = {
-    tooltip: {
-        trigger: "axis",
-        axisPointer: {
-            // 坐标轴指示器，坐标轴触发有效
-            type: "shadow", // 默认为直线，可选为：'line' | 'shadow' | 'none'
-        },
-        formatter: function (params) {
-            //
-        },
-    },
-    legend: {
-        orient: "horizontal",
-        right: 0,
-        itemGap: 20,
-        left: "center",
-        textStyle: {
-            color: "#ffffff",
-        },
-        data: ["人口总数", "常住人口", "流动人口"],
-    },
-    grid: {
-        left: 20,
-        right: 20,
-        top: 20,
-        bottom: 0,
-        containLabel: true,
-    },
-    xAxis: {
-        type: "category",
-        data: ["网格1", "网格2", "网格3", "网格4", "网格5", "网格6"],
-        boundaryGap: ["20%", "20%"],
-        axisTick: {
-            alignWithLabel: true,
-        },
-        nameRotate: 45,
-        axisLabel: {
-            interval: 0, //强制文字产生间隔
-            // rotate: '45', //旋转角度
-        },
-        axisLine: {
-            show: true,
-            lineStyle: {
-                color: "#ffffff",
-            },
-        },
-    },
-    yAxis: [
-        {
-            type: "value",
-            show: true,
-            splitLine: {
-                show: false,
-            },
-        },
-    ],
-    series: [
-        {
-            type: "bar",
-            barWidth: 12,
-            color: "#4dd2ff",
-            data: [12504, 20498, 10916, 6637, 16603, 31352],
-            itemStyle: {
-                normal: {
-                    shadowBlur: 10, //发光范围
-                    shadowColor: "#0681c8", //发光颜色
-                    color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [
-                        {
-                            offset: 0,
-                            color: "#092ff266", // 鼠标指示时，提示框内图例的颜色
-                        },
-                        {
-                            offset: 1,
-                            color: "#05eaff",
-                        },
-                    ]),
-                },
-            },
-        },
-    ],
-};
 ```
 
 # Echarts 常用 API
@@ -353,8 +255,7 @@ echarts.getMap(mapName: string) => Object
 
 图形相关帮助方法。主要有两个方法：clipPointsByRect()和 clipRectByRect()。
 
--   clipPointsByRect()
-    输入一组点，一个矩形，返回被矩形截取过的点
+-   clipPointsByRect() 输入一组点，一个矩形，返回被矩形截取过的点
 
 ```javascript
 (
@@ -370,8 +271,7 @@ echarts.getMap(mapName: string) => Object
 ) => Array.<Array.<number>> // 截取结果。
 ```
 
--   clipRectByRect()
-    输入两个矩形，返回第二个矩形截取第一个矩形的结果。
+-   clipRectByRect() 输入两个矩形，返回第二个矩形截取第一个矩形的结果。
 
 ```javascript
 (
@@ -407,11 +307,7 @@ echarts.getMap(mapName: string) => Object
 
 #### echartsInstance.setOption()
 
-(option: Object, notMerge?: boolean, lazyUpdate?: boolean)或者(option: Object, opts?: Object)
-设置图表实例的配置项和数据，万能接口，所有参数和数据的修改都可以通过 setOption 来完成。Echarts 会合并新的参数和数据，然后刷新图表。还有开启动画的话，Echarts 会找到两组数据的差异然后通过合适的动画去展示。
-notMerge: 可选参数，是否可以不和之前的 option 进行合并，默认为 false，进行合并。
-lazyUpdate：也是一个可选参数，在设置完 option 之后是否不更新图表。默认为 false，即立即更新。
-**注意**：lazyUpdate 这个参数，设置为 false 的时候，会立即更新图表。一般在做项目的时候，会根据一定的不同条件值（时间等 condition）来在一个 div 容器上渲染具有不同数据的图表。这时候会从后端获取不同的数据来渲染 echarts 图表。这时候需要将 lazyUpdate 参数设置为 true，然后图表才能随着数据的变化而正常变化。
+(option: Object, notMerge?: boolean, lazyUpdate?: boolean)或者(option: Object, opts?: Object) 设置图表实例的配置项和数据，万能接口，所有参数和数据的修改都可以通过 setOption 来完成。Echarts 会合并新的参数和数据，然后刷新图表。还有开启动画的话，Echarts 会找到两组数据的差异然后通过合适的动画去展示。 notMerge: 可选参数，是否可以不和之前的 option 进行合并，默认为 false，进行合并。 lazyUpdate：也是一个可选参数，在设置完 option 之后是否不更新图表。默认为 false，即立即更新。 **注意**：lazyUpdate 这个参数，设置为 false 的时候，会立即更新图表。一般在做项目的时候，会根据一定的不同条件值（时间等 condition）来在一个 div 容器上渲染具有不同数据的图表。这时候会从后端获取不同的数据来渲染 echarts 图表。这时候需要将 lazyUpdate 参数设置为 true，然后图表才能随着数据的变化而正常变化。
 
 ## 常用的方法
 
@@ -455,9 +351,7 @@ lazyUpdate：也是一个可选参数，在设置完 option 之后是否不更�
 )
 ```
 
-绑定事件处理函数。
-Echarts 的事件有两种。一种是鼠标事件。还有一种是通过 dispatchAction 触发的事件，每个 action 上都有对应的事件。
-**注意**：如果事件是外部 dispatchAction 触发，并且 action 中有 batch 属性触发批量的行为，则相应的响应事件参数里也会把属性都放在 batch 属性中。？？？
+绑定事件处理函数。 Echarts 的事件有两种。一种是鼠标事件。还有一种是通过 dispatchAction 触发的事件，每个 action 上都有对应的事件。 **注意**：如果事件是外部 dispatchAction 触发，并且 action 中有 batch 属性触发批量的行为，则相应的响应事件参数里也会把属性都放在 batch 属性中。？？？
 
 -   echartsInstance.off((eventName: string, handler?: Function))
 
@@ -623,10 +517,10 @@ Echarts 的事件有两种。一种是鼠标事件。还有一种是通过 dispa
 
 ```javascript
 (opts: {
-    // 要增加数据的系列序号。
-    seriesIndex?: string,
-    // 增加的数据。
-    data?: Array | TypedArray,
+	// 要增加数据的系列序号。
+	seriesIndex?: string,
+	// 增加的数据。
+	data?: Array | TypedArray,
 }) => string;
 ```
 
@@ -654,154 +548,154 @@ Echarts 的事件有两种。一种是鼠标事件。还有一种是通过 dispa
 ### 立体柱状图
 
 ```javascript
-xData = ["本年话务总量", "本年人工话务量", "每万客户呼入量"];
+xData = ['本年话务总量', '本年人工话务量', '每万客户呼入量'];
 yData = [0, 1230, 425];
 option = {
-    backgroundColor: "#061326",
-    grid: {
-        top: "25%",
-        left: "-5%",
-        bottom: "5%",
-        right: "5%",
-        containLabel: true,
-    },
-    tooltip: {
-        show: true,
-    },
-    animation: false,
-    xAxis: [
-        {
-            type: "category",
-            data: xData,
-            axisTick: {
-                alignWithLabel: true,
-            },
-            nameTextStyle: {
-                color: "#82b0ec",
-            },
-            axisLine: {
-                show: false,
-                lineStyle: {
-                    color: "#82b0ec",
-                },
-            },
-            axisLabel: {
-                textStyle: {
-                    color: "#fff",
-                },
-                margin: 30,
-            },
-        },
-    ],
-    yAxis: [
-        {
-            show: false,
-            type: "value",
-            axisLabel: {
-                textStyle: {
-                    color: "#fff",
-                },
-            },
-            splitLine: {
-                lineStyle: {
-                    color: "#0c2c5a",
-                },
-            },
-            axisLine: {
-                show: false,
-            },
-        },
-    ],
-    series: [
-        {
-            name: "",
-            type: "pictorialBar",
-            symbolSize: [40, 10],
-            symbolOffset: [0, -6], // 上部椭圆
-            symbolPosition: "end",
-            z: 12,
-            // "barWidth": "0",
-            label: {
-                normal: {
-                    show: true,
-                    position: "top",
-                    // "formatter": "{c}%"
-                    fontSize: 15,
-                    fontWeight: "bold",
-                    color: "#34DCFF",
-                },
-            },
-            color: "#2DB1EF",
-            data: yData,
-        },
-        {
-            name: "",
-            type: "pictorialBar",
-            symbolSize: [40, 10],
-            symbolOffset: [0, 7], // 下部椭圆
-            // "barWidth": "20",
-            z: 12,
-            color: "#2DB1EF",
-            data: yData,
-        },
-        {
-            name: "",
-            type: "pictorialBar",
-            symbolSize: function (d) {
-                return d > 0 ? [50, 15] : [0, 0];
-            },
-            symbolOffset: [0, 12], // 下部内环
-            z: 10,
-            itemStyle: {
-                normal: {
-                    color: "transparent",
-                    borderColor: "#2EA9E5",
-                    borderType: "solid",
-                    borderWidth: 1,
-                },
-            },
-            data: yData,
-        },
-        {
-            name: "",
-            type: "pictorialBar",
-            symbolSize: [70, 20],
-            symbolOffset: [0, 18], // 下部外环
-            z: 10,
-            itemStyle: {
-                normal: {
-                    color: "transparent",
-                    borderColor: "#19465D",
-                    borderType: "solid",
-                    borderWidth: 2,
-                },
-            },
-            data: yData,
-        },
-        {
-            type: "bar",
-            //silent: true,
-            barWidth: "40",
-            barGap: "10%", // Make series be overlap
-            barCateGoryGap: "10%",
-            itemStyle: {
-                normal: {
-                    color: new echarts.graphic.LinearGradient(0, 0, 0, 0.7, [
-                        {
-                            offset: 0,
-                            color: "#38B2E6",
-                        },
-                        {
-                            offset: 1,
-                            color: "#0B3147",
-                        },
-                    ]),
-                    opacity: 0.8,
-                },
-            },
-            data: yData,
-        },
-    ],
+	backgroundColor: '#061326',
+	grid: {
+		top: '25%',
+		left: '-5%',
+		bottom: '5%',
+		right: '5%',
+		containLabel: true,
+	},
+	tooltip: {
+		show: true,
+	},
+	animation: false,
+	xAxis: [
+		{
+			type: 'category',
+			data: xData,
+			axisTick: {
+				alignWithLabel: true,
+			},
+			nameTextStyle: {
+				color: '#82b0ec',
+			},
+			axisLine: {
+				show: false,
+				lineStyle: {
+					color: '#82b0ec',
+				},
+			},
+			axisLabel: {
+				textStyle: {
+					color: '#fff',
+				},
+				margin: 30,
+			},
+		},
+	],
+	yAxis: [
+		{
+			show: false,
+			type: 'value',
+			axisLabel: {
+				textStyle: {
+					color: '#fff',
+				},
+			},
+			splitLine: {
+				lineStyle: {
+					color: '#0c2c5a',
+				},
+			},
+			axisLine: {
+				show: false,
+			},
+		},
+	],
+	series: [
+		{
+			name: '',
+			type: 'pictorialBar',
+			symbolSize: [40, 10],
+			symbolOffset: [0, -6], // 上部椭圆
+			symbolPosition: 'end',
+			z: 12,
+			// "barWidth": "0",
+			label: {
+				normal: {
+					show: true,
+					position: 'top',
+					// "formatter": "{c}%"
+					fontSize: 15,
+					fontWeight: 'bold',
+					color: '#34DCFF',
+				},
+			},
+			color: '#2DB1EF',
+			data: yData,
+		},
+		{
+			name: '',
+			type: 'pictorialBar',
+			symbolSize: [40, 10],
+			symbolOffset: [0, 7], // 下部椭圆
+			// "barWidth": "20",
+			z: 12,
+			color: '#2DB1EF',
+			data: yData,
+		},
+		{
+			name: '',
+			type: 'pictorialBar',
+			symbolSize: function (d) {
+				return d > 0 ? [50, 15] : [0, 0];
+			},
+			symbolOffset: [0, 12], // 下部内环
+			z: 10,
+			itemStyle: {
+				normal: {
+					color: 'transparent',
+					borderColor: '#2EA9E5',
+					borderType: 'solid',
+					borderWidth: 1,
+				},
+			},
+			data: yData,
+		},
+		{
+			name: '',
+			type: 'pictorialBar',
+			symbolSize: [70, 20],
+			symbolOffset: [0, 18], // 下部外环
+			z: 10,
+			itemStyle: {
+				normal: {
+					color: 'transparent',
+					borderColor: '#19465D',
+					borderType: 'solid',
+					borderWidth: 2,
+				},
+			},
+			data: yData,
+		},
+		{
+			type: 'bar',
+			//silent: true,
+			barWidth: '40',
+			barGap: '10%', // Make series be overlap
+			barCateGoryGap: '10%',
+			itemStyle: {
+				normal: {
+					color: new echarts.graphic.LinearGradient(0, 0, 0, 0.7, [
+						{
+							offset: 0,
+							color: '#38B2E6',
+						},
+						{
+							offset: 1,
+							color: '#0B3147',
+						},
+					]),
+					opacity: 0.8,
+				},
+			},
+			data: yData,
+		},
+	],
 };
 ```
 
@@ -812,158 +706,158 @@ option = {
 ### 多边形柱状图
 
 ```javascript
-var xData = ["工单", "影响客户"];
+var xData = ['工单', '影响客户'];
 var yData1 = [100, 60];
 var yData2 = [80, 40];
-var path = "path://M214,1079l8-6h16l8,6-8,6H222Z";
+var path = 'path://M214,1079l8-6h16l8,6-8,6H222Z';
 option = {
-    backgroundColor: "BLACK",
-    title: {
-        text: "本年预安排停电",
-        top: 5,
-        left: "20%",
-        textStyle: {
-            fontSize: 18,
-            color: "#fff",
-        },
-    },
-    legend: {
-        data: ["总数", "未复电数"],
-    },
-    grid: {
-        top: "25%",
-        left: "-5%",
-        bottom: "10%",
-        right: "5%",
-        containLabel: true,
-    },
-    animation: false,
-    xAxis: [
-        {
-            type: "category",
-            data: xData,
-            axisTick: {
-                show: false,
-                alignWithLabel: true,
-            },
-            nameTextStyle: {
-                color: "#fff",
-            },
-            axisLine: {
-                show: false,
-                lineStyle: {
-                    color: "#82b0ec",
-                },
-            },
-            axisLabel: {
-                textStyle: {
-                    color: "#fff",
-                },
-                margin: 20,
-            },
-        },
-    ],
-    yAxis: [
-        {
-            show: false,
-            type: "value",
-            axisLabel: {
-                textStyle: {
-                    color: "#fff",
-                },
-                formatter: "{value}%",
-            },
-            splitLine: {
-                lineStyle: {
-                    color: "#0c2c5a",
-                },
-            },
-            axisLine: {
-                show: false,
-            },
-        },
-    ],
-    series: [
-        {
-            type: "pictorialBar",
-            symbol: path,
-            symbolSize: [30, 8],
-            symbolOffset: [-20, -5],
-            symbolPosition: "end",
-            z: 12,
-            color: "#68B4FF",
-            data: yData1,
-        },
-        {
-            type: "pictorialBar",
-            symbol: path,
-            symbolSize: [30, 8],
-            symbolOffset: [20, -5],
-            symbolPosition: "end",
-            z: 12,
-            color: "#FFCE69",
-            data: yData2,
-        },
-        {
-            type: "pictorialBar",
-            symbol: path,
-            symbolSize: [30, 8],
-            symbolOffset: [-20, 5],
-            z: 12,
-            color: "#68B4FF",
-            data: yData1,
-        },
-        {
-            name: "",
-            type: "pictorialBar",
-            symbol: path,
-            symbolSize: [30, 8],
-            symbolOffset: [20, 5],
-            color: "#FFCE69",
-            z: 12,
-            data: yData2,
-        },
-        {
-            type: "bar",
-            itemStyle: {
-                normal: {
-                    opacity: 0.7,
-                },
-            },
-            barWidth: "30",
-            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                {
-                    offset: 0,
-                    color: "#3D83CD",
-                },
-                {
-                    offset: 1,
-                    color: "#0B3147",
-                },
-            ]),
-            data: yData1,
-        },
-        {
-            type: "bar",
-            itemStyle: {
-                normal: {
-                    opacity: 0.7,
-                },
-            },
-            barWidth: "30",
-            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                {
-                    offset: 0,
-                    color: "#CC9F49",
-                },
-                {
-                    offset: 1,
-                    color: "#0B3147",
-                },
-            ]),
-            data: yData2,
-        },
-    ],
+	backgroundColor: 'BLACK',
+	title: {
+		text: '本年预安排停电',
+		top: 5,
+		left: '20%',
+		textStyle: {
+			fontSize: 18,
+			color: '#fff',
+		},
+	},
+	legend: {
+		data: ['总数', '未复电数'],
+	},
+	grid: {
+		top: '25%',
+		left: '-5%',
+		bottom: '10%',
+		right: '5%',
+		containLabel: true,
+	},
+	animation: false,
+	xAxis: [
+		{
+			type: 'category',
+			data: xData,
+			axisTick: {
+				show: false,
+				alignWithLabel: true,
+			},
+			nameTextStyle: {
+				color: '#fff',
+			},
+			axisLine: {
+				show: false,
+				lineStyle: {
+					color: '#82b0ec',
+				},
+			},
+			axisLabel: {
+				textStyle: {
+					color: '#fff',
+				},
+				margin: 20,
+			},
+		},
+	],
+	yAxis: [
+		{
+			show: false,
+			type: 'value',
+			axisLabel: {
+				textStyle: {
+					color: '#fff',
+				},
+				formatter: '{value}%',
+			},
+			splitLine: {
+				lineStyle: {
+					color: '#0c2c5a',
+				},
+			},
+			axisLine: {
+				show: false,
+			},
+		},
+	],
+	series: [
+		{
+			type: 'pictorialBar',
+			symbol: path,
+			symbolSize: [30, 8],
+			symbolOffset: [-20, -5],
+			symbolPosition: 'end',
+			z: 12,
+			color: '#68B4FF',
+			data: yData1,
+		},
+		{
+			type: 'pictorialBar',
+			symbol: path,
+			symbolSize: [30, 8],
+			symbolOffset: [20, -5],
+			symbolPosition: 'end',
+			z: 12,
+			color: '#FFCE69',
+			data: yData2,
+		},
+		{
+			type: 'pictorialBar',
+			symbol: path,
+			symbolSize: [30, 8],
+			symbolOffset: [-20, 5],
+			z: 12,
+			color: '#68B4FF',
+			data: yData1,
+		},
+		{
+			name: '',
+			type: 'pictorialBar',
+			symbol: path,
+			symbolSize: [30, 8],
+			symbolOffset: [20, 5],
+			color: '#FFCE69',
+			z: 12,
+			data: yData2,
+		},
+		{
+			type: 'bar',
+			itemStyle: {
+				normal: {
+					opacity: 0.7,
+				},
+			},
+			barWidth: '30',
+			color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+				{
+					offset: 0,
+					color: '#3D83CD',
+				},
+				{
+					offset: 1,
+					color: '#0B3147',
+				},
+			]),
+			data: yData1,
+		},
+		{
+			type: 'bar',
+			itemStyle: {
+				normal: {
+					opacity: 0.7,
+				},
+			},
+			barWidth: '30',
+			color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+				{
+					offset: 0,
+					color: '#CC9F49',
+				},
+				{
+					offset: 1,
+					color: '#0B3147',
+				},
+			]),
+			data: yData2,
+		},
+	],
 };
 ```
 
@@ -974,65 +868,52 @@ option = {
 ### 回调函数使用
 
 ```javascript
-var colors = ["#32DA56", "#e43c59"];
-var xData = [
-    "2016-1",
-    "2016-2",
-    "2016-3",
-    "2016-4",
-    "2016-5",
-    "2016-6",
-    "2016-7",
-    "2016-8",
-    "2016-9",
-    "2016-10",
-    "2016-11",
-    "2016-12",
-];
+var colors = ['#32DA56', '#e43c59'];
+var xData = ['2016-1', '2016-2', '2016-3', '2016-4', '2016-5', '2016-6', '2016-7', '2016-8', '2016-9', '2016-10', '2016-11', '2016-12'];
 var yData = [300, 380, 400, 380, 350, 410, 480, 460, 410, 380, 350, 320];
 option = {
-    // color: colors,
-    xAxis: [
-        {
-            type: "category",
-            axisTick: {
-                show: false,
-                alignWithLabel: true,
-            },
-            splitLine: {
-                show: true,
-            },
-            data: xData,
-        },
-    ],
-    yAxis: [
-        {
-            type: "value",
-            axisTick: {
-                show: false,
-                alignWithLabel: true,
-            },
-            splitLine: {
-                show: true,
-            },
-        },
-    ],
-    series: [
-        {
-            type: "bar",
-            symbol: "none",
-            smooth: true,
-            data: yData,
-            itemStyle: {
-                normal: {
-                    color: function (d) {
-                        console.log(d);
-                        return d.value > 400 ? colors[1] : colors[0];
-                    },
-                },
-            },
-        },
-    ],
+	// color: colors,
+	xAxis: [
+		{
+			type: 'category',
+			axisTick: {
+				show: false,
+				alignWithLabel: true,
+			},
+			splitLine: {
+				show: true,
+			},
+			data: xData,
+		},
+	],
+	yAxis: [
+		{
+			type: 'value',
+			axisTick: {
+				show: false,
+				alignWithLabel: true,
+			},
+			splitLine: {
+				show: true,
+			},
+		},
+	],
+	series: [
+		{
+			type: 'bar',
+			symbol: 'none',
+			smooth: true,
+			data: yData,
+			itemStyle: {
+				normal: {
+					color: function (d) {
+						console.log(d);
+						return d.value > 400 ? colors[1] : colors[0];
+					},
+				},
+			},
+		},
+	],
 };
 ```
 

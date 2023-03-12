@@ -6,14 +6,14 @@
 
 ```javascript
 this.$router.push({
-    path: `/particulars/${id}`,
+	path: `/particulars/${id}`,
 });
 ```
 
 ```javascript
 // 对应的路由需要如下配置
 {
-    path: "/particulars/:id";
+	path: '/particulars/:id';
 }
 ```
 
@@ -26,17 +26,17 @@ this.$route.params.id;
 
 ```javascript
 this.$router.push({
-    name: "particulars",
-    params: {
-        id: id,
-    },
+	name: 'particulars',
+	params: {
+		id: id,
+	},
 });
 ```
 
 ```javascript
 // 注意这里不能使用:/id来传递参数了，因为组件中，已经使用params来携带参数了
 {
-    path: "/particulars";
+	path: '/particulars';
 }
 ```
 
@@ -48,16 +48,16 @@ this.$route.params.id;
 
 ```javascript
 this.$router.push({
-    path: "/particulars",
-    query: {
-        id: id,
-    },
+	path: '/particulars',
+	query: {
+		id: id,
+	},
 });
 ```
 
 ```javascript
 {
-    path: "/particulars";
+	path: '/particulars';
 }
 ```
 
@@ -113,22 +113,22 @@ methods: {
 
 ```html
 <ul>
-    <li v-for="item in list">
-        <span :data-index="item.id" @click="cools($event)"></span>
-    </li>
+	<li v-for="item in list">
+		<span :data-index="item.id" @click="cools($event)"></span>
+	</li>
 </ul>
 ```
 
 ```javascript
 const vm = new Vue({
-    el: "#app",
-    data() {
-        return {};
-    },
-    methods: {
-        cools(ev) {
-            console.log(ev.target.dataset.index);
-        },
-    },
+	el: '#app',
+	data() {
+		return {};
+	},
+	methods: {
+		cools(ev) {
+			console.log(ev.target.dataset.index);
+		},
+	},
 });
 ```

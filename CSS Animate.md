@@ -2,35 +2,35 @@
 
 ```css
 @keyframes animated_div {
-    0% {
-        transform: rotate(0deg);
-        left: 0px;
-    }
-    25% {
-        transform: rotate(20deg);
-        left: 0px;
-    }
-    50% {
-        transform: rotate(0deg);
-        left: 500px;
-    }
-    55% {
-        transform: rotate(0deg);
-        left: 500px;
-    }
-    70% {
-        transform: rotate(0deg);
-        left: 500px;
-        background: [[1ec7e6]];
-    }
-    100% {
-        transform: rotate(-360deg);
-        left: 0px;
-    }
+	0% {
+		transform: rotate(0deg);
+		left: 0px;
+	}
+	25% {
+		transform: rotate(20deg);
+		left: 0px;
+	}
+	50% {
+		transform: rotate(0deg);
+		left: 500px;
+	}
+	55% {
+		transform: rotate(0deg);
+		left: 500px;
+	}
+	70% {
+		transform: rotate(0deg);
+		left: 500px;
+		background: [[1ec7e6]];
+	}
+	100% {
+		transform: rotate(-360deg);
+		left: 0px;
+	}
 }
 /* 动画的调用 */
 .div {
-    animation: animated_div 3s;
+	animation: animated_div 3s;
 }
 ```
 
@@ -53,19 +53,17 @@
 
 ```css
 div {
-    /* 只改变运动路径,其他保持一致 */
-    offset-path: path(
-        "M 0 0 L 100 0 L 200 0 L 300 100 L 400 0 L 500 100 L 600 0 L 700 100 L 800 0"
-    );
-    animation: move 2000ms infinite alternate linear;
+	/* 只改变运动路径,其他保持一致 */
+	offset-path: path('M 0 0 L 100 0 L 200 0 L 300 100 L 400 0 L 500 100 L 600 0 L 700 100 L 800 0');
+	animation: move 2000ms infinite alternate linear;
 }
 @keyframes move {
-    0% {
-        offset-distance: 0%;
-    }
-    100% {
-        offset-distance: 100%;
-    }
+	0% {
+		offset-distance: 0%;
+	}
+	100% {
+		offset-distance: 100%;
+	}
 }
 ```
 

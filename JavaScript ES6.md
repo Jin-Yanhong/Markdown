@@ -24,7 +24,7 @@ x; // null
 
 ```javascript
 function f() {
-    console.log("aaa");
+	console.log('aaa');
 }
 
 let [x = f()] = [1];
@@ -36,14 +36,14 @@ let [x = f()] = [1];
 
 ```javascript
 let todoList = [
-    {
-        index: 1,
-        name: "code",
-        status: "doing",
-    },
+	{
+		index: 1,
+		name: 'code',
+		status: 'doing',
+	},
 ];
 let newTodoList = todoList.map((el, index) => {
-    return { ...el, status: "done" };
+	return { ...el, status: 'done' };
 });
 console.log(newTodoList);
 // [{ index: 1, name: 'code', status: 'done' }]
@@ -56,10 +56,10 @@ console.log(newTodoList);
 如果变量名与属性名不一致，必须写成下面这样。
 
 ```javascript
-let { foo: baz } = { foo: "aaa", bar: "bbb" };
+let { foo: baz } = { foo: 'aaa', bar: 'bbb' };
 baz; // "aaa"
 
-let obj = { first: "hello", last: "world" };
+let obj = { first: 'hello', last: 'world' };
 let { first: f, last: l } = obj;
 f; // 'hello'
 l; // 'world'
@@ -69,11 +69,11 @@ l; // 'world'
 >
 > ```javascript
 > let obj = {
->     p: ["Hello", { y: "World" }],
+> 	p: ['Hello', { y: 'World' }],
 > };
 >
 > let {
->     p: [x, { y }],
+> 	p: [x, { y }],
 > } = obj;
 > x; // "Hello"
 > y; // "World"
@@ -98,7 +98,7 @@ x; // null
 字符串也可以解构赋值。这是因为此时，字符串被转换成了一个类似数组的对象。
 
 ```javascript
-const [a, b, c, d, e] = "hello";
+const [a, b, c, d, e] = 'hello';
 a; // "h"
 b; // "e"
 c; // "l"
@@ -109,7 +109,7 @@ e; // "o"
 > 类似数组的对象都有一个`length`属性，因此还可以对这个属性解构赋值。
 >
 > ```javascript
-> let { length: len } = "hello";
+> let { length: len } = 'hello';
 > len; // 5
 > ```
 
@@ -119,7 +119,7 @@ e; // "o"
 
 ```javascript
 function move({ x = 0, y = 0 } = {}) {
-    return [x, y];
+	return [x, y];
 }
 
 move({ x: 3, y: 8 }); // [3, 8]
@@ -157,15 +157,15 @@ last; // 3
 ### 字符的 Unicode 表示法
 
 ```javascript
-"\u0061";
+'\u0061';
 // "a"
 ```
 
 ES6 为字符串添加了遍历器接口，使得字符串可以被`for...of`循环遍历。
 
 ```javascript
-for (let codePoint of "foo") {
-    console.log(codePoint);
+for (let codePoint of 'foo') {
+	console.log(codePoint);
 }
 // "f"
 // "o"
@@ -194,8 +194,8 @@ for (let codePoint of "foo") {
 >     globalThis.s = 21;
 >
 >     const obj = {
->         s: 42,
->         m: () => console.log(this.s),
+>     	s: 42,
+>     	m: () => console.log(this.s),
 >     };
 >
 >     obj.m(); // 21
@@ -204,10 +204,10 @@ for (let codePoint of "foo") {
 > -   需要动态`this`的时候，也不应使用箭头函数
 >
 >     ```javascript
->     var button = document.getElementById("press");
+>     var button = document.getElementById('press');
 >
->     button.addEventListener("click", () => {
->         this.classList.toggle("on");
+>     button.addEventListener('click', () => {
+>     	this.classList.toggle('on');
 >     });
 >     ```
 >
@@ -230,9 +230,9 @@ a1; // [2, 2]
 #### 合并数组
 
 ```javascript
-const arr1 = ["a", "b"];
-const arr2 = ["c"];
-const arr3 = ["d", "e"];
+const arr1 = ['a', 'b'];
+const arr2 = ['c'];
+const arr3 = ['d', 'e'];
 
 // ES5 的合并数组
 arr1.concat(arr2, arr3);
@@ -248,14 +248,14 @@ arr1.concat(arr2, arr3);
 #### 字符串
 
 ```javascript
-[..."hello"];
+[...'hello'];
 // [ "h", "e", "l", "l", "o" ]
 ```
 
 #### 实现了 `Iterator` 接口的对象
 
 ```javascript
-let nodeList = document.querySelectorAll("div"); // 类数组对象，没有数组的方法属性
+let nodeList = document.querySelectorAll('div'); // 类数组对象，没有数组的方法属性
 let array = [...nodeList]; // 转化为数组
 ```
 
@@ -263,9 +263,9 @@ let array = [...nodeList]; // 转化为数组
 
 ```javascript
 let map = new Map([
-    [1, "one"],
-    [2, "two"],
-    [3, "three"],
+	[1, 'one'],
+	[2, 'two'],
+	[3, 'three'],
 ]);
 
 let arr = [...map.keys()]; // [1, 2, 3]
@@ -277,15 +277,15 @@ let arr = [...map.keys()]; // [1, 2, 3]
 
 ```javascript
 // NodeList对象
-let ps = document.querySelectorAll("p");
-Array.from(ps).filter((p) => {
-    return p.textContent.length > 100;
+let ps = document.querySelectorAll('p');
+Array.from(ps).filter(p => {
+	return p.textContent.length > 100;
 });
 9;
 // arguments对象
 function foo() {
-    var args = Array.from(arguments);
-    // ...
+	var args = Array.from(arguments);
+	// ...
 }
 
 // 只要是部署了 Iterator 接口的数据结构，Array.from都能将其转为数组。
@@ -299,7 +299,7 @@ function foo() {
 
 ```javascript
 let obj = { foo: 123 };
-Object.getOwnPropertyDescriptor(obj, "foo");
+Object.getOwnPropertyDescriptor(obj, 'foo');
 //  {
 //    value: 123,
 //    writable: true,
@@ -384,15 +384,10 @@ func?.(...args); // 函数或对象方法是否存在
 ```
 
 ```javascript
-const firstName = message?.body?.user?.firstName || "default";
-const fooValue = myForm.querySelector("input[name=foo]")?.value;
+const firstName = message?.body?.user?.firstName || 'default';
+const fooValue = myForm.querySelector('input[name=foo]')?.value;
 
-const firstName =
-    (message &&
-        message.body &&
-        message.body.user &&
-        message.body.user.firstName) ||
-    "default";
+const firstName = (message && message.body && message.body.user && message.body.user.firstName) || 'default';
 ```
 
 ### Null 判断运算符
@@ -400,7 +395,7 @@ const firstName =
 **`??`**
 
 ```javascript
-const headerText = response.settings.headerText ?? "Hello, world!";
+const headerText = response.settings.headerText ?? 'Hello, world!';
 const animationDuration = response.settings.animationDuration ?? 300;
 const showSplashScreen = response.settings.showSplashScreen ?? true;
 ```
@@ -412,10 +407,10 @@ const showSplashScreen = response.settings.showSplashScreen ?? true;
 ```javascript
 const s = new Set();
 
-[2, 3, 5, 4, 5, 2, 2].forEach((x) => s.add(x));
+[2, 3, 5, 4, 5, 2, 2].forEach(x => s.add(x));
 
 for (let i of s) {
-    console.log(i);
+	console.log(i);
 }
 // 2 3 5 4
 ```
@@ -445,7 +440,7 @@ Set 结构的实例有四个遍历方法，可以用于遍历成员。
 
 ```javascript
 function dedupe(array) {
-    return Array.from(new Set(array));
+	return Array.from(new Set(array));
 }
 
 dedupe([1, 1, 2, 3]); // [1, 2, 3]
@@ -469,9 +464,9 @@ JavaScript 的对象（Object），本质上是键值对的集合（Hash 结构�
 
 ```javascript
 class Foo {
-    constructor() {
-        return Object.create(null);
-    }
+	constructor() {
+		return Object.create(null);
+	}
 }
 
 new Foo() instanceof Foo;
@@ -484,26 +479,23 @@ new Foo() instanceof Foo;
 
 ```javascript
 class CustomHTMLElement {
-    constructor(element) {
-        this.element = element;
-    }
+	constructor(element) {
+		this.element = element;
+	}
 
-    get html() {
-        return this.element.innerHTML;
-    }
+	get html() {
+		return this.element.innerHTML;
+	}
 
-    set html(value) {
-        this.element.innerHTML = value;
-    }
+	set html(value) {
+		this.element.innerHTML = value;
+	}
 }
 
-var descriptor = Object.getOwnPropertyDescriptor(
-    CustomHTMLElement.prototype,
-    "html"
-);
+var descriptor = Object.getOwnPropertyDescriptor(CustomHTMLElement.prototype, 'html');
 
-"get" in descriptor; // true
-"set" in descriptor; // true
+'get' in descriptor; // true
+'set' in descriptor; // true
 ```
 
 ### 静态方法
@@ -514,9 +506,9 @@ var descriptor = Object.getOwnPropertyDescriptor(
 
 ```javascript
 class Foo {
-    static classMethod() {
-        return "hello";
-    }
+	static classMethod() {
+		return 'hello';
+	}
 }
 
 Foo.classMethod(); // 'hello'
@@ -530,15 +522,15 @@ foo.classMethod();
 
 ```javascript
 class Foo {
-    static bar() {
-        this.baz();
-    }
-    static baz() {
-        console.log("hello");
-    }
-    baz() {
-        console.log("world");
-    }
+	static bar() {
+		this.baz();
+	}
+	static baz() {
+		console.log('hello');
+	}
+	baz() {
+		console.log('world');
+	}
 }
 
 Foo.bar(); // hell
@@ -560,13 +552,13 @@ Foo.bar(); // hell
 
     ```javascript
     class Logger {
-        printName(name = "there") {
-            this.print(`Hello ${name}`);
-        }
+    	printName(name = 'there') {
+    		this.print(`Hello ${name}`);
+    	}
 
-        print(text) {
-            console.log(text);
-        }
+    	print(text) {
+    		console.log(text);
+    	}
     }
 
     const logger = new Logger();
@@ -583,18 +575,18 @@ Foo.bar(); // hell
     ```javascript
     // 在构造方法中绑定this
     class Logger {
-        constructor() {
-            this.printName = this.printName.bind(this);
-        }
+    	constructor() {
+    		this.printName = this.printName.bind(this);
+    	}
 
-        // ...
+    	// ...
     }
 
     // 使用就箭头函数
     class Obj {
-        constructor() {
-            this.getThis = () => this;
-        }
+    	constructor() {
+    		this.getThis = () => this;
+    	}
     }
 
     const myObj = new Obj();
@@ -602,21 +594,21 @@ Foo.bar(); // hell
 
     // 使用Proxy
     function selfish(target) {
-        const cache = new WeakMap();
-        const handler = {
-            get(target, key) {
-                const value = Reflect.get(target, key);
-                if (typeof value !== "function") {
-                    return value;
-                }
-                if (!cache.has(value)) {
-                    cache.set(value, value.bind(target));
-                }
-                return cache.get(value);
-            },
-        };
-        const proxy = new Proxy(target, handler);
-        return proxy;
+    	const cache = new WeakMap();
+    	const handler = {
+    		get(target, key) {
+    			const value = Reflect.get(target, key);
+    			if (typeof value !== 'function') {
+    				return value;
+    			}
+    			if (!cache.has(value)) {
+    				cache.set(value, value.bind(target));
+    			}
+    			return cache.get(value);
+    		},
+    	};
+    	const proxy = new Proxy(target, handler);
+    	return proxy;
     }
 
     const logger = selfish(new Logger());

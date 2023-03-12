@@ -13,7 +13,7 @@
 ```javascript
 // 拿到对象的key值索引
 for (const key in Object.keys(data)) {
-    console.log(key);
+	console.log(key);
 }
 ```
 
@@ -46,8 +46,8 @@ for (const [key, value] of Object.entries(object1)) {
 
 ```javascript
 const entries = new Map([
-    ["foo", "bar"],
-    ["baz", 42],
+	['foo', 'bar'],
+	['baz', 42],
 ]);
 
 const obj = Object.fromEntries(entries);
@@ -77,7 +77,7 @@ console.log(obj);
 
 ```javascript
 const object1 = {
-    property1: 42,
+	property1: 42,
 };
 
 Object.seal(object1);
@@ -98,18 +98,17 @@ console.log(object1.property1);
 >
 > 注：Array，Map，Set 都属于 ES6 的 iterable 类型
 
-> 返回值：Promise
-> 所有的`Promise`都完成返回完成状态的 Promise，有一个 Promise 为失败，则返回失败状态的 Promise
+> 返回值：Promise 所有的`Promise`都完成返回完成状态的 Promise，有一个 Promise 为失败，则返回失败状态的 Promise
 
 ```javascript
 const promise1 = Promise.resolve(3);
 const promise2 = 42;
 const promise3 = new Promise((resolve, reject) => {
-    setTimeout(resolve, 100, "foo");
+	setTimeout(resolve, 100, 'foo');
 });
 
-Promise.all([promise1, promise2, promise3]).then((values) => {
-    console.log(values);
+Promise.all([promise1, promise2, promise3]).then(values => {
+	console.log(values);
 });
 // expected output: Array [3, 42, "foo"]
 ```
@@ -120,18 +119,18 @@ Promise.all([promise1, promise2, promise3]).then((values) => {
 
 ```javascript
 function resolveAfter2Seconds() {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve("resolved");
-        }, 2000);
-    });
+	return new Promise(resolve => {
+		setTimeout(() => {
+			resolve('resolved');
+		}, 2000);
+	});
 }
 
 async function asyncCall() {
-    console.log("calling");
-    const result = await resolveAfter2Seconds();
-    console.log(result);
-    // expected output: "resolved"
+	console.log('calling');
+	const result = await resolveAfter2Seconds();
+	console.log(result);
+	// expected output: "resolved"
 }
 
 asyncCall();
@@ -147,14 +146,10 @@ asyncCall();
 
 ```javascript
 const promise1 = Promise.resolve(3);
-const promise2 = new Promise((resolve, reject) =>
-    setTimeout(reject, 100, "foo")
-);
+const promise2 = new Promise((resolve, reject) => setTimeout(reject, 100, 'foo'));
 const promises = [promise1, promise2];
 
-Promise.allSettled(promises).then((results) =>
-    results.forEach((result) => console.log(result.status))
-);
+Promise.allSettled(promises).then(results => results.forEach(result => console.log(result.status)));
 
 // expected output:
 // "fulfilled"
@@ -173,16 +168,16 @@ Promise.allSettled(promises).then((results) =>
 
 ```javascript
 const promise1 = new Promise((resolve, reject) => {
-    setTimeout(resolve, 500, "one");
+	setTimeout(resolve, 500, 'one');
 });
 
 const promise2 = new Promise((resolve, reject) => {
-    setTimeout(resolve, 100, "two");
+	setTimeout(resolve, 100, 'two');
 });
 
-Promise.race([promise1, promise2]).then((value) => {
-    console.log(value);
-    // Both resolve, but promise2 is faster
+Promise.race([promise1, promise2]).then(value => {
+	console.log(value);
+	// Both resolve, but promise2 is faster
 });
 // expected output: "two"
 ```
@@ -197,9 +192,9 @@ Promise.race([promise1, promise2]).then((value) => {
 >
 > ```javascript
 > let thenable = {
->     then: (resolve, reject) => {
->         resolve(thenable);
->     },
+> 	then: (resolve, reject) => {
+> 		resolve(thenable);
+> 	},
 > };
 >
 > Promise.resolve(thenable); //这会造成一个死循环
@@ -209,19 +204,19 @@ Promise.race([promise1, promise2]).then((value) => {
 
 ```javascript
 const promise = new Promise((resolve, reject) => {
-    setTimeout(resolve, 500, "one");
+	setTimeout(resolve, 500, 'one');
 });
 
 promise
-    .then((res) => {
-        // ...
-        return res;
-    })
-    .then((res) => {
-        // ...
-        return res;
-        // 返回结果处理完以后，依然是一个Promise
-    });
+	.then(res => {
+		// ...
+		return res;
+	})
+	.then(res => {
+		// ...
+		return res;
+		// 返回结果处理完以后，依然是一个Promise
+	});
 ```
 
 ## Windows
@@ -245,8 +240,8 @@ window.scrollBy({
 
 ```javascript
 window.scrollTo({
-    top: 0,
-    behavior: "smooth",
+	top: 0,
+	behavior: 'smooth',
 });
 ```
 
