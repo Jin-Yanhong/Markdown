@@ -165,7 +165,12 @@ Object.prototype.toString.call(obj);
  * @param {*} collectionLabel 对照集合中的字段名称 默认 'label'
  * @returns
  */
-function fieldTranslate(collection, value, collectionField = 'value', collectionLabel = 'label') {
+function fieldTranslate(
+	collection,
+	value,
+	collectionField = 'value',
+	collectionLabel = 'label',
+) {
 	if (collection && value && toString(value).length) {
 		if (Object.prototype.toString.call(collection) === '[object Array]') {
 			let checked = collection.find(ele => {
@@ -174,7 +179,9 @@ function fieldTranslate(collection, value, collectionField = 'value', collection
 			let tips = (checked && checked[collectionLabel]) || 'Error';
 			return tips;
 		} else {
-			console.log('fieldTranslate Error: the type of the first parameter must be array!');
+			console.log(
+				'fieldTranslate Error: the type of the first parameter must be array!',
+			);
 			return '';
 		}
 	} else {
@@ -318,4 +325,18 @@ groupList(list, colCount) {
   }
   return outPut;
 },
+```
+
+### js 获取时间戳
+
+```javascript
+const timestamp = Date.parse(new Date());
+```
+
+```javascript
+const timestamp = new Date().valueOf();
+```
+
+```javascript
+const timestamp=new Date().getTime()；
 ```

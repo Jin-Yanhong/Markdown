@@ -60,6 +60,6 @@ clip < filepath filename
 
 ```sh
 # 环境变量
-# set PATH=C
+set PATH=C
 echo %PATH%
 ```
