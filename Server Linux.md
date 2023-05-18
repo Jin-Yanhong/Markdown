@@ -18,7 +18,7 @@ cat filename
 
 ### 查看 linux 内核版本
 
-```
+```shell
 uname -r
 ```
 

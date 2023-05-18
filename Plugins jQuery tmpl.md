@@ -155,7 +155,7 @@ ${}等同与{{=}}是输出变量 ${}里面还可以放表达式 （=和变量之
 
 > **`$.tmpl(temp, data).appendTo(target)`**
 
-> **` $(temp).tmpl(data).appendTo(target);`**
+> **`$(temp).tmpl(data).appendTo(target);`**
 
 ```js
 let articleTemp = `

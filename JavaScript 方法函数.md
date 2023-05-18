@@ -12,7 +12,7 @@ totalPage = (total + pageSize - 1) / pageSize;
 ```javascript
 // 从 URL 获取参数
 function UrlSearch(url) {
-	let str = url.split('#')[0] || location.href.split('#')[0]; //取得整个path
+	let str = url?.split('#')[0] || window.location.href?.split('#')[0]; //取得整个path
 	let num = str.indexOf('?');
 	if (num !== -1) {
 		str = str.substr(num + 1);
@@ -129,7 +129,7 @@ function tree2Array(treeObj, rootid) {
 ###### 方法 二
 
 ```javascript
-function tree2List() {
+function tree2List(tree) {
 	var queen = [];
 	var out = [];
 	queen = queen.concat(tree);
@@ -165,12 +165,7 @@ Object.prototype.toString.call(obj);
  * @param {*} collectionLabel 对照集合中的字段名称 默认 'label'
  * @returns
  */
-function fieldTranslate(
-	collection,
-	value,
-	collectionField = 'value',
-	collectionLabel = 'label',
-) {
+function fieldTranslate(collection, value, collectionField = 'value', collectionLabel = 'label') {
 	if (collection && value && toString(value).length) {
 		if (Object.prototype.toString.call(collection) === '[object Array]') {
 			let checked = collection.find(ele => {
@@ -179,9 +174,7 @@ function fieldTranslate(
 			let tips = (checked && checked[collectionLabel]) || 'Error';
 			return tips;
 		} else {
-			console.log(
-				'fieldTranslate Error: the type of the first parameter must be array!',
-			);
+			console.log('fieldTranslate Error: the type of the first parameter must be array!');
 			return '';
 		}
 	} else {

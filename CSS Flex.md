@@ -58,7 +58,7 @@
 	flex-basis: <length> | auto; /* default auto */
 
 	/* 上述属性的简写 */
-	flex: none | [ < 'flex-grow' > < 'flex-shrink' >? || < 'flex-basis' > ];
+	flex: none | [ < 'flex-grow' > < 'flex-shrink' >? || < 'flex-basis' >];
 
 	/* align-self 会对齐当前 grid 或 flex 行中的元素,并覆盖已有的 align-items 的值 */
 	align-self: auto | flex-start | flex-end | center | baseline | stretch;
