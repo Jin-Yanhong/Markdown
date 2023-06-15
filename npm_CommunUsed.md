@@ -36,5 +36,5 @@ npm config set sass_binary_site=https //npm.taobao.org/mirrors/node-sass
 ```
 
 ```bash
-npm i node-sass --sass_binary_site=https://npm.taobao.org/mirrors/node-sass/
+npm i -g node-sass --sass_binary_site=https://npm.taobao.org/mirrors/node-sass/
 ```

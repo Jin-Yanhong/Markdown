@@ -353,3 +353,47 @@ fuser -m -v /data/
 ```bash
 
 ```
+
+## 安装 Nodejs
+
+### Installing Node from the CentOS AppStream Repository
+
+```bash
+sudo dnf module list nodejs
+
+sudo dnf module enable nodejs:16
+
+sudo dnf install nodejs
+
+node --version
+```
+
+### Installing Node Using the NVM
+
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+
+source ~/.bash_profile
+
+nvm install v16.14.2
+```
+
+### Installing Node from Source
+
+```
+cd ~
+
+curl https://nodejs.org/download/release/v16.16.0/node-v16.16.0.tar.gz | tar xz
+
+cd node-v*
+
+sudo yum install gcc-c++
+
+./configure
+make -j4
+
+sudo make install
+
+node --version
+```
+
