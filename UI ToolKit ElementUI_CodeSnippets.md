@@ -5,11 +5,7 @@
 ```html
 <el-table-column label="状态" align="center">
 	<template slot-scope="scope">
-		<el-switch
-			v-model="scope.row.state"
-			:active-value="'true'"
-			:inactive-value="'false'"
-			@change="handleStatusChange(scope.row)"></el-switch>
+		<el-switch v-model="scope.row.state" :active-value="'true'" :inactive-value="'false'" @change="handleStatusChange(scope.row)"></el-switch>
 	</template>
 </el-table-column>
 ```
@@ -35,11 +31,7 @@
 ```
 
 ```html
-<el-cascader
-	ref="cascader"
-	:props="cascaderProps"
-	:options="options"
-	v-model="target">
+<el-cascader ref="cascader" :props="cascaderProps" :options="options" v-model="target">
 	<template slot-scope="{ node, data }">
 		<div @click="nodeClick(data, target)">
 			<span>{{ data.label }}</span>
@@ -103,4 +95,16 @@
 		}
 	}
 </style>
+```
+
+## 表格
+
+-   表单内只含有一个表单项，回车事件触发的表单提交
+
+```html
+<el-form :model="query" @submit.native.prevent>
+	<el-form-item>
+		<el-input v-model="query.positionName" @keyup.enter.native="toQuery" />
+	</el-form-item>
+</el-form>
 ```
