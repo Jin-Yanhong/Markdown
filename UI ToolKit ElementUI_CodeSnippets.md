@@ -97,8 +97,6 @@
 </style>
 ```
 
-## 表格
-
 -   表单内只含有一个表单项，回车事件触发的表单提交
 
 ```html
@@ -107,4 +105,10 @@
 		<el-input v-model="query.positionName" @keyup.enter.native="toQuery" />
 	</el-form-item>
 </el-form>
+```
+
+-   Element UI 组件库修改组件 props 原型链上的默认值
+
+```javascript
+Element.Form.props.validateOnRuleChange.default = false;
 ```

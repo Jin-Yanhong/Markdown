@@ -44,6 +44,14 @@ service install serviceName
 systemctl restart dnsmasq.service
 ```
 
+##### Windows 刷新环境变量
+
+```bash
+set PATH=C
+exit;
+echo %PATH%
+```
+
 ## 文件操作
 
 ##### 查看文本文件内容

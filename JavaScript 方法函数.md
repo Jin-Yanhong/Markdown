@@ -29,9 +29,32 @@ function UrlSearch(url) {
 }
 ```
 
+#### 深拷贝
+
+```javascript
+function deepCopy(obj) {
+	// 深度复制数组
+	if (Object.prototype.toString.call(obj) === '[object Array]') {
+		const object = [];
+		for (let i = 0; i < obj.length; i++) {
+			object.push(deepCopy(obj[i]));
+		}
+		return object;
+	}
+	// 深度复制对象
+	if (Object.prototype.toString.call(obj) === '[object Object]') {
+		const object = {};
+		for (let p in obj) {
+			object[p] = obj[p];
+		}
+		return object;
+	}
+}
+```
+
 #### 树形数据处理
 
-##### List 2 Tree
+##### ListToTree
 
 ```javascript
 /**
@@ -66,63 +89,29 @@ function list2Tree(list, id, parentId, children) {
 }
 ```
 
-##### Tree 2 List
+##### TreeToList
 
 ###### 方法 一
 
 ```javascript
-/****************** 数组\对象 深拷贝 **********************/
-//
-//
-function deepCopy(obj) {
-	// 深度复制数组
-	if (Object.prototype.toString.call(obj) === '[object Array]') {
-		const object = [];
-		for (let i = 0; i < obj.length; i++) {
-			object.push(deepCopy(obj[i]));
-		}
-		return object;
-	}
-	// 深度复制对象
-	if (Object.prototype.toString.call(obj) === '[object Object]') {
-		const object = {};
-		for (let p in obj) {
-			object[p] = obj[p];
-		}
-		return object;
-	}
-}
-/******************** 树形结构转化为一维数组 ****************************/
-
-// 将treeObj中的所有对象，放入一个数组中，要求某个对象在另一个对象的children时，其parent_id是对应的另一个对象的id
-// 其原理实际上是数据结构中的广度优先遍历
-function tree2Array(treeObj, rootid) {
-	const temp = []; // 设置临时数组，用来存放队列
-	const out = []; // 设置输出数组，用来存放要输出的一维数组
-	temp.push(treeObj);
-	// 首先把根元素存放入out中
-	let pid = rootid;
-	const obj = deepCopy(treeObj);
-	obj.pid = pid;
-	delete obj['children'];
-	out.push(obj);
-	// 对树对象进行广度优先的遍历
-	while (temp.length > 0) {
-		const first = temp.shift();
-		const children = first.children;
-		if (children && children.length > 0) {
-			pid = first.id;
-			const len = first.children.length;
-			for (let i = 0; i < len; i++) {
-				temp.push(children[i]);
-				const obj = deepCopy(children[i]);
-				obj.pid = pid;
-				delete obj['children'];
-				out.push(obj);
+function handleTree(treeList) {
+	let level = -1;
+	const output = [];
+	function treeToList(treeList, output, level) {
+		for (let i = 0; i < treeList.length; i++) {
+			const tree = treeList[i];
+			tree.level = level + 1;
+			output.push(tree);
+			const child = tree.children;
+			if (child instanceof Array && child.length > 0) {
+				treeToList(child, output, level + 1);
+				delete tree.children;
 			}
 		}
+		return output;
 	}
-	return out;
+	const result = treeToList(treeList, output, level);
+	return result;
 }
 ```
 
@@ -255,6 +244,56 @@ function throttle(fn, delay) {
 }
 ```
 
+##### 字符串转对象
+
+```javascript
+// 输入 a.b.c => 输出 { a: { b: { c: {} } } }
+/**
+ *
+ * @param {string} input 输入的字符串
+ * @param {*} value 最里层key的值
+ * @returns {object} 解析后的对象
+ */
+function str2Obj(input, value = {}) {
+	let output = {};
+	const keys = input.split('.').reverse();
+	for (let i = 0; i < keys.length; i++) {
+		const key = keys[i];
+		let temp = {};
+		temp[key] = i == 0 ? value : output;
+		output = temp;
+	}
+	return output;
+}
+```
+
+##### 行政区划编码转文字地址
+
+```javascript
+// 行政区划 区域码 反查
+function returnLabel(collect, input, result = '') {
+	let children = {};
+	let collectlength = collect.length;
+	for (let i = 0; i < input.length; i++) {
+		for (let j = 0; j < collectlength; j++) {
+			const val = input[i];
+			const obj = collect[j];
+			if (obj.value == val) {
+				children = obj.children ?? null;
+				result += obj.label + ' ';
+				input = input.slice(1, input.length);
+				if (children) {
+					return returnLabel(children, input, result);
+				} else {
+					break;
+				}
+			}
+		}
+	}
+	return result;
+}
+```
+
 ## 项目小结
 
 #### window.postMessage
@@ -332,4 +371,11 @@ const timestamp = new Date().valueOf();
 
 ```javascript
 const timestamp=new Date().getTime()；
+```
+
+### 获取 iFrame 内部元素
+
+```javascript
+const iframe = document.getElementById('iframe');
+const h1 = iframe.contentDocument.getElementById('h1');
 ```
