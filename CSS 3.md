@@ -114,7 +114,7 @@ div + p {
 	-webkit-filter: grayscale(1);
 	filter: grayscale(1);
 }
- .disabled {
+.disabled {
 	-webkit-filter: grayscale(100%);
 	-moz-filter: grayscale(100%);
 	-ms-filter: grayscale(100%);

@@ -33,21 +33,17 @@ Host *
 ### 创建 git 仓库
 
 ```bash
+# 推送 并关联 远程本地
 git push --set-upstream origin master
+# 简写
 git push -u origin master
-# 已有仓库
 
+# 已有仓库
 cd existing_git_repo
 git push --set-upstream origin master
-#gitee.com
-git remote add origin https:
-#xxx
-#xxx.git
-# 推送 并关联 远程本地
-git push -u origin(远程分支) master(本地分支)
-# 将本地分支关联到远程仓库
-git push --set-upstream origin dev
 
+# 添加远程分支
+git remote add origin https:xxx.xxx.git
 ```
 
 ## 版本控制
@@ -55,10 +51,26 @@ git push --set-upstream origin dev
 ### 回撤到某一版本(本地)
 
 ```bash
-# hard 销毁本地更改 soft 保留本地更改
+# 保留本地未提交更改
+git reset --soft HEAD^
+
+# 不保留本地更改
+git reset --hard HEAD^
+
+# 上两个版本
+git reset --hard HEAD^^
+
+# 上20个版本
+git reset --hard HEAD~20
+
+# 回退到指定commitID版本
 git reset --hard cedc856 (commit Hash 字符串前 7 位)
+
+# 强制提交
 git push --force origin master
-git checkout 9ae2c2ce4ad80c87615965f8036fe01c661e646b（切换到以往版本）
+
+# 切换到以往版本
+git checkout 9ae2c2ce4ad80c87615965f8036fe01c661e646b
 ```
 
 ## 本地仓库更改
@@ -70,27 +82,33 @@ git checkout 9ae2c2ce4ad80c87615965f8036fe01c661e646b（切换到以往版本）
 git checkout .
 ```
 
-### 撤销 commit（本地）
-
-#### 软、硬撤回
+### 切换分支前暂存本地
 
 ```bash
-# 保留本地未提交更改
-git reset --soft HEAD^
+# 将改动存储到隐式存储并将改动的文件回滚到 HEAD 分支
+git stash [push]
 
-# 不保留本地更改
-git reset --hard HEAD^
-```
+# 创建 隐式存储
+git stash create "message"
 
-#### 撤回到指定版本
+# 将改动存储到隐式存储
+git stash save
 
-```bash
-# 上两个版本
-git reset --hard HEAD^^
-# 上20个版本
-git reset --hard HEAD~20
-# 回退到指定commitID版本
-git reset --hard commitID
+# 查看存储了哪些些文件
+git stash show
+
+# 查看有哪些隐式存储入口
+git stash list
+
+# 将第 index 个隐式存储应用于当前分支
+git stash apply index
+
+# 将第 0 个隐式存储应用于当前分支后删除
+git stash pop
+
+# 将第 index 个隐式存储删除
+git stash drop index
+
 ```
 
 ### 修改本地 commit 消息
@@ -186,6 +204,12 @@ git push origin --delete remoteBranchName
 
 # 推送到远端
 git push origin :branch-name
+```
+
+### 暂存工作区修改
+
+```bash
+
 ```
 
 ## Git 查看相关信息

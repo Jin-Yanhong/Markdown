@@ -227,20 +227,16 @@ function debounce(fn, delay) {
 ##### 节流
 
 ```javascript
-function throttle(fn, delay) {
-	let valid = true;
-	return function () {
-		if (!valid) {
-			//休息时间 暂不接客
-			return false;
-		}
-		// 工作时间，执行函数并且在间隔期内把状态位设为无效
-		valid = false;
-		setTimeout(() => {
-			fn();
-			valid = true;
-		}, delay);
-	};
+function throttle(func, delay) {
+    let prev = 0;
+    return (...args) => {
+        let now = new Date().getTime();
+        console.log(now - prev, delay);
+        if (now - prev > delay) {
+            prev = now;
+            return func(...args);
+        }
+    };
 }
 ```
 
@@ -379,3 +375,30 @@ const timestamp=new Date().getTime()；
 const iframe = document.getElementById('iframe');
 const h1 = iframe.contentDocument.getElementById('h1');
 ```
+
+### 通过浏览器录屏
+
+```javascript
+document.body.addEventListener('click', async function () {
+	let stream = await navigator.mediaDevices.getDisplayMedia({ video: true });
+	let mime = MediaRecorder.isTypeSupported('video/webm; codecs=vp9') ? 'video/webm; codecs=vp9' : 'video/webm';
+
+	let mediaRecorder = new MediaRecorder(stream, { mimeType: mime });
+
+	let chunks = [];
+	mediaRecorder.addEventListener('dataavailable', function (e) {
+		chunks.push(e.data);
+	});
+
+	mediaRecorder.addEventListener('stop', function () {
+		let blob = new Blob(chunks, { type: chunks[0].type });
+		let url = URL.createObjectURL(blob);
+		let a = document.createElement('a');
+		a.href = url;
+		a.download = 'video.webm';
+		a.click();
+	});
+	mediaRecorder.start();
+});
+```
+
