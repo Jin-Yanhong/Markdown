@@ -85,14 +85,11 @@ git checkout .
 ### 切换分支前暂存本地
 
 ```bash
-# 将改动存储到隐式存储并将改动的文件回滚到 HEAD 分支
-git stash [push]
-
-# 创建 隐式存储
-git stash create "message"
-
-# 将改动存储到隐式存储
-git stash save
+# 将改动存储到隐式存储并将改动的文件回滚到 HEAD 分支，并添加 message 信息
+git stash push -m "message"
+# 简写
+git stash -m "message"
+# 如果没有指定 message 信息，则使用当前分支最近提交的信息
 
 # 查看存储了哪些些文件
 git stash show
