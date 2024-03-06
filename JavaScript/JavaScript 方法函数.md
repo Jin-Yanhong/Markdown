@@ -1,18 +1,21 @@
-## 常用方法函数
+## 工具类函数
 
-#### 处理页码
+### 从 HTML 字符中获取内容
 
 ```javascript
-// 分页参数的处理方式
-totalPage = (total + pageSize - 1) / pageSize;
+export function getTextFromHtml(html = '') {
+	let regExp = /<(\S*?)[^>]*>.*?|<.*? \/>/g;
+	let text = html.replace(regExp, '');
+	return text;
+}
 ```
 
-#### 从浏览器 URL 获取参数
+### 从浏览器 URL 获取参数
 
 ```javascript
 // 从 URL 获取参数
-function UrlSearch(url) {
-	let str = url?.split('#')[0] || window.location.href?.split('#')[0]; //取得整个path
+function UrlSearch(url = window.location.href) {
+	let str = url.split('#')[0];
 	let num = str.indexOf('?');
 	if (num !== -1) {
 		str = str.substr(num + 1);
@@ -20,7 +23,7 @@ function UrlSearch(url) {
 		let obj = {};
 		for (let i = 0; i < arr.length; i++) {
 			num = arr[i].split('=');
-			obj[num[0]] = num[1];
+			obj[num[0]] = decodeURIComponent(num[1]);
 		}
 		return obj;
 	} else {
@@ -29,32 +32,71 @@ function UrlSearch(url) {
 }
 ```
 
-#### 深拷贝
+### 深拷贝
+
+#### 方法 1
 
 ```javascript
-function deepCopy(obj) {
-	// 深度复制数组
-	if (Object.prototype.toString.call(obj) === '[object Array]') {
+function clone(input) {
+	if (input instanceof Array) {
 		const object = [];
-		for (let i = 0; i < obj.length; i++) {
-			object.push(deepCopy(obj[i]));
+		for (let i = 0; i < input.length; i++) {
+			object.push(clone(input[i]));
 		}
 		return object;
 	}
-	// 深度复制对象
-	if (Object.prototype.toString.call(obj) === '[object Object]') {
+	if (input instanceof Object) {
 		const object = {};
-		for (let p in obj) {
-			object[p] = obj[p];
+		for (let p in input) {
+			object[p] = input[p];
 		}
 		return object;
 	}
 }
 ```
 
-#### 树形数据处理
+#### 方法 2
 
-##### ListToTree
+```javascript
+/**
+ * @description deepClone sth
+ * @param {Object} source
+ */
+export function deepClone(source) {
+	if (!source && typeof source !== 'object') {
+		throw new Error('error arguments', 'deepClone');
+	}
+	const targetObj = source.constructor === Array ? [] : {};
+	Object.keys(source).forEach(keys => {
+		if (source[keys] && typeof source[keys] === 'object') {
+			targetObj[keys] = deepClone(source[keys]);
+		} else {
+			targetObj[keys] = source[keys];
+		}
+	});
+	return targetObj;
+}
+```
+
+### 对象深度合并
+
+```javascript
+function objectDeepAssign(...param) {
+	let result = Object.assign({}, ...param);
+	for (let item of param) {
+		for (let [key, value] of Object.entries(item)) {
+			if (typeof value === 'object') {
+				result[key] = objectDeepAssign(result[key], value);
+			}
+		}
+	}
+	return result;
+}
+```
+
+### 树形数据处理
+
+#### ListToTree
 
 ```javascript
 /**
@@ -89,9 +131,9 @@ function list2Tree(list, id, parentId, children) {
 }
 ```
 
-##### TreeToList
+#### TreeToList
 
-###### 方法 一
+##### 方法 一
 
 ```javascript
 function handleTree(treeList) {
@@ -115,7 +157,7 @@ function handleTree(treeList) {
 }
 ```
 
-###### 方法 二
+##### 方法 二
 
 ```javascript
 function tree2List(tree) {
@@ -134,7 +176,7 @@ function tree2List(tree) {
 }
 ```
 
-#### 数据类型判断
+### 数据类型判断
 
 ```javascript
 Object.prototype.toString.call(obj);
@@ -143,7 +185,7 @@ Object.prototype.toString.call(obj);
 // '[object String]'
 ```
 
-#### 字段翻译
+### 字段翻译
 
 ```javascript
 /**
@@ -173,7 +215,7 @@ function fieldTranslate(collection, value, collectionField = 'value', collection
 }
 ```
 
-#### 复制文本到剪切板
+### 复制文本到剪切板
 
 ```javascript
 function copyToClipboard(text) {
@@ -208,9 +250,9 @@ function copyToClipboard(text) {
 }
 ```
 
-#### 防抖节流
+### 防抖节流
 
-##### 防抖
+#### 防抖
 
 ```javascript
 function debounce(fn, delay) {
@@ -224,23 +266,23 @@ function debounce(fn, delay) {
 }
 ```
 
-##### 节流
+#### 节流
 
 ```javascript
 function throttle(func, delay) {
-    let prev = 0;
-    return (...args) => {
-        let now = new Date().getTime();
-        console.log(now - prev, delay);
-        if (now - prev > delay) {
-            prev = now;
-            return func(...args);
-        }
-    };
+	let prev = 0;
+	return (...args) => {
+		let now = new Date().getTime();
+		console.log(now - prev, delay);
+		if (now - prev > delay) {
+			prev = now;
+			return func(...args);
+		}
+	};
 }
 ```
 
-##### 字符串转对象
+### 字符串转对象
 
 ```javascript
 // 输入 a.b.c => 输出 { a: { b: { c: {} } } }
@@ -263,7 +305,7 @@ function str2Obj(input, value = {}) {
 }
 ```
 
-##### 行政区划编码转文字地址
+### 根据值显示树形数据对应标签
 
 ```javascript
 // 行政区划 区域码 反查
@@ -292,15 +334,52 @@ function returnLabel(collect, input, result = '') {
 
 ## 项目小结
 
-#### window.postMessage
+### iframe 相关
 
-```javascript
-//  外层获取内层
-iframe.contentWindow; //获取iframe的window对象；
-iframe.contentDocument; //获取iframe的document对象
+#### message 事件
 
-// 内层获取外层
-window.parent;
+```html
+<!-- parent.html -->
+<iframe src="./frame.html" frameborder="0"></iframe>
+<textarea cols="30" rows="10" id="textarea"></textarea>
+<script>
+	const iframe = document.querySelector('iframe');
+	const frameWindow = iframe.contentWindow;
+	document.querySelector('#textarea').addEventListener('input', e => {
+		const value = e.srcElement.value;
+		frameWindow.postMessage(value, '*');
+	});
+</script>
+```
+
+```html
+<!-- iframe.html -->
+<script>
+	window.addEventListener('message', function (event) {
+		console.log('Message received from the parent: ' + event.data); // Message received from parent
+	});
+</script>
+```
+
+#### 给 Iframe 写入内容
+
+```vue
+<template>
+	<div>
+		<iframe ref="iframe" class="iframe" frameborder="0" width="100%" :height="frameHeight" />
+	</div>
+</template>
+
+<script>
+export default {
+	mounted() {
+		const iframe = this.$refs.iframe;
+		iframe?.contentDocument.open();
+		iframe?.contentDocument.write('<p> this is a text </p>');
+		iframe?.contentDocument.close();
+	},
+};
+</script>
 ```
 
 ### 可视区宽高
@@ -312,69 +391,14 @@ let obj = {
 };
 ```
 
-#### 几种常见的循环、迭代
+### 处理页码
 
 ```javascript
-// 拿到对象的key值索引
-for (const key in Object.keys(data)) {
-	console.log(key);
-}
+// 分页参数的处理方式
+totalPage = (total + pageSize - 1) / pageSize;
 ```
 
-#### window.onbeforeunload
-
-> 页面刷新之前执行的回调
-
-#### JavaScript 随机数
-
-```javascript
-parseInt(Math.random() * (max - min + 1) + min, 10);
-Math.floor(Math.random() * (max - min + 1) + min); //  Math.floor() 向下取整
-```
-
-```javascript
-/**
- *  @param list 需要分组的数据
- *  @param colCount 所有字段一共分为 colCount 列
- *  @param outPut 接收最后的返回值
- */
-groupList(list, colCount) {
-  let outPut = [];
-  let length = list.length; // 总共 91 条数据
-  let colLength = Math.ceil(length / colCount); // 每列 23 条数据
-  for (let k = 0; k < colCount; k++) {
-    outPut.push([]);
-  }
-  // 数据分组
-  for (let i = 0; i < colCount; i++) {
-    for (let j = i * colLength; j < (i + 1) * colLength; j++) {
-      list[j] && outPut[i].push(list[j]);
-    }
-  }
-  return outPut;
-},
-```
-
-### js 获取时间戳
-
-```javascript
-const timestamp = Date.parse(new Date());
-```
-
-```javascript
-const timestamp = new Date().valueOf();
-```
-
-```javascript
-const timestamp=new Date().getTime()；
-```
-
-### 获取 iFrame 内部元素
-
-```javascript
-const iframe = document.getElementById('iframe');
-const h1 = iframe.contentDocument.getElementById('h1');
-```
+## 不实用但有趣
 
 ### 通过浏览器录屏
 
@@ -401,4 +425,3 @@ document.body.addEventListener('click', async function () {
 	mediaRecorder.start();
 });
 ```
-

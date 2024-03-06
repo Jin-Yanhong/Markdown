@@ -231,3 +231,19 @@ git rev-parse HEAD
 # 获取简短commit
 git rev-parse --short HEAD
 ```
+
+### 查看修改记录
+
+```bash
+git show HEAD^
+
+git show HEAD^^
+
+git show 'commit ID'
+```
+
+### 提交情况统计
+
+```bash
+git shortlog
+```

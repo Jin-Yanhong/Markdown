@@ -12,6 +12,12 @@ npm config set registry https://registry.npm.taobao.org
 npm config get registry
 ```
 
+关闭证书校验
+
+```bash
+npm config set strict-ssl false
+```
+
 ## Yarn
 
 指定淘宝镜像源
@@ -32,7 +38,7 @@ nvm npm_mirror https://npm.taobao.org/mirrors/npm/
 ## Node-Sass
 
 ```bash
-npm config set sass_binary_site=https //npm.taobao.org/mirrors/node-sass
+npm config set sass_binary_site=https://npm.taobao.org/mirrors/node-sass/
 ```
 
 ```bash
