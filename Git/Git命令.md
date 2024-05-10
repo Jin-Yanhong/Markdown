@@ -223,6 +223,18 @@ git remote get-url origin
 git log --graph --pretty=format:'%C(red)%h%Creset - %C(white)%s %C(yellow)%d %C(cyan)（%cr）%Creset %C(green)<%an> '
 ```
 
+### 查看某个文件相关信息
+
+#### 某个文件的记录
+
+```bash
+# 提交记录
+git log fileName
+
+# 修改记录
+git log -p fileName
+```
+
 ### 查看当前 commit ID
 
 ```bash
@@ -240,6 +252,9 @@ git show HEAD^
 git show HEAD^^
 
 git show 'commit ID'
+
+# 查看某个文件的修改记录
+git show 'commit ID' fileName
 ```
 
 ### 提交情况统计

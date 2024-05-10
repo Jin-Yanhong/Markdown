@@ -227,6 +227,14 @@ p {
 }
 ```
 
+#### 文本不换行
+
+```css
+p {
+	text-align-last: justify;
+}
+```
+
 ### 调整滚动条
 
 ```css

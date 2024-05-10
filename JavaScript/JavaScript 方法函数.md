@@ -332,6 +332,125 @@ function returnLabel(collect, input, result = '') {
 }
 ```
 
+### 获取树形数据的祖先节点
+
+```javascript
+function returnAncestorData(deptTree, id, key = 'id', parentKey = 'parentID') {
+	function flapTreedata(treeData, result = []) {
+		for (let i = 0; i < treeData.length; i++) {
+			const treeDataItem = treeData[i];
+			if (treeDataItem.children) {
+				for (let k = 0; k < treeDataItem.children.length; k++) {
+					const el = treeDataItem.children[k];
+					el.path = treeDataItem.path + '/' + el.path;
+				}
+				flapTreedata(treeDataItem.children, result);
+			}
+			result.push(treeDataItem);
+		}
+		return result;
+	}
+
+	function getAncestorsData(datas, id) {
+		const data = datas.find(el => el[key] == id);
+		if (data[parentKey]) {
+			return getAncestorsData(datas, data[parentKey]);
+		} else {
+			return data;
+		}
+	}
+
+	const datas = flapTreedata(deptTree);
+	return getAncestorsData(datas, id);
+}
+```
+
+### 鼠标移动元素
+
+```javascript
+// 当前元素的父节点 相对定位，当前节点设置绝对定位
+function handleElMove(el) {
+	let evtName = getEventName();
+	// 鼠标指针相对于浏览器可视区域的偏移
+	let offsetX = 0,
+		offsetY = 0;
+	// 限制图片可以X和Y轴可以移动的最大范围，防止溢出
+	let limitX = 0,
+		limitY = 0;
+
+	// 确保图片加载完
+	const { width, height } = el;
+
+	limitX = el.parentElement.clientWidth - width;
+	limitY = el.parentElement.clientHeight - height;
+
+	el.addEventListener(evtName.start, event => {
+		// 监听鼠标指针相对于可视窗口移动的距离
+		// 注意移动事件要绑定在document元素上，防止移动过快,位置丢失
+		document.addEventListener(evtName.move, moveAt);
+	});
+
+	// 鼠标指针停止移动时,释放document上绑定的移动事件
+	// 不然白白产生性能开销
+	document.addEventListener(evtName.end, () => {
+		document.removeEventListener(evtName.move, moveAt);
+	});
+
+	// 移动元素
+	function moveAt({ movementX, movementY }) {
+		const { offsetX, offsetY } = getSafeOffset({ movementX, movementY });
+
+		window.requestAnimationFrame(() => {
+			el.style.cssText = `left:${offsetX}px;top:${offsetY}px;`;
+		});
+	}
+
+	// 获取安全的偏移距离
+	const getSafeOffset = ({ movementX, movementY }) => {
+		// //距上次鼠标位置的X,Y方向的偏移量
+		offsetX += movementX;
+		offsetY += movementY;
+
+		// 防止拖拽元素被甩出可视区域
+		// if (offsetX > limitX) {
+		// 	offsetX = limitX;
+		// }
+
+		// if (offsetX < 0) {
+		// 	offsetX = 0;
+		// }
+
+		// if (offsetY > limitY) {
+		// 	offsetY = limitY;
+		// }
+
+		// if (offsetY < 0) {
+		// 	offsetY = 0;
+		// }
+
+		// console.log({ movementX, movementY, offsetX, offsetY });
+		return { offsetX, offsetY };
+	};
+
+	// 区分是移动端还是PC端移动事件
+	function getEventName() {
+		if ('ontouchstart' in window) {
+			return {
+				start: 'touchstart',
+				move: 'touchmove',
+				end: 'touchend',
+			};
+		} else {
+			return {
+				start: 'pointerdown',
+				move: 'pointermove',
+				end: 'pointerup',
+			};
+		}
+	}
+}
+```
+
 ## 项目小结
 
 ### iframe 相关
@@ -396,6 +515,39 @@ let obj = {
 ```javascript
 // 分页参数的处理方式
 totalPage = (total + pageSize - 1) / pageSize;
+```
+
+货币数字千分位
+
+```javascript
+
+export function parseStringToNumber(value) {
+	const str = value.replaceAll(',', '');
+	const regexp = /\d{1,3}(?=(\d{3})+(\.|$))/gy;
+	return str.replace(regexp, '$&,');
+}
+
+export const parseAmount = v => v.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+export function toCurrencyNumber(nVal) {
+	// 匹配数字
+	let str = (nVal + '').toString().replace(/[^0-9\,\.]/g, '');
+	// 小数部分截取两位
+	// replace(/(?<=\.\d{ 2 }).+ /);
+	if (/^[0-9]+/.test(str)) {
+		const number = parseStringToNumber(str)
+			?.replace(/(?<=\.\d{2}).+/gm, '')
+			?.replace(/\.+/, '.')
+			?.replace(/(?<=^0+)[0-9]+/gims, '');
+
+		// 把数字格式化成货币格式
+		const parseAmount = v => v.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+		//
+		return parseAmount(number);
+	} else {
+		return '';
+	}
+}
 ```
 
 ## 不实用但有趣
