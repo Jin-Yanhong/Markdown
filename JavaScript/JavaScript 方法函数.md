@@ -517,10 +517,9 @@ let obj = {
 totalPage = (total + pageSize - 1) / pageSize;
 ```
 
-货币数字千分位
+### 货币数字千分位
 
 ```javascript
-
 export function parseStringToNumber(value) {
 	const str = value.replaceAll(',', '');
 	const regexp = /\d{1,3}(?=(\d{3})+(\.|$))/gy;

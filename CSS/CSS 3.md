@@ -217,6 +217,10 @@ p {
 	-webkit-line-clamp: 3;
 	overflow: hidden;
 }
+// 保持空白正常换行
+p {
+	word-wrap: pre-wrap;
+}
 ```
 
 #### 标签内文本均匀分布
